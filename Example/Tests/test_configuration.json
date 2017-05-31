@@ -1,0 +1,42 @@
+{
+    "display_red_view": {
+        "Title": "Display Red View",
+        "Group": "UI",
+        "Value": true,
+        "CanBeDisplayed": true
+    },
+    "display_yellow_view": {
+        "Title": "Display Yellow View",
+        "Group": "UI",
+        "Value": false,
+        "CanBeDisplayed": true
+    },
+    "display_green_view": {
+        "Value": true
+    },
+    "greet_on_app_did_become_active": {
+        "Title": "Greet on app launch",
+        "Group": "General",
+        "Value": false,
+        "CanBeDisplayed": true
+    },
+    "tap_to_change_color_enabled": {
+        "Value": true,
+        "CanBeDisplayed": true
+    },
+    "tap_to_change_color_enabled_bis": {
+        "CanBeDisplayed": false
+    },
+    "red_view_alpha_component": {
+        "CanBeDisplayed": true,
+        "Title": "Red View Alpha Component",
+        "Group": "UI",
+        "Value": 1.0
+    },
+    "change_tweaks_button_label_text": {
+        "CanBeDisplayed": true,
+        "Title": "Change Tweaks Button Label Text",
+        "Group": "UI",
+        "Value": "Change Configuration"
+    }
+}
