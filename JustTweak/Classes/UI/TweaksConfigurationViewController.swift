@@ -17,6 +17,19 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
 
 @objc(JETweaksConfigurationViewController) public class TweaksConfigurationViewController: UITableViewController {
     
+    private class Tweak: NSObject {
+        var identifier: String
+        var title: String?
+        var value: TweakValue
+        
+        init(identifier: String, title: String?, value: TweakValue) {
+            self.identifier = identifier
+            self.title = title
+            self.value = value
+            super.init()
+        }
+    }
+    
     private enum CellIdentifiers: String {
         case ToogleCell, TextCell, NumberCell
     }
@@ -144,11 +157,11 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
     
     private func registerCellClasses() {
         tableView.register(BooleanTweakTableViewCell.self,
-                                forCellReuseIdentifier: CellIdentifiers.ToogleCell.rawValue)
+                           forCellReuseIdentifier: CellIdentifiers.ToogleCell.rawValue)
         tableView.register(NumericTweakTableViewCell.self,
-                                forCellReuseIdentifier: CellIdentifiers.NumberCell.rawValue)
+                           forCellReuseIdentifier: CellIdentifiers.NumberCell.rawValue)
         tableView.register(TextTweakTableViewCell.self,
-                                forCellReuseIdentifier: CellIdentifiers.TextCell.rawValue)
+                           forCellReuseIdentifier: CellIdentifiers.TextCell.rawValue)
     }
     
     private func rebuildSections() {
@@ -166,7 +179,8 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
                 var items = [Tweak]()
                 for tweak in allTweaks {
                     if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
-                        items.append(tweak)
+                        var dto = Tweak(identifier: tweak.identifier, title: tweak.title, value: tweak.value)
+                        items.append(dto)
                     }
                 }
                 if items.count > 0 {
@@ -198,9 +212,10 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
     
     internal func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
-            if let tweak = tweakAt(indexPath: indexPath) {
+            if var tweak = tweakAt(indexPath: indexPath) {
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
                 configuration?.set(value: cell.value, forTweakWithIdentifier: tweak.identifier)
+                tweak.value = cell.value
             }
         }
     }
