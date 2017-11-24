@@ -20,11 +20,11 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - JustTweak (1.0.1):
-    - JustTweak/Core (= 1.0.1)
-    - JustTweak/UI (= 1.0.1)
-  - JustTweak/Core (1.0.1)
-  - JustTweak/UI (1.0.1):
+  - JustTweak (1.0.0):
+    - JustTweak/Core (= 1.0.0)
+    - JustTweak/UI (= 1.0.0)
+  - JustTweak/Core (1.0.0)
+  - JustTweak/UI (1.0.0):
     - JustTweak/Core
   - Protobuf (3.2.0)
 
@@ -43,7 +43,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseRemoteConfig: af3003f4e8daa2bd1d5cf90d3cccc1fe224f8ed9
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  JustTweak: 6ad1934e448db13e6bdfbd1bf14a3b905034282a
+  JustTweak: dad58f6f0b724a5007cccfeac9422866e43bd4ba
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
 
 PODFILE CHECKSUM: b4c3138242c78b63b404939b620af9ed35ddde88
