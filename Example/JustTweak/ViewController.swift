@@ -74,10 +74,10 @@ class ViewController: UIViewController {
     }
     
     internal func changeViewColor() {
-        func randomColorValue() -> Float {
-            return Float(arc4random() % 255) / 255.0
+        func randomColorValue() -> CGFloat {
+            return CGFloat(arc4random() % 255) / 255.0
         }
-        view.backgroundColor = UIColor(colorLiteralRed: randomColorValue(),
+        view.backgroundColor = UIColor(red: randomColorValue(),
                                        green: randomColorValue(),
                                        blue: randomColorValue(),
                                        alpha: 1.0)
