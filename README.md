@@ -99,7 +99,7 @@ it, simply add the following line to your Podfile:
 pod "JustTweak"
 ```
 ## Requirements
-JustTweak supports swift 4.0 and xCode 9
+JustTweak supports swift 4.0 and Xcode 9
 
 ## License
 
