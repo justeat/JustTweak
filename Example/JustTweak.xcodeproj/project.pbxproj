@@ -295,6 +295,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = U6VYQWW69B;
 						LastSwiftMigration = 0910;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -619,6 +620,7 @@
 			baseConfigurationReference = 9418360080E044BFF47F4F7C /* Pods-JustTweak_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = U6VYQWW69B;
 				INFOPLIST_FILE = JustTweak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -634,6 +636,7 @@
 			baseConfigurationReference = 885820D39A762E4E89BA2546 /* Pods-JustTweak_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = U6VYQWW69B;
 				INFOPLIST_FILE = JustTweak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;

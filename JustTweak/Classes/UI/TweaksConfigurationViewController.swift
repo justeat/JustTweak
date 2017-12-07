@@ -15,7 +15,7 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
     func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell)
 }
 
-@objc(JETweaksConfigurationViewController) public class TweaksConfigurationViewController: UITableViewController {
+@objcMembers public class TweaksConfigurationViewController: UITableViewController {
     
     fileprivate class Tweak: NSObject {
         var identifier: String
@@ -212,7 +212,7 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
     
     internal func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
-            if var tweak = tweakAt(indexPath: indexPath) {
+            if let tweak = tweakAt(indexPath: indexPath) {
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
                 configuration?.set(value: cell.value, forTweakWithIdentifier: tweak.identifier)
                 tweak.value = cell.value

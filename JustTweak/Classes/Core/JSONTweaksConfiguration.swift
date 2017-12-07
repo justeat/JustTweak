@@ -5,8 +5,7 @@
 
 import Foundation
 
-@objcMembers
-@objc(JEJSONTweaksConfiguration) final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
+@objcMembers final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private enum EncodingKeys : String {
         case Title, CanBeDisplayed, Value, Group

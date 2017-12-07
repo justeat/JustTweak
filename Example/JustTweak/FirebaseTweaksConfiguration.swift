@@ -7,7 +7,7 @@ import JustTweak
 import FirebaseAnalytics
 import FirebaseRemoteConfig
 
-@objc(JEFirebaseTweaksConfiguration) public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+@objcMembers public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public override init() {
         super.init()
