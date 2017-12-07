@@ -7,7 +7,7 @@ import JustTweak
 import FirebaseAnalytics
 import FirebaseRemoteConfig
 
-@objc(JEFirebaseTweaksConfiguration) public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+@objcMembers public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public override init() {
         super.init()
@@ -31,16 +31,16 @@ import FirebaseRemoteConfig
     
     // Google dependencies
     private var configured: Bool = false
-    internal lazy var firebaseAppClass: FIRApp.Type = {
-        return FIRApp.self
+    internal lazy var firebaseAppClass: FirebaseApp.Type = {
+        return FirebaseApp.self
     }()
-    internal lazy var remoteConfiguration: FIRRemoteConfig = {
-        return FIRRemoteConfig.remoteConfig()
+    internal lazy var remoteConfiguration: RemoteConfig = {
+        return RemoteConfig.remoteConfig()
     }()
     
     private func fetchTweaks() {
         guard configured else { return }
-        remoteConfiguration.configSettings = FIRRemoteConfigSettings(developerModeEnabled: true)!
+        remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)!
         remoteConfiguration.fetch { [weak self] (status, error) in
             if let error = error {
                 print("!!! Error while fetching Firebase configuration => \(error) !!!")

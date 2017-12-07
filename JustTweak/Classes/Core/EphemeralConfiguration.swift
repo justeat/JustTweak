@@ -5,7 +5,7 @@
 
 import Foundation
 
-@objc(JEEphemeralConfiguration) public class EphemeralConfiguration: NSObject, MutableTweaksConfiguration {
+@objcMembers public class EphemeralConfiguration: NSObject, MutableTweaksConfiguration {
     
     private var storage = [String : TweakValue]()
     public var logClosure: TweaksLogClosure?

@@ -98,6 +98,8 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "JustTweak"
 ```
+## Requirements
+JustTweak supports swift 4.0 and Xcode 9
 
 ## License
 

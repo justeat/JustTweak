@@ -15,9 +15,9 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
     func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell)
 }
 
-@objc(JETweaksConfigurationViewController) public class TweaksConfigurationViewController: UITableViewController {
+@objcMembers public class TweaksConfigurationViewController: UITableViewController {
     
-    private class Tweak: NSObject {
+    fileprivate class Tweak: NSObject {
         var identifier: String
         var title: String?
         var value: TweakValue
@@ -179,7 +179,7 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
                 var items = [Tweak]()
                 for tweak in allTweaks {
                     if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
-                        var dto = Tweak(identifier: tweak.identifier, title: tweak.title, value: tweak.value)
+                        let dto = Tweak(identifier: tweak.identifier, title: tweak.title, value: tweak.value)
                         items.append(dto)
                     }
                 }
@@ -201,7 +201,7 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
         tableView.backgroundView?.isHidden = configurationsCoordinator?.topCustomizableConfiguration() != nil
     }
     
-    internal func dismissViewController() {
+    @objc internal func dismissViewController() {
         view.endEditing(true)
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
@@ -212,7 +212,7 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
     
     internal func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
-            if var tweak = tweakAt(indexPath: indexPath) {
+            if let tweak = tweakAt(indexPath: indexPath) {
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
                 configuration?.set(value: cell.value, forTweakWithIdentifier: tweak.identifier)
                 tweak.value = cell.value

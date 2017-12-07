@@ -48,7 +48,7 @@ public func ==(lhs: TweakValue, rhs: TweakValue) -> Bool {
     return NSNumber(tweakValue: lhs) == NSNumber(tweakValue: rhs)
 }
 
-@objc(JETweak) final public class Tweak: NSObject {
+@objcMembers final public class Tweak: NSObject {
     
     public let identifier: String
     public let value: TweakValue

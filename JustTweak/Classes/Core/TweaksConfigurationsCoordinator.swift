@@ -5,7 +5,8 @@
 
 import Foundation
 
-@objc(JETweaksConfigurationsCoordinator) final public class TweaksConfigurationsCoordinator: NSObject {
+@objcMembers
+@objc final public class TweaksConfigurationsCoordinator: NSObject {
     
     private struct TweakCachedValue: Hashable {
         let tweak: Tweak
@@ -20,7 +21,7 @@ import Foundation
         }
     }
     
-    public var logClosure: TweaksLogClosure = { print($0) } {
+    public var logClosure: TweaksLogClosure = {(message, logLevel) in  print(message) } {
         didSet {
             configurations.forEach {
                 $0.logClosure = logClosure
@@ -106,7 +107,7 @@ import Foundation
         return allTweaks
     }
     
-    public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping (Void) -> Void) {
+    public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping () -> Void) {
         deregisterFromConfigurationsUpdates(object)
         let queue = OperationQueue.main
         let name = TweaksConfigurationDidChangeNotification

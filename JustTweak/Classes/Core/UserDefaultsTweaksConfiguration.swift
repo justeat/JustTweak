@@ -5,7 +5,7 @@
 
 import Foundation
 
-@objc(JEUserDefaultsTweaksConfiguration) final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfiguration {
+@objcMembers final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfiguration {
     
     private let userDefaults: UserDefaults
     private let fallbackConfiguration: JSONTweaksConfiguration?
