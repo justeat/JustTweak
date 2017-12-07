@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         tapGestureRecognizer.isEnabled = valueForExperiment(withIdentifier: ExperimentIdentifiers.TapToChangeViewColor.rawValue).boolValue
     }
     
-    internal func changeViewColor() {
+    @objc internal func changeViewColor() {
         func randomColorValue() -> CGFloat {
             return CGFloat(arc4random() % 255) / 255.0
         }

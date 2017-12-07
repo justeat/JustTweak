@@ -48,11 +48,11 @@ class TextTweakTableViewCell: UITableViewCell, TweaksConfigurationViewController
         return textField
     }()
     
-    func textDidChange() {
+    @objc func textDidChange() {
         value = textField.text!
     }
     
-    func textEditingDidEnd() {
+    @objc func textEditingDidEnd() {
         delegate?.tweaksConfigurationCellDidChangeValue(self)
     }
     
