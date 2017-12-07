@@ -6,7 +6,7 @@
 import Foundation
 
 @objcMembers
-@objc(JETweaksConfigurationsCoordinator) final public class TweaksConfigurationsCoordinator: NSObject {
+@objc final public class TweaksConfigurationsCoordinator: NSObject {
     
     private struct TweakCachedValue: Hashable {
         let tweak: Tweak

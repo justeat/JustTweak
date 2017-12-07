@@ -5,11 +5,11 @@
 
 import Foundation
 
-@objc(JETweaksConfigurationPriority) public enum TweaksConfigurationPriority: Int {
+@objc public enum TweaksConfigurationPriority: Int {
     case high, medium, low, fallback
 }
 
-@objc(JETweaksConfiguration) public protocol TweaksConfiguration {
+@objc public protocol TweaksConfiguration {
     
     var logClosure: TweaksLogClosure? { set get }
     var priority: TweaksConfigurationPriority { get }
@@ -17,7 +17,7 @@ import Foundation
     
 }
 
-@objc(JEMutableTweaksConfiguration) public protocol MutableTweaksConfiguration: TweaksConfiguration {
+@objc public protocol MutableTweaksConfiguration: TweaksConfiguration {
     
     var allTweakIdentifiers: [String] { get }
     
