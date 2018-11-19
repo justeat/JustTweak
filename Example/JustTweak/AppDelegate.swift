@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(identifier: "greet_on_app_did_become_active")
+        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(feature: "greet_on_app_did_become_active")
         if let shouldShowAlert = shouldShowAlert, shouldShowAlert == true {
             let alertController = UIAlertController(title: "Hello",
                                                     message: "Welcome to this Demo app!",

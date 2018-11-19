@@ -33,22 +33,22 @@ class JSONTweaksConfigurationTests: XCTestCase {
     
     func testParsesBoolTweakWithAllValues() {
         let redViewTweak = Tweak(identifier: "display_red_view", title: "Display Red View", group: "UI", value: true, canBeDisplayed: true)
-        XCTAssertEqual(redViewTweak, configuration.tweakWith(identifier: "display_red_view"))
+        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: "display_red_view"))
     }
     
     func testParsesBoolTweakWithOneValue() {
         let tapBisTweak = Tweak(identifier: "tap_to_change_color_enabled_bis", title: nil, group: nil, value: false, canBeDisplayed: false)
-        XCTAssertEqual(tapBisTweak, configuration.tweakWith(identifier: "tap_to_change_color_enabled_bis"))
+        XCTAssertEqual(tapBisTweak, configuration.tweakWith(feature: "tap_to_change_color_enabled_bis"))
     }
     
     func testParsesFloatTweakWithAllValues() {
         let redViewAlphaTweak = Tweak(identifier: "red_view_alpha_component", title: "Red View Alpha Component", group: "UI", value: 1.0, canBeDisplayed: true)
-        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(identifier: "red_view_alpha_component"))
+        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: "red_view_alpha_component"))
     }
     
     func testParsesStringTweakWithAllValues() {
         let buttonLabelTweak = Tweak(identifier: "change_tweaks_button_label_text", title: "Change Tweaks Button Label Text", group: "UI", value: "Change Configuration", canBeDisplayed: true)
-        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(identifier: "change_tweaks_button_label_text"))
+        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: "change_tweaks_button_label_text"))
     }
     
 }

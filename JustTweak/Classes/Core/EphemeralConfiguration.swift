@@ -18,9 +18,9 @@ import Foundation
         return Array(storage.keys)
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
-        guard let storedValue = storage[identifier] else { return nil }
-        return Tweak(identifier: identifier, title: nil, group: nil, value: storedValue, canBeDisplayed: false)
+    public func tweakWith(feature: String) -> Tweak? {
+        guard let storedValue = storage[feature] else { return nil }
+        return Tweak(identifier: feature, title: nil, group: nil, value: storedValue, canBeDisplayed: false)
     }
     
     public func deleteValue(forTweakWithIdentifier identifier: String) {

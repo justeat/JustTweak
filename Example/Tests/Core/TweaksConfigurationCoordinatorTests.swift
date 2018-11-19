@@ -47,7 +47,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
             @objc let priority: TweaksConfigurationPriority = .high
             @objc var allTweakIdentifiers: [String] { get { return [] } }
             
-            @objc func tweakWith(identifier: String) -> Tweak? { return nil }
+            @objc func tweakWith(feature: String) -> Tweak? { return nil }
             @objc func set(boolValue value: Bool, forTweakWithIdentifier identifier: String) {}
             @objc func set(stringValue value: String, forTweakWithIdentifier identifier: String) {}
             @objc func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String) {}
@@ -62,33 +62,33 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(configurationCoordinator.valueForTweakWith(identifier: "some_undefined_tweak"))
+        XCTAssertNil(configurationCoordinator.valueForTweakWith(feature: "some_undefined_tweak"))
     }
     
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(identifier: "display_red_view") as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: "display_red_view") as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(identifier: "display_yellow_view") as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: "display_yellow_view") as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(identifier: "display_green_view") as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: "display_green_view") as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(identifier: "greet_on_app_did_become_active") as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: "greet_on_app_did_become_active") as! Bool)
     }
     
     func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(identifier: "tap_to_change_color_enabled") as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: "tap_to_change_color_enabled") as! Bool)
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
         let mutableConfiguration = configurationCoordinator.topCustomizableConfiguration()
         mutableConfiguration?.set(value: false, forTweakWithIdentifier: "greet_on_app_did_become_active")
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(identifier: "greet_on_app_did_become_active") as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: "greet_on_app_did_become_active") as! Bool)
     }
     
     func testReturnsAllDisplayableValues_ForValuesInJSONConfig_AsDisplayable_WithExpectedTitle_WithValueByConfigPriority() {
@@ -144,9 +144,9 @@ class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
                        "display_green_view": ["Value": false],
                        "greet_on_app_did_become_active": ["Value": true]]
     
-    func tweakWith(identifier: String) -> Tweak? {
-        guard let value = knownValues[identifier] else { return nil }
-        return Tweak(identifier: identifier, title: nil, group: nil, value: value["Value"]!, canBeDisplayed: false)
+    func tweakWith(feature: String) -> Tweak? {
+        guard let value = knownValues[feature] else { return nil }
+        return Tweak(identifier: feature, title: nil, group: nil, value: value["Value"]!, canBeDisplayed: false)
     }
     
 }

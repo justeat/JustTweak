@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     }
 
     private func valueForExperiment(withIdentifier identifier: String) -> TweakValue {
-        return configurationsCoordinator?.valueForTweakWith(identifier: identifier) ?? 0
+        return configurationsCoordinator?.valueForTweakWith(feature: identifier) ?? 0
     }
 
 }

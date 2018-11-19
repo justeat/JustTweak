@@ -35,13 +35,13 @@ import Foundation
         fileURL = jsonURL
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
-        guard let dictionary = configurationFile[identifier] else { return nil }
+    public func tweakWith(feature: String) -> Tweak? {
+        guard let dictionary = configurationFile[feature] else { return nil }
         let title = dictionary[EncodingKeys.Title.rawValue] as? String
         let group = dictionary[EncodingKeys.Group.rawValue] as? String
         let value = tweakValueFromJSONObject(dictionary[EncodingKeys.Value.rawValue])
         let canBeDisplayed = dictionary[EncodingKeys.CanBeDisplayed.rawValue]?.boolValue ?? false
-        return Tweak(identifier: identifier,
+        return Tweak(identifier: feature,
                      title: title,
                      group: group,
                      value: value,

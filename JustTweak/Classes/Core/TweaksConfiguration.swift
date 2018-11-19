@@ -13,7 +13,7 @@ import Foundation
     
     var logClosure: TweaksLogClosure? { set get }
     var priority: TweaksConfigurationPriority { get }
-    func tweakWith(identifier: String) -> Tweak?
+    func tweakWith(feature: String) -> Tweak?
     
 }
 

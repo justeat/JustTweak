@@ -53,12 +53,12 @@ import FirebaseRemoteConfig
         }
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
+    public func tweakWith(feature: String) -> Tweak? {
         guard configured else { return nil }
-        let configValue = remoteConfiguration.configValue(forKey: identifier)
+        let configValue = remoteConfiguration.configValue(forKey: feature)
         guard configValue.source != .static else { return nil }
         guard let stringValue = configValue.stringValue else { return nil }
-        return Tweak(identifier: identifier,
+        return Tweak(identifier: feature,
                      title: nil,
                      group: nil,
                      value: stringValue.tweakValue,

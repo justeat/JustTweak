@@ -125,7 +125,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
         cell.switchControl.sendActions(for: .valueChanged)
-        XCTAssertTrue(viewController.configurationsCoordinator!.valueForTweakWith(identifier: "display_yellow_view") as! Bool)
+        XCTAssertTrue(viewController.configurationsCoordinator!.valueForTweakWith(feature: "display_yellow_view") as! Bool)
     }
     
     // MARK: No configuration view
