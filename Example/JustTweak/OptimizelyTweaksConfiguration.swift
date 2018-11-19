@@ -30,9 +30,8 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
         optimizelyClient = optimizelyManager?.initialize()
     }
     
-    public func tweakWith(feature: String) -> Tweak? {
-        guard let enabled = optimizelyClient?.isFeatureEnabled(feature, userId: nil, attributes: nil) else { return nil }
-        return Tweak(identifier: feature, boolValue: enabled)
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        return optimizelyClient?.isFeatureEnabled(feature, userId: nil, attributes: nil) ?? false
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {

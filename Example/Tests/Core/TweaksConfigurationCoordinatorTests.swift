@@ -47,7 +47,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
             @objc let priority: TweaksConfigurationPriority = .p10
             @objc var allTweakIdentifiers: [String] { get { return [] } }
             
-            @objc func tweakWith(feature: String) -> Tweak? { return nil }
+            @objc func isFeatureEnabled(_ feature: String) -> Bool { return false }
             @objc func tweakWith(feature: String, variable: String) -> Tweak? { return nil }
             @objc func set(boolValue value: Bool, forTweakWithIdentifier identifier: String) {}
             @objc func set(stringValue value: String, forTweakWithIdentifier identifier: String) {}
@@ -145,8 +145,8 @@ class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
                        "display_green_view": ["Value": false],
                        "greet_on_app_did_become_active": ["Value": true]]
     
-    func tweakWith(feature: String) -> Tweak? {
-        return tweakWith(feature: "", variable: feature)
+    func isFeatureEnabled(_ feature: String) -> Bool {
+        return tweakWith(feature: "", variable: feature)?.boolValue ?? false
     }
     
     func tweakWith(feature: String, variable: String) -> Tweak? {

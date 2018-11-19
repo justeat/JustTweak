@@ -27,13 +27,13 @@ import Foundation
         self.fallbackConfiguration = fallbackConfiguration
     }
     
-    public func tweakWith(feature: String) -> Tweak? {
-        return tweakWith(feature: "", variable: feature)
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        return tweakWith(feature: "", variable: feature)?.boolValue ?? false
     }
-    
+
     public func tweakWith(feature: String, variable: String) -> Tweak? {
         let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(variable)
-        let fallbackTweak = fallbackConfiguration?.tweakWith(feature: variable)
+        let fallbackTweak = fallbackConfiguration?.tweakWith(feature: feature, variable: variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
         return Tweak(identifier: variable,

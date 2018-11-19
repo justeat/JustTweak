@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(feature: "greet_on_app_did_become_active")
+        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue)
         if let shouldShowAlert = shouldShowAlert, shouldShowAlert == true {
             let alertController = UIAlertController(title: "Hello",
                                                     message: "Welcome to this Demo app!",
@@ -41,8 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                  fallbackConfiguration: jsonConfiguration)
         
         let firebaseConfiguration = FirebaseTweaksConfiguration()
-        
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration]
+
+        let optimizelyConfiguration = OptimizelyTweaksConfiguration()
+
+        let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration, optimizelyConfiguration]
         configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
     

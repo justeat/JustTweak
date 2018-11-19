@@ -49,8 +49,8 @@ import Foundation
         NotificationCenter.default.removeObserver(self)
     }
     
-    public func tweakWith(feature: String) -> Tweak? {
-        if let cachedValue = tweaksCache[feature] {
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        if let cachedValue = tweaksCache[variable] {
             logClosure("Tweak '\(cachedValue.tweak)' found in cache.)", .verbose)
             return cachedValue.tweak
         }
@@ -58,32 +58,32 @@ import Foundation
         var result: Tweak? = nil
         var valueSource: String? = nil
         for (_, configuration) in configurations.enumerated() {
-            if let tweak = configuration.tweakWith(feature: feature) {
+            if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
                 logClosure("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
                 valueSource = valueSource ?? "\(type(of: configuration))"
-                result = Tweak(identifier: feature,
+                result = Tweak(identifier: variable,
                                title: result?.title ?! tweak.title,
                                group: result?.group ?! tweak.group,
                                value: result?.value ?! tweak.value,
                                canBeDisplayed: result?.canBeDisplayed ||| tweak.canBeDisplayed) // always displayable if any configuration allows it
             }
             else {
-                logClosure("Tweak with identifier '\(feature)' NOT found in configuration \(configuration))", .verbose)
+                logClosure("Tweak with identifier '\(variable)' NOT found in configuration \(configuration))", .verbose)
             }
         }
         if let result = result, let valueSource = valueSource {
-            logClosure("Tweak with identifier '\(feature)' resolved. Using '\(result)'.", .debug)
+            logClosure("Tweak with identifier '\(variable)' resolved. Using '\(result)'.", .debug)
             let cachedValue = TweakCachedValue(tweak: result, source: valueSource)
-            tweaksCache[feature] = cachedValue
+            tweaksCache[variable] = cachedValue
         }
         else {
-            logClosure("No Tweak found for identifier '\(feature)'", .error)
+            logClosure("No Tweak found for identifier '\(variable)'", .error)
         }
         return result
     }
     
-    public func valueForTweakWith(feature: String) -> TweakValue? {
-        return tweakWith(feature: feature)?.value
+    public func valueForTweakWith(feature: String, variable: String) -> TweakValue? {
+        return tweakWith(feature: feature, variable: variable)?.value
     }
     
     public func topCustomizableConfiguration() -> MutableTweaksConfiguration? {
@@ -98,8 +98,8 @@ import Foundation
     public func displayableTweaks() -> [Tweak] {
         var allTweaks = [Tweak]()
         if let allTweakIdentifiers = topCustomizableConfiguration()?.allTweakIdentifiers {
-            for identfier in allTweakIdentifiers {
-                if let tweak = tweakWith(feature: identfier) , tweak.canBeDisplayed {
+            for identifier in allTweakIdentifiers {
+                if let tweak = tweakWith(feature: "", variable: identifier), tweak.canBeDisplayed {
                     allTweaks.append(tweak)
                 }
             }

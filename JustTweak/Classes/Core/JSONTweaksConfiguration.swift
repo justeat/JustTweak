@@ -35,8 +35,8 @@ import Foundation
         fileURL = jsonURL
     }
     
-    public func tweakWith(feature: String) -> Tweak? {
-        return tweakWith(feature: "", variable: feature)
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        return tweakWith(feature: "", variable: feature)?.boolValue ?? false
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {

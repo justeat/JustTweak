@@ -13,7 +13,7 @@ import Foundation
     
     var logClosure: TweaksLogClosure? { set get }
     var priority: TweaksConfigurationPriority { get }
-    func tweakWith(feature: String) -> Tweak?
+    func isFeatureEnabled(_ feature: String) -> Bool
     func tweakWith(feature: String, variable: String) -> Tweak?
 }
 
@@ -25,7 +25,6 @@ import Foundation
     func set(boolValue value: Bool, forTweakWithIdentifier identifier: String)
     func set(stringValue value: String, forTweakWithIdentifier identifier: String)
     func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String)
-    
 }
 
 public extension MutableTweaksConfiguration {
@@ -41,7 +40,6 @@ public extension MutableTweaksConfiguration {
             set(numberValue: value, forTweakWithIdentifier: identifier)
         }
     }
-    
 }
 
 public let TweaksConfigurationDidChangeNotification = Notification.Name("TweaksConfigurationDidChangeNotification")
