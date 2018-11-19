@@ -48,6 +48,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
             @objc var allTweakIdentifiers: [String] { get { return [] } }
             
             @objc func tweakWith(feature: String) -> Tweak? { return nil }
+            @objc func tweakWith(feature: String, variable: String) -> Tweak? { return nil }
             @objc func set(boolValue value: Bool, forTweakWithIdentifier identifier: String) {}
             @objc func set(stringValue value: String, forTweakWithIdentifier identifier: String) {}
             @objc func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String) {}
@@ -145,8 +146,12 @@ class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
                        "greet_on_app_did_become_active": ["Value": true]]
     
     func tweakWith(feature: String) -> Tweak? {
-        guard let value = knownValues[feature] else { return nil }
-        return Tweak(identifier: feature, title: nil, group: nil, value: value["Value"]!, canBeDisplayed: false)
+        return tweakWith(feature: "", variable: feature)
+    }
+    
+    func tweakWith(feature: String, variable: String) -> Tweak? {
+        guard let value = knownValues[variable] else { return nil }
+        return Tweak(identifier: variable, title: nil, group: nil, value: value["Value"]!, canBeDisplayed: false)
     }
     
 }

@@ -19,8 +19,12 @@ import Foundation
     }
     
     public func tweakWith(feature: String) -> Tweak? {
-        guard let storedValue = storage[feature] else { return nil }
-        return Tweak(identifier: feature, title: nil, group: nil, value: storedValue, canBeDisplayed: false)
+        return tweakWith(feature: "", variable: feature)
+    }
+    
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        guard let storedValue = storage[variable] else { return nil }
+        return Tweak(identifier: variable, title: nil, group: nil, value: storedValue, canBeDisplayed: false)
     }
     
     public func deleteValue(forTweakWithIdentifier identifier: String) {

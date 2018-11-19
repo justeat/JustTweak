@@ -14,7 +14,7 @@ import Foundation
     var logClosure: TweaksLogClosure? { set get }
     var priority: TweaksConfigurationPriority { get }
     func tweakWith(feature: String) -> Tweak?
-    
+    func tweakWith(feature: String, variable: String) -> Tweak?
 }
 
 @objc public protocol MutableTweaksConfiguration: TweaksConfiguration {

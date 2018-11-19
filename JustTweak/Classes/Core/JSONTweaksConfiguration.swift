@@ -36,12 +36,16 @@ import Foundation
     }
     
     public func tweakWith(feature: String) -> Tweak? {
-        guard let dictionary = configurationFile[feature] else { return nil }
+        return tweakWith(feature: "", variable: feature)
+    }
+    
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        guard let dictionary = configurationFile[variable] else { return nil }
         let title = dictionary[EncodingKeys.Title.rawValue] as? String
         let group = dictionary[EncodingKeys.Group.rawValue] as? String
         let value = tweakValueFromJSONObject(dictionary[EncodingKeys.Value.rawValue])
         let canBeDisplayed = dictionary[EncodingKeys.CanBeDisplayed.rawValue]?.boolValue ?? false
-        return Tweak(identifier: feature,
+        return Tweak(identifier: variable,
                      title: title,
                      group: group,
                      value: value,

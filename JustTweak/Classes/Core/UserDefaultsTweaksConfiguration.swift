@@ -28,11 +28,15 @@ import Foundation
     }
     
     public func tweakWith(feature: String) -> Tweak? {
-        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(feature)
-        let fallbackTweak = fallbackConfiguration?.tweakWith(feature: feature)
+        return tweakWith(feature: "", variable: feature)
+    }
+    
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(variable)
+        let fallbackTweak = fallbackConfiguration?.tweakWith(feature: variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
-        return Tweak(identifier: feature,
+        return Tweak(identifier: variable,
                      title: fallbackTweak?.title,
                      group: fallbackTweak?.group,
                      value: value,
