@@ -30,7 +30,7 @@ import Foundation
     }
     
     private let configurations: [TweaksConfiguration]
-    private var tweaksCache = [String : TweakCachedValue]()
+    private var tweaksCache = [String : [String : TweakCachedValue]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
     public init?(configurations: [TweaksConfiguration]) {
@@ -50,9 +50,9 @@ import Foundation
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        if let cachedValue = tweaksCache[variable] {
-            logClosure("Tweak '\(cachedValue.tweak)' found in cache.)", .verbose)
-            return cachedValue.tweak
+        if let cachedVariables = tweaksCache[feature], let cachedVariable = cachedVariables[variable] {
+            logClosure("Tweak '\(cachedVariable.tweak)' found in cache.)", .verbose)
+            return cachedVariable.tweak
         }
         
         var result: Tweak? = nil
@@ -72,9 +72,13 @@ import Foundation
             }
         }
         if let result = result, let valueSource = valueSource {
-            logClosure("Tweak with identifier '\(variable)' resolved. Using '\(result)'.", .debug)
-            let cachedValue = TweakCachedValue(tweak: result, source: valueSource)
-            tweaksCache[variable] = cachedValue
+            logClosure("Tweak with feature '\(feature)' and variable '\(variable)' resolved. Using '\(result)'.", .debug)
+            let cachedTweak = TweakCachedValue(tweak: result, source: valueSource)
+            if let _ = tweaksCache[feature] {
+                tweaksCache[feature]?[variable] = cachedTweak
+            } else {
+                tweaksCache[feature] = [variable : cachedTweak]
+            }
         }
         else {
             logClosure("No Tweak found for identifier '\(variable)'", .error)
@@ -125,7 +129,7 @@ import Foundation
     }
     
     @objc public func resetCache() {
-        tweaksCache = [String : TweakCachedValue]()
+        tweaksCache = [String : [String : TweakCachedValue]]()
     }
     
 }
