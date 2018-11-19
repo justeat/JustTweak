@@ -44,7 +44,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     func testReturnsConsistentMutableConfiguration_IfInitializedWithMultipleMutableConfigurations_WithSamePriority() {
         @objc class MockMutableTweaksConfiguration: NSObject, MutableTweaksConfiguration {
             var logClosure: TweaksLogClosure?
-            @objc let priority: TweaksConfigurationPriority = .high
+            @objc let priority: TweaksConfigurationPriority = .p10
             @objc var allTweakIdentifiers: [String] { get { return [] } }
             
             @objc func tweakWith(feature: String) -> Tweak? { return nil }
@@ -139,7 +139,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
 class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
 
     var logClosure: TweaksLogClosure?
-    let priority: TweaksConfigurationPriority = .medium
+    let priority: TweaksConfigurationPriority = .p5
     let knownValues = ["display_red_view": ["Value": true],
                        "display_yellow_view": ["Value": false],
                        "display_green_view": ["Value": false],

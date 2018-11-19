@@ -10,9 +10,7 @@ import Foundation
     private var storage = [String : TweakValue]()
     public var logClosure: TweaksLogClosure?
     
-    public var priority: TweaksConfigurationPriority {
-        return .fallback
-    }
+    public var priority: TweaksConfigurationPriority = .p1
     
     public var allTweakIdentifiers: [String] {
         return Array(storage.keys)

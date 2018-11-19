@@ -35,7 +35,7 @@ import Foundation
     
     public init?(configurations: [TweaksConfiguration]) {
         guard configurations.count > 0 else { return nil }
-        self.configurations = configurations.sorted(by: { $0.priority.rawValue < $1.priority.rawValue })
+        self.configurations = configurations.sorted(by: { $0.priority.rawValue > $1.priority.rawValue })
         logClosure("Configurations lookup order => \(self.configurations) ", .verbose)
         super.init()
         self.configurations.forEach {

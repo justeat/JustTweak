@@ -9,7 +9,7 @@ import OptimizelySDKiOS
 public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public var logClosure: TweaksLogClosure?
-    public var priority: TweaksConfigurationPriority = .medium
+    public var priority: TweaksConfigurationPriority = .p8
     
     private var optimizelyManager: OPTLYManager?
     private var optimizelyClient: OPTLYClient?

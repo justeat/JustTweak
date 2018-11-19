@@ -15,7 +15,7 @@ import Foundation
     private let fileURL: URL
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .fallback
+    public let priority: TweaksConfigurationPriority = .p0
     
     public var allIdentifiers: [String] {
         return Array(configurationFile.keys)

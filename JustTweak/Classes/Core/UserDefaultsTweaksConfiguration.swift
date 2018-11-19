@@ -14,7 +14,7 @@ import Foundation
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .high
+    public let priority: TweaksConfigurationPriority = .p10
     
     public var allTweakIdentifiers: [String] {
         let fallbackConfigurationTweaks = fallbackConfiguration?.allIdentifiers ?? []
