@@ -68,4 +68,8 @@ import FirebaseRemoteConfig
                      value: stringValue.tweakValue,
                      canBeDisplayed: false)
     }
+    
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
 }

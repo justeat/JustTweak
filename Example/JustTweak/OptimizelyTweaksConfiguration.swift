@@ -59,4 +59,8 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
         
         return nil
     }
+    
+    public func activeVariation(for experiment: String) -> String? {
+        return optimizelyClient?.activate(experiment, userId: "")?.variationKey
+    }
 }

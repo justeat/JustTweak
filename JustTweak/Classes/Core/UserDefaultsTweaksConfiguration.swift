@@ -43,6 +43,10 @@ import Foundation
                      canBeDisplayed: fallbackTweak?.canBeDisplayed ?? false)
     }
     
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
+
     public func set(boolValue value: Bool, forTweakWithIdentifier identifier: String) {
         set(numberValue: NSNumber(value: value as Bool), forTweakWithIdentifier: identifier)
     }
@@ -83,5 +87,4 @@ import Foundation
         }
         return nil
     }
-    
 }

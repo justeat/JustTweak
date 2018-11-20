@@ -15,6 +15,7 @@ import Foundation
     var priority: TweaksConfigurationPriority { get }
     func isFeatureEnabled(_ feature: String) -> Bool
     func tweakWith(feature: String, variable: String) -> Tweak?
+    func activeVariation(for experiment: String) -> String?
 }
 
 @objc public protocol MutableTweaksConfiguration: TweaksConfiguration {

@@ -52,6 +52,10 @@ import Foundation
                      canBeDisplayed: canBeDisplayed)
     }
     
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
+
     private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
         let value: TweakValue
         if let numberValue = jsonObject as? NSNumber {
@@ -65,5 +69,4 @@ import Foundation
         }
         return value
     }
-    
 }

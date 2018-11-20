@@ -25,6 +25,10 @@ import Foundation
         return Tweak(identifier: variable, title: nil, group: nil, value: storedValue, canBeDisplayed: false)
     }
     
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
+
     public func deleteValue(forTweakWithIdentifier identifier: String) {
         storage.removeValue(forKey: identifier)
     }
@@ -39,6 +43,5 @@ import Foundation
     
     public func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String) {
         storage[identifier] = value.tweakValue
-    }
-    
+    }    
 }
