@@ -8,11 +8,14 @@ import OptimizelySDKiOS
 
 public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     
+    private var optimizelyManager: OPTLYManager?
+    private var optimizelyClient: OPTLYClient?
+    
     public var logClosure: TweaksLogClosure?
     public var priority: TweaksConfigurationPriority = .p8
     
-    private var optimizelyManager: OPTLYManager?
-    private var optimizelyClient: OPTLYClient?
+    public var userId: String!
+    public var attributes: [String : String]?
     
     public override init() {
         super.init()
@@ -26,28 +29,28 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
             builder.datafile = jsonDatafile
             builder.sdkKey = "SDK_KEY_HERE"
         }))
-        
         optimizelyClient = optimizelyManager?.initialize()
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        return optimizelyClient?.isFeatureEnabled(feature, userId: nil, attributes: nil) ?? false
+        return optimizelyClient?.isFeatureEnabled(feature, userId: userId, attributes: attributes) ?? false
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let optimizelyClient = optimizelyClient, optimizelyClient.isFeatureEnabled(feature, userId: nil, attributes: nil) == true else { return nil }
+        guard let optimizelyClient = optimizelyClient else { return nil }
+        guard optimizelyClient.isFeatureEnabled(feature, userId: userId, attributes: attributes) == true else { return nil }
         
         let tweakValue: TweakValue? = {
-            if let boolValue = optimizelyClient.getFeatureVariableBoolean(feature, variableKey: variable, userId: nil, attributes: nil)?.boolValue {
+            if let boolValue = optimizelyClient.getFeatureVariableBoolean(feature, variableKey: variable, userId: userId, attributes: attributes)?.boolValue {
                 return boolValue
             }
-            else if let doubleValue = optimizelyClient.getFeatureVariableDouble(feature, variableKey: variable, userId: nil, attributes: nil)?.doubleValue {
+            else if let doubleValue = optimizelyClient.getFeatureVariableDouble(feature, variableKey: variable, userId: userId, attributes: attributes)?.doubleValue {
                 return doubleValue
             }
-            else if let intValue = optimizelyClient.getFeatureVariableInteger(feature, variableKey: variable, userId: nil, attributes: nil)?.intValue {
+            else if let intValue = optimizelyClient.getFeatureVariableInteger(feature, variableKey: variable, userId: userId, attributes: attributes)?.intValue {
                 return intValue
             }
-            else if let stringValue = optimizelyClient.getFeatureVariableString(feature, variableKey: variable, userId: nil, attributes: nil) {
+            else if let stringValue = optimizelyClient.getFeatureVariableString(feature, variableKey: variable, userId: userId, attributes: attributes) {
                 return stringValue
             }
             return nil
@@ -61,6 +64,6 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public func activeVariation(for experiment: String) -> String? {
-        return optimizelyClient?.activate(experiment, userId: "")?.variationKey
+        return optimizelyClient?.activate(experiment, userId: userId)?.variationKey
     }
 }
