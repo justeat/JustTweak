@@ -39,51 +39,51 @@ class UserDefaultsTweaksConfigurationTests: XCTestCase {
         let anotherConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
         anotherConfiguration.set(value: true, forTweakWithIdentifier: "tweak_1")
         let expectedTweak = Tweak(identifier: "tweak_1", title: nil, group: nil, value: true, canBeDisplayed: false)
-        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "tweak_1") == expectedTweak)
+        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "tweak_1", variable: "tweak_1") == expectedTweak)
     }
     
     func testReturnsNilForTweaksThatHaveNoUserDefaultValue() {
-        XCTAssertNil(configuration.tweakWith(feature: "display_red_view"))
+        XCTAssertNil(configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
     }
     
     func testReturnsNonNilForTweaksThatHaveNoUserDefaultValue() {
         userDefaults.set("Hello", forKey: "lib.fragments.userDefaultsKey.display_red_view")
-        XCTAssertNotNil(configuration.tweakWith(feature: "display_red_view"))
+        XCTAssertNotNil(configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
     }
     
     func testUpdatesValueForTweak_withBool() {
-        configuration.set(value: true, forTweakWithIdentifier: "display_red_view")
-        let tweak = configuration.tweakWith(feature: "display_red_view")
+        configuration.set(value: true, forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
+        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
         XCTAssertTrue(tweak!.value == true)
     }
     
     func testUpdatesValueForTweak_withNumber() {
-        configuration.set(value: 1, forTweakWithIdentifier: "display_red_view")
-        let tweak = configuration.tweakWith(feature: "display_red_view")
+        configuration.set(value: 1, forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
+        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
         XCTAssertTrue(tweak!.value == 1)
     }
     
     func testUpdatesValueForTweak_withString() {
-        configuration.set(value: "Hello", forTweakWithIdentifier: "display_red_view")
-        let tweak = configuration.tweakWith(feature: "display_red_view")
+        configuration.set(value: "Hello", forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
+        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
         XCTAssertTrue(tweak!.value == "Hello")
     }
     
     func testUpdatesValueForTweak_withBool_withSupportForObjectiveC() {
-        configuration.set(boolValue: true, forTweakWithIdentifier: "display_red_view")
-        let tweak = configuration.tweakWith(feature: "display_red_view")
+        configuration.set(boolValue: true, forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
+        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
         XCTAssertTrue(tweak!.value == true)
     }
     
     func testUpdatesValueForTweak_withNumber_withSupportForObjectiveC() {
-        configuration.set(numberValue: NSNumber(value: 1), forTweakWithIdentifier: "display_red_view")
-        let tweak = configuration.tweakWith(feature: "display_red_view")
+        configuration.set(numberValue: NSNumber(value: 1), forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
+        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
         XCTAssertTrue(tweak!.value == 1)
     }
     
     func testUpdatesValueForTweak_withString_withSupportForObjectiveC() {
-        configuration.set(stringValue: "Hello", forTweakWithIdentifier: "display_red_view")
-        let tweak = configuration.tweakWith(feature: "display_red_view")
+        configuration.set(stringValue: "Hello", forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
+        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
         XCTAssertTrue(tweak!.value == "Hello")
     }
     

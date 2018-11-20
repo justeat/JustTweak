@@ -24,9 +24,6 @@
         "Value": true,
         "CanBeDisplayed": true
     },
-    "tap_to_change_color_enabled_bis": {
-        "CanBeDisplayed": false
-    },
     "red_view_alpha_component": {
         "CanBeDisplayed": true,
         "Title": "Red View Alpha Component",

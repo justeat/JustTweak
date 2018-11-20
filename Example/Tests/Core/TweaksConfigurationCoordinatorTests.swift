@@ -63,42 +63,42 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(configurationCoordinator.valueForTweakWith(feature: "some_undefined_tweak"))
+        XCTAssertNil(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: "some_undefined_tweak"))
     }
     
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: "display_red_view") as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue) as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: "display_yellow_view") as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue) as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: "display_green_view") as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue) as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: "greet_on_app_did_become_active") as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue) as! Bool)
     }
     
     func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: "tap_to_change_color_enabled") as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.TapToChangeViewColor.rawValue) as! Bool)
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
         let mutableConfiguration = configurationCoordinator.topCustomizableConfiguration()
-        mutableConfiguration?.set(value: false, forTweakWithIdentifier: "greet_on_app_did_become_active")
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: "greet_on_app_did_become_active") as! Bool)
+        mutableConfiguration?.set(value: false, forTweakWithIdentifier: Variables.GreetOnAppDidBecomeActive.rawValue)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue) as! Bool)
     }
     
     func testReturnsAllDisplayableValues_ForValuesInJSONConfig_AsDisplayable_WithExpectedTitle_WithValueByConfigPriority() {
-        let redViewTweak = Tweak(identifier: "display_red_view", title: "Display Red View", group: "UI", value: true, canBeDisplayed: true)
-        let yellowViewTweak = Tweak(identifier: "display_yellow_view", title: "Display Yellow View", group: "UI", value: false, canBeDisplayed: true)
-        let greetingsTweak = Tweak(identifier: "greet_on_app_did_become_active", title: "Greet on app launch", group: "General", value: true, canBeDisplayed: true)
-        let tapColorTweak = Tweak(identifier: "tap_to_change_color_enabled", title: nil, group: nil, value: true, canBeDisplayed: true)
-        let redViewAlphaTweak = Tweak(identifier: "red_view_alpha_component", title: "Red View Alpha Component", group: "UI", value: 1.0, canBeDisplayed: true)
-        let buttonTitleTweak = Tweak(identifier: "change_tweaks_button_label_text", title: "Change Tweaks Button Label Text", group: "UI", value: "Change Configuration", canBeDisplayed: true)
+        let redViewTweak = Tweak(identifier: Variables.DisplayRedView.rawValue, title: "Display Red View", group: "UI", value: true, canBeDisplayed: true)
+        let yellowViewTweak = Tweak(identifier: Variables.DisplayYellowView.rawValue, title: "Display Yellow View", group: "UI", value: false, canBeDisplayed: true)
+        let greetingsTweak = Tweak(identifier: Variables.GreetOnAppDidBecomeActive.rawValue, title: "Greet on app launch", group: "General", value: true, canBeDisplayed: true)
+        let tapColorTweak = Tweak(identifier: Variables.TapToChangeViewColor.rawValue, title: nil, group: nil, value: true, canBeDisplayed: true)
+        let redViewAlphaTweak = Tweak(identifier: Variables.RedViewAlpha.rawValue, title: "Red View Alpha Component", group: "UI", value: 1.0, canBeDisplayed: true)
+        let buttonTitleTweak = Tweak(identifier: Variables.ChangeConfigurationButton.rawValue, title: "Change Tweaks Button Label Text", group: "UI", value: "Change Configuration", canBeDisplayed: true)
         let expectedTweaks = [
             redViewTweak,
             yellowViewTweak,
