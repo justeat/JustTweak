@@ -12,33 +12,24 @@ class ViewController: UIViewController {
     @IBOutlet var greenView: UIView!
     @IBOutlet var yellowView: UIView!
     @IBOutlet var changeConfigurationButton: UIButton!
-
+    
     var configurationsCoordinator: TweaksConfigurationsCoordinator?
     private var tapGestureRecognizer: UITapGestureRecognizer!
-
+    
     private var canShowRedView: Bool {
-        get {
-            let variable = Variables.DisplayRedView.rawValue
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: variable).boolValue
-        }
+        return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue).boolValue
     }
     private var canShowGreenView: Bool {
-        get {
-            let variable = Variables.DisplayGreenView.rawValue
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: variable).boolValue
-        }
+        return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue).boolValue
     }
     private var canShowYellowView: Bool {
-        get {
-            let variable = Variables.DisplayYellowView.rawValue
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: variable).boolValue
-        }
+        return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue).boolValue
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
