@@ -5,8 +5,7 @@
 
 import Foundation
 
-@objcMembers
-@objc final public class TweaksConfigurationsCoordinator: NSObject {
+final public class TweaksConfigurationsCoordinator: NSObject {
     
     private struct TweakCachedValue: Hashable {
         let tweak: Tweak
@@ -21,15 +20,15 @@ import Foundation
         }
     }
     
-    public var logClosure: TweaksLogClosure = {(message, logLevel) in  print(message) } {
+    public var logClosure: TweaksLogClosure = {(message, logLevel) in print(message) } {
         didSet {
-            configurations.forEach {
-                $0.logClosure = logClosure
+            for (index, _) in configurations.enumerated() {
+                configurations[index].logClosure = logClosure
             }
         }
     }
     
-    private let configurations: [TweaksConfiguration]
+    private var configurations: [TweaksConfiguration]
     private var tweaksCache = [String : [String : TweakCachedValue]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
@@ -38,8 +37,8 @@ import Foundation
         self.configurations = configurations.sorted(by: { $0.priority.rawValue > $1.priority.rawValue })
         logClosure("Configurations lookup order => \(self.configurations) ", .verbose)
         super.init()
-        self.configurations.forEach {
-            $0.logClosure = logClosure
+        for (index, _) in self.configurations.enumerated() {
+            self.configurations[index].logClosure = logClosure
         }
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(resetCache), name: TweaksConfigurationDidChangeNotification, object: nil)
@@ -60,12 +59,13 @@ import Foundation
         for (_, configuration) in configurations.enumerated() {
             if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
                 logClosure("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
-                valueSource = valueSource ?? "\(type(of: configuration))"
-                result = Tweak(identifier: variable,
-                               title: result?.title ?! tweak.title,
-                               group: result?.group ?! tweak.group,
-                               value: result?.value ?! tweak.value,
-                               canBeDisplayed: result?.canBeDisplayed ||| tweak.canBeDisplayed) // always displayable if any configuration allows it
+                valueSource = "\(type(of: configuration))"
+                let identifier = [feature, variable].joined(separator: "-")
+                result = Tweak(identifier: identifier,
+                               title: tweak.title,
+                               group: tweak.group,
+                               value: tweak.value)
+                break
             }
             else {
                 logClosure("Tweak with identifier '\(variable)' NOT found in configuration \(configuration))", .verbose)
@@ -100,15 +100,22 @@ import Foundation
     }
     
     public func displayableTweaks() -> [Tweak] {
-        var allTweaks = [Tweak]()
-        if let allTweakIdentifiers = topCustomizableConfiguration()?.allTweakIdentifiers {
-            for identifier in allTweakIdentifiers {
-                if let tweak = tweakWith(feature: "", variable: identifier), tweak.canBeDisplayed {
-                    allTweaks.append(tweak)
+        var tweaks = [Tweak]()
+        if let features = jsonConfiguration?.features {
+            for (feature, variables) in features {
+                for variable in variables {
+                    if let tweak = tweakWith(feature: feature, variable: variable) {
+                        let jsonTweak = jsonConfiguration?.tweakWith(feature: feature, variable: variable)
+                        let aggregatedTweak = Tweak(identifier: tweak.identifier,
+                                                    title: jsonTweak?.title,
+                                                    group: jsonTweak?.group,
+                                                    value: tweak.value)
+                        tweaks.append(aggregatedTweak)
+                    }
                 }
             }
         }
-        return allTweaks
+        return tweaks
     }
     
     public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping () -> Void) {
@@ -132,4 +139,7 @@ import Foundation
         tweaksCache = [String : [String : TweakCachedValue]]()
     }
     
+    private var jsonConfiguration: JSONTweaksConfiguration? {
+        return configurations.filter { $0 is JSONTweaksConfiguration }.first as? JSONTweaksConfiguration
+    }
 }

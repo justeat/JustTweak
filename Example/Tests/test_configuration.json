@@ -1,39 +1,37 @@
 {
-    "display_red_view": {
+    "ui_customization-display_red_view": {
         "Title": "Display Red View",
-        "Group": "UI",
-        "Value": true,
-        "CanBeDisplayed": true
-    },
-    "display_yellow_view": {
-        "Title": "Display Yellow View",
-        "Group": "UI",
-        "Value": false,
-        "CanBeDisplayed": true
-    },
-    "display_green_view": {
+        "Group": "UI Customization",
         "Value": true
     },
-    "greet_on_app_did_become_active": {
-        "Title": "Greet on app launch",
-        "Group": "General",
-        "Value": false,
-        "CanBeDisplayed": true
+    "ui_customization-display_yellow_view": {
+        "Title": "Display Yellow View",
+        "Group": "UI Customization",
+        "Value": false
     },
-    "tap_to_change_color_enabled": {
-        "Value": true,
-        "CanBeDisplayed": true
+    "ui_customization-display_green_view": {
+        "Title": "Display Green View",
+        "Group": "UI Customization",
+        "Value": true
     },
-    "red_view_alpha_component": {
-        "CanBeDisplayed": true,
+    "ui_customization-red_view_alpha_component": {
         "Title": "Red View Alpha Component",
-        "Group": "UI",
+        "Group": "UI Customization",
         "Value": 1.0
     },
-    "change_tweaks_button_label_text": {
-        "CanBeDisplayed": true,
+    "ui_customization-change_tweaks_button_label_text": {
         "Title": "Change Tweaks Button Label Text",
-        "Group": "UI",
+        "Group": "UI Customization",
         "Value": "Change Configuration"
+    },
+    "general-greet_on_app_did_become_active": {
+        "Title": "Greet on app launch",
+        "Group": "General",
+        "Value": false
+    },
+    "general-tap_to_change_color_enabled": {
+        "Title": "Tap to change views color",
+        "Group": "General",
+        "Value": true
     }
 }

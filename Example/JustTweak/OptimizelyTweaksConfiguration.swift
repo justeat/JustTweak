@@ -57,7 +57,7 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
         }()
         
         if let tweakValue = tweakValue {
-            return Tweak(identifier: variable, title: nil, group: nil, value: tweakValue, canBeDisplayed: false)
+            return Tweak(identifier: variable, title: nil, group: nil, value: tweakValue)
         }
         
         return nil

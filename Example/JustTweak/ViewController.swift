@@ -17,13 +17,19 @@ class ViewController: UIViewController {
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
     private var canShowRedView: Bool {
-        return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue).boolValue
+        get {
+            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue).boolValue
+        }
     }
     private var canShowGreenView: Bool {
-        return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue).boolValue
+        get {
+            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue).boolValue
+        }
     }
     private var canShowYellowView: Bool {
-        return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue).boolValue
+        get {
+            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue).boolValue
+        }
     }
     
     deinit {
@@ -73,7 +79,7 @@ class ViewController: UIViewController {
     }
 
     private func valueForExperiment(feature: String, variable: String) -> TweakValue {
-        return configurationsCoordinator?.valueForTweakWith(feature: feature, variable: variable) ?? 0
+        let value = configurationsCoordinator?.valueForTweakWith(feature: feature, variable: variable)
+        return value ?? 0
     }
-
 }

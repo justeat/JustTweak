@@ -4,87 +4,53 @@ import JustTweak
 
 class UserDefaultsTweaksConfigurationTests: XCTestCase {
     
-    var configuration: UserDefaultsTweaksConfiguration!
+    var userDefaultsConfiguration: UserDefaultsTweaksConfiguration!
     let userDefaults = UserDefaults(suiteName: String(describing: UserDefaultsTweaksConfigurationTests.self))!
-    
+
+    private let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
+
     override func setUp() {
         super.setUp()
-        let bundle = Bundle(for: TweaksConfigurationCoordinatorTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonConfigurationURL)!
-        configuration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults,
-                                                        fallbackConfiguration: jsonConfiguration)
+        userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
     }
     
     override func tearDown() {
-        userDefaults.removeObject(forKey: "lib.fragments.userDefaultsKey.display_red_view")
-        configuration = nil
+        userDefaults.removeObject(forKey: "\(userDefaultsKeyPrefix).display_red_view")
+        userDefaultsConfiguration = nil
         super.tearDown()
     }
     
-    func testReturnsNoTweaksIdentifiersWhenInitializedWithoutFallbackConfigurationsAndNoTweaksHaveBeenSet() {
+    func testReturnsCorrectTweaksIdentifiersWhenInitializedAndTweaksHaveBeenSet() {
         let anotherConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
-        XCTAssertEqual(anotherConfiguration.allTweakIdentifiers, [])
-    }
-    
-    func testReturnsCorrectTweaksIdentifiersWhenInitializedWithoutFallbackConfigurationsAndTweaksHaveBeenSet() {
-        let anotherConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
-        anotherConfiguration.set(stringValue: "hello", forTweakWithIdentifier: "tweak_3")
-        anotherConfiguration.set(boolValue: true, forTweakWithIdentifier: "tweak_2")
-        anotherConfiguration.set(value: 1, forTweakWithIdentifier: "tweak_1")
-        XCTAssertEqual(anotherConfiguration.allTweakIdentifiers, ["tweak_1", "tweak_2", "tweak_3"])
-    }
-    
-    func testReturnsExpectedTweakWhenValueIsSetAndHasNoFallbackConfiguration() {
-        let anotherConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
-        anotherConfiguration.set(value: true, forTweakWithIdentifier: "tweak_1")
-        let expectedTweak = Tweak(identifier: "tweak_1", title: nil, group: nil, value: true, canBeDisplayed: false)
-        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "tweak_1", variable: "tweak_1") == expectedTweak)
+        anotherConfiguration.set("hello", feature: "feature_1", variable: "variable_3")
+        anotherConfiguration.set(true, feature: "feature_1", variable: "variable_2")
+        anotherConfiguration.set(1, feature: "feature_1", variable: "variable_1")
+        
+        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")!.value == 1)
+        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_2")!.value == true)
+        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_3")!.value == "hello")
     }
     
     func testReturnsNilForTweaksThatHaveNoUserDefaultValue() {
-        XCTAssertNil(configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
-    }
-    
-    func testReturnsNonNilForTweaksThatHaveNoUserDefaultValue() {
-        userDefaults.set("Hello", forKey: "lib.fragments.userDefaultsKey.display_red_view")
-        XCTAssertNotNil(configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
+        let tweak = userDefaultsConfiguration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
+        XCTAssertNil(tweak)
     }
     
     func testUpdatesValueForTweak_withBool() {
-        configuration.set(value: true, forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
-        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
+        userDefaultsConfiguration.set(value: true, feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == true)
     }
     
     func testUpdatesValueForTweak_withNumber() {
-        configuration.set(value: 1, forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
-        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
-        XCTAssertTrue(tweak!.value == 1)
+        userDefaultsConfiguration.set(value: 42, feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
+        XCTAssertTrue(tweak!.value == 42)
     }
     
     func testUpdatesValueForTweak_withString() {
-        configuration.set(value: "Hello", forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
-        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
+        userDefaultsConfiguration.set(value: "Hello", feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == "Hello")
-    }
-    
-    func testUpdatesValueForTweak_withBool_withSupportForObjectiveC() {
-        configuration.set(boolValue: true, forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
-        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
-        XCTAssertTrue(tweak!.value == true)
-    }
-    
-    func testUpdatesValueForTweak_withNumber_withSupportForObjectiveC() {
-        configuration.set(numberValue: NSNumber(value: 1), forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
-        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
-        XCTAssertTrue(tweak!.value == 1)
-    }
-    
-    func testUpdatesValueForTweak_withString_withSupportForObjectiveC() {
-        configuration.set(stringValue: "Hello", forTweakWithIdentifier: Variables.DisplayRedView.rawValue)
-        let tweak = configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
-        XCTAssertTrue(tweak!.value == "Hello")
-    }
-    
+    }    
 }

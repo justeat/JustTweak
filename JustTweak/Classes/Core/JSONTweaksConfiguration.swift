@@ -5,10 +5,10 @@
 
 import Foundation
 
-@objcMembers final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
+final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private enum EncodingKeys : String {
-        case Title, CanBeDisplayed, Value, Group
+        case Title, Value, Group
     }
     
     private let configurationFile: [String : [String : AnyObject]]
@@ -16,6 +16,22 @@ import Foundation
     
     public var logClosure: TweaksLogClosure?
     public let priority: TweaksConfigurationPriority = .p0
+    
+    public var features: [String : [String]] {
+        var storage: [String : [String]] = [:]
+        for identifier in allIdentifiers {
+            let components = identifier.split(separator: "-")
+            let feature = String(components[0])
+            let variable = String(components[1])
+            
+            if let _ = storage[feature] {
+                storage[feature]?.append(variable)
+            } else {
+                storage[feature] = [variable]
+            }
+        }
+        return storage
+    }
     
     public var allIdentifiers: [String] {
         return Array(configurationFile.keys)
@@ -36,20 +52,19 @@ import Foundation
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        return tweakWith(feature: "", variable: feature)?.boolValue ?? false
+        return configurationFile[feature] != nil
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let dictionary = configurationFile[variable] else { return nil }
+        let identifier = [feature, variable].joined(separator: "-")
+        guard let dictionary = configurationFile[identifier] else { return nil }
         let title = dictionary[EncodingKeys.Title.rawValue] as? String
         let group = dictionary[EncodingKeys.Group.rawValue] as? String
         let value = tweakValueFromJSONObject(dictionary[EncodingKeys.Value.rawValue])
-        let canBeDisplayed = dictionary[EncodingKeys.CanBeDisplayed.rawValue]?.boolValue ?? false
-        return Tweak(identifier: variable,
+        return Tweak(identifier: identifier,
                      title: title,
                      group: group,
-                     value: value,
-                     canBeDisplayed: canBeDisplayed)
+                     value: value)
     }
     
     public func activeVariation(for experiment: String) -> String? {

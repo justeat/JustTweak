@@ -12,7 +12,7 @@ class ConfigurationViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
-        viewController.configurationsCoordinator?.topCustomizableConfiguration()?.deleteValue(forTweakWithIdentifier: Variables.DisplayYellowView.rawValue)
+        viewController.configurationsCoordinator?.topCustomizableConfiguration()?.deleteValue(feature: "feature_1", variable: "variable_1")
         viewController = nil
         super.tearDown()
     }
@@ -33,82 +33,73 @@ class ConfigurationViewControllerTests: XCTestCase {
     }
     
     func testHasExpectedNumberOfSections() {
-        XCTAssertEqual(3, viewController.numberOfSections(in: viewController.tableView))
-    }
-    
-    func testHasExpectedNumberOfSectionsWhenNoDisplayableTweakIsUngrouped() {
-        buildViewControllerWithConfigurationFromFileNamed("test_configuration_no_displayable_ungrouped")
         XCTAssertEqual(2, viewController.numberOfSections(in: viewController.tableView))
     }
     
-    func testUngroupedTweaksAreDisplayedUnderOneSection() {
-        XCTAssertEqual(4, viewController.tableView(viewController.tableView, numberOfRowsInSection: 2))
-        XCTAssertEqual("UI", viewController.tableView(viewController.tableView, titleForHeaderInSection: 2))
-    }
-    
     func testGroupedTweaksAreDisplayedInTheirOwnSections() {
-        XCTAssertEqual(1, viewController.tableView(viewController.tableView, numberOfRowsInSection: 0))
+        XCTAssertEqual(2, viewController.tableView(viewController.tableView, numberOfRowsInSection: 0))
         XCTAssertEqual("General", viewController.tableView(viewController.tableView, titleForHeaderInSection: 0))
-        XCTAssertEqual(1, viewController.tableView(viewController.tableView, numberOfRowsInSection: 1))
-        XCTAssertEqual("Other", viewController.tableView(viewController.tableView, titleForHeaderInSection: 1))
+        XCTAssertEqual(5, viewController.tableView(viewController.tableView, numberOfRowsInSection: 1))
+        XCTAssertEqual("UI Customization", viewController.tableView(viewController.tableView, titleForHeaderInSection: 1))
     }
     
     // MARK: Convenience Methods
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.DisplayYellowView.rawValue)
-        let expectedIndexPath = IndexPath(row: 2, section: 2)
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayYellowView.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)
+        let expectedIndexPath = IndexPath(row: 3, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound_2() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.DisplayRedView.rawValue)
-        let expectedIndexPath = IndexPath(row: 1, section: 2)
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayRedView.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)
+        let expectedIndexPath = IndexPath(row: 2, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
     
     // MARK: Tweak Cells Display
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakNotFound() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier("some_nonexisting_tweak")
+        let identifier = [Features.General.rawValue, "some_nonexisting_tweak"].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)
         XCTAssertNil(indexPath)
     }
     
     func testDisplaysTweakOn_IfEnabled() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.DisplayYellowView.rawValue)!
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayYellowView.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as! BooleanTweakTableViewCell
         XCTAssertFalse(cell.switchControl.isOn)
     }
     
     func testDisplaysTweakOff_IfDisabled() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.DisplayRedView.rawValue)!
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayRedView.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as! BooleanTweakTableViewCell
         XCTAssertTrue(cell.switchControl.isOn)
     }
     
     func testDisplaysTweakTitle_ForTweakThatHaveIt() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.DisplayRedView.rawValue)!
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayRedView.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)
         XCTAssertEqual(cell.textLabel?.text, "Display Red View")
         XCTAssertEqual((cell as! TweaksConfigurationViewControllerCell).title, "Display Red View")
     }
     
-    func testDisplaysTweakIdentifier_ForTweakThatDoNotHaveATitle() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.TapToChangeViewColor.rawValue)!
-        let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)
-        XCTAssertEqual(cell.textLabel?.text, "tap_to_change_color_enabled")
-        XCTAssertEqual((cell as! TweaksConfigurationViewControllerCell).title, "tap_to_change_color_enabled")
-    }
-    
     func testDisplaysNumericTweaksCorrectly() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.RedViewAlpha.rawValue)!
+        let identifier = [Features.UICustomization.rawValue, Variables.RedViewAlpha.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as? NumericTweakTableViewCell
         XCTAssertEqual(cell?.title, "Red View Alpha Component")
         XCTAssertEqual(cell?.textField.text, "1.0")
     }
     
     func testDisplaysTextTweaksCorrectly() {
-        let indexPath = viewController.indexPathForTweakWithIdentifier(Variables.ChangeConfigurationButton.rawValue)!
+        let identifier = [Features.UICustomization.rawValue, Variables.ChangeConfigurationButton.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)  as? TextTweakTableViewCell
         XCTAssertEqual(cell?.title, "Change Tweaks Button Label Text")
         XCTAssertEqual(cell?.textField.text, "Change Configuration")
@@ -121,7 +112,8 @@ class ConfigurationViewControllerTests: XCTestCase {
         viewController.beginAppearanceTransition(true, animated: false)
         viewController.endAppearanceTransition()
         
-        let indexPath = viewController.indexPathForTweakWithIdentifier("display_yellow_view")!
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayYellowView.rawValue].joined(separator: "-")
+        let indexPath = viewController.indexPathForTweakWithIdentifier(identifier)!
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
         cell.switchControl.sendActions(for: .valueChanged)
@@ -188,9 +180,8 @@ class ConfigurationViewControllerTests: XCTestCase {
         let bundle = Bundle(for: ConfigurationViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
         let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonURL!)!
-        let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")
-        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults!,
-                                                                        fallbackConfiguration: jsonConfiguration)
+        let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
+        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
         let configurations: [TweaksConfiguration] = [jsonConfiguration, userDefaultsConfiguration]
         let configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)!
         viewController = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)

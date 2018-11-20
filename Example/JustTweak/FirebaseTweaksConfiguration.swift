@@ -7,7 +7,7 @@ import JustTweak
 import FirebaseAnalytics
 import FirebaseRemoteConfig
 
-@objcMembers public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public override init() {
         super.init()
@@ -54,7 +54,7 @@ import FirebaseRemoteConfig
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        return tweakWith(feature: "", variable: feature)?.boolValue ?? false
+        return false
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
@@ -62,11 +62,11 @@ import FirebaseRemoteConfig
         let configValue = remoteConfiguration.configValue(forKey: variable)
         guard configValue.source != .static else { return nil }
         guard let stringValue = configValue.stringValue else { return nil }
-        return Tweak(identifier: variable,
+        let identifier = [feature, variable].joined(separator: "-")
+        return Tweak(identifier: identifier,
                      title: nil,
                      group: nil,
-                     value: stringValue.tweakValue,
-                     canBeDisplayed: false)
+                     value: stringValue.tweakValue)
     }
     
     public func activeVariation(for experiment: String) -> String? {

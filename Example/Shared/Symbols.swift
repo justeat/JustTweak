@@ -8,6 +8,7 @@ import JustTweak
 
 enum Features : String {
     case UICustomization = "ui_customization"
+    case General = "general"
 }
 
 enum Variables : String {
