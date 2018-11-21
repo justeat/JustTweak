@@ -170,7 +170,7 @@ class ConfigurationViewControllerTests: XCTestCase {
     private func buildViewControllerWithConfigurationFromFileNamed(_ fileName: String) {
         let bundle = Bundle(for: ConfigurationViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
-        let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonURL!)!
+        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonURL!)!
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
         let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
         let configurations: [TweaksConfiguration] = [jsonConfiguration, userDefaultsConfiguration]

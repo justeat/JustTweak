@@ -19,12 +19,12 @@ class JSONTweaksConfigurationTests: XCTestCase {
     private func configurationWithFileNamed(_ fileName: String) -> JSONTweaksConfiguration? {
         let bundle = Bundle(for: JSONTweaksConfigurationTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")!
-        return JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonURL)
+        return JSONTweaksConfiguration(jsonURL: jsonURL)
     }
     
     func testGetsNilInitialized_IfURLContainsNoData() {
         let fileURL = URL(fileURLWithPath: "/none")
-        XCTAssertNil(JSONTweaksConfiguration(defaultValuesFromJSONAtURL: fileURL))
+        XCTAssertNil(JSONTweaksConfiguration(jsonURL: fileURL))
     }
     
     func testGetsNilInitialized_IfJSONIsInvalid() {

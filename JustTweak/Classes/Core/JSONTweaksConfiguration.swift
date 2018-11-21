@@ -8,10 +8,10 @@ import Foundation
 final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private enum EncodingKeys : String {
-        case Title, Value, Group
+        case Title, Group, Value
     }
     
-    private let configurationFile: [String : [String : AnyObject]]
+    private let configurationFile: [String : [String : [String : AnyObject]]]
     private let fileURL: URL
     
     public var logClosure: TweaksLogClosure?
@@ -19,32 +19,26 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]
-        for identifier in allIdentifiers {
-            let components = identifier.split(separator: ":")
-            let feature = String(components[0])
-            let variable = String(components[1])
-            
-            if let _ = storage[feature] {
-                storage[feature]?.append(variable)
-            } else {
-                storage[feature] = [variable]
+        for feature in Array(configurationFile.keys) {
+            for variable in Array(configurationFile[feature]!.keys) {
+                if let _ = storage[feature] {
+                    storage[feature]?.append(variable)
+                } else {
+                    storage[feature] = [variable]
+                }
             }
         }
         return storage
-    }
-    
-    public var allIdentifiers: [String] {
-        return Array(configurationFile.keys)
     }
     
     public override var description: String {
         get { return "\(super.description) { fileURL: \(fileURL) }" }
     }
     
-    public init?(defaultValuesFromJSONAtURL jsonURL: URL) {
+    public init?(jsonURL: URL) {
         guard let data = try? Data(contentsOf: jsonURL) else { return nil }
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        guard let configuration = json as? [String : [String : AnyObject]] else {
+        guard let configuration = json as? [String : [String : [String : AnyObject]]] else {
             return nil
         }
         configurationFile = configuration
@@ -56,11 +50,10 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        let identifier = [feature, variable].joined(separator: ":")
-        guard let dictionary = configurationFile[identifier] else { return nil }
-        let title = dictionary[EncodingKeys.Title.rawValue] as? String
-        let group = dictionary[EncodingKeys.Group.rawValue] as? String
-        let value = tweakValueFromJSONObject(dictionary[EncodingKeys.Value.rawValue])
+        guard let entry = configurationFile[feature]?[variable] else { return nil }
+        let title = entry[EncodingKeys.Title.rawValue] as? String
+        let group = entry[EncodingKeys.Group.rawValue] as? String
+        let value = tweakValueFromJSONObject(entry[EncodingKeys.Value.rawValue])
         return Tweak(feature: feature,
                      variable: variable,
                      value: value,
@@ -71,7 +64,7 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     public func activeVariation(for experiment: String) -> String? {
         return nil
     }
-
+    
     private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
         let value: TweakValue
         if let numberValue = jsonObject as? NSNumber {

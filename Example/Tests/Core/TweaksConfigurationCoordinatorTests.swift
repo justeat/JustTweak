@@ -8,7 +8,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     let jsonConfiguration: JSONTweaksConfiguration = {
         let bundle = Bundle(for: TweaksConfigurationCoordinatorTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonConfigurationURL)!
+        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonConfigurationURL)!
         return jsonConfiguration
     }()
     var userDefaultsConfiguration: UserDefaultsTweaksConfiguration!
