@@ -14,7 +14,8 @@ final public class Tweak: NSObject {
     
     public let title: String?
     public let group: String?
-    
+    public let source: String?
+
     public var displayTitle: String {
         return title ?? "\(feature):\(variable)"
     }
@@ -34,11 +35,12 @@ final public class Tweak: NSObject {
     
     private var dictionaryValue: [String : Any?] {
         get {
-            return ["title": title,
-                    "group": group,
+            return ["feature": feature,
+                    "variable": variable,
                     "value": value,
-                    "identifier": feature,
-                    "variable": variable
+                    "title": title,
+                    "group": group,
+                    "source": source
             ]
         }
     }
@@ -48,12 +50,13 @@ final public class Tweak: NSObject {
         }
     }
     
-    public init(feature: String, variable: String, value: TweakValue, title: String?, group: String?) {
+    public init(feature: String, variable: String, value: TweakValue, title: String? = nil, group: String? = nil, source: String? = nil) {
         self.feature = feature
         self.variable = variable
         self.value = value
         self.title = title
         self.group = group
+        self.source = source
         super.init()
     }
     
@@ -62,7 +65,8 @@ final public class Tweak: NSObject {
             lhs.variable == rhs.variable &&
             lhs.value == rhs.value &&
             lhs.title == rhs.title &&
-            lhs.group == rhs.group
+            lhs.group == rhs.group &&
+            lhs.source == rhs.source
     }
     
 }
@@ -89,14 +93,14 @@ public extension Tweak {
     }
     
     convenience init(feature: String, variable: String, boolValue: Bool) {
-        self.init(feature: feature, variable: variable, value: boolValue, title: nil, group: nil)
+        self.init(feature: feature, variable: variable, value: boolValue)
     }
     
     convenience init(feature: String, variable: String, stringValue: String) {
-        self.init(feature: feature, variable: variable, value: stringValue, title: nil, group: nil)
+        self.init(feature: feature, variable: variable, value: stringValue)
     }
     
     convenience init(feature: String, variable: String, numberValue: NSNumber) {
-        self.init(feature: feature, variable: variable, value: numberValue.tweakValue, title: nil, group: nil)
+        self.init(feature: feature, variable: variable, value: numberValue.tweakValue)
     }
 }

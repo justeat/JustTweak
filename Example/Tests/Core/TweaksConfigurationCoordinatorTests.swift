@@ -88,10 +88,6 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: nil)
         XCTAssertFalse(didCallClosure)
     }
-    
-    private func identifier(for feature: String, variable: String) -> String {
-        return [feature, variable].joined(separator: ":")
-    }
 }
 
 class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
