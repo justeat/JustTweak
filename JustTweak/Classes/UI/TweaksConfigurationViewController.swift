@@ -17,7 +17,7 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
 
 public class TweaksConfigurationViewController: UITableViewController {
     
-    fileprivate class Tweak: NSObject {
+    fileprivate class Tweak {
         var feature: String
         var variable: String
         var title: String?
@@ -28,7 +28,6 @@ public class TweaksConfigurationViewController: UITableViewController {
             self.variable = variable
             self.value = value
             self.title = title
-            super.init()
         }
     }
     
