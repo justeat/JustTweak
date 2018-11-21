@@ -7,22 +7,26 @@ import Foundation
 
 final public class Tweak: NSObject {
     
-    public let identifier: String
+    public let feature: String
+    public let variable: String
+    
     public let value: TweakValue
     
     public let title: String?
     public let group: String?
     
     public var displayTitle: String {
-        return title ?? identifier
+        return title ?? "\(feature):\(variable)"
     }
     
     public override var hash: Int {
         return hashValue
     }
+    
     public override var hashValue: Int {
-        return identifier.hashValue
+        return "\(feature)\(variable)".hashValue
     }
+    
     public override func isEqual(_ object: Any?) -> Bool {
         guard let other = object as? Tweak else { return false }
         return self == other
@@ -33,7 +37,9 @@ final public class Tweak: NSObject {
             return ["title": title,
                     "group": group,
                     "value": value,
-                    "identifier": identifier]
+                    "identifier": feature,
+                    "variable": variable
+            ]
         }
     }
     public override var description: String {
@@ -42,8 +48,9 @@ final public class Tweak: NSObject {
         }
     }
     
-    public init(identifier: String, title: String?, group: String?, value: TweakValue) {
-        self.identifier = identifier
+    public init(feature: String, variable: String, value: TweakValue, title: String?, group: String?) {
+        self.feature = feature
+        self.variable = variable
         self.value = value
         self.title = title
         self.group = group
@@ -51,7 +58,8 @@ final public class Tweak: NSObject {
     }
     
     public static func ==(lhs: Tweak, rhs: Tweak) -> Bool {
-        return lhs.identifier == rhs.identifier &&
+        return lhs.feature == rhs.feature &&
+            lhs.variable == rhs.variable &&
             lhs.value == rhs.value &&
             lhs.title == rhs.title &&
             lhs.group == rhs.group
@@ -80,15 +88,15 @@ public extension Tweak {
         return value.stringValue
     }
     
-    convenience init(identifier: String, boolValue: Bool) {
-        self.init(identifier: identifier, title: nil, group: nil, value: boolValue)
+    convenience init(feature: String, variable: String, boolValue: Bool) {
+        self.init(feature: feature, variable: variable, value: boolValue, title: nil, group: nil)
     }
     
-    convenience init(identifier: String, stringValue: String) {
-        self.init(identifier: identifier, title: nil, group: nil, value: stringValue)
+    convenience init(feature: String, variable: String, stringValue: String) {
+        self.init(feature: feature, variable: variable, value: stringValue, title: nil, group: nil)
     }
     
-    convenience init(identifier: String, numberValue: NSNumber) {
-        self.init(identifier: identifier, title: nil, group: nil, value: numberValue.tweakValue)
+    convenience init(feature: String, variable: String, numberValue: NSNumber) {
+        self.init(feature: feature, variable: variable, value: numberValue.tweakValue, title: nil, group: nil)
     }
 }

@@ -110,7 +110,7 @@ class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
     
     func tweakWith(feature: String, variable: String) -> Tweak? {
         guard let value = knownValues[variable] else { return nil }
-        return Tweak(identifier: variable, title: nil, group: nil, value: value["Value"]!)
+        return Tweak(feature: feature, variable: variable, value: value["Value"]!, title: nil, group: nil)
     }
     
     func activeVariation(for experiment: String) -> String? {

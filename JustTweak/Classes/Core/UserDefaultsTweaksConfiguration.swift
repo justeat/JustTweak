@@ -28,10 +28,11 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
         let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(identifier)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
-        return Tweak(identifier: identifier,
+        return Tweak(feature: feature,
+                     variable: variable,
+                     value: value,
                      title: nil,
-                     group: nil,
-                     value: value)
+                     group: nil)
     }
     
     public func activeVariation(for experiment: String) -> String? {

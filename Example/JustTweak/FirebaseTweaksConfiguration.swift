@@ -62,11 +62,11 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
         let configValue = remoteConfiguration.configValue(forKey: variable)
         guard configValue.source != .static else { return nil }
         guard let stringValue = configValue.stringValue else { return nil }
-        let identifier = [feature, variable].joined(separator: "-")
-        return Tweak(identifier: identifier,
+        return Tweak(feature: feature,
+                     variable: variable,
+                     value: stringValue.tweakValue,
                      title: nil,
-                     group: nil,
-                     value: stringValue.tweakValue)
+                     group: nil)
     }
     
     public func activeVariation(for experiment: String) -> String? {

@@ -18,7 +18,7 @@ public class EphemeralConfiguration: NSObject, MutableTweaksConfiguration {
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
         guard let storedValue = storage[feature]?[variable] else { return nil }
-        return Tweak(identifier: variable, title: nil, group: nil, value: storedValue)
+        return Tweak(feature: feature, variable: variable, value: storedValue, title: nil, group: nil)
     }
     
     public func activeVariation(for experiment: String) -> String? {

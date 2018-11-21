@@ -12,11 +12,11 @@ final public class TweaksConfigurationsCoordinator: NSObject {
         let source: String
         
         var hashValue: Int {
-            return tweak.identifier.hashValue
+            return tweak.feature.hashValue
         }
         
         static func ==(lhs: TweakCachedValue, rhs: TweakCachedValue) -> Bool {
-            return lhs.tweak.identifier == rhs.tweak.identifier
+            return lhs.tweak.feature == rhs.tweak.feature
         }
     }
     
@@ -61,10 +61,11 @@ final public class TweaksConfigurationsCoordinator: NSObject {
                 logClosure("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
                 valueSource = "\(type(of: configuration))"
                 let identifier = [feature, variable].joined(separator: "-")
-                result = Tweak(identifier: identifier,
+                result = Tweak(feature: feature,
+                               variable: variable,
+                               value: tweak.value,
                                title: tweak.title,
-                               group: tweak.group,
-                               value: tweak.value)
+                               group: tweak.group)
                 break
             }
             else {
@@ -106,10 +107,11 @@ final public class TweaksConfigurationsCoordinator: NSObject {
                 for variable in variables {
                     if let tweak = tweakWith(feature: feature, variable: variable) {
                         let jsonTweak = jsonConfiguration?.tweakWith(feature: feature, variable: variable)
-                        let aggregatedTweak = Tweak(identifier: tweak.identifier,
+                        let aggregatedTweak = Tweak(feature: tweak.feature,
+                                                    variable: tweak.variable,
+                                                    value: tweak.value,
                                                     title: jsonTweak?.title,
-                                                    group: jsonTweak?.group,
-                                                    value: tweak.value)
+                                                    group: jsonTweak?.group)
                         tweaks.append(aggregatedTweak)
                     }
                 }

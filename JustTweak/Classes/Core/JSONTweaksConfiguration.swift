@@ -61,10 +61,11 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
         let title = dictionary[EncodingKeys.Title.rawValue] as? String
         let group = dictionary[EncodingKeys.Group.rawValue] as? String
         let value = tweakValueFromJSONObject(dictionary[EncodingKeys.Value.rawValue])
-        return Tweak(identifier: identifier,
+        return Tweak(feature: feature,
+                     variable: variable,
+                     value: value,
                      title: title,
-                     group: group,
-                     value: value)
+                     group: group)
     }
     
     public func activeVariation(for experiment: String) -> String? {

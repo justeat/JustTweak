@@ -32,20 +32,17 @@ class JSONTweaksConfigurationTests: XCTestCase {
     }
     
     func testParsesBoolTweak() {
-        let identifier = self.identifier(for: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
-        let redViewTweak = Tweak(identifier: identifier, title: "Display Red View", group: "UI Customization", value: true)
+        let redViewTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue, value: true, title: "Display Red View", group: "UI Customization")
         XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
     }
     
     func testParsesFloatTweak() {
-        let identifier = self.identifier(for: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue)
-        let redViewAlphaTweak = Tweak(identifier: identifier, title: "Red View Alpha Component", group: "UI Customization", value: 1.0)
+        let redViewAlphaTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
         XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue))
     }
     
     func testParsesStringTweak() {
-        let identifier = self.identifier(for: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue)
-        let buttonLabelTweak = Tweak(identifier: identifier, title: "Change Tweaks Button Label Text", group: "UI Customization", value: "Change Configuration")
+        let buttonLabelTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue, value: "Change Configuration", title: "Change Tweaks Button Label Text", group: "UI Customization")
         XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue))
     }
     

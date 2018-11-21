@@ -18,14 +18,16 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
 public class TweaksConfigurationViewController: UITableViewController {
     
     fileprivate class Tweak: NSObject {
-        var identifier: String
+        var feature: String
+        var variable: String
         var title: String?
         var value: TweakValue
         
-        init(identifier: String, title: String?, value: TweakValue) {
-            self.identifier = identifier
-            self.title = title
+        init(feature: String, variable: String, value: TweakValue, title: String?) {
+            self.feature = feature
+            self.variable = variable
             self.value = value
+            self.title = title
             super.init()
         }
     }
@@ -98,7 +100,7 @@ public class TweaksConfigurationViewController: UITableViewController {
         let cellIdentifier = cellIdentifierForTweak(tweak)
         let cell = table.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if let cell = cell as? TweaksConfigurationViewControllerCell {
-            cell.title = tweak.title ?? tweak.identifier
+            cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
             cell.value = tweak.value
             cell.delegate = self
         }
@@ -111,10 +113,10 @@ public class TweaksConfigurationViewController: UITableViewController {
     
     // MARK: Convenience
     
-    public func indexPathForTweakWithIdentifier(_ identifier: String) -> IndexPath? {
+    public func indexPathForTweak(with feature: String, variable: String) -> IndexPath? {
         for section in 0 ..< numberOfSections(in: tableView) {
             for (row, tweak) in tweaksIn(section: section).enumerated() {
-                if tweak.identifier == identifier {
+                if tweak.feature == feature, tweak.variable == variable {
                     return IndexPath(row: row, section: section)
                 }
             }
@@ -179,7 +181,10 @@ public class TweaksConfigurationViewController: UITableViewController {
                 var items = [Tweak]()
                 for tweak in allTweaks {
                     if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
-                        let dto = Tweak(identifier: tweak.identifier, title: tweak.title, value: tweak.value)
+                        let dto = Tweak(feature: tweak.feature,
+                                        variable: tweak.variable,
+                                        value: tweak.value,
+                                        title: tweak.title)
                         items.append(dto)
                     }
                 }
@@ -213,9 +218,8 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
-                let components = tweak.identifier.split(separator: "-")
-                let feature = String(components[0])
-                let variable = String(components[1])
+                let feature = tweak.feature
+                let variable = tweak.variable
                 configuration?.set(value: cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
