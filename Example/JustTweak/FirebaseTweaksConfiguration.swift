@@ -53,7 +53,9 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        return false
+        let configValue = remoteConfiguration.configValue(forKey: feature)
+        guard configValue.source != .static else { return false }
+        return configValue.boolValue
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {

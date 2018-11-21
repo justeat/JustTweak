@@ -15,13 +15,10 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Priority 10 => User Defaults Configuration
-        // Priority 5 => Mock Remote Configuration
-        // Priority 0 => JSON Configuration
         let mockFirebaseConfiguration = MockTweaksRemoteConfiguration()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
         userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: testUserDefaults)
-        let configurations: [TweaksConfiguration] = [mockFirebaseConfiguration, jsonConfiguration, userDefaultsConfiguration]
+        let configurations: [TweaksConfiguration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
         configurationCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
     
