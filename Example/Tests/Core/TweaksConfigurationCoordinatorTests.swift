@@ -90,7 +90,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
     
     private func identifier(for feature: String, variable: String) -> String {
-        return [feature, variable].joined(separator: "-")
+        return [feature, variable].joined(separator: ":")
     }
 }
 

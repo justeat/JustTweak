@@ -60,7 +60,7 @@ final public class TweaksConfigurationsCoordinator: NSObject {
             if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
                 logClosure("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
                 valueSource = "\(type(of: configuration))"
-                let identifier = [feature, variable].joined(separator: "-")
+                let identifier = [feature, variable].joined(separator: ":")
                 result = Tweak(feature: feature,
                                variable: variable,
                                value: tweak.value,

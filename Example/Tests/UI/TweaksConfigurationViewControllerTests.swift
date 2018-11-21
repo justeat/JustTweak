@@ -104,7 +104,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         viewController.beginAppearanceTransition(true, animated: false)
         viewController.endAppearanceTransition()
         
-        let identifier = [Features.UICustomization.rawValue, Variables.DisplayYellowView.rawValue].joined(separator: "-")
+        let identifier = [Features.UICustomization.rawValue, Variables.DisplayYellowView.rawValue].joined(separator: ":")
         let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue)!
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true

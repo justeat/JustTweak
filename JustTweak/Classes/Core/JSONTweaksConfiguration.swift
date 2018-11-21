@@ -20,7 +20,7 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]
         for identifier in allIdentifiers {
-            let components = identifier.split(separator: "-")
+            let components = identifier.split(separator: ":")
             let feature = String(components[0])
             let variable = String(components[1])
             
@@ -56,7 +56,7 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        let identifier = [feature, variable].joined(separator: "-")
+        let identifier = [feature, variable].joined(separator: ":")
         guard let dictionary = configurationFile[identifier] else { return nil }
         let title = dictionary[EncodingKeys.Title.rawValue] as? String
         let group = dictionary[EncodingKeys.Group.rawValue] as? String

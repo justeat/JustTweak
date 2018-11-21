@@ -24,7 +24,7 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
 
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        let identifier = [feature, variable].joined(separator: "-")
+        let identifier = [feature, variable].joined(separator: ":")
         let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(identifier)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
@@ -40,7 +40,7 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
 
     public func deleteValue(feature: String, variable: String) {
-        let identifier = [feature, variable].joined(separator: "-")
+        let identifier = [feature, variable].joined(separator: ":")
         userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(identifier))
     }
     
@@ -57,7 +57,7 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
     
     private func updateUserDefaultsWith(value: Any, feature: String, variable: String) {
-        let identifier = [feature, variable].joined(separator: "-")
+        let identifier = [feature, variable].joined(separator: ":")
         registeredTweaksIdentifiers.insert(identifier)
         userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(identifier))
         userDefaults.synchronize()

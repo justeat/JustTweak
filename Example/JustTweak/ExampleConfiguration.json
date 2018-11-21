@@ -1,35 +1,35 @@
 {
-    "ui_customization-display_red_view": {
+    "ui_customization:display_red_view": {
         "Title": "Display Red View",
         "Group": "UI Customization",
         "Value": false
     },
-    "ui_customization-display_yellow_view": {
+    "ui_customization:display_yellow_view": {
         "Title": "Display Yellow View",
         "Group": "UI Customization",
         "Value": false
     },
-    "ui_customization-display_green_view": {
+    "ui_customization:display_green_view": {
         "Title": "Display Green View",
         "Group": "UI Customization",
         "Value": true
     },
-    "ui_customization-red_view_alpha_component": {
+    "ui_customization:red_view_alpha_component": {
         "Title": "Red View Alpha Component",
         "Group": "UI Customization",
         "Value": 1.0
     },
-    "ui_customization-change_tweaks_button_label_text": {
+    "ui_customization:change_tweaks_button_label_text": {
         "Title": "Change Tweaks Button Label Text",
         "Group": "UI Customization",
         "Value": "Change Configuration"
     },
-    "general-greet_on_app_did_become_active": {
+    "general:greet_on_app_did_become_active": {
         "Title": "Greet on app launch",
         "Group": "General",
         "Value": false
     },
-    "general-tap_to_change_color_enabled": {
+    "general:tap_to_change_color_enabled": {
         "Title": "Tap to change views color",
         "Group": "General",
         "Value": true
