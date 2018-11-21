@@ -30,7 +30,11 @@ public class TweaksConfigurationViewController: UITableViewController {
             self.variable = variable
             self.value = value
             self.title = title
+<<<<<<< HEAD
+=======
             self.desc = description
+            super.init()
+>>>>>>> Show Tweak description in TweaksConfigurationViewController
         }
     }
     
