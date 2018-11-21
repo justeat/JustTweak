@@ -2,26 +2,31 @@
   "ui_customization": {
     "display_red_view": {
       "Title": "Display Red View",
+      "Description": "shows a red view in the main view controller",
       "Group": "UI Customization",
       "Value": false
     },
     "display_yellow_view": {
       "Title": "Display Yellow View",
+      "Description": "shows a yellow view in the main view controller",
       "Group": "UI Customization",
       "Value": false
     },
     "display_green_view": {
       "Title": "Display Green View",
+      "Description": "shows a green view in the main view controller",
       "Group": "UI Customization",
       "Value": true
     },
     "red_view_alpha_component": {
       "Title": "Red View Alpha Component",
+      "Description": "defines the alpha level of the red view",
       "Group": "UI Customization",
       "Value": 1.0
     },
     "change_tweaks_button_label_text": {
       "Title": "Change Tweaks Button Label Text",
+      "Description": "the title of the button to load this view controller",
       "Group": "UI Customization",
       "Value": "Change Configuration"
     }
@@ -29,11 +34,13 @@
   "general": {
     "greet_on_app_did_become_active": {
       "Title": "Greet on app launch",
+      "Description": "shows an alert on applicationDidBecomeActive",
       "Group": "General",
       "Value": false
     },
     "tap_to_change_color_enabled": {
       "Title": "Tap to change views color",
+      "Description": "change the colour of the main view when receiving a tap",
       "Group": "General",
       "Value": true
     }

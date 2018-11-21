@@ -8,7 +8,7 @@ import Foundation
 final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private enum EncodingKeys : String {
-        case Title, Group, Value
+        case Title, Description, Group, Value
     }
     
     private let configurationFile: [String : [String : [String : AnyObject]]]
@@ -51,12 +51,14 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     public func tweakWith(feature: String, variable: String) -> Tweak? {
         guard let entry = configurationFile[feature]?[variable] else { return nil }
         let title = entry[EncodingKeys.Title.rawValue] as? String
+        let description = entry[EncodingKeys.Description.rawValue] as? String
         let group = entry[EncodingKeys.Group.rawValue] as? String
         let value = tweakValueFromJSONObject(entry[EncodingKeys.Value.rawValue])
         return Tweak(feature: feature,
                      variable: variable,
                      value: value,
                      title: title,
+                     description: description,
                      group: group)
     }
     
