@@ -27,7 +27,6 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .p5
     
     // Google dependencies
     private var configured: Bool = false

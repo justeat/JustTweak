@@ -9,9 +9,7 @@ public class EphemeralConfiguration: NSObject, MutableTweaksConfiguration {
     
     private var storage = [String : [String : TweakValue]]()
     public var logClosure: TweaksLogClosure?
-    
-    public var priority: TweaksConfigurationPriority = .p1
-    
+        
     public func isFeatureEnabled(_ feature: String) -> Bool {
         return false
     }

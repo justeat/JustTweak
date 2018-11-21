@@ -15,7 +15,6 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     private let fileURL: URL
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .p0
     
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]

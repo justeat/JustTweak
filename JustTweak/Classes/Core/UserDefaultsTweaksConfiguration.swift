@@ -13,7 +13,6 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .p10
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults

@@ -12,7 +12,6 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     private var optimizelyClient: OPTLYClient?
     
     public var logClosure: TweaksLogClosure?
-    public var priority: TweaksConfigurationPriority = .p8
     
     public var userId: String!
     public var attributes: [String : String]?

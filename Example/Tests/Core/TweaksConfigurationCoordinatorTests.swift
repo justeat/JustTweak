@@ -31,13 +31,9 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testNilInitialized_WhenPassingEmptyArrayOfConfigurations() {
-        XCTAssertNil(TweaksConfigurationsCoordinator(configurations: []))
-    }
-    
     func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
         let configurationCoordinator = TweaksConfigurationsCoordinator(configurations: [jsonConfiguration])
-        XCTAssertNil(configurationCoordinator?.topCustomizableConfiguration())
+        XCTAssertNil(configurationCoordinator.topCustomizableConfiguration())
     }
     
     func testReturnsNil_ForUndefinedTweak() {
@@ -93,7 +89,6 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
 class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
     
     var logClosure: TweaksLogClosure?
-    let priority: TweaksConfigurationPriority = .p5
     let features: [String : [String]] = [:]
     let knownValues = [Variables.DisplayRedView.rawValue: ["Value": true],
                        Variables.DisplayYellowView.rawValue: ["Value": false],

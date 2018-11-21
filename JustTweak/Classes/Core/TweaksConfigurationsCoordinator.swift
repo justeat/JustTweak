@@ -19,10 +19,8 @@ final public class TweaksConfigurationsCoordinator: NSObject {
     private var tweaksCache = [String : [String : Tweak]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
-    public init?(configurations: [TweaksConfiguration]) {
-        guard configurations.count > 0 else { return nil }
-        self.configurations = configurations.sorted(by: { $0.priority.rawValue > $1.priority.rawValue })
-        logClosure("Configurations lookup order => \(self.configurations) ", .verbose)
+    public init(configurations: [TweaksConfiguration]) {
+        self.configurations = configurations
         super.init()
         for (index, _) in self.configurations.enumerated() {
             self.configurations[index].logClosure = logClosure
@@ -42,7 +40,7 @@ final public class TweaksConfigurationsCoordinator: NSObject {
         }
         
         var result: Tweak? = nil
-        for (_, configuration) in configurations.enumerated() {
+        for (_, configuration) in configurations.enumerated().reversed() {
             if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
                 logClosure("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
                 result = Tweak(feature: feature,

@@ -35,16 +35,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
         let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
         
-        let userDefaults = UserDefaults.standard
-        let localConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
-        
         let firebaseConfiguration = FirebaseTweaksConfiguration()
 
         let optimizelyConfiguration = OptimizelyTweaksConfiguration()
         optimizelyConfiguration.userId = UUID().uuidString
 
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration, optimizelyConfiguration]
+        let userDefaults = UserDefaults.standard
+        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
+        
+        let configurations: [TweaksConfiguration] = [jsonConfiguration, firebaseConfiguration, optimizelyConfiguration, userDefaultsConfiguration]
         configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
-    
 }
