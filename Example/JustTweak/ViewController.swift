@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.TapToChangeViewColor.rawValue).boolValue
+        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.General.rawValue, variable: Variables.TapToChangeViewColor.rawValue).boolValue
     }
     
     @objc internal func changeViewColor() {
