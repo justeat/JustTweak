@@ -8,14 +8,14 @@ import UIKit
 internal protocol TweaksConfigurationViewControllerCell: class {
     var title: String? { get set }
     var value: TweakValue { get set }
-    weak var delegate: TweaksConfigurationViewControllerCellDelegate? { get set }
+    var delegate: TweaksConfigurationViewControllerCellDelegate? { get set }
 }
 
 internal protocol TweaksConfigurationViewControllerCellDelegate: class {
     func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell)
 }
 
-@objcMembers public class TweaksConfigurationViewController: UITableViewController {
+public class TweaksConfigurationViewController: UITableViewController {
     
     fileprivate class Tweak: NSObject {
         var identifier: String
@@ -205,7 +205,6 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
         view.endEditing(true)
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCellDelegate {
@@ -214,10 +213,12 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
-                configuration?.set(value: cell.value, forTweakWithIdentifier: tweak.identifier)
+                let components = tweak.identifier.split(separator: "-")
+                let feature = String(components[0])
+                let variable = String(components[1])
+                configuration?.set(value: cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
         }
     }
-    
 }

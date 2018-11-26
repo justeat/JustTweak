@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(identifier: "greet_on_app_did_become_active")
+        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue)
         if let shouldShowAlert = shouldShowAlert, shouldShowAlert == true {
             let alertController = UIAlertController(title: "Hello",
                                                     message: "Welcome to this Demo app!",
@@ -32,17 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setUpConfigurations() {
-        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration",
-                                                               withExtension: "json")!
+        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
         let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonFileURL)!
         
         let userDefaults = UserDefaults.standard
-        let localConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults,
-                                                                 fallbackConfiguration: jsonConfiguration)
+        let localConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
         
         let firebaseConfiguration = FirebaseTweaksConfiguration()
-        
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration]
+
+        let optimizelyConfiguration = OptimizelyTweaksConfiguration()
+        optimizelyConfiguration.userId = UUID().uuidString
+
+        let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration, optimizelyConfiguration]
         configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
     

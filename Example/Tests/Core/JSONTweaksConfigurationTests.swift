@@ -31,24 +31,25 @@ class JSONTweaksConfigurationTests: XCTestCase {
         XCTAssertNil(configurationWithFileNamed("test_configuration_invalid"))
     }
     
-    func testParsesBoolTweakWithAllValues() {
-        let redViewTweak = Tweak(identifier: "display_red_view", title: "Display Red View", group: "UI", value: true, canBeDisplayed: true)
-        XCTAssertEqual(redViewTweak, configuration.tweakWith(identifier: "display_red_view"))
+    func testParsesBoolTweak() {
+        let identifier = self.identifier(for: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)
+        let redViewTweak = Tweak(identifier: identifier, title: "Display Red View", group: "UI Customization", value: true)
+        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
     }
     
-    func testParsesBoolTweakWithOneValue() {
-        let tapBisTweak = Tweak(identifier: "tap_to_change_color_enabled_bis", title: nil, group: nil, value: false, canBeDisplayed: false)
-        XCTAssertEqual(tapBisTweak, configuration.tweakWith(identifier: "tap_to_change_color_enabled_bis"))
+    func testParsesFloatTweak() {
+        let identifier = self.identifier(for: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue)
+        let redViewAlphaTweak = Tweak(identifier: identifier, title: "Red View Alpha Component", group: "UI Customization", value: 1.0)
+        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue))
     }
     
-    func testParsesFloatTweakWithAllValues() {
-        let redViewAlphaTweak = Tweak(identifier: "red_view_alpha_component", title: "Red View Alpha Component", group: "UI", value: 1.0, canBeDisplayed: true)
-        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(identifier: "red_view_alpha_component"))
+    func testParsesStringTweak() {
+        let identifier = self.identifier(for: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue)
+        let buttonLabelTweak = Tweak(identifier: identifier, title: "Change Tweaks Button Label Text", group: "UI Customization", value: "Change Configuration")
+        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue))
     }
     
-    func testParsesStringTweakWithAllValues() {
-        let buttonLabelTweak = Tweak(identifier: "change_tweaks_button_label_text", title: "Change Tweaks Button Label Text", group: "UI", value: "Change Configuration", canBeDisplayed: true)
-        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(identifier: "change_tweaks_button_label_text"))
+    private func identifier(for feature: String, variable: String) -> String {
+        return [feature, variable].joined(separator: "-")
     }
-    
 }

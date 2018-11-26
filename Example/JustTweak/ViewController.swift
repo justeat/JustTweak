@@ -8,46 +8,34 @@ import JustTweak
 
 class ViewController: UIViewController {
 
-    private enum ExperimentIdentifiers : String {
-        case RedViewAlpha = "red_view_alpha_component"
-        case DisplayRedView = "display_red_view"
-        case DisplayGreenView = "display_green_view"
-        case DisplayYellowView = "display_yellow_view"
-        case TapToChangeViewColor = "tap_to_change_color_enabled"
-        case ChangeConfigurationButton = "change_tweaks_button_label_text"
-    }
-
     @IBOutlet var redView: UIView!
     @IBOutlet var greenView: UIView!
     @IBOutlet var yellowView: UIView!
     @IBOutlet var changeConfigurationButton: UIButton!
-
+    
     var configurationsCoordinator: TweaksConfigurationsCoordinator?
     private var tapGestureRecognizer: UITapGestureRecognizer!
-
+    
     private var canShowRedView: Bool {
         get {
-            let identifier = ExperimentIdentifiers.DisplayRedView.rawValue
-            return valueForExperiment(withIdentifier: identifier).boolValue
+            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue).boolValue
         }
     }
     private var canShowGreenView: Bool {
         get {
-            let identifier = ExperimentIdentifiers.DisplayGreenView.rawValue
-            return valueForExperiment(withIdentifier: identifier).boolValue
+            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue).boolValue
         }
     }
     private var canShowYellowView: Bool {
         get {
-            let identifier = ExperimentIdentifiers.DisplayYellowView.rawValue
-            return valueForExperiment(withIdentifier: identifier).boolValue
+            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue).boolValue
         }
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
@@ -61,8 +49,8 @@ class ViewController: UIViewController {
         redView.isHidden = !canShowRedView
         greenView.isHidden = !canShowGreenView
         yellowView.isHidden = !canShowYellowView
-        changeConfigurationButton.setTitle(valueForExperiment(withIdentifier: ExperimentIdentifiers.ChangeConfigurationButton.rawValue).stringValue, for: .normal)
-        redView.alpha = CGFloat(valueForExperiment(withIdentifier: ExperimentIdentifiers.RedViewAlpha.rawValue).floatValue)
+        changeConfigurationButton.setTitle(valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue).stringValue, for: .normal)
+        redView.alpha = CGFloat(valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue).floatValue)
     }
     
     internal func setUpGesturesIfNeeded() {
@@ -70,7 +58,7 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = valueForExperiment(withIdentifier: ExperimentIdentifiers.TapToChangeViewColor.rawValue).boolValue
+        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.TapToChangeViewColor.rawValue).boolValue
     }
     
     @objc internal func changeViewColor() {
@@ -90,8 +78,8 @@ class ViewController: UIViewController {
         present(UINavigationController(rootViewController:viewController), animated: true, completion: nil)
     }
 
-    private func valueForExperiment(withIdentifier identifier: String) -> TweakValue {
-        return configurationsCoordinator?.valueForTweakWith(identifier: identifier) ?? 0
+    private func valueForExperiment(feature: String, variable: String) -> TweakValue {
+        let value = configurationsCoordinator?.valueForTweakWith(feature: feature, variable: variable)
+        return value ?? 0
     }
-
 }

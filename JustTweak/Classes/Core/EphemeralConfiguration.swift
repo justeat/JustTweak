@@ -5,38 +5,39 @@
 
 import Foundation
 
-@objcMembers public class EphemeralConfiguration: NSObject, MutableTweaksConfiguration {
+public class EphemeralConfiguration: NSObject, MutableTweaksConfiguration {
     
-    private var storage = [String : TweakValue]()
+    private var storage = [String : [String : TweakValue]]()
     public var logClosure: TweaksLogClosure?
     
-    public var priority: TweaksConfigurationPriority {
-        return .fallback
+    public var priority: TweaksConfigurationPriority = .p1
+    
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        return false
     }
     
-    public var allTweakIdentifiers: [String] {
-        return Array(storage.keys)
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        guard let storedValue = storage[feature]?[variable] else { return nil }
+        return Tweak(identifier: variable, title: nil, group: nil, value: storedValue)
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
-        guard let storedValue = storage[identifier] else { return nil }
-        return Tweak(identifier: identifier, title: nil, group: nil, value: storedValue, canBeDisplayed: false)
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
+
+    public func deleteValue(feature: String, variable: String) {
+        storage[feature]?.removeValue(forKey: variable)
     }
     
-    public func deleteValue(forTweakWithIdentifier identifier: String) {
-        storage.removeValue(forKey: identifier)
+    public func set(_ value: Bool, feature: String, variable: String) {
+        storage[feature]?[variable] = NSNumber(value: value).tweakValue
     }
     
-    public func set(boolValue value: Bool, forTweakWithIdentifier identifier: String) {
-        set(numberValue: NSNumber(value: value), forTweakWithIdentifier: identifier)
+    public func set(_ value: String, feature: String, variable: String) {
+        storage[feature]?[variable] = value
     }
     
-    public func set(stringValue value: String, forTweakWithIdentifier identifier: String) {
-        storage[identifier] = value
+    public func set(_ value: NSNumber, feature: String, variable: String) {
+        storage[feature]?[variable] = value.tweakValue
     }
-    
-    public func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String) {
-        storage[identifier] = value.tweakValue
-    }
-    
 }

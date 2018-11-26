@@ -7,7 +7,7 @@ import JustTweak
 import FirebaseAnalytics
 import FirebaseRemoteConfig
 
-@objcMembers public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public override init() {
         super.init()
@@ -27,7 +27,7 @@ import FirebaseRemoteConfig
     }
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .medium
+    public let priority: TweaksConfigurationPriority = .p5
     
     // Google dependencies
     private var configured: Bool = false
@@ -53,16 +53,23 @@ import FirebaseRemoteConfig
         }
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        return false
+    }
+    
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
         guard configured else { return nil }
-        let configValue = remoteConfiguration.configValue(forKey: identifier)
+        let configValue = remoteConfiguration.configValue(forKey: variable)
         guard configValue.source != .static else { return nil }
         guard let stringValue = configValue.stringValue else { return nil }
+        let identifier = [feature, variable].joined(separator: "-")
         return Tweak(identifier: identifier,
                      title: nil,
                      group: nil,
-                     value: stringValue.tweakValue,
-                     canBeDisplayed: false)
+                     value: stringValue.tweakValue)
     }
     
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
 }
