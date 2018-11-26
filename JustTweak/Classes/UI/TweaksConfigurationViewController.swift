@@ -7,6 +7,7 @@ import UIKit
 
 internal protocol TweaksConfigurationViewControllerCell: class {
     var title: String? { get set }
+    var desc: String? { get set }
     var value: TweakValue { get set }
     var delegate: TweaksConfigurationViewControllerCellDelegate? { get set }
 }
@@ -21,13 +22,15 @@ public class TweaksConfigurationViewController: UITableViewController {
         var feature: String
         var variable: String
         var title: String?
+        var desc: String?
         var value: TweakValue
         
-        init(feature: String, variable: String, value: TweakValue, title: String?) {
+        init(feature: String, variable: String, value: TweakValue, title: String?, description: String?) {
             self.feature = feature
             self.variable = variable
             self.value = value
             self.title = title
+            self.desc = description
         }
     }
     
@@ -100,6 +103,7 @@ public class TweaksConfigurationViewController: UITableViewController {
         let cell = table.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if let cell = cell as? TweaksConfigurationViewControllerCell {
             cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
+            cell.desc = tweak.desc
             cell.value = tweak.value
             cell.delegate = self
         }
@@ -183,7 +187,8 @@ public class TweaksConfigurationViewController: UITableViewController {
                         let dto = Tweak(feature: tweak.feature,
                                         variable: tweak.variable,
                                         value: tweak.value,
-                                        title: tweak.title)
+                                        title: tweak.title,
+                                        description: tweak.desc)
                         items.append(dto)
                     }
                 }

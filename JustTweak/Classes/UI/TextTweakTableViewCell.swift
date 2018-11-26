@@ -7,6 +7,14 @@ import UIKit
 
 class TextTweakTableViewCell: UITableViewCell, TweaksConfigurationViewControllerCell, UITextFieldDelegate {
 
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var title: String? {
         get {
             return textLabel?.text
@@ -15,6 +23,16 @@ class TextTweakTableViewCell: UITableViewCell, TweaksConfigurationViewController
             textLabel?.text = newValue
         }
     }
+    
+    var desc: String? {
+        get {
+            return detailTextLabel?.text
+        }
+        set {
+            detailTextLabel?.text = newValue
+        }
+    }
+    
     var value: TweakValue = "" {
         didSet {
             textField.text = value.description

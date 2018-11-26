@@ -13,6 +13,7 @@ final public class Tweak: NSObject {
     public let value: TweakValue
     
     public let title: String?
+    public let desc: String?
     public let group: String?
     public let source: String?
 
@@ -39,6 +40,7 @@ final public class Tweak: NSObject {
                     "variable": variable,
                     "value": value,
                     "title": title,
+                    "description": desc,
                     "group": group,
                     "source": source
             ]
@@ -50,11 +52,12 @@ final public class Tweak: NSObject {
         }
     }
     
-    public init(feature: String, variable: String, value: TweakValue, title: String? = nil, group: String? = nil, source: String? = nil) {
+    public init(feature: String, variable: String, value: TweakValue, title: String? = nil, description: String? = nil, group: String? = nil, source: String? = nil) {
         self.feature = feature
         self.variable = variable
         self.value = value
         self.title = title
+        self.desc = description
         self.group = group
         self.source = source
         super.init()
@@ -65,6 +68,7 @@ final public class Tweak: NSObject {
             lhs.variable == rhs.variable &&
             lhs.value == rhs.value &&
             lhs.title == rhs.title &&
+            lhs.desc == rhs.desc &&
             lhs.group == rhs.group &&
             lhs.source == rhs.source
     }

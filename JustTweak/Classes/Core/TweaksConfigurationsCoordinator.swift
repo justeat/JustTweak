@@ -113,6 +113,7 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
                                                     variable: tweak.variable,
                                                     value: tweak.value,
                                                     title: jsonTweak?.title,
+                                                    description: jsonTweak?.desc,
                                                     group: jsonTweak?.group)
                         tweaks.append(aggregatedTweak)
                     }
