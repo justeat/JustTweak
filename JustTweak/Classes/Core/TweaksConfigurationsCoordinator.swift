@@ -128,4 +128,7 @@ import Foundation
         tweaksCache = [String : TweakCachedValue]()
     }
     
+    @objc public func isTweaksCacheEmpty() -> Bool {
+        return tweaksCache.isEmpty
+    }
 }

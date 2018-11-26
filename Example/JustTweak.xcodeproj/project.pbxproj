@@ -74,7 +74,7 @@
 		61F1DECD1DA7ECF700314DEC /* TweaksUtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweaksUtilitiesTests.swift; sourceTree = "<group>"; };
 		6817DC526CBFCF55440CC371 /* Pods-JustTweak_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		76FF00FC0F5A540F87BE8F55 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		81146C91EF73602F390082AB /* JustTweak.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JustTweak.podspec; path = ../JustTweak.podspec; sourceTree = "<group>"; };
+		81146C91EF73602F390082AB /* JustTweak.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JustTweak.podspec; path = ../JustTweak.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		885820D39A762E4E89BA2546 /* Pods-JustTweak_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9418360080E044BFF47F4F7C /* Pods-JustTweak_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B347460C9476DF9F5F7BDF32 /* Pods_JustTweak_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustTweak_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,7 +251,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				EEB747579A8E00C8D94DB72D /* [CP] Embed Pods Frameworks */,
-				158FF6673D4E545CDE3552EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,8 +269,6 @@
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				A91FAEE924EDEBC69F1262D5 /* [CP] Embed Pods Frameworks */,
-				3FB75F1BAE16A97FB08D5EA9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -349,51 +346,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		158FF6673D4E545CDE3552EE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3FB75F1BAE16A97FB08D5EA9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A91FAEE924EDEBC69F1262D5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D2F894A2A9B802CCF5D931F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,14 +389,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JustTweak/JustTweak.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JustTweak.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
