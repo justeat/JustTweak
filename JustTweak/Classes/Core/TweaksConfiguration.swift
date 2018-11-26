@@ -5,15 +5,9 @@
 
 import Foundation
 
-public enum TweaksConfigurationPriority: Int {
-    case p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10
-}
-
 public protocol TweaksConfiguration {
     
-    var logClosure: TweaksLogClosure? { set get }
-    var priority: TweaksConfigurationPriority { get }
-    
+    var logClosure: TweaksLogClosure? { set get }    
     func isFeatureEnabled(_ feature: String) -> Bool
     func tweakWith(feature: String, variable: String) -> Tweak?
     func activeVariation(for experiment: String) -> String?

@@ -24,7 +24,7 @@ var configurationsCoordinator: TweaksConfigurationsCoordinator!
 private func setUpConfigurations() {
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration",
                                       withExtension: "json")!
-    let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonFileURL)!
+    let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
 
     let userDefaults = UserDefaults.standard
     let localConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults,

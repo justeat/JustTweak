@@ -27,7 +27,6 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .p5
     
     // Google dependencies
     private var configured: Bool = false
@@ -54,7 +53,9 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        return false
+        let configValue = remoteConfiguration.configValue(forKey: feature)
+        guard configValue.source != .static else { return false }
+        return configValue.boolValue
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
@@ -62,11 +63,11 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
         let configValue = remoteConfiguration.configValue(forKey: variable)
         guard configValue.source != .static else { return nil }
         guard let stringValue = configValue.stringValue else { return nil }
-        let identifier = [feature, variable].joined(separator: "-")
-        return Tweak(identifier: identifier,
+        return Tweak(feature: feature,
+                     variable: variable,
+                     value: stringValue.tweakValue,
                      title: nil,
-                     group: nil,
-                     value: stringValue.tweakValue)
+                     group: nil)
     }
     
     public func activeVariation(for experiment: String) -> String? {

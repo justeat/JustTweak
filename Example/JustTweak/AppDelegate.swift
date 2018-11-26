@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue)
+        let shouldShowAlert = configurationsCoordinator.valueForTweakWith(feature: Features.General.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue)
         if let shouldShowAlert = shouldShowAlert, shouldShowAlert == true {
             let alertController = UIAlertController(title: "Hello",
                                                     message: "Welcome to this Demo app!",
@@ -33,18 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setUpConfigurations() {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonFileURL)!
-        
-        let userDefaults = UserDefaults.standard
-        let localConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
+        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
         
         let firebaseConfiguration = FirebaseTweaksConfiguration()
 
         let optimizelyConfiguration = OptimizelyTweaksConfiguration()
         optimizelyConfiguration.userId = UUID().uuidString
 
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration, optimizelyConfiguration]
+        let userDefaults = UserDefaults.standard
+        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
+        
+        let configurations: [TweaksConfiguration] = [jsonConfiguration, firebaseConfiguration, optimizelyConfiguration, userDefaultsConfiguration]
         configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
-    
 }

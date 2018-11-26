@@ -8,30 +8,29 @@ import Foundation
 final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfiguration {
     
     private let userDefaults: UserDefaults
-    private var registeredTweaksIdentifiers: Set<String> = Set<String>()
     
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .p10
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        return false
+        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(feature)
+        return userDefaults.bool(forKey: userDefaultsKey)
     }
 
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        let identifier = [feature, variable].joined(separator: "-")
-        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(identifier)
+        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
-        return Tweak(identifier: identifier,
+        return Tweak(feature: feature,
+                     variable: variable,
+                     value: value,
                      title: nil,
-                     group: nil,
-                     value: value)
+                     group: nil)
     }
     
     public func activeVariation(for experiment: String) -> String? {
@@ -39,8 +38,7 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
 
     public func deleteValue(feature: String, variable: String) {
-        let identifier = [feature, variable].joined(separator: "-")
-        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(identifier))
+        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(variable))
     }
     
     public func set(_ value: Bool, feature: String, variable: String) {
@@ -56,12 +54,10 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
     
     private func updateUserDefaultsWith(value: Any, feature: String, variable: String) {
-        let identifier = [feature, variable].joined(separator: "-")
-        registeredTweaksIdentifiers.insert(identifier)
-        userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(identifier))
+        userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(variable))
         userDefaults.synchronize()
         let notificationCenter = NotificationCenter.default
-        let userInfo = [TweaksConfigurationDidChangeNotificationTweakIdentifierKey: identifier]
+        let userInfo = [TweaksConfigurationDidChangeNotificationTweakIdentifierKey: variable]
         notificationCenter.post(name: TweaksConfigurationDidChangeNotification,
                                 object: self,
                                 userInfo: userInfo)

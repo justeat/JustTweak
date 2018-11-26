@@ -12,7 +12,6 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     private var optimizelyClient: OPTLYClient?
     
     public var logClosure: TweaksLogClosure?
-    public var priority: TweaksConfigurationPriority = .p8
     
     public var userId: String!
     public var attributes: [String : String]?
@@ -57,7 +56,7 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
         }()
         
         if let tweakValue = tweakValue {
-            return Tweak(identifier: variable, title: nil, group: nil, value: tweakValue)
+            return Tweak(feature: feature, variable: variable, value: tweakValue, title: nil, group: nil)
         }
         
         return nil
