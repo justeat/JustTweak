@@ -18,6 +18,7 @@ With JustTweak you can achieve the following:
 - enable, disable, and customize features locally at runtime
 - provide a dedicated UI for customization (this comes particularly handy for feature that are under development to showcase it to stakeholders)
 
+
 ## Installation
 
 JustTweak is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
@@ -26,7 +27,7 @@ JustTweak is available through [CocoaPods](http://cocoapods.org). To install it,
 pod "JustTweak"
 ```
 
-## Usage
+## Implementation
 
 ### Integration
 
@@ -64,7 +65,7 @@ private func setupJustTweak() {
 The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableTweaksConfiguration` with the highest priority, such as `UserDefaultsTweaksConfiguration` in the example above, will be used to load the `TweaksConfigurationViewController` UI. The `JSONTweaksConfiguration` should have the lowest priority as it provides the default values from a local configuration.
 
 
-### Consuming
+### Usage
 
 The three main features of JustTweak can be accessed from the `TweaksConfigurationsCoordinator` instance to drive code path decisions.
 
@@ -105,7 +106,14 @@ if let variation = variation {
 ```
 
 
-#### Update a configuration at runtime
+### Caching
+
+The `TweaksConfigurationsCoordinator` provides the ability to enable caching of the values to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
+
+- call the `resetCache` method on the  `TweaksConfigurationsCoordinator`
+- post a `TweaksConfigurationDidChangeNotification` notification
+
+### Update a configuration at runtime
 
 JustTweak comes with a ViewController that allows the user to edit the `MutableTweaksConfiguration` with the highest priority.
 
@@ -134,7 +142,8 @@ override func viewDidLoad() {
 }
 ```
 
-## Extending JustTweak
+
+### Customization
 
 JustTweak comes with two configurations out-of-the-box:
 
