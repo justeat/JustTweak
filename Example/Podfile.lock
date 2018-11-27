@@ -1,83 +1,135 @@
 PODS:
-  - Firebase/Core (4.7.0):
-    - FirebaseAnalytics (= 4.0.5)
-    - FirebaseCore (= 4.0.12)
-  - Firebase/RemoteConfig (4.7.0):
+  - Firebase/Core (5.13.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.3.0)
+  - Firebase/CoreOnly (5.13.0):
+    - FirebaseCore (= 5.1.8)
+  - Firebase/RemoteConfig (5.13.0):
     - Firebase/Core
-    - FirebaseRemoteConfig (= 2.1.0)
-  - FirebaseABTesting (1.0.0):
-    - FirebaseCore (~> 4.0)
-    - Protobuf (~> 3.1)
-  - FirebaseAnalytics (4.0.5):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - FirebaseRemoteConfig (= 3.1.0)
+  - FirebaseABTesting (2.0.0):
+    - FirebaseCore (~> 5.0)
+    - Protobuf (~> 3.5)
+  - FirebaseAnalytics (5.3.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleAppMeasurement (~> 5.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.12):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (2.0.7)
-  - FirebaseRemoteConfig (2.1.0):
-    - FirebaseABTesting (~> 1.0)
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - Protobuf (~> 3.1)
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - FirebaseCore (5.1.8):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.3.0):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseRemoteConfig (3.1.0):
+    - FirebaseABTesting (~> 2.0)
+    - FirebaseAnalytics (~> 5.3)
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleUtilities/Environment (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - Protobuf (~> 3.5)
+  - GoogleAppMeasurement (5.3.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.3.6):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.3.6)
+  - GoogleUtilities/Logger (5.3.6):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.3.6):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.3.6):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.3.6)"
+  - GoogleUtilities/Reachability (5.3.6):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.6):
+    - GoogleUtilities/Logger
   - JustTweak (2.0.0):
     - JustTweak/Core (= 2.0.0)
     - JustTweak/UI (= 2.0.0)
   - JustTweak/Core (2.0.0)
   - JustTweak/UI (2.0.0):
     - JustTweak/Core
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - OptimizelySDKCore (2.1.3)
-  - OptimizelySDKDatafileManager (2.1.3):
-    - OptimizelySDKShared (= 2.1.3)
-  - OptimizelySDKEventDispatcher (2.1.3):
-    - OptimizelySDKShared (= 2.1.3)
-  - OptimizelySDKiOS (2.1.3):
-    - OptimizelySDKDatafileManager (= 2.1.3)
-    - OptimizelySDKEventDispatcher (= 2.1.3)
-    - OptimizelySDKUserProfileService (= 2.1.3)
-  - OptimizelySDKShared (2.1.3):
-    - OptimizelySDKCore (= 2.1.3)
-  - OptimizelySDKUserProfileService (2.1.3):
-    - OptimizelySDKShared (= 2.1.3)
-  - Protobuf (3.5.0)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - OptimizelySDKCore (2.1.4)
+  - OptimizelySDKDatafileManager (2.1.4):
+    - OptimizelySDKShared (= 2.1.4)
+  - OptimizelySDKEventDispatcher (2.1.4):
+    - OptimizelySDKShared (= 2.1.4)
+  - OptimizelySDKiOS (2.1.4):
+    - OptimizelySDKDatafileManager (= 2.1.4)
+    - OptimizelySDKEventDispatcher (= 2.1.4)
+    - OptimizelySDKUserProfileService (= 2.1.4)
+  - OptimizelySDKShared (2.1.4):
+    - OptimizelySDKCore (= 2.1.4)
+  - OptimizelySDKUserProfileService (2.1.4):
+    - OptimizelySDKShared (= 2.1.4)
+  - Protobuf (3.6.1)
 
 DEPENDENCIES:
   - Firebase/RemoteConfig
   - JustTweak (from `../`)
   - OptimizelySDKiOS
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Firebase
+    - FirebaseABTesting
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseRemoteConfig
+    - GoogleAppMeasurement
+    - GoogleUtilities
+    - nanopb
+    - OptimizelySDKCore
+    - OptimizelySDKDatafileManager
+    - OptimizelySDKEventDispatcher
+    - OptimizelySDKiOS
+    - OptimizelySDKShared
+    - OptimizelySDKUserProfileService
+    - Protobuf
+
 EXTERNAL SOURCES:
   JustTweak:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
-  FirebaseABTesting: d07d0ee833b842d5153549e4c7e2e2cb1c23a3f9
-  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
-  FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
-  FirebaseInstanceID: 148c25c986c8699e67304b114e365713dce467f2
-  FirebaseRemoteConfig: 451fe8e9c43ac1e7a137ad2a42189bfc8c2c3ebc
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
+  FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
+  FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
+  FirebaseCore: fba2bfaa691c49028309b92e4dd37cc4b5512fbe
+  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
+  GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
+  GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   JustTweak: df75851891f4e6244ad175cfa8608589c2c38ed3
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  OptimizelySDKCore: a79a8bd1de6c784ed2f9f6d57450adced2cf5245
-  OptimizelySDKDatafileManager: a6ac7dcc05aacfa03b3b9462aaa4b93c59681e1e
-  OptimizelySDKEventDispatcher: e7fbcf2001786e8077da41fccb0533facb84ccfd
-  OptimizelySDKiOS: d96c3ac7b68716a2425fefc94856ad9523cadd6d
-  OptimizelySDKShared: 097bdddda2924026ea913a28e6d2856168295c74
-  OptimizelySDKUserProfileService: 839af3ae439c0e6d441148c7be8e1149544712ae
-  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  OptimizelySDKCore: 17e6cee67f720ab09128e97b2b983b89cd50c145
+  OptimizelySDKDatafileManager: 3b00a6ef6f89cb7455e4092316b1679d456b5efc
+  OptimizelySDKEventDispatcher: 4d6059fcbf97ae5182b13d5af50a2bc55ca7638d
+  OptimizelySDKiOS: 409e22b1ec22cd5f5f288acdcedfc2d034c016b2
+  OptimizelySDKShared: d3c2afca439279220f61a5b5de52f49c61b43f4d
+  OptimizelySDKUserProfileService: 657f338f74963885a619ad7ef1d43f9059362d82
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
 PODFILE CHECKSUM: 699b095b8b7f3b37cd7fb3b4f31ba8cb862688e1
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

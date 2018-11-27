@@ -5,6 +5,7 @@
 
 import JustTweak
 import FirebaseAnalytics
+import FirebaseCore
 import FirebaseRemoteConfig
 
 public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
@@ -39,7 +40,7 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private func fetchTweaks() {
         guard configured else { return }
-        remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)!
+        remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)
         remoteConfiguration.fetch { [weak self] (status, error) in
             guard let strongSelf = self else { return }
             if let error = error {
