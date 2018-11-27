@@ -30,7 +30,7 @@ public func |||(lhs: Bool?, rhs: Bool?) -> Bool {
     return rhs ?? false
 }
 
-@objc public enum TweaksLogLevel: Int {
+public enum TweaksLogLevel: Int {
     case error, debug, verbose
 }
 

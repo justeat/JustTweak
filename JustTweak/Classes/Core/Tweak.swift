@@ -5,68 +5,30 @@
 
 import Foundation
 
-public protocol TweakValue: CustomStringConvertible {}
-
-extension Bool: TweakValue {}
-extension Int: TweakValue {}
-extension Float: TweakValue {}
-extension Double: TweakValue {}
-extension String: TweakValue {
-    public var description: String {
-        get { return self }
-    }
-}
-
-public extension TweakValue {
+final public class Tweak: NSObject {
     
-    public var intValue: Int {
-        return Int(doubleValue)
-    }
+    public let feature: String
+    public let variable: String
     
-    public var floatValue: Float {
-        return Float(doubleValue)
-    }
-    
-    public var doubleValue: Double {
-        return Double(description) ?? 0.0
-    }
-    
-    public var boolValue: Bool {
-        return self as? Bool ?? false
-    }
-    
-    public var stringValue: String? {
-        return self as? String
-    }
-    
-}
-
-public func ==(lhs: TweakValue, rhs: TweakValue) -> Bool {
-    if let lhs = lhs as? String, let rhs = rhs as? String {
-        return lhs == rhs
-    }
-    return NSNumber(tweakValue: lhs) == NSNumber(tweakValue: rhs)
-}
-
-@objcMembers final public class Tweak: NSObject {
-    
-    public let identifier: String
     public let value: TweakValue
     
     public let title: String?
+    public let desc: String?
     public let group: String?
-    public let canBeDisplayed: Bool
-    
+    public let source: String?
+
     public var displayTitle: String {
-        return title ?? identifier
+        return title ?? "\(feature):\(variable)"
     }
     
     public override var hash: Int {
         return hashValue
     }
+    
     public override var hashValue: Int {
-        return identifier.hashValue
+        return "\(feature)\(variable)".hashValue
     }
+    
     public override func isEqual(_ object: Any?) -> Bool {
         guard let other = object as? Tweak else { return false }
         return self == other
@@ -74,11 +36,14 @@ public func ==(lhs: TweakValue, rhs: TweakValue) -> Bool {
     
     private var dictionaryValue: [String : Any?] {
         get {
-            return ["title": title,
-                    "group": group,
+            return ["feature": feature,
+                    "variable": variable,
                     "value": value,
-                    "identifier": identifier,
-                    "canBeDisplayed": canBeDisplayed]
+                    "title": title,
+                    "description": desc,
+                    "group": group,
+                    "source": source
+            ]
         }
     }
     public override var description: String {
@@ -87,56 +52,59 @@ public func ==(lhs: TweakValue, rhs: TweakValue) -> Bool {
         }
     }
     
-    public init(identifier: String, title: String?, group: String?, value: TweakValue, canBeDisplayed: Bool) {
-        self.canBeDisplayed = canBeDisplayed
-        self.identifier = identifier
+    public init(feature: String, variable: String, value: TweakValue, title: String? = nil, description: String? = nil, group: String? = nil, source: String? = nil) {
+        self.feature = feature
+        self.variable = variable
         self.value = value
         self.title = title
+        self.desc = description
         self.group = group
+        self.source = source
         super.init()
     }
     
     public static func ==(lhs: Tweak, rhs: Tweak) -> Bool {
-        return lhs.identifier == rhs.identifier &&
+        return lhs.feature == rhs.feature &&
+            lhs.variable == rhs.variable &&
             lhs.value == rhs.value &&
             lhs.title == rhs.title &&
+            lhs.desc == rhs.desc &&
             lhs.group == rhs.group &&
-            lhs.canBeDisplayed == rhs.canBeDisplayed
+            lhs.source == rhs.source
     }
     
 }
 
-// Objective-C support
 public extension Tweak {
-    @objc public var intValue: Int {
+    public var intValue: Int {
         return value.intValue
     }
     
-    @objc public var floatValue: Float {
+    public var floatValue: Float {
         return value.floatValue
     }
     
-    @objc public var doubleValue: Double {
+    public var doubleValue: Double {
         return value.doubleValue
     }
     
-    @objc public var boolValue: Bool {
+    public var boolValue: Bool {
         return value.boolValue
     }
     
-    @objc public var stringValue: String? {
+    public var stringValue: String? {
         return value.stringValue
     }
     
-    convenience init(identifier: String, boolValue: Bool) {
-        self.init(identifier: identifier, title: nil, group: nil, value: boolValue, canBeDisplayed: false)
+    convenience init(feature: String, variable: String, boolValue: Bool) {
+        self.init(feature: feature, variable: variable, value: boolValue)
     }
     
-    convenience init(identifier: String, stringValue: String) {
-        self.init(identifier: identifier, title: nil, group: nil, value: stringValue, canBeDisplayed: false)
+    convenience init(feature: String, variable: String, stringValue: String) {
+        self.init(feature: feature, variable: variable, value: stringValue)
     }
     
-    convenience init(identifier: String, numberValue: NSNumber) {
-        self.init(identifier: identifier, title: nil, group: nil, value: numberValue.tweakValue, canBeDisplayed: false)
+    convenience init(feature: String, variable: String, numberValue: NSNumber) {
+        self.init(feature: feature, variable: variable, value: numberValue.tweakValue)
     }
 }

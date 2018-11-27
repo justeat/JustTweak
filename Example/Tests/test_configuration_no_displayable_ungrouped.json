@@ -1,27 +1,31 @@
 {
+  "ui_customization": {
     "display_red_view": {
-        "Title": "Display Red View",
-        "Group": "UI",
-        "Value": true,
-        "CanBeDisplayed": true
+      "Title": "Display Red View",
+      "Group": "UI Customization",
+      "Value": true
     },
     "display_yellow_view": {
-        "Title": "Display Yellow View",
-        "Group": "UI",
-        "Value": false,
-        "CanBeDisplayed": true
+      "Title": "Display Yellow View",
+      "Group": "UI Customization",
+      "Value": false
     },
     "display_green_view": {
-        "Value": true
-    },
+      "Title": "Display Green View",
+      "Group": "UI Customization",
+      "Value": true
+    }
+  },
+  "general": {
     "greet_on_app_did_become_active": {
-        "Title": "Greet on app launch",
-        "Group": "General",
-        "Value": false,
-        "CanBeDisplayed": true
+      "Title": "Greet on app launch",
+      "Group": "General",
+      "Value": false
     },
     "tap_to_change_color_enabled": {
-        "Value": true,
-        "Title": "Tap to change views color"
+      "Title": "Tap to change views color",
+      "Group": "General",
+      "Value": true
     }
+  }
 }

@@ -5,47 +5,65 @@
 
 import Foundation
 
-@objcMembers final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
+final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private enum EncodingKeys : String {
-        case Title, CanBeDisplayed, Value, Group
+        case Title, Description, Group, Value
     }
     
-    private let configurationFile: [String : [String : AnyObject]]
+    private let configurationFile: [String : [String : [String : AnyObject]]]
     private let fileURL: URL
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .fallback
     
-    public var allIdentifiers: [String] {
-        return Array(configurationFile.keys)
+    public var features: [String : [String]] {
+        var storage: [String : [String]] = [:]
+        for feature in Array(configurationFile.keys) {
+            for variable in Array(configurationFile[feature]!.keys) {
+                if let _ = storage[feature] {
+                    storage[feature]?.append(variable)
+                } else {
+                    storage[feature] = [variable]
+                }
+            }
+        }
+        return storage
     }
     
     public override var description: String {
         get { return "\(super.description) { fileURL: \(fileURL) }" }
     }
     
-    public init?(defaultValuesFromJSONAtURL jsonURL: URL) {
+    public init?(jsonURL: URL) {
         guard let data = try? Data(contentsOf: jsonURL) else { return nil }
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        guard let configuration = json as? [String : [String : AnyObject]] else {
+        guard let configuration = json as? [String : [String : [String : AnyObject]]] else {
             return nil
         }
         configurationFile = configuration
         fileURL = jsonURL
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
-        guard let dictionary = configurationFile[identifier] else { return nil }
-        let title = dictionary[EncodingKeys.Title.rawValue] as? String
-        let group = dictionary[EncodingKeys.Group.rawValue] as? String
-        let value = tweakValueFromJSONObject(dictionary[EncodingKeys.Value.rawValue])
-        let canBeDisplayed = dictionary[EncodingKeys.CanBeDisplayed.rawValue]?.boolValue ?? false
-        return Tweak(identifier: identifier,
-                     title: title,
-                     group: group,
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        return configurationFile[feature] != nil
+    }
+    
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        guard let entry = configurationFile[feature]?[variable] else { return nil }
+        let title = entry[EncodingKeys.Title.rawValue] as? String
+        let description = entry[EncodingKeys.Description.rawValue] as? String
+        let group = entry[EncodingKeys.Group.rawValue] as? String
+        let value = tweakValueFromJSONObject(entry[EncodingKeys.Value.rawValue])
+        return Tweak(feature: feature,
+                     variable: variable,
                      value: value,
-                     canBeDisplayed: canBeDisplayed)
+                     title: title,
+                     description: description,
+                     group: group)
+    }
+    
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
     }
     
     private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
@@ -61,5 +79,4 @@ import Foundation
         }
         return value
     }
-    
 }

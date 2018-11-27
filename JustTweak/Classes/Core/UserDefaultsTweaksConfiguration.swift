@@ -5,65 +5,62 @@
 
 import Foundation
 
-@objcMembers final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfiguration {
+final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfiguration {
     
     private let userDefaults: UserDefaults
-    private let fallbackConfiguration: JSONTweaksConfiguration?
-    private var registeredTweaksIdentifiers: Set<String> = Set<String>()
     
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .high
     
-    public var allTweakIdentifiers: [String] {
-        let fallbackConfigurationTweaks = fallbackConfiguration?.allIdentifiers ?? []
-        registeredTweaksIdentifiers.formUnion(fallbackConfigurationTweaks)
-        return Array(registeredTweaksIdentifiers).sorted()
-    }
-    
-    public init(userDefaults: UserDefaults, fallbackConfiguration: JSONTweaksConfiguration? = nil) {
+    public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
-        self.fallbackConfiguration = fallbackConfiguration
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
-        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(identifier)
-        let fallbackTweak = fallbackConfiguration?.tweakWith(identifier: identifier)
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(feature)
+        return userDefaults.bool(forKey: userDefaultsKey)
+    }
+
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
-        return Tweak(identifier: identifier,
-                     title: fallbackTweak?.title,
-                     group: fallbackTweak?.group,
+        return Tweak(feature: feature,
+                     variable: variable,
                      value: value,
-                     canBeDisplayed: fallbackTweak?.canBeDisplayed ?? false)
+                     title: nil,
+                     group: nil)
     }
     
-    public func set(boolValue value: Bool, forTweakWithIdentifier identifier: String) {
-        set(numberValue: NSNumber(value: value as Bool), forTweakWithIdentifier: identifier)
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
+
+    public func deleteValue(feature: String, variable: String) {
+        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(variable))
     }
     
-    public func set(stringValue value: String, forTweakWithIdentifier identifier: String) {
-        updateUserDefaultsWith(value: value as AnyObject, forTweakWithIdentifier: identifier)
+    public func set(_ value: Bool, feature: String, variable: String) {
+        updateUserDefaultsWith(value: value, feature: feature, variable: variable)
     }
     
-    public func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String) {
-        updateUserDefaultsWith(value: value, forTweakWithIdentifier: identifier)
+    public func set(_ value: String, feature: String, variable: String) {
+        updateUserDefaultsWith(value: value, feature: feature, variable: variable)
     }
     
-    private func updateUserDefaultsWith(value: AnyObject, forTweakWithIdentifier identifier: String) {
-        registeredTweaksIdentifiers.insert(identifier)
-        userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(identifier))
+    public func set(_ value: NSNumber, feature: String, variable: String) {
+        updateUserDefaultsWith(value: value, feature: feature, variable: variable)
+    }
+    
+    private func updateUserDefaultsWith(value: Any, feature: String, variable: String) {
+        userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(variable))
         userDefaults.synchronize()
         let notificationCenter = NotificationCenter.default
-        let userInfo = [TweaksConfigurationDidChangeNotificationTweakIdentifierKey: identifier]
+        let userInfo = [TweaksConfigurationDidChangeNotificationTweakIdentifierKey: variable]
         notificationCenter.post(name: TweaksConfigurationDidChangeNotification,
                                 object: self,
                                 userInfo: userInfo)
-    }
-    
-    public func deleteValue(forTweakWithIdentifier identifier: String) {
-        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(identifier))
     }
     
     private func userDefaultsKeyForTweakWithIdentifier(_ identifier: String) -> String {
@@ -79,5 +76,4 @@ import Foundation
         }
         return nil
     }
-    
 }

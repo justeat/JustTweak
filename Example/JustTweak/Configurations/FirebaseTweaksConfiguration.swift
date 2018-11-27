@@ -5,9 +5,10 @@
 
 import JustTweak
 import FirebaseAnalytics
+import FirebaseCore
 import FirebaseRemoteConfig
 
-@objcMembers public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public override init() {
         super.init()
@@ -27,7 +28,6 @@ import FirebaseRemoteConfig
     }
     
     public var logClosure: TweaksLogClosure?
-    public let priority: TweaksConfigurationPriority = .medium
     
     // Google dependencies
     private var configured: Bool = false
@@ -40,10 +40,11 @@ import FirebaseRemoteConfig
     
     private func fetchTweaks() {
         guard configured else { return }
-        remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)!
+        remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)
         remoteConfiguration.fetch { [weak self] (status, error) in
+            guard let strongSelf = self else { return }
             if let error = error {
-                print("!!! Error while fetching Firebase configuration => \(error) !!!")
+                strongSelf.logClosure?("Error while fetching Firebase configuration => \(error)", .error)
             }
             else {
                 self?.remoteConfiguration.activateFetched()
@@ -53,16 +54,25 @@ import FirebaseRemoteConfig
         }
     }
     
-    public func tweakWith(identifier: String) -> Tweak? {
-        guard configured else { return nil }
-        let configValue = remoteConfiguration.configValue(forKey: identifier)
-        guard configValue.source != .static else { return nil }
-        guard let stringValue = configValue.stringValue else { return nil }
-        return Tweak(identifier: identifier,
-                     title: nil,
-                     group: nil,
-                     value: stringValue.tweakValue,
-                     canBeDisplayed: false)
+    public func isFeatureEnabled(_ feature: String) -> Bool {
+        let configValue = remoteConfiguration.configValue(forKey: feature)
+        guard configValue.source != .static else { return false }
+        return configValue.boolValue
     }
     
+    public func tweakWith(feature: String, variable: String) -> Tweak? {
+        guard configured else { return nil }
+        let configValue = remoteConfiguration.configValue(forKey: variable)
+        guard configValue.source != .static else { return nil }
+        guard let stringValue = configValue.stringValue else { return nil }
+        return Tweak(feature: feature,
+                     variable: variable,
+                     value: stringValue.tweakValue,
+                     title: nil,
+                     group: nil)
+    }
+    
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
 }

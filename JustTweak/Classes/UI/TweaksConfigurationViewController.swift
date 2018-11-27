@@ -7,26 +7,30 @@ import UIKit
 
 internal protocol TweaksConfigurationViewControllerCell: class {
     var title: String? { get set }
+    var desc: String? { get set }
     var value: TweakValue { get set }
-    weak var delegate: TweaksConfigurationViewControllerCellDelegate? { get set }
+    var delegate: TweaksConfigurationViewControllerCellDelegate? { get set }
 }
 
 internal protocol TweaksConfigurationViewControllerCellDelegate: class {
     func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell)
 }
 
-@objcMembers public class TweaksConfigurationViewController: UITableViewController {
+public class TweaksConfigurationViewController: UITableViewController {
     
-    fileprivate class Tweak: NSObject {
-        var identifier: String
+    fileprivate class Tweak {
+        var feature: String
+        var variable: String
         var title: String?
+        var desc: String?
         var value: TweakValue
         
-        init(identifier: String, title: String?, value: TweakValue) {
-            self.identifier = identifier
-            self.title = title
+        init(feature: String, variable: String, value: TweakValue, title: String?, description: String?) {
+            self.feature = feature
+            self.variable = variable
             self.value = value
-            super.init()
+            self.title = title
+            self.desc = description
         }
     }
     
@@ -98,7 +102,8 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
         let cellIdentifier = cellIdentifierForTweak(tweak)
         let cell = table.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if let cell = cell as? TweaksConfigurationViewControllerCell {
-            cell.title = tweak.title ?? tweak.identifier
+            cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
+            cell.desc = tweak.desc
             cell.value = tweak.value
             cell.delegate = self
         }
@@ -111,10 +116,10 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
     
     // MARK: Convenience
     
-    public func indexPathForTweakWithIdentifier(_ identifier: String) -> IndexPath? {
+    public func indexPathForTweak(with feature: String, variable: String) -> IndexPath? {
         for section in 0 ..< numberOfSections(in: tableView) {
             for (row, tweak) in tweaksIn(section: section).enumerated() {
-                if tweak.identifier == identifier {
+                if tweak.feature == feature, tweak.variable == variable {
                     return IndexPath(row: row, section: section)
                 }
             }
@@ -179,7 +184,11 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
                 var items = [Tweak]()
                 for tweak in allTweaks {
                     if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
-                        let dto = Tweak(identifier: tweak.identifier, title: tweak.title, value: tweak.value)
+                        let dto = Tweak(feature: tweak.feature,
+                                        variable: tweak.variable,
+                                        value: tweak.value,
+                                        title: tweak.title,
+                                        description: tweak.desc)
                         items.append(dto)
                     }
                 }
@@ -205,7 +214,6 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
         view.endEditing(true)
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCellDelegate {
@@ -214,10 +222,11 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
-                configuration?.set(value: cell.value, forTweakWithIdentifier: tweak.identifier)
+                let feature = tweak.feature
+                let variable = tweak.variable
+                configuration?.set(value: cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
         }
     }
-    
 }

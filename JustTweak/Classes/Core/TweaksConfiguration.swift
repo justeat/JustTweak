@@ -5,43 +5,35 @@
 
 import Foundation
 
-@objc public enum TweaksConfigurationPriority: Int {
-    case high, medium, low, fallback
+public protocol TweaksConfiguration {
+    
+    var logClosure: TweaksLogClosure? { set get }    
+    func isFeatureEnabled(_ feature: String) -> Bool
+    func tweakWith(feature: String, variable: String) -> Tweak?
+    func activeVariation(for experiment: String) -> String?
 }
 
-@objc public protocol TweaksConfiguration {
+public protocol MutableTweaksConfiguration: TweaksConfiguration {
     
-    var logClosure: TweaksLogClosure? { set get }
-    var priority: TweaksConfigurationPriority { get }
-    func tweakWith(identifier: String) -> Tweak?
-    
-}
-
-@objc public protocol MutableTweaksConfiguration: TweaksConfiguration {
-    
-    var allTweakIdentifiers: [String] { get }
-    
-    func deleteValue(forTweakWithIdentifier identifier: String)
-    func set(boolValue value: Bool, forTweakWithIdentifier identifier: String)
-    func set(stringValue value: String, forTweakWithIdentifier identifier: String)
-    func set(numberValue value: NSNumber, forTweakWithIdentifier identifier: String)
-    
+    func deleteValue(feature: String, variable: String)
+    func set(_ value: Bool, feature: String, variable: String)
+    func set(_ value: String, feature: String, variable: String)
+    func set(_ value: NSNumber, feature: String, variable: String)
 }
 
 public extension MutableTweaksConfiguration {
     
-    func set(value: TweakValue, forTweakWithIdentifier identifier: String) {
+    func set(value: TweakValue, feature: String, variable: String) {
         if let value = value as? Bool {
-            set(boolValue: value, forTweakWithIdentifier: identifier)
+            set(value, feature: feature, variable: variable)
         }
         if let value = value as? String {
-            set(stringValue: value, forTweakWithIdentifier: identifier)
+            set(value, feature: feature, variable: variable)
         }
         else if let value = NSNumber(tweakValue: value) {
-            set(numberValue: value, forTweakWithIdentifier: identifier)
+            set(value, feature: feature, variable: variable)
         }
     }
-    
 }
 
 public let TweaksConfigurationDidChangeNotification = Notification.Name("TweaksConfigurationDidChangeNotification")

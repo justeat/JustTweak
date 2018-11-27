@@ -2,104 +2,156 @@
 
 # JustTweak
 
-[![Build Status](https://www.bitrise.io/app/375d99516a39bb82/status.svg?token=G7k3kFr7gFKb5y0gzuwH9Q)](https://www.bitrise.io/app/375d99516a39bb82)
+[![Build Status](https://app.bitrise.io/app/375d99516a39bb82/status.svg?token=G7k3kFr7gFKb5y0gzuwH9Q&branch=master)](https://app.bitrise.io/app/375d99516a39bb82)
 [![Version](https://img.shields.io/cocoapods/v/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 [![License](https://img.shields.io/cocoapods/l/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 [![Platform](https://img.shields.io/cocoapods/p/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 
-JustTweak is a framework for feature flagging, locally and remotely configure and A/B test iOS apps.
-It provides a simple interface to creating multiple configurations of Tweaks that you want apply to your app based on some priority.
+JustTweak is a framework for feature flagging and A/B testing for iOS apps.
+It provides a simple facade interface interacting with multiple providers that are queried respecting a given priority.
+Tweaks represent flags used to drive decisions in the client code. 
 
-For example, let's say you want to have a Feature Flag for a feature you're developing and you want to run an A/B test enabling this feature for some of your users using a server based configuration. At the same time you want to force the feature on or off while developing it or to show it working in both cases to your colleagues. Also, you'd like testers and/or Beta users to be able to turn the feature on or off on demand as they use the app without having to ask you.
+With JustTweak you can achieve the following:
 
-Using JustTweak achieving this sort of configuration is super simple. All you have to do is add the some information about the tweak in your server based and local Tweaks configuration, and query JustTweak for the value of that Tweak in your code when needed. JustTweak will use the value from the configuration with the highest priority and fallback to the others automatically if no set value is found.
+- use a JSON local configuration providing default values for experimentation 
+- use a number of remote configuration providers such as Firebase and Optmizely to run A/B tests and feature flagging   
+- enable, disable, and customize features locally at runtime
+- provide a dedicated UI for customization (this comes particularly handy for feature that are under development to showcase it to stakeholders)
 
-## Usage
+
+## Installation
+
+JustTweak is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+
+```ruby
+pod "JustTweak"
+```
+
+## Implementation
+
+### Integration
+
+- define a JSON configuration file including your features (you can use the included `ExampleConfiguration.json` as a template)
+- define your features and A/B tests in your services such as Firebase and Optmizely (optional)
+- configure the JustTweak stack as following
 
 ```swift
-// somewhere in your app, create a TweaksConfigurationsCoordinator
-// to inject in the different parts of your app
+// create a TweaksConfigurationsCoordinator
 var configurationsCoordinator: TweaksConfigurationsCoordinator!
 
-private func setUpConfigurations() {
-    let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration",
-                                      withExtension: "json")!
-    let jsonConfiguration = JSONTweaksConfiguration(defaultValuesFromJSONAtURL: jsonFileURL)!
+private func setupJustTweak() {
 
-    let userDefaults = UserDefaults.standard
-    let localConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults,
-                                                             fallbackConfiguration: jsonConfiguration)
+    // local JSON configuration (default tweaks)
+    let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+    let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
 
+    // remote configurations (optional)
     let firebaseConfiguration = FirebaseTweaksConfiguration()
-
-    let configurations: [TweaksConfiguration] = [jsonConfiguration, localConfiguration, firebaseConfiguration]
+    let optimizelyConfiguration = OptimizelyTweaksConfiguration()
+    optimizelyConfiguration.userId = <#user_id#>
+    
+    // local mutable configuration (to override tweaks from other configurations)
+    let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: UserDefaults.standard)
+    
+    // priority is defined by the order in the configurations array (from low to high)
+    let configurations: [TweaksConfiguration] = [jsonConfiguration,
+                                                 firebaseConfiguration,
+                                                 optimizelyConfiguration,
+                                                 userDefaultsConfiguration]
     configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
-}
-
-// Later on...
-let tweakEnabled = configurationsCoordinator.valueForTweakWith(identifier: "my_tweak")
-if tweakEnabled {
-    // enable the tweak
-} else {
-    // disable the tweak if it was enabled
 }
 ```
 
-#### Let the user update a configuration at run time
+The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableTweaksConfiguration` with the highest priority, such as `UserDefaultsTweaksConfiguration` in the example above, will be used to load the `TweaksConfigurationViewController` UI. The `JSONTweaksConfiguration` should have the lowest priority as it provides the default values from a local configuration.
 
-The Pod also comes with a ViewController to to allow the user to edit the `MutableTweaksConfiguration` with the highest priority.
+
+### Usage
+
+The three main features of JustTweak can be accessed from the `TweaksConfigurationsCoordinator` instance to drive code path decisions.
+
+1. Checking if a feature is enabled
 
 ```swift
-// somewhere in a UIViewController...
-func presentConfigurationViewController() {
+// check for a feature to be enabled
+let enabled = configurationsCoordinator.isFeatureEnabled("some_feature")
+if enabled {
+    // enable the feature
+} else {
+    // default behaviour
+}
+```
+
+2. Get the value of a flag for a given feature. JustTweak will return the value from the configuration with the highest priority and automatically fallback to the others if no set value is found.
+
+```swift
+// check for a tweak value
+let tweak = configurationsCoordinator.valueForTweakWith(feature: "some_feature", variable: "some_flag")
+if let tweak = tweak {
+    // tweak was found in some configuration, use tweak.value
+} else {
+    // tweak was not found in any configuration
+}
+```
+
+3. Run an A/B test
+
+```swift
+// check for a tweak value
+let variation = configurationsCoordinator.activeVariation(for: "some_experiment")
+if let variation = variation {
+   // act according to the kind of variation (e.g. "control", "variation_1")
+} else {
+   // default behaviour
+}
+```
+
+
+### Caching
+
+The `TweaksConfigurationsCoordinator` provides the ability to enable caching of the values to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
+
+- call the `resetCache` method on the  `TweaksConfigurationsCoordinator`
+- post a `TweaksConfigurationDidChangeNotification` notification
+
+### Update a configuration at runtime
+
+JustTweak comes with a ViewController that allows the user to edit the `MutableTweaksConfiguration` with the highest priority.
+
+```swift
+func presentTweaksConfigurationViewController() {
     guard let coordinator = configurationsCoordinator else { return }
-    let viewController = TweaksConfigurationViewController(style: .Grouped, configurationsCoordinator: coordinator)
+    let viewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: coordinator)
     viewController.title = "Edit Configuration"
     presentViewController(UINavigationController(rootViewController:viewController), animated: true, completion: nil)
 }
 ```
 
-#### Update a configuration at run time yourself
+When a value is modified in any `MutableTweaksConfiguration`, a notification is fired to give the clients the opportunity to react and reflect changes in the UI.
 
 ```swift
 override func viewDidLoad() {
     super.viewDidLoad()
-    updateView()
     NotificationCenter.defaultCenter().addObserver(self,
-                                                   selector: #selector(updateView),
-                                                   name: ConfigurationDidChangeNotification,
+                                                   selector: #selector(updateUI),
+                                                   name: TweaksConfigurationDidChangeNotification,
                                                    object: nil)
 }
 
-internal func updateView() {
-    setUpGesturesIfNeeded()
-    redView.hidden = !canShowRedView
-    greenView.hidden = !canShowGreenView
-    yellowView.hidden = !canShowYellowView
+@objc func updateUI() {
+    // update the UI accordingly
 }
 ```
 
-## Extending JustTweak
 
-JustTweak comes with three default configurations you can immediately startUsing: one for interfacing with UserDefaults, one that takes a JSON file (meant to be the default configuration) and an Ephemenral configuration to use in Unit/UI Tests. Check the example file to see what the JSON scheme looks like.
+### Customization
 
-In addition, JustTweak defines `TweaksConfiguration` and `MutableTweaksConfiguration` as protocols you can implement to create your own configurations to fit your own needs. For example, you can create a configuration that takes its values from services such as Firebase RemoteConfig, Facebook's Tweaks, CloudKit or your own sever.
+JustTweak comes with two configurations out-of-the-box:
 
-As a matter of fact, the Example app included in the project, implements a Firebase RemoteConfig based configuration that you can also use in your projects.
-Unfortunately it's not currently possible, or non-intuitive at least, to add Firebase as a dependency on this Pod, therefore and that's why we're not including a Firebase configuration by default - however, as you can see from the Podspec, we plan of having an optional subspec to include it.
+- `UserDefaultsTweaksConfiguration` which is mutable and uses `UserDefaults` as a key/value store 
+- `JSONTweaksConfiguration` which is read-only and uses a JSON configuration file that is meant to be the default configuration
 
-We also plan to include configurations to support other services, still as optional subspecs. Feel free to open Pull Requests to add services you use.
+In addition, JustTweak defines `TweaksConfiguration` and `MutableTweaksConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
 
-## Installation
-
-JustTweak is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod "JustTweak"
-```
-## Requirements
-JustTweak supports swift 4.0 and Xcode 9
 
 ## License
 
