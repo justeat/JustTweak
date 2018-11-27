@@ -109,8 +109,8 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
                 for variable in variables {
                     if let tweak = tweakWith(feature: feature, variable: variable) {
                         let jsonTweak = jsonConfiguration?.tweakWith(feature: feature, variable: variable)
-                        let aggregatedTweak = Tweak(feature: tweak.feature,
-                                                    variable: tweak.variable,
+                        let aggregatedTweak = Tweak(feature: feature,
+                                                    variable: variable,
                                                     value: tweak.value,
                                                     title: jsonTweak?.title,
                                                     description: jsonTweak?.desc,

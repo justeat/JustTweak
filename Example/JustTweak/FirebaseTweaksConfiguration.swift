@@ -41,8 +41,9 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
         guard configured else { return }
         remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)!
         remoteConfiguration.fetch { [weak self] (status, error) in
+            guard let strongSelf = self else { return }
             if let error = error {
-                print("!!! Error while fetching Firebase configuration => \(error) !!!")
+                strongSelf.logClosure?("Error while fetching Firebase configuration => \(error)", .error)
             }
             else {
                 self?.remoteConfiguration.activateFetched()
