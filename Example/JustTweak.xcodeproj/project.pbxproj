@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F6422A121A2F7FB002B69F0 /* OptimizelyTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A021A2F7FB002B69F0 /* OptimizelyTweaksConfiguration.swift */; };
+		4F30EA6E21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */; };
+		4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */; };
+		4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */; };
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
@@ -25,7 +27,6 @@
 		619938DE1DA7F9FA00765852 /* test_configuration_no_displayable_ungrouped.json in Resources */ = {isa = PBXBuildFile; fileRef = 619938DD1DA7F9FA00765852 /* test_configuration_no_displayable_ungrouped.json */; };
 		619938E01DA805BA00765852 /* JSONTweaksConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619938DF1DA805BA00765852 /* JSONTweaksConfigurationTests.swift */; };
 		619938E21DA8061900765852 /* test_configuration_invalid.json in Resources */ = {isa = PBXBuildFile; fileRef = 619938E11DA8061900765852 /* test_configuration_invalid.json */; };
-		61A561371DA6A62900839F7F /* FirebaseTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A561361DA6A62900839F7F /* FirebaseTweaksConfiguration.swift */; };
 		61A561391DA6AC4B00839F7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */; };
 		61A561411DA7B65200839F7F /* test_configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = 61A5613F1DA7B64900839F7F /* test_configuration.json */; };
 		61BE051B1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE051A1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift */; };
@@ -50,7 +51,9 @@
 /* Begin PBXFileReference section */
 		2A3A7CF0048CBC9CF1917718 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4F6422A021A2F7FB002B69F0 /* OptimizelyTweaksConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizelyTweaksConfiguration.swift; sourceTree = "<group>"; };
+		4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTweaksConfiguration.swift; sourceTree = "<group>"; };
+		4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyTweaksConfiguration.swift; sourceTree = "<group>"; };
+		4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EphimeralTweaksConfiguration.swift; sourceTree = "<group>"; };
 		4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +73,6 @@
 		619938DD1DA7F9FA00765852 /* test_configuration_no_displayable_ungrouped.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration_no_displayable_ungrouped.json; sourceTree = "<group>"; };
 		619938DF1DA805BA00765852 /* JSONTweaksConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTweaksConfigurationTests.swift; sourceTree = "<group>"; };
 		619938E11DA8061900765852 /* test_configuration_invalid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration_invalid.json; sourceTree = "<group>"; };
-		61A561361DA6A62900839F7F /* FirebaseTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTweaksConfiguration.swift; sourceTree = "<group>"; };
 		61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61A5613F1DA7B64900839F7F /* test_configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration.json; sourceTree = "<group>"; };
 		61BE051A1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanTweakTableViewCellTests.swift; sourceTree = "<group>"; };
@@ -108,6 +110,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F30EA6A21ADA06A00AECF77 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */,
+				4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */,
+				4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 		4F6422A421A4205B002B69F0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,12 +153,11 @@
 		607FACD21AFB9204008FA782 /* Example for JustTweak */ = {
 			isa = PBXGroup;
 			children = (
+				4F30EA6A21ADA06A00AECF77 /* Configurations */,
 				61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration.json */,
 				4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */,
 				61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				61A561361DA6A62900839F7F /* FirebaseTweaksConfiguration.swift */,
-				4F6422A021A2F7FB002B69F0 /* OptimizelyTweaksConfiguration.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -444,11 +455,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F30EA6E21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift in Sources */,
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
-				61A561371DA6A62900839F7F /* FirebaseTweaksConfiguration.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */,
+				4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				4F6422A121A2F7FB002B69F0 /* OptimizelyTweaksConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
