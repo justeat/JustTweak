@@ -28,7 +28,21 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
             builder.datafile = jsonDatafile
             builder.sdkKey = "SDK_KEY_HERE"
         }))
-        optimizelyClient = optimizelyManager?.initialize()
+        optimizelyManager?.initialize() { [weak self] error, client in
+            guard let strongSelf = self else { return }
+            switch (error, client) {
+            case (nil, let client):
+                strongSelf.optimizelyClient = client
+                let notificationCentre = NotificationCenter.default
+                notificationCentre.post(name: TweaksConfigurationDidChangeNotification, object: strongSelf)
+            case (let error, _):
+                if let error = error {
+                    strongSelf.logClosure?("Couldn't initialize Optimizely manager. \(error.localizedDescription)", .error)
+                } else {
+                    strongSelf.logClosure?("Couldn't initialize Optimizely manager", .error)
+                }
+            }
+        }
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
