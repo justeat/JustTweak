@@ -15,6 +15,8 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
         }
     }
     
+    public var useCache: Bool = false
+    
     private var configurations: [TweaksConfiguration]
     private var tweaksCache = [String : [String : Tweak]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
@@ -26,7 +28,7 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
             self.configurations[index].logClosure = logClosure
         }
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(resetCache), name: TweaksConfigurationDidChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweaksConfigurationDidChangeNotification, object: nil)
     }
     
     deinit {
@@ -45,7 +47,7 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        if let cachedTweaks = tweaksCache[feature], let cachedTweak = cachedTweaks[variable] {
+        if useCache, let cachedTweaks = tweaksCache[feature], let cachedTweak = cachedTweaks[variable] {
             logClosure?("Tweak '\(cachedTweak)' found in cache.)", .verbose)
             return cachedTweak
         }
@@ -68,10 +70,12 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
         }
         if let result = result {
             logClosure?("Tweak with feature '\(feature)' and variable '\(variable)' resolved. Using '\(result)'.", .debug)
-            if let _ = tweaksCache[feature] {
-                tweaksCache[feature]?[variable] = result
-            } else {
-                tweaksCache[feature] = [variable : result]
+            if useCache {
+                if let _ = tweaksCache[feature] {
+                    tweaksCache[feature]?[variable] = result
+                } else {
+                    tweaksCache[feature] = [variable : result]
+                }
             }
         }
         else {
@@ -140,8 +144,14 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
         observersMap.removeValue(forKey: object)
     }
     
-    @objc public func resetCache() {
+    public func resetCache() {
         tweaksCache = [String : [String : Tweak]]()
+    }
+    
+    @objc private func configurationDidChange() {
+        if useCache {
+            resetCache()
+        }
     }
     
     private var jsonConfiguration: JSONTweaksConfiguration? {
