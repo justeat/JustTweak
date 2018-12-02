@@ -22,10 +22,6 @@ final public class Tweak: NSObject {
     }
     
     public override var hash: Int {
-        return hashValue
-    }
-    
-    public override var hashValue: Int {
         return "\(feature)\(variable)".hashValue
     }
     
