@@ -7,7 +7,7 @@ import Foundation
 
 final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguration {
     
-    public var logClosure: TweaksLogClosure? = {(message, logLevel) in print(message) } {
+    public var logClosure: TweaksLogClosure? {
         didSet {
             for (index, _) in configurations.enumerated() {
                 configurations[index].logClosure = logClosure
