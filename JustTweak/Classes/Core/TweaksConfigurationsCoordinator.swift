@@ -17,7 +17,7 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
     
     public var useCache: Bool = false
     
-    private var configurations: [TweaksConfiguration]
+    public private(set) var configurations: [TweaksConfiguration]
     private var tweaksCache = [String : [String : Tweak]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
