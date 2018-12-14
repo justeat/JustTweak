@@ -24,14 +24,15 @@ public protocol MutableTweaksConfiguration: TweaksConfiguration {
 public extension MutableTweaksConfiguration {
     
     func set(value: TweakValue, feature: String, variable: String) {
-        if let value = value as? Bool {
-            set(value, feature: feature, variable: variable)
-        }
-        if let value = value as? String {
-            set(value, feature: feature, variable: variable)
-        }
-        else if let value = NSNumber(tweakValue: value) {
-            set(value, feature: feature, variable: variable)
+        switch value {
+        case is Bool:
+            self.set(value as! Bool, feature: feature, variable: variable)
+        case is String:
+            self.set(value as! String, feature: feature, variable: variable)
+        default:
+            if let value = NSNumber(tweakValue: value) {
+                self.set(value, feature: feature, variable: variable)
+            }
         }
     }
 }
