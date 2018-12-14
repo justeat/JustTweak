@@ -65,7 +65,7 @@ public class TweaksConfigurationViewController: UITableViewController {
     
     // MARK: Convenience Initializers
     
-    public convenience init(style: UITableViewStyle, configurationsCoordinator: TweaksConfigurationsCoordinator) {
+    public convenience init(style: UITableView.Style, configurationsCoordinator: TweaksConfigurationsCoordinator) {
         self.init(style: style)
         self.configurationsCoordinator = configurationsCoordinator
     }
