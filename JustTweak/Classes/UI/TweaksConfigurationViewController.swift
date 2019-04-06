@@ -43,10 +43,6 @@ public class TweaksConfigurationViewController: UITableViewController {
         case ToogleCell, TextCell, NumberCell
     }
     
-    private enum SectionGroupKeys: String {
-        case Title, Items
-    }
-    
     private var sections = [Section]()
     private var filteredSections = [Section]()
     public var configurationsCoordinator: TweaksConfigurationsCoordinator? {
@@ -71,14 +67,10 @@ public class TweaksConfigurationViewController: UITableViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    // MARK: Convenience Initializers
-    
     public convenience init(style: UITableView.Style, configurationsCoordinator: TweaksConfigurationsCoordinator) {
         self.init(style: style)
         self.configurationsCoordinator = configurationsCoordinator
     }
-    
-    // MARK: View Lifecycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,9 +87,10 @@ public class TweaksConfigurationViewController: UITableViewController {
         registerCellClasses()
         rebuildSections()
     }
-    
-    // MARK: UITableViewDataSource
-    
+}
+
+extension TweaksConfigurationViewController {
+
     public override func numberOfSections(in tableView: UITableView) -> Int {
         return isFiltering() ? filteredSections.count : sections.count
     }
@@ -123,8 +116,6 @@ public class TweaksConfigurationViewController: UITableViewController {
         return titleForHeaderForSection(section)
     }
     
-    // MARK: Convenience
-    
     public func indexPathForTweak(with feature: String, variable: String) -> IndexPath? {
         for section in 0 ..< numberOfSections(in: tableView) {
             for (row, tweak) in tweaksIn(section: section).enumerated() {
@@ -135,8 +126,6 @@ public class TweaksConfigurationViewController: UITableViewController {
         }
         return nil
     }
-    
-    // MARK: Helpers
     
     private func cellIdentifierForTweak(_ tweak: Tweak) -> String {
         if let _ = tweak.value as? Bool {
@@ -162,6 +151,9 @@ public class TweaksConfigurationViewController: UITableViewController {
         let tweaks = tweaksIn(section: (indexPath as NSIndexPath).section)
         return tweaks[(indexPath as NSIndexPath).row]
     }
+}
+
+extension TweaksConfigurationViewController {
     
     private func setupBarButtonItems() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
@@ -171,9 +163,16 @@ public class TweaksConfigurationViewController: UITableViewController {
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Tweaks"
-        navigationItem.searchController = searchController
+        searchController.searchBar.placeholder = NSLocalizedString("just_tweak_search_bar_placeholder_text",
+                                                                   bundle: TweaksConfigurationViewController.justTweakResourcesBundle(),
+                                                                   comment: "")
+        searchController.searchBar.sizeToFit()
+        
+        tableView.tableHeaderView = searchController.searchBar
+        // on iOS 11 it would be possible to add the searchController to the navigationItem instead of adding it as tableHeaderView
+        // navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
