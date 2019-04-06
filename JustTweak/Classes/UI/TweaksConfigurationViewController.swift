@@ -18,6 +18,11 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
 
 public class TweaksConfigurationViewController: UITableViewController {
     
+    fileprivate struct Section {
+        let title: String
+        let tweaks: [Tweak]
+    }
+    
     fileprivate class Tweak {
         var feature: String
         var variable: String
@@ -42,8 +47,8 @@ public class TweaksConfigurationViewController: UITableViewController {
         case Title, Items
     }
     
-    private var sections = [[String : Any]]()
-    private var filteredSections = [[String : Any]]()
+    private var sections = [Section]()
+    private var filteredSections = [Section]()
     public var configurationsCoordinator: TweaksConfigurationsCoordinator? {
         didSet {
             rebuildSections()
@@ -147,25 +152,25 @@ public class TweaksConfigurationViewController: UITableViewController {
     }
     
     private func titleForHeaderForSection(_ section: Int) -> String? {
-        let thisSection: [String: Any] = {
+        let thisSection: Section = {
             if isFiltering() {
                 return filteredSections[0]
             } else {
                 return sections[section]
             }
         }()
-        return thisSection[SectionGroupKeys.Title.rawValue] as? String
+        return thisSection.title
     }
     
     private func tweaksIn(section: Int) -> [Tweak] {
-        let thisSection: [String: Any] = {
+        let thisSection: Section = {
             if isFiltering() {
                 return filteredSections[0]
             } else {
                 return sections[section]
             }
         }()
-        return thisSection[SectionGroupKeys.Items.rawValue] as! [Tweak]
+        return thisSection.tweaks
     }
     
     fileprivate func tweakAt(indexPath: IndexPath) -> Tweak? {
@@ -197,7 +202,7 @@ public class TweaksConfigurationViewController: UITableViewController {
     }
     
     private func rebuildSections() {
-        var allSections = [[String : Any]]()
+        var allSections = [Section]()
         if let configurationsCoordinator = configurationsCoordinator {
             let allTweaks = configurationsCoordinator.displayableTweaks().sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.displayTitle < rhs.displayTitle
@@ -220,14 +225,13 @@ public class TweaksConfigurationViewController: UITableViewController {
                     }
                 }
                 if items.count > 0 {
-                    let section: [String : Any] = [SectionGroupKeys.Items.rawValue: items,
-                                                   SectionGroupKeys.Title.rawValue: group]
+                    let section = Section(title: group, tweaks: items)
                     allSections.append(section)
                 }
             }
         }
         sections = allSections.sorted { (lhs, rhs) -> Bool in
-            return (lhs[SectionGroupKeys.Title.rawValue] as! String) < (rhs[SectionGroupKeys.Title.rawValue] as! String)
+            return lhs.title < rhs.title
         }
         
         tableView.reloadData()
@@ -275,25 +279,14 @@ extension TweaksConfigurationViewController {
         var filteredTweaks = [Tweak]()
         
         for section in sections {
-            for (key, value) in section {
-                if key == SectionGroupKeys.Items.rawValue {
-                    let tweaks = value as! [Tweak]
-                    for tweak in tweaks {
-                        if let title = tweak.title, title.lowercased().contains(searchText.lowercased()) {
-                            filteredTweaks.append(tweak)
-                        }
-                    }
+            for tweak in section.tweaks {
+                if let title = tweak.title, title.lowercased().contains(searchText.lowercased()) {
+                    filteredTweaks.append(tweak)
                 }
             }
         }
         
-        filteredSections = [
-            [
-                SectionGroupKeys.Title.rawValue: "Filtered tweaks",
-                SectionGroupKeys.Items.rawValue: filteredTweaks
-            ]
-        ]
-        
+        filteredSections = [Section(title: "Filtered Tweaks", tweaks: filteredTweaks)]
         tableView.reloadData()
     }
     
