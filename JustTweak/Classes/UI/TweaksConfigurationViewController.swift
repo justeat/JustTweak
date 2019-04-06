@@ -99,10 +99,7 @@ public class TweaksConfigurationViewController: UITableViewController {
     // MARK: UITableViewDataSource
     
     public override func numberOfSections(in tableView: UITableView) -> Int {
-        if isFiltering() {
-            return filteredSections.count
-        }
-        return sections.count ?? 0
+        return isFiltering() ? filteredSections.count : sections.count
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -152,24 +149,12 @@ public class TweaksConfigurationViewController: UITableViewController {
     }
     
     private func titleForHeaderForSection(_ section: Int) -> String? {
-        let thisSection: Section = {
-            if isFiltering() {
-                return filteredSections[0]
-            } else {
-                return sections[section]
-            }
-        }()
+        let thisSection: Section = isFiltering() ? filteredSections[section] : sections[section]
         return thisSection.title
     }
     
     private func tweaksIn(section: Int) -> [Tweak] {
-        let thisSection: Section = {
-            if isFiltering() {
-                return filteredSections[0]
-            } else {
-                return sections[section]
-            }
-        }()
+        let thisSection: Section = isFiltering() ? filteredSections[section] : sections[section]
         return thisSection.tweaks
     }
     
@@ -276,17 +261,19 @@ extension TweaksConfigurationViewController {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        var filteredTweaks = [Tweak]()
-        
+        filteredSections = [Section]()
         for section in sections {
+            var filteredTweaks = [Tweak]()
             for tweak in section.tweaks {
                 if let title = tweak.title, title.lowercased().contains(searchText.lowercased()) {
                     filteredTweaks.append(tweak)
                 }
             }
+            if filteredTweaks.count > 0 {
+                let filteredSection = Section(title: section.title, tweaks: filteredTweaks)
+                filteredSections.append(filteredSection)
+            }
         }
-        
-        filteredSections = [Section(title: "Filtered Tweaks", tweaks: filteredTweaks)]
         tableView.reloadData()
     }
     
