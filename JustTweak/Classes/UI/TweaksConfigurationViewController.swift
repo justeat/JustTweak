@@ -18,6 +18,11 @@ internal protocol TweaksConfigurationViewControllerCellDelegate: class {
 
 public class TweaksConfigurationViewController: UITableViewController {
     
+    fileprivate struct Section {
+        let title: String
+        let tweaks: [Tweak]
+    }
+    
     fileprivate class Tweak {
         var feature: String
         var variable: String
@@ -38,11 +43,8 @@ public class TweaksConfigurationViewController: UITableViewController {
         case ToogleCell, TextCell, NumberCell
     }
     
-    private enum SectionGroupKeys: String {
-        case Title, Items
-    }
-    
-    private var sections: [[String : Any]]?
+    private var sections = [Section]()
+    private var filteredSections = [Section]()
     public var configurationsCoordinator: TweaksConfigurationsCoordinator? {
         didSet {
             rebuildSections()
@@ -63,14 +65,12 @@ public class TweaksConfigurationViewController: UITableViewController {
                                  comment: "")
     }()
     
-    // MARK: Convenience Initializers
+    private let searchController = UISearchController(searchResultsController: nil)
     
     public convenience init(style: UITableView.Style, configurationsCoordinator: TweaksConfigurationsCoordinator) {
         self.init(style: style)
         self.configurationsCoordinator = configurationsCoordinator
     }
-    
-    // MARK: View Lifecycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,15 +82,17 @@ public class TweaksConfigurationViewController: UITableViewController {
         tableView.backgroundView = backgroundView
         tableView.keyboardDismissMode = .onDrag
         updateBackgroundView()
-        setUpBarButtonItems()
+        setupBarButtonItems()
+        setupSearchController()
         registerCellClasses()
         rebuildSections()
     }
-    
-    // MARK: UITableViewDataSource
-    
+}
+
+extension TweaksConfigurationViewController {
+
     public override func numberOfSections(in tableView: UITableView) -> Int {
-        return sections?.count ?? 0
+        return isFiltering() ? filteredSections.count : sections.count
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,8 +116,6 @@ public class TweaksConfigurationViewController: UITableViewController {
         return titleForHeaderForSection(section)
     }
     
-    // MARK: Convenience
-    
     public func indexPathForTweak(with feature: String, variable: String) -> IndexPath? {
         for section in 0 ..< numberOfSections(in: tableView) {
             for (row, tweak) in tweaksIn(section: section).enumerated() {
@@ -126,8 +126,6 @@ public class TweaksConfigurationViewController: UITableViewController {
         }
         return nil
     }
-    
-    // MARK: Helpers
     
     private func cellIdentifierForTweak(_ tweak: Tweak) -> String {
         if let _ = tweak.value as? Bool {
@@ -140,24 +138,42 @@ public class TweaksConfigurationViewController: UITableViewController {
     }
     
     private func titleForHeaderForSection(_ section: Int) -> String? {
-        let thisSection = sections?[section]
-        return thisSection?[SectionGroupKeys.Title.rawValue] as? String
+        let thisSection: Section = isFiltering() ? filteredSections[section] : sections[section]
+        return thisSection.title
     }
     
     private func tweaksIn(section: Int) -> [Tweak] {
-        let thisSection = sections?[section]
-        return thisSection?[SectionGroupKeys.Items.rawValue] as! [Tweak]
+        let thisSection: Section = isFiltering() ? filteredSections[section] : sections[section]
+        return thisSection.tweaks
     }
     
     fileprivate func tweakAt(indexPath: IndexPath) -> Tweak? {
         let tweaks = tweaksIn(section: (indexPath as NSIndexPath).section)
         return tweaks[(indexPath as NSIndexPath).row]
     }
+}
+
+extension TweaksConfigurationViewController {
     
-    private func setUpBarButtonItems() {
+    private func setupBarButtonItems() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
                                                             action: #selector(dismissViewController))
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = NSLocalizedString("just_tweak_search_bar_placeholder_text",
+                                                                   bundle: TweaksConfigurationViewController.justTweakResourcesBundle(),
+                                                                   comment: "")
+        searchController.searchBar.sizeToFit()
+        
+        tableView.tableHeaderView = searchController.searchBar
+        // on iOS 11 it would be possible to add the searchController to the navigationItem instead of adding it as tableHeaderView
+        // navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     private func registerCellClasses() {
@@ -170,7 +186,7 @@ public class TweaksConfigurationViewController: UITableViewController {
     }
     
     private func rebuildSections() {
-        var allSections = [[String : Any]]()
+        var allSections = [Section]()
         if let configurationsCoordinator = configurationsCoordinator {
             let allTweaks = configurationsCoordinator.displayableTweaks().sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.displayTitle < rhs.displayTitle
@@ -193,14 +209,13 @@ public class TweaksConfigurationViewController: UITableViewController {
                     }
                 }
                 if items.count > 0 {
-                    let section: [String : Any] = [SectionGroupKeys.Items.rawValue: items,
-                                                   SectionGroupKeys.Title.rawValue: group]
+                    let section = Section(title: group, tweaks: items)
                     allSections.append(section)
                 }
             }
         }
         sections = allSections.sorted { (lhs, rhs) -> Bool in
-            return (lhs[SectionGroupKeys.Title.rawValue] as! String) < (rhs[SectionGroupKeys.Title.rawValue] as! String)
+            return lhs.title < rhs.title
         }
         
         tableView.reloadData()
@@ -228,5 +243,40 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
                 tweak.value = cell.value
             }
         }
+    }
+}
+
+extension TweaksConfigurationViewController: UISearchResultsUpdating {
+    
+    public func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
+extension TweaksConfigurationViewController {
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredSections = [Section]()
+        for section in sections {
+            var filteredTweaks = [Tweak]()
+            for tweak in section.tweaks {
+                if let title = tweak.title, title.lowercased().contains(searchText.lowercased()) {
+                    filteredTweaks.append(tweak)
+                }
+            }
+            if filteredTweaks.count > 0 {
+                let filteredSection = Section(title: section.title, tweaks: filteredTweaks)
+                filteredSections.append(filteredSection)
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
 }
