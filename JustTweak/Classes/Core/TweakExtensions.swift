@@ -7,7 +7,7 @@ import Foundation
 
 public extension String {
     
-    public var tweakValue: TweakValue {
+    var tweakValue: TweakValue {
         get {
             let lowecase = lowercased()
             if lowecase == "true" || lowecase == "false" {

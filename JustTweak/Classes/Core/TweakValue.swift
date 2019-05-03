@@ -19,23 +19,23 @@ extension String: TweakValue {
 
 public extension TweakValue {
     
-    public var intValue: Int {
+    var intValue: Int {
         return Int(doubleValue)
     }
     
-    public var floatValue: Float {
+    var floatValue: Float {
         return Float(doubleValue)
     }
     
-    public var doubleValue: Double {
+    var doubleValue: Double {
         return Double(description) ?? 0.0
     }
     
-    public var boolValue: Bool {
+    var boolValue: Bool {
         return self as? Bool ?? false
     }
     
-    public var stringValue: String? {
+    var stringValue: String? {
         return self as? String
     }
     

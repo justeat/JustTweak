@@ -18,8 +18,7 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public override init() {
         super.init()
-        let useOptimizely = false
-        guard useOptimizely else { return }
+        /* DOWNLOAD THE Optimizely datafile from the Optimizely dashboard */
         optimizelyManager = OPTLYManager(builder: OPTLYManagerBuilder(block: { builder in
             guard let builder = builder,
                 let filePath = Bundle.main.path(forResource: "ExampleOptimizelyDatafile", ofType: "json"),
