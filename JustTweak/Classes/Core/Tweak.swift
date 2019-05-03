@@ -72,23 +72,23 @@ final public class Tweak: NSObject {
 }
 
 public extension Tweak {
-    public var intValue: Int {
+    var intValue: Int {
         return value.intValue
     }
     
-    public var floatValue: Float {
+    var floatValue: Float {
         return value.floatValue
     }
     
-    public var doubleValue: Double {
+    var doubleValue: Double {
         return value.doubleValue
     }
     
-    public var boolValue: Bool {
+    var boolValue: Bool {
         return value.boolValue
     }
     
-    public var stringValue: String? {
+    var stringValue: String? {
         return value.stringValue
     }
     

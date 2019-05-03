@@ -13,11 +13,9 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     public override init() {
         super.init()
         
-        /* DOWNLOAD THE GoogleService.plist from your app in the Firebase console and modify `useFirebase` to true */
-        let useFirebase = false
-        
+        /* DOWNLOAD THE GoogleService.plist from the Firebase dashboard */
         let googleServicePlistURL = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist")
-        if let _ = googleServicePlistURL, useFirebase {
+        if let _ = googleServicePlistURL {
             firebaseAppClass.configure()
             configured = true
             fetchTweaks()
