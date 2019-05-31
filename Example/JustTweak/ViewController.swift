@@ -75,7 +75,9 @@ class ViewController: UIViewController {
         guard let coordinator = configurationsCoordinator else { return }
         let viewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: coordinator)
         viewController.title = "Edit Configuration"
-        present(UINavigationController(rootViewController:viewController), animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController:viewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+        present(navigationController, animated: true, completion: nil)
     }
 
     private func valueForExperiment(feature: String, variable: String) -> TweakValue {

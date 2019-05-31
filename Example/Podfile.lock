@@ -58,11 +58,11 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.8.0):
     - GoogleUtilities/Logger
-  - JustTweak (3.4.0):
-    - JustTweak/Core (= 3.4.0)
-    - JustTweak/UI (= 3.4.0)
-  - JustTweak/Core (3.4.0)
-  - JustTweak/UI (3.4.0):
+  - JustTweak (3.5.0):
+    - JustTweak/Core (= 3.5.0)
+    - JustTweak/UI (= 3.5.0)
+  - JustTweak/Core (3.5.0)
+  - JustTweak/UI (3.5.0):
     - JustTweak/Core
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -121,7 +121,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
-  JustTweak: 3f67df9fd81bdfbec4da283df6a70f76291c93f2
+  JustTweak: 01cf18b06845c30ecac27c123f2d30f89eece01c
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OptimizelySDKCore: b888f8e8397e74ca811b4f0e236127ef8da11f77
   OptimizelySDKDatafileManager: 275d98dc1dad055a484b405fe10aecd1c2929827
@@ -131,6 +131,6 @@ SPEC CHECKSUMS:
   OptimizelySDKUserProfileService: e61d5d40fdc0cd6c1cc62ce23649f64955f18cda
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
 
-PODFILE CHECKSUM: bc8e9826fb88612e28170bb505bed61edc07bc72
+PODFILE CHECKSUM: a7b727d37e751c9d933eb79a0171bbf9b553766d
 
 COCOAPODS: 1.6.1
