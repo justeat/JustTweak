@@ -169,10 +169,8 @@ extension TweaksConfigurationViewController {
                                                                    bundle: TweaksConfigurationViewController.justTweakResourcesBundle(),
                                                                    comment: "")
         searchController.searchBar.sizeToFit()
-        
-        tableView.tableHeaderView = searchController.searchBar
-        // on iOS 11 it would be possible to add the searchController to the navigationItem instead of adding it as tableHeaderView
-        // navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     
