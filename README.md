@@ -2,7 +2,7 @@
 
 # JustTweak
 
-[![Build Status](https://app.bitrise.io/app/375d99516a39bb82/status.svg?token=G7k3kFr7gFKb5y0gzuwH9Q&branch=master)](https://app.bitrise.io/app/375d99516a39bb82)
+[![Build Status](https://travis-ci.org/justeat/JustTweak.svg?branch=master)](https://travis-ci.org/justeat/JustTweak)
 [![Version](https://img.shields.io/cocoapods/v/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 [![License](https://img.shields.io/cocoapods/l/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 [![Platform](https://img.shields.io/cocoapods/p/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
