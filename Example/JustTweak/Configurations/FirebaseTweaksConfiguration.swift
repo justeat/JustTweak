@@ -4,7 +4,6 @@
 //
 
 import JustTweak
-import FirebaseAnalytics
 import FirebaseCore
 import FirebaseRemoteConfig
 
