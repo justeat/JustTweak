@@ -37,14 +37,14 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
     
     private func fetchTweaks() {
         guard configured else { return }
-        remoteConfiguration.configSettings = RemoteConfigSettings(developerModeEnabled: true)
+        remoteConfiguration.configSettings = RemoteConfigSettings()
         remoteConfiguration.fetch { [weak self] (status, error) in
             guard let strongSelf = self else { return }
             if let error = error {
                 strongSelf.logClosure?("Error while fetching Firebase configuration => \(error)", .error)
             }
             else {
-                self?.remoteConfiguration.activateFetched()
+                self?.remoteConfiguration.activate(completionHandler: nil) // You can pass a completion handler if you want the configuration to be applied immediately after being fetched; otherwise it will be applied on next launch
                 let notificationCentre = NotificationCenter.default
                 notificationCentre.post(name: TweaksConfigurationDidChangeNotification, object: self)
             }
