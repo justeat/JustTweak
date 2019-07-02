@@ -79,7 +79,7 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
             }
         }
         else {
-            logClosure?("No Tweak found for identifier '\(variable)'", .error)
+            logClosure?("No Tweak found for identifier '\(variable)'", .verbose)
         }
         return result
     }
