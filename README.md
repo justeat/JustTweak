@@ -6,6 +6,7 @@
 [![Version](https://img.shields.io/cocoapods/v/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 [![License](https://img.shields.io/cocoapods/l/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
 [![Platform](https://img.shields.io/cocoapods/p/JustTweak.svg?style=flat)](http://cocoapods.org/pods/JustTweak)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 JustTweak is a framework for feature flagging and A/B testing for iOS apps.
 It provides a simple facade interface interacting with multiple providers that are queried respecting a given priority.
@@ -14,7 +15,7 @@ Tweaks represent flags used to drive decisions in the client code.
 With JustTweak you can achieve the following:
 
 - use a JSON local configuration providing default values for experimentation 
-- use a number of remote configuration providers such as Firebase and Optmizely to run A/B tests and feature flagging   
+- use a number of remote configuration providers such as Firebase and Optimizely to run A/B tests and feature flagging   
 - enable, disable, and customize features locally at runtime
 - provide a dedicated UI for customization (this comes particularly handy for feature that are under development to showcase it to stakeholders)
 
@@ -27,12 +28,18 @@ JustTweak is available through [CocoaPods](http://cocoapods.org). To install it,
 pod "JustTweak"
 ```
 
+JustTweak is also available through [Carthage](https://github.com/Carthage/Carthage). To integrate JustTweak into your Xcode project using Carthage, specify it in your Cartfile:
+
+```ruby
+github "justeat/JustTweak"
+```
+
 ## Implementation
 
 ### Integration
 
 - define a JSON configuration file including your features (you can use the included `ExampleConfiguration.json` as a template)
-- define your features and A/B tests in your services such as Firebase and Optmizely (optional)
+- define your features and A/B tests in your services such as Firebase and Optimizely (optional)
 - configure the JustTweak stack as following
 
 ```swift
