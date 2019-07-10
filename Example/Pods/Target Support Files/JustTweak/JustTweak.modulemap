@@ -1,0 +1,6 @@
+framework module JustTweak {
+  umbrella header "JustTweak-umbrella.h"
+
+  export *
+  module * { export * }
+}

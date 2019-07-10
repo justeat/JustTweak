@@ -1,0 +1,6 @@
+framework module OptimizelySDKiOS {
+  umbrella header "OptimizelySDKiOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

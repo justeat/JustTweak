@@ -1,0 +1,6 @@
+framework module Pods_JustTweak_Tests {
+  umbrella header "Pods-JustTweak_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

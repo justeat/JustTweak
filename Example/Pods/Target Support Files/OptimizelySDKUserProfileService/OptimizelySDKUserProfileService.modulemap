@@ -1,0 +1,6 @@
+framework module OptimizelySDKUserProfileService {
+  umbrella header "OptimizelySDKUserProfileService-umbrella.h"
+
+  export *
+  module * { export * }
+}

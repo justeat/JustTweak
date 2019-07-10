@@ -1,0 +1,6 @@
+framework module OptimizelySDKEventDispatcher {
+  umbrella header "OptimizelySDKEventDispatcher-umbrella.h"
+
+  export *
+  module * { export * }
+}

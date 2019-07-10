@@ -1,0 +1,9 @@
+framework module FirebaseABTesting {
+  umbrella header "FirebaseABTesting.h"
+  export *
+  module * { export * }
+  link framework "CoreFoundation"
+  link framework "Foundation"
+  link framework "Security"
+  link framework "SystemConfiguration"
+}
