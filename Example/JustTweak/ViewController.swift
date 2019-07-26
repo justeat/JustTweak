@@ -39,9 +39,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-        configurationsCoordinator?.registerForConfigurationsUpdates(self) { [weak self] in
+        configurationsCoordinator?.registerForConfigurationsUpdates(self, closure: { [weak self] (tweakIdentifier) in
+            print("\(tweakIdentifier ?? "Unknown") tweak changed")
             self?.updateView()
-        }
+        })
     }
     
     internal func updateView() {

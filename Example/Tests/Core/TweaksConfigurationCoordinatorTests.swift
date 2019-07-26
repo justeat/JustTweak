@@ -65,8 +65,9 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {
         var didCallClosure = false
-        configurationCoordinator.registerForConfigurationsUpdates(self) {
+        configurationCoordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
+            print("\(tweakIdentifier ?? "Unknown") tweak changed")
         }
         NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: nil)
         XCTAssertTrue(didCallClosure)
@@ -74,8 +75,9 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     
     func testDoesNotCallClosureForDeregisteredObserverWhenAnyConfigurationChanges() {
         var didCallClosure = false
-        configurationCoordinator.registerForConfigurationsUpdates(self) {
+        configurationCoordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
+            print("\(tweakIdentifier ?? "Unknown") tweak changed")
         }
         configurationCoordinator.deregisterFromConfigurationsUpdates(self)
         NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: nil)

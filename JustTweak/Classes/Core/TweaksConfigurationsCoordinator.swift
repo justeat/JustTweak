@@ -127,13 +127,14 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
         return tweaks
     }
     
-    public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping () -> Void) {
+    public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping (_ tweakIdentifier: String?) -> Void) {
         deregisterFromConfigurationsUpdates(object)
         let queue = OperationQueue.main
         let name = TweaksConfigurationDidChangeNotification
         let notificationsCenter = NotificationCenter.default
-        let observer = notificationsCenter.addObserver(forName: name, object: nil, queue: queue) { (_) in
-            closure()
+        let observer = notificationsCenter.addObserver(forName: name, object: nil, queue: queue) { (notification) in
+            let tweakIdentifier = notification.userInfo?[TweaksConfigurationDidChangeNotificationTweakIdentifierKey] as? String
+            closure(tweakIdentifier)
         }
         observersMap[object] = observer
     }
