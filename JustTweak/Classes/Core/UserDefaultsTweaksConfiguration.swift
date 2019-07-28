@@ -50,14 +50,15 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
     
     public func set(_ value: NSNumber, feature: String, variable: String) {
-        updateUserDefaultsWith(value: value, feature: feature, variable: variable)
+        updateUserDefaultsWith(value: value.floatValue, feature: feature, variable: variable)
     }
     
-    private func updateUserDefaultsWith(value: Any, feature: String, variable: String) {
+    private func updateUserDefaultsWith(value: TweakValue, feature: String, variable: String) {
         userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(variable))
         userDefaults.synchronize()
         let notificationCenter = NotificationCenter.default
-        let userInfo = [TweaksConfigurationDidChangeNotificationTweakIdentifierKey: variable]
+        let tweak = Tweak(feature: feature, variable: variable, value: value)
+        let userInfo = [TweaksConfigurationDidChangeNotificationTweakKey: tweak]
         notificationCenter.post(name: TweaksConfigurationDidChangeNotification,
                                 object: self,
                                 userInfo: userInfo)

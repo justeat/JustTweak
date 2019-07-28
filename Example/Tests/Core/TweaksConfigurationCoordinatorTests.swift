@@ -67,9 +67,10 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         var didCallClosure = false
         configurationCoordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
-            print("\(tweakIdentifier ?? "Unknown") tweak changed")
         }
-        NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: nil)
+        let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
+        let userInfo = [TweaksConfigurationDidChangeNotificationTweakKey: tweak]
+        NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertTrue(didCallClosure)
     }
     
@@ -77,10 +78,11 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         var didCallClosure = false
         configurationCoordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
-            print("\(tweakIdentifier ?? "Unknown") tweak changed")
         }
         configurationCoordinator.deregisterFromConfigurationsUpdates(self)
-        NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: nil)
+        let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
+        let userInfo = [TweaksConfigurationDidChangeNotificationTweakKey: tweak]
+        NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertFalse(didCallClosure)
     }
 }

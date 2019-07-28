@@ -38,4 +38,4 @@ public extension MutableTweaksConfiguration {
 }
 
 public let TweaksConfigurationDidChangeNotification = Notification.Name("TweaksConfigurationDidChangeNotification")
-public let TweaksConfigurationDidChangeNotificationTweakIdentifierKey = "TweaksConfigurationDidChangeNotificationTweakIdentifierKey"
+public let TweaksConfigurationDidChangeNotificationTweakKey = "TweaksConfigurationDidChangeNotificationTweakKey"
