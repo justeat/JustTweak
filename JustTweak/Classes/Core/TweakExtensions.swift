@@ -28,8 +28,11 @@ public extension NSNumber {
         get {
             let encoding = String(cString: self.objCType)
             switch encoding {
-            case "d", "f":
+            case "d":
                 return self.doubleValue
+                
+            case "f":
+                return self.floatValue
                 
             case "c":
                 return self.boolValue

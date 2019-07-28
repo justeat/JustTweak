@@ -41,18 +41,10 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
         userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(variable))
     }
     
-    public func set(_ value: Bool, feature: String, variable: String) {
+    public func set(_ value: TweakValue, feature: String, variable: String) {
         updateUserDefaultsWith(value: value, feature: feature, variable: variable)
     }
-    
-    public func set(_ value: String, feature: String, variable: String) {
-        updateUserDefaultsWith(value: value, feature: feature, variable: variable)
-    }
-    
-    public func set(_ value: NSNumber, feature: String, variable: String) {
-        updateUserDefaultsWith(value: value.floatValue, feature: feature, variable: variable)
-    }
-    
+        
     private func updateUserDefaultsWith(value: TweakValue, feature: String, variable: String) {
         userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(variable))
         userDefaults.synchronize()
