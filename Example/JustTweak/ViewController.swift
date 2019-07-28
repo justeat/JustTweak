@@ -11,9 +11,9 @@ class ViewController: UIViewController {
     @IBOutlet var redView: UIView!
     @IBOutlet var greenView: UIView!
     @IBOutlet var yellowView: UIView!
-    @IBOutlet var changeConfigurationButton: UIButton!
+    @IBOutlet var mainLabel: UILabel!
     
-    var configurationsCoordinator: TweaksConfigurationsCoordinator?
+    var configurationsCoordinator: TweaksConfigurationsCoordinator!
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
     private var canShowRedView: Bool {
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         redView.isHidden = !canShowRedView
         greenView.isHidden = !canShowGreenView
         yellowView.isHidden = !canShowYellowView
-        changeConfigurationButton.setTitle(valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue).stringValue, for: .normal)
+        mainLabel.text = valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue).stringValue
         redView.alpha = CGFloat(valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue).floatValue)
     }
     
@@ -71,14 +71,17 @@ class ViewController: UIViewController {
                                        blue: randomColorValue(),
                                        alpha: 1.0)
     }
-
+    
     @IBAction func presentConfigurationViewController() {
-        guard let coordinator = configurationsCoordinator else { return }
-        let viewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: coordinator)
-        viewController.title = "Edit Configuration"
-        let navigationController = UINavigationController(rootViewController:viewController)
-        navigationController.navigationBar.prefersLargeTitles = true
-        present(navigationController, animated: true, completion: nil)
+        let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+        let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)
+        tweaksNavigationController.navigationBar.prefersLargeTitles = true
+        present(tweaksNavigationController, animated: true, completion: nil)
+    }
+    
+    @IBAction func pushConfigurationViewController() {
+        let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+        navigationController?.pushViewController(tweaksViewController, animated: true)
     }
 
     private func valueForExperiment(feature: String, variable: String) -> TweakValue {

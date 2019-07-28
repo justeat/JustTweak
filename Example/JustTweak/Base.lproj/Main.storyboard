@@ -1,42 +1,81 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9A0-sz-msH">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="Rbn-xy-PQ1">
+            <objects>
+                <navigationController id="9A0-sz-msH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pmo-Iy-UAR">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Ynw-oL-upb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CTM-aj-Vwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1410" y="-71"/>
+        </scene>
+        <!--JustTweak-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="JustTweak_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfR-y2-S3q">
+                                <rect key="frame" x="20" y="96" width="374" height="125"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="dTz-dh-EtJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sx5-Kl-tNF">
+                                <rect key="frame" x="20" y="229" width="374" height="125"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yxe-lf-k23">
+                                <rect key="frame" x="20" y="362" width="374" height="125"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuV-xl-hYI">
-                                <state key="normal" title="Change Configuration"/>
+                                <rect key="frame" x="107.5" y="822" width="199" height="30"/>
+                                <state key="normal" title="Change Configuration (push)"/>
                                 <connections>
-                                    <action selector="presentConfigurationViewController" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oYa-Wg-sf8"/>
+                                    <action selector="pushConfigurationViewController" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uQt-vR-iGB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pix-Hj-wcd">
+                                <rect key="frame" x="98" y="784" width="218" height="30"/>
+                                <state key="normal" title="Change Configuration (present)"/>
+                                <connections>
+                                    <action selector="presentConfigurationViewController" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Nck-qF-Flr"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzm-8G-DD7">
+                                <rect key="frame" x="186" y="495" width="42" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="ZEd-ni-36W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -47,23 +86,28 @@
                             <constraint firstItem="Yxe-lf-k23" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="86R-Yt-hTr"/>
                             <constraint firstItem="sx5-Kl-tNF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="CV1-77-FnA"/>
                             <constraint firstItem="Yxe-lf-k23" firstAttribute="top" secondItem="sx5-Kl-tNF" secondAttribute="bottom" constant="8" symbolic="YES" id="MKU-t2-a1W"/>
+                            <constraint firstItem="zzm-8G-DD7" firstAttribute="top" secondItem="Yxe-lf-k23" secondAttribute="bottom" constant="8" id="OKE-AP-NkV"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="HuV-xl-hYI" secondAttribute="bottom" constant="10" id="U8W-5W-zRZ"/>
+                            <constraint firstItem="pix-Hj-wcd" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="WMk-JO-Acb"/>
                             <constraint firstItem="sx5-Kl-tNF" firstAttribute="height" secondItem="AfR-y2-S3q" secondAttribute="height" id="WZD-zM-Pwe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sx5-Kl-tNF" secondAttribute="trailing" id="ZUd-L4-PVx"/>
+                            <constraint firstItem="zzm-8G-DD7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="deb-Wo-7O9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AfR-y2-S3q" secondAttribute="trailing" id="nB1-bL-two"/>
                             <constraint firstItem="sx5-Kl-tNF" firstAttribute="top" secondItem="AfR-y2-S3q" secondAttribute="bottom" constant="8" symbolic="YES" id="vcQ-a8-Rya"/>
+                            <constraint firstItem="HuV-xl-hYI" firstAttribute="top" secondItem="pix-Hj-wcd" secondAttribute="bottom" constant="8" id="xIa-gj-pfg"/>
                             <constraint firstItem="AfR-y2-S3q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="yEp-HU-oeT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="JustTweak" id="kyq-mR-PAA"/>
                     <connections>
-                        <outlet property="changeConfigurationButton" destination="HuV-xl-hYI" id="Ogw-gt-kUO"/>
                         <outlet property="greenView" destination="Yxe-lf-k23" id="NkD-YK-1Jw"/>
+                        <outlet property="mainLabel" destination="zzm-8G-DD7" id="vJ4-vQ-oPS"/>
                         <outlet property="redView" destination="AfR-y2-S3q" id="1FF-AT-b9l"/>
                         <outlet property="yellowView" destination="sx5-Kl-tNF" id="Zyq-YM-rne"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-455.07246376811599" y="-72.321428571428569"/>
         </scene>
     </scenes>
 </document>

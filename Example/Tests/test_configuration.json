@@ -20,10 +20,10 @@
       "Group": "UI Customization",
       "Value": 1.0
     },
-    "change_tweaks_button_label_text": {
-      "Title": "Change Tweaks Button Label Text",
+    "label_text": {
+      "Title": "Label Text",
       "Group": "UI Customization",
-      "Value": "Change Configuration"
+      "Value": "Test value"
     }
   },
   "general": {

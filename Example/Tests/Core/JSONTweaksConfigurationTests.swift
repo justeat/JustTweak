@@ -42,7 +42,7 @@ class JSONTweaksConfigurationTests: XCTestCase {
     }
     
     func testParsesStringTweak() {
-        let buttonLabelTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue, value: "Change Configuration", title: "Change Tweaks Button Label Text", group: "UI Customization")
-        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue))
+        let buttonLabelTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue, value: "Test value", title: "Label Text", group: "UI Customization")
+        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue))
     }
 }

@@ -119,10 +119,15 @@ JustTweak comes with a ViewController that allows the user to edit the `MutableT
 
 ```swift
 func presentTweaksConfigurationViewController() {
-    guard let coordinator = configurationsCoordinator else { return }
-    let viewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: coordinator)
-    viewController.title = "Edit Configuration"
-    presentViewController(UINavigationController(rootViewController:viewController), animated: true, completion: nil)
+    let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+    
+    // either present it modally
+    let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)
+    tweaksNavigationController.navigationBar.prefersLargeTitles = true
+    present(tweaksNavigationController, animated: true, completion: nil)
+    
+    // or push it on an existing UINavigationController
+    navigationController?.pushViewController(tweaksViewController, animated: true)
 }
 ```
 

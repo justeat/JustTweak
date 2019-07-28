@@ -17,6 +17,6 @@ enum Variables : String {
     case DisplayGreenView = "display_green_view"
     case DisplayYellowView = "display_yellow_view"
     case TapToChangeViewColor = "tap_to_change_color_enabled"
-    case ChangeConfigurationButton = "change_tweaks_button_label_text"
+    case LabelText = "label_text"
     case GreetOnAppDidBecomeActive = "greet_on_app_did_become_active"
 }
