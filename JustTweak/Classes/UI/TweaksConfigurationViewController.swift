@@ -156,9 +156,11 @@ extension TweaksConfigurationViewController {
 extension TweaksConfigurationViewController {
     
     private func setupBarButtonItems() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                            target: self,
-                                                            action: #selector(dismissViewController))
+        if self.isModal() {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                target: self,
+                                                                action: #selector(dismissViewController))
+        }
     }
     
     private func setupSearchController() {
@@ -226,6 +228,13 @@ extension TweaksConfigurationViewController {
     @objc internal func dismissViewController() {
         view.endEditing(true)
         presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    func isModal() -> Bool {
+        let presentingIsModal = presentingViewController != nil
+        let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
+        let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
+        return presentingIsModal || presentingIsNavigation || presentingIsTabBar
     }
 }
 
