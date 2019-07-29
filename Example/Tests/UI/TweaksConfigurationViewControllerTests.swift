@@ -149,14 +149,6 @@ class ConfigurationViewControllerTests: XCTestCase {
     
     // MARK: Other Actions
     
-    func testHasBarButtonToGetDismissed() {
-        let _ = viewController.view // force loading view (iOS 8 compatible)
-        let button = viewController.navigationItem.rightBarButtonItem
-        XCTAssertEqual(button?.style, .done)
-        XCTAssertEqual(button?.target as? NSObject, viewController)
-        XCTAssertEqual(button?.action, #selector(viewController.dismissViewController))
-    }
-    
     func testAsksToBeDismissedWhenDoneButtonIsTapped() {
         class FakeViewController: TweaksConfigurationViewController {
             fileprivate let mockPresentingViewController = MockPresentingViewController()
@@ -183,5 +175,4 @@ class ConfigurationViewControllerTests: XCTestCase {
         let configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
         viewController = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)
     }
-    
 }
