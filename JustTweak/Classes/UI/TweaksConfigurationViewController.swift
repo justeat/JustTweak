@@ -246,7 +246,7 @@ extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCe
                 let configuration = configurationsCoordinator?.topCustomizableConfiguration()
                 let feature = tweak.feature
                 let variable = tweak.variable
-                configuration?.set(value: cell.value, feature: feature, variable: variable)
+                configuration?.set(cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
         }

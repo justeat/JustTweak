@@ -16,26 +16,8 @@ public protocol TweaksConfiguration {
 public protocol MutableTweaksConfiguration: TweaksConfiguration {
     
     func deleteValue(feature: String, variable: String)
-    func set(_ value: Bool, feature: String, variable: String)
-    func set(_ value: String, feature: String, variable: String)
-    func set(_ value: NSNumber, feature: String, variable: String)
-}
-
-public extension MutableTweaksConfiguration {
-    
-    func set(value: TweakValue, feature: String, variable: String) {
-        switch value {
-        case is Bool:
-            self.set(value as! Bool, feature: feature, variable: variable)
-        case is String:
-            self.set(value as! String, feature: feature, variable: variable)
-        default:
-            if let value = NSNumber(tweakValue: value) {
-                self.set(value, feature: feature, variable: variable)
-            }
-        }
-    }
+    func set(_ value: TweakValue, feature: String, variable: String)
 }
 
 public let TweaksConfigurationDidChangeNotification = Notification.Name("TweaksConfigurationDidChangeNotification")
-public let TweaksConfigurationDidChangeNotificationTweakIdentifierKey = "TweaksConfigurationDidChangeNotificationTweakIdentifierKey"
+public let TweaksConfigurationDidChangeNotificationTweakKey = "TweaksConfigurationDidChangeNotificationTweakKey"
