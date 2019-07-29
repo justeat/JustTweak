@@ -39,15 +39,7 @@ extension NSMutableDictionary: MutableTweaksConfiguration {
         removeObject(forKey: variable)
     }
     
-    public func set(_ value: Bool, feature: String, variable: String) {
-        self[variable] = NSNumber(value: value)
-    }
-    
-    public func set(_ value: String, feature: String, variable: String) {
-        self[variable] = value
-    }
-    
-    public func set(_ value: NSNumber, feature: String, variable: String) {
+    public func set(_ value: TweakValue, feature: String, variable: String) {
         self[variable] = value
     }
 }
