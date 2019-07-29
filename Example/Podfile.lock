@@ -27,11 +27,11 @@ PODS:
   - "GoogleUtilities/NSData+zlib (6.2.1)"
   - GoogleUtilities/UserDefaults (6.2.1):
     - GoogleUtilities/Logger
-  - JustTweak (3.5.1):
-    - JustTweak/Core (= 3.5.1)
-    - JustTweak/UI (= 3.5.1)
-  - JustTweak/Core (3.5.1)
-  - JustTweak/UI (3.5.1):
+  - JustTweak (4.0.0):
+    - JustTweak/Core (= 4.0.0)
+    - JustTweak/UI (= 4.0.0)
+  - JustTweak/Core (4.0.0)
+  - JustTweak/UI (4.0.0):
     - JustTweak/Core
   - OptimizelySDKCore (3.1.1)
   - OptimizelySDKDatafileManager (3.1.1):
@@ -80,7 +80,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: f20243a1d828e0e9a3798b995174dedc16f1b32a
   FirebaseRemoteConfig: 7c64ecec5ca63d7c6b304509c3a6f9a036d403d4
   GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
-  JustTweak: e3902b2bfe2fe9acf387022f1c8724eb23d3b192
+  JustTweak: 3edc6464d63601037a507571c6efa27a55d75988
   OptimizelySDKCore: 18bda61dedb38b642b2856d971d1ed2f102cacee
   OptimizelySDKDatafileManager: f8c998425e0cbdc7270647e3bff7fe0b07df9172
   OptimizelySDKEventDispatcher: 08f5d2e0eca4a2d265da9137d0dc077c26e8d369
