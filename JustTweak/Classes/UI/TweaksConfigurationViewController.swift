@@ -76,6 +76,9 @@ public class TweaksConfigurationViewController: UITableViewController {
         super.viewDidLoad()
         let backgroundView = TweaksErrorView()
         let bundle = TweaksConfigurationViewController.justTweakResourcesBundle()
+        title = NSLocalizedString("just_tweak_configurations_vc_title",
+                                  bundle: bundle,
+                                  comment: "")
         backgroundView.text = NSLocalizedString("just_tweak_configurations_vc_no_configurations_message",
                                                 bundle: bundle,
                                                 comment: "")
@@ -156,7 +159,7 @@ extension TweaksConfigurationViewController {
 extension TweaksConfigurationViewController {
     
     private func setupBarButtonItems() {
-        if self.isModal() {
+        if isModal() {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                 target: self,
                                                                 action: #selector(dismissViewController))
@@ -231,10 +234,7 @@ extension TweaksConfigurationViewController {
     }
 
     func isModal() -> Bool {
-        let presentingIsModal = presentingViewController != nil
-        let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
-        let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
-        return presentingIsModal || presentingIsNavigation || presentingIsTabBar
+        return presentingViewController != nil
     }
 }
 

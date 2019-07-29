@@ -14,9 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         setUpConfigurations()
-        if let rootViewController = window?.rootViewController as? ViewController {
-            rootViewController.configurationsCoordinator = configurationsCoordinator
-        }
+        let navigationController = window?.rootViewController as! UINavigationController
+        let viewController = navigationController.topViewController as! ViewController
+        viewController.configurationsCoordinator = configurationsCoordinator
         return true
     }
     

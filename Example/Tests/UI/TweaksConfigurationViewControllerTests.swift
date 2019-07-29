@@ -46,13 +46,19 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Convenience Methods
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue)!
-        let expectedIndexPath = IndexPath(row: 3, section: 1)
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue)!
+        let expectedIndexPath = IndexPath(row: 0, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound_2() {
         let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)!
+        let expectedIndexPath = IndexPath(row: 1, section: 1)
+        XCTAssertEqual(indexPath, expectedIndexPath)
+    }
+    
+    func testReturnsCorrectIndexPathForTweak_WhenTweakFound_3() {
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue)!
         let expectedIndexPath = IndexPath(row: 2, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
@@ -91,10 +97,10 @@ class ConfigurationViewControllerTests: XCTestCase {
     }
     
     func testDisplaysTextTweaksCorrectly() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.ChangeConfigurationButton.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)  as? TextTweakTableViewCell
-        XCTAssertEqual(cell?.title, "Change Tweaks Button Label Text")
-        XCTAssertEqual(cell?.textField.text, "Change Configuration")
+        XCTAssertEqual(cell?.title, "Label Text")
+        XCTAssertEqual(cell?.textField.text, "Test value")
     }
     
     // MARK: Cells Actions
@@ -143,14 +149,6 @@ class ConfigurationViewControllerTests: XCTestCase {
     
     // MARK: Other Actions
     
-    func testHasBarButtonToGetDismissed() {
-        let _ = viewController.view // force loading view (iOS 8 compatible)
-        let button = viewController.navigationItem.rightBarButtonItem
-        XCTAssertEqual(button?.style, .done)
-        XCTAssertEqual(button?.target as? NSObject, viewController)
-        XCTAssertEqual(button?.action, #selector(viewController.dismissViewController))
-    }
-    
     func testAsksToBeDismissedWhenDoneButtonIsTapped() {
         class FakeViewController: TweaksConfigurationViewController {
             fileprivate let mockPresentingViewController = MockPresentingViewController()
@@ -177,5 +175,4 @@ class ConfigurationViewControllerTests: XCTestCase {
         let configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
         viewController = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)
     }
-    
 }
