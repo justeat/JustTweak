@@ -75,7 +75,7 @@ DEPENDENCIES:
   - OptimizelySDKiOS
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalyticsInterop
@@ -112,7 +112,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 166f9b9f82cbf60a204e8fe2daa9db3e3ec1fb15
   GoogleDataTransportCCTSupport: f6ab1962e9dc05ab1fb938b795e5b310209edeec
   GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
-  JustTweak: f5e9f2455c95734af776ca0149b96154c012f51f
+  JustTweak: a5a722551848ffb37c1125f27b462ee2f412f69f
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OptimizelySDKCore: 3f6018cc222b23de13ae9a71c2c15cd7fa397aed
   OptimizelySDKDatafileManager: 34edeb189ef170992677149460172ef44bfa7250
@@ -124,4 +124,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a7b727d37e751c9d933eb79a0171bbf9b553766d
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.8.4
