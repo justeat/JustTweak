@@ -5,7 +5,7 @@
 
 import Foundation
 
-final public class Tweak: NSObject {
+public struct Tweak {
     
     public let feature: String
     public let variable: String
@@ -21,15 +21,6 @@ final public class Tweak: NSObject {
         return title ?? "\(feature):\(variable)"
     }
     
-    public override var hash: Int {
-        return "\(feature)\(variable)".hashValue
-    }
-    
-    public override func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? Tweak else { return false }
-        return self == other
-    }
-    
     private var dictionaryValue: [String : Any?] {
         get {
             return ["feature": feature,
@@ -42,11 +33,6 @@ final public class Tweak: NSObject {
             ]
         }
     }
-    public override var description: String {
-        get {
-            return dictionaryValue.description
-        }
-    }
     
     public init(feature: String, variable: String, value: TweakValue, title: String? = nil, description: String? = nil, group: String? = nil, source: String? = nil) {
         self.feature = feature
@@ -56,10 +42,21 @@ final public class Tweak: NSObject {
         self.desc = description
         self.group = group
         self.source = source
-        super.init()
     }
+}
+
+extension Tweak: CustomStringConvertible {
     
-    public static func ==(lhs: Tweak, rhs: Tweak) -> Bool {
+    public var description: String {
+        get {
+            return dictionaryValue.description
+        }
+    }
+}
+
+extension Tweak: Equatable {
+
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
         return lhs.feature == rhs.feature &&
             lhs.variable == rhs.variable &&
             lhs.value == rhs.value &&
@@ -68,7 +65,6 @@ final public class Tweak: NSObject {
             lhs.group == rhs.group &&
             lhs.source == rhs.source
     }
-    
 }
 
 public extension Tweak {
