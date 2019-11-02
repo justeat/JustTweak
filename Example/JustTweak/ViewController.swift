@@ -7,30 +7,14 @@ import UIKit
 import JustTweak
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var redView: UIView!
     @IBOutlet var greenView: UIView!
     @IBOutlet var yellowView: UIView!
     @IBOutlet var mainLabel: UILabel!
     
-    var configurationsCoordinator: TweaksConfigurationsCoordinator!
+    var accessor: Accessor!
     private var tapGestureRecognizer: UITapGestureRecognizer!
-    
-    private var canShowRedView: Bool {
-        get {
-            return valueForExperiment(feature: Features.UICustomization, variable: Variables.DisplayRedView).boolValue
-        }
-    }
-    private var canShowGreenView: Bool {
-        get {
-            return valueForExperiment(feature: Features.UICustomization, variable: Variables.DisplayGreenView).boolValue
-        }
-    }
-    private var canShowYellowView: Bool {
-        get {
-            return valueForExperiment(feature: Features.UICustomization, variable: Variables.DisplayYellowView).boolValue
-        }
-    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -39,7 +23,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-        configurationsCoordinator?.registerForConfigurationsUpdates(self) { [weak self] tweak in
+        accessor.configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
             print("Tweak changed: \(tweak)")
             self?.updateView()
         }
@@ -47,11 +31,11 @@ class ViewController: UIViewController {
     
     internal func updateView() {
         setUpGesturesIfNeeded()
-        redView.isHidden = !canShowRedView
-        greenView.isHidden = !canShowGreenView
-        yellowView.isHidden = !canShowYellowView
-        mainLabel.text = valueForExperiment(feature: Features.UICustomization, variable: Variables.LabelText).stringValue
-        redView.alpha = CGFloat(valueForExperiment(feature: Features.UICustomization, variable: Variables.RedViewAlpha).floatValue)
+        redView.isHidden = !accessor.canShowRedView
+        greenView.isHidden = !accessor.canShowGreenView
+        yellowView.isHidden = !accessor.canShowYellowView
+        mainLabel.text = accessor.labelText
+        redView.alpha = CGFloat(accessor.redViewAlpha)
     }
     
     internal func setUpGesturesIfNeeded() {
@@ -59,7 +43,7 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.General, variable: Variables.TapToChangeViewColor).boolValue
+        tapGestureRecognizer.isEnabled = accessor.isTapGestureToChangeColorEnabled
     }
     
     @objc internal func changeViewColor() {
@@ -72,20 +56,17 @@ class ViewController: UIViewController {
                                        alpha: 1.0)
     }
     
+    private var tweaksConfigurationViewController: TweaksConfigurationViewController {
+        return TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: accessor.configurationsCoordinator)
+    }
+    
     @IBAction func presentConfigurationViewController() {
-        let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
-        let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)
+        let tweaksNavigationController = UINavigationController(rootViewController: tweaksConfigurationViewController)
         tweaksNavigationController.navigationBar.prefersLargeTitles = true
         present(tweaksNavigationController, animated: true, completion: nil)
     }
     
     @IBAction func pushConfigurationViewController() {
-        let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
-        navigationController?.pushViewController(tweaksViewController, animated: true)
-    }
-
-    private func valueForExperiment(feature: String, variable: String) -> TweakValue {
-        let value = configurationsCoordinator?.valueForTweakWith(feature: feature, variable: variable)
-        return value ?? 0
+        navigationController?.pushViewController(tweaksConfigurationViewController, animated: true)
     }
 }

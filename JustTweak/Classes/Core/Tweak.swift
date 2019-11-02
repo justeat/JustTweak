@@ -72,6 +72,7 @@ final public class Tweak: NSObject {
 }
 
 public extension Tweak {
+    
     var intValue: Int {
         return value.intValue
     }
@@ -90,17 +91,5 @@ public extension Tweak {
     
     var stringValue: String? {
         return value.stringValue
-    }
-    
-    convenience init(feature: String, variable: String, boolValue: Bool) {
-        self.init(feature: feature, variable: variable, value: boolValue)
-    }
-    
-    convenience init(feature: String, variable: String, stringValue: String) {
-        self.init(feature: feature, variable: variable, value: stringValue)
-    }
-    
-    convenience init(feature: String, variable: String, numberValue: NSNumber) {
-        self.init(feature: feature, variable: variable, value: numberValue.tweakValue)
     }
 }
