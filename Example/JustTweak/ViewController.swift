@@ -18,17 +18,17 @@ class ViewController: UIViewController {
     
     private var canShowRedView: Bool {
         get {
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue).boolValue
+            return valueForExperiment(feature: Features.UICustomization, variable: Variables.DisplayRedView).boolValue
         }
     }
     private var canShowGreenView: Bool {
         get {
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue).boolValue
+            return valueForExperiment(feature: Features.UICustomization, variable: Variables.DisplayGreenView).boolValue
         }
     }
     private var canShowYellowView: Bool {
         get {
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue).boolValue
+            return valueForExperiment(feature: Features.UICustomization, variable: Variables.DisplayYellowView).boolValue
         }
     }
     
@@ -50,8 +50,8 @@ class ViewController: UIViewController {
         redView.isHidden = !canShowRedView
         greenView.isHidden = !canShowGreenView
         yellowView.isHidden = !canShowYellowView
-        mainLabel.text = valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue).stringValue
-        redView.alpha = CGFloat(valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue).floatValue)
+        mainLabel.text = valueForExperiment(feature: Features.UICustomization, variable: Variables.LabelText).stringValue
+        redView.alpha = CGFloat(valueForExperiment(feature: Features.UICustomization, variable: Variables.RedViewAlpha).floatValue)
     }
     
     internal func setUpGesturesIfNeeded() {
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.General.rawValue, variable: Variables.TapToChangeViewColor.rawValue).boolValue
+        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.General, variable: Variables.TapToChangeViewColor).boolValue
     }
     
     @objc internal func changeViewColor() {

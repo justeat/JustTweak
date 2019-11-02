@@ -46,19 +46,19 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Convenience Methods
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayGreenView)!
         let expectedIndexPath = IndexPath(row: 0, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound_2() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayRedView)!
         let expectedIndexPath = IndexPath(row: 1, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakFound_3() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayYellowView)!
         let expectedIndexPath = IndexPath(row: 2, section: 1)
         XCTAssertEqual(indexPath, expectedIndexPath)
     }
@@ -66,38 +66,38 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Tweak Cells Display
     
     func testReturnsCorrectIndexPathForTweak_WhenTweakNotFound() {
-        let indexPath = viewController.indexPathForTweak(with: Features.General.rawValue, variable: "some_nonexisting_tweak")
+        let indexPath = viewController.indexPathForTweak(with: Features.General, variable: "some_nonexisting_tweak")
         XCTAssertNil(indexPath)
     }
     
     func testDisplaysTweakOn_IfEnabled() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayYellowView)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as! BooleanTweakTableViewCell
         XCTAssertFalse(cell.switchControl.isOn)
     }
     
     func testDisplaysTweakOff_IfDisabled() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayRedView)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as! BooleanTweakTableViewCell
         XCTAssertTrue(cell.switchControl.isOn)
     }
     
     func testDisplaysTweakTitle_ForTweakThatHaveIt() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayRedView)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)
         XCTAssertEqual(cell.textLabel?.text, "Display Red View")
         XCTAssertEqual((cell as! TweaksConfigurationViewControllerCell).title, "Display Red View")
     }
     
     func testDisplaysNumericTweaksCorrectly() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.RedViewAlpha)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath) as? NumericTweakTableViewCell
         XCTAssertEqual(cell?.title, "Red View Alpha Component")
         XCTAssertEqual(cell?.textField.text, "1.0")
     }
     
     func testDisplaysTextTweaksCorrectly() {
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.LabelText)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)  as? TextTweakTableViewCell
         XCTAssertEqual(cell?.title, "Label Text")
         XCTAssertEqual(cell?.textField.text, "Test value")
@@ -110,11 +110,11 @@ class ConfigurationViewControllerTests: XCTestCase {
         viewController.beginAppearanceTransition(true, animated: false)
         viewController.endAppearanceTransition()
         
-        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue)!
+        let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayYellowView)!
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
         cell.switchControl.sendActions(for: .valueChanged)
-        XCTAssertTrue(viewController.configurationsCoordinator!.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue) as! Bool)
+        XCTAssertTrue(viewController.configurationsCoordinator!.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView) as! Bool)
     }
     
     // MARK: No configuration view

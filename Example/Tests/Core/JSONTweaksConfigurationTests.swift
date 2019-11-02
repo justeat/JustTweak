@@ -32,17 +32,17 @@ class JSONTweaksConfigurationTests: XCTestCase {
     }
     
     func testParsesBoolTweak() {
-        let redViewTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue, value: true, title: "Display Red View", group: "UI Customization")
-        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue))
+        let redViewTweak = Tweak(feature: Features.UICustomization, variable: Variables.DisplayRedView, value: true, title: "Display Red View", group: "UI Customization")
+        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView))
     }
     
     func testParsesFloatTweak() {
-        let redViewAlphaTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
-        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue))
+        let redViewAlphaTweak = Tweak(feature: Features.UICustomization, variable: Variables.RedViewAlpha, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
+        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.RedViewAlpha))
     }
     
     func testParsesStringTweak() {
-        let buttonLabelTweak = Tweak(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue, value: "Test value", title: "Label Text", group: "UI Customization")
-        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue))
+        let buttonLabelTweak = Tweak(feature: Features.UICustomization, variable: Variables.LabelText, value: "Test value", title: "Label Text", group: "UI Customization")
+        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.LabelText))
     }
 }
