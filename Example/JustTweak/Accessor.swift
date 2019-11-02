@@ -11,7 +11,7 @@ import JustTweak
 
 class Accessor {
     
-    static let coordinator: TweaksConfigurationsCoordinator = {
+    lazy var configurationsCoordinator: TweaksConfigurationsCoordinator = {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
         let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
         
@@ -26,10 +26,6 @@ class Accessor {
         let configurations: [TweaksConfiguration] = [jsonConfiguration, /*firebaseConfiguration, optimizelyConfiguration,*/ userDefaultsConfiguration]
         return TweaksConfigurationsCoordinator(configurations: configurations)
     }()
-    
-    var configurationsCoordinator: TweaksConfigurationsCoordinator {
-        return Accessor.coordinator
-    }
     
     var shouldShowAlert: Bool {
         return configurationsCoordinator.tweakWith(feature: Features.General,
