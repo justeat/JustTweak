@@ -13,7 +13,7 @@ JustTweak is a framework for feature flagging, locally and remotely configure an
   s.source           = { :git => 'https://github.com/justeat/JustTweak.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
-  s.swift_version = '5.0'
+  s.swift_version = '5.1'
 
   s.default_subspecs = 'Core', 'UI'
   s.ios.resource_bundle = { 'JustTweak' => 'JustTweak/Assets/**/*' }

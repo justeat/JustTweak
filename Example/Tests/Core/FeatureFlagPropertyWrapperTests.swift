@@ -11,7 +11,7 @@ import JustTweak
 
 class Accessor {
     
-    static var coordinator: TweaksConfigurationsCoordinator = {
+    static let coordinator: TweaksConfigurationsCoordinator = {
         let ephimeralConfiguration: MutableTweaksConfiguration = NSMutableDictionary()
         return TweaksConfigurationsCoordinator(configurations: [ephimeralConfiguration])
     }()
