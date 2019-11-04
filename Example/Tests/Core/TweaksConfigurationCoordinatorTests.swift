@@ -23,7 +23,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
     
     override func tearDown() {
-        userDefaultsConfiguration.deleteValue(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue)
+        userDefaultsConfiguration.deleteValue(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
         configurationCoordinator = nil
         super.tearDown()
     }
@@ -34,33 +34,33 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: "some_undefined_tweak"))
+        XCTAssertNil(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
     }
     
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue) as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView) as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue) as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView) as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue) as! Bool)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayGreenView) as! Bool)
     }
     
     func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue) as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive) as! Bool)
     }
     
     func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.General.rawValue, variable: Variables.TapToChangeViewColor.rawValue) as! Bool)
+        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.General, variable: Variables.TapToChangeViewColor) as! Bool)
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
         let mutableConfiguration = configurationCoordinator.topCustomizableConfiguration()
-        mutableConfiguration?.set(false, feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue)
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization.rawValue, variable: Variables.GreetOnAppDidBecomeActive.rawValue) as! Bool)
+        mutableConfiguration?.set(false, feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
+        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive) as! Bool)
     }
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {
@@ -91,10 +91,10 @@ class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
     
     var logClosure: TweaksLogClosure?
     let features: [String : [String]] = [:]
-    let knownValues = [Variables.DisplayRedView.rawValue: ["Value": true],
-                       Variables.DisplayYellowView.rawValue: ["Value": false],
-                       Variables.DisplayGreenView.rawValue: ["Value": false],
-                       Variables.GreetOnAppDidBecomeActive.rawValue: ["Value": true]]
+    let knownValues = [Variables.DisplayRedView: ["Value": true],
+                       Variables.DisplayYellowView: ["Value": false],
+                       Variables.DisplayGreenView: ["Value": false],
+                       Variables.GreetOnAppDidBecomeActive: ["Value": true]]
     
     func isFeatureEnabled(_ feature: String) -> Bool {
         return false

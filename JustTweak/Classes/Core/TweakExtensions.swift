@@ -19,7 +19,6 @@ public extension String {
             return self
         }
     }
-    
 }
 
 public extension NSNumber {
@@ -60,5 +59,4 @@ public extension NSNumber {
             return nil
         }
     }
-    
 }

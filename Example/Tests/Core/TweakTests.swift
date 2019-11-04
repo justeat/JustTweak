@@ -4,11 +4,6 @@ import JustTweak
 
 class TweakTests: XCTestCase {
     
-    func testTweakHashIsEqualToHashValue() {
-        let tweak = Tweak(feature: "some_feature", variable: "some_variable", value: false, title: nil, group: nil)
-        XCTAssertEqual(tweak.hashValue, tweak.hash)
-    }
-    
     func testTweakIsEqualToOtherTweakWithSameAttributes() {
         let tweakA = Tweak(feature: "some_feature", variable: "some_variable", value: false, title: nil, group: nil)
         let tweakB = Tweak(feature: "some_feature", variable: "some_variable", value: false, title: nil, group: nil)
@@ -18,12 +13,6 @@ class TweakTests: XCTestCase {
     func testTweakIsNotEqualToOtherTweakWithSameIdentifierButDifferentAttributes() {
         let tweakA = Tweak(feature: "some_feature", variable: "some_variable", value: false, title: nil, group: nil)
         let tweakB = Tweak(feature: "some_feature", variable: "some_variable", value: true, title: nil, group: nil)
-        XCTAssertNotEqual(tweakA, tweakB)
-    }
-    
-    func testTweakIsNotEqualToSomeOtherObjectClaimingToBeATweak() {
-        let tweakA = Tweak(feature: "some_feature", variable: "some_variable", value: false, title: nil, group: nil)
-        let tweakB = NSObject()
         XCTAssertNotEqual(tweakA, tweakB)
     }
     

@@ -7,30 +7,16 @@ import UIKit
 import JustTweak
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var redView: UIView!
     @IBOutlet var greenView: UIView!
     @IBOutlet var yellowView: UIView!
     @IBOutlet var mainLabel: UILabel!
     
+    var configurationAccessor: ConfigurationAccessor!
     var configurationsCoordinator: TweaksConfigurationsCoordinator!
-    private var tapGestureRecognizer: UITapGestureRecognizer!
     
-    private var canShowRedView: Bool {
-        get {
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayRedView.rawValue).boolValue
-        }
-    }
-    private var canShowGreenView: Bool {
-        get {
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayGreenView.rawValue).boolValue
-        }
-    }
-    private var canShowYellowView: Bool {
-        get {
-            return valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.DisplayYellowView.rawValue).boolValue
-        }
-    }
+    private var tapGestureRecognizer: UITapGestureRecognizer!
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -39,7 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-        configurationsCoordinator?.registerForConfigurationsUpdates(self) { [weak self] tweak in
+        configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
             print("Tweak changed: \(tweak)")
             self?.updateView()
         }
@@ -47,11 +33,11 @@ class ViewController: UIViewController {
     
     internal func updateView() {
         setUpGesturesIfNeeded()
-        redView.isHidden = !canShowRedView
-        greenView.isHidden = !canShowGreenView
-        yellowView.isHidden = !canShowYellowView
-        mainLabel.text = valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.LabelText.rawValue).stringValue
-        redView.alpha = CGFloat(valueForExperiment(feature: Features.UICustomization.rawValue, variable: Variables.RedViewAlpha.rawValue).floatValue)
+        redView.isHidden = !configurationAccessor.canShowRedView
+        greenView.isHidden = !configurationAccessor.canShowGreenView
+        yellowView.isHidden = !configurationAccessor.canShowYellowView
+        mainLabel.text = configurationAccessor.labelText
+        redView.alpha = CGFloat(configurationAccessor.redViewAlpha)
     }
     
     internal func setUpGesturesIfNeeded() {
@@ -59,7 +45,7 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = valueForExperiment(feature: Features.General.rawValue, variable: Variables.TapToChangeViewColor.rawValue).boolValue
+        tapGestureRecognizer.isEnabled = configurationAccessor.isTapGestureToChangeColorEnabled
     }
     
     @objc internal func changeViewColor() {
@@ -72,20 +58,17 @@ class ViewController: UIViewController {
                                        alpha: 1.0)
     }
     
+    private var tweaksConfigurationViewController: TweaksConfigurationViewController {
+        return TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+    }
+    
     @IBAction func presentConfigurationViewController() {
-        let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
-        let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)
+        let tweaksNavigationController = UINavigationController(rootViewController: tweaksConfigurationViewController)
         tweaksNavigationController.navigationBar.prefersLargeTitles = true
         present(tweaksNavigationController, animated: true, completion: nil)
     }
     
     @IBAction func pushConfigurationViewController() {
-        let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
-        navigationController?.pushViewController(tweaksViewController, animated: true)
-    }
-
-    private func valueForExperiment(feature: String, variable: String) -> TweakValue {
-        let value = configurationsCoordinator?.valueForTweakWith(feature: feature, variable: variable)
-        return value ?? 0
+        navigationController?.pushViewController(tweaksConfigurationViewController, animated: true)
     }
 }

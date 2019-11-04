@@ -6,17 +6,17 @@
 import UIKit
 import JustTweak
 
-enum Features : String {
-    case UICustomization = "ui_customization"
-    case General = "general"
+struct Features {
+    static let UICustomization = "ui_customization"
+    static let General = "general"
 }
 
-enum Variables : String {
-    case RedViewAlpha = "red_view_alpha_component"
-    case DisplayRedView = "display_red_view"
-    case DisplayGreenView = "display_green_view"
-    case DisplayYellowView = "display_yellow_view"
-    case TapToChangeViewColor = "tap_to_change_color_enabled"
-    case LabelText = "label_text"
-    case GreetOnAppDidBecomeActive = "greet_on_app_did_become_active"
+struct Variables {
+    static let RedViewAlpha = "red_view_alpha_component"
+    static let DisplayRedView = "display_red_view"
+    static let DisplayGreenView = "display_green_view"
+    static let DisplayYellowView = "display_yellow_view"
+    static let TapToChangeViewColor = "tap_to_change_color_enabled"
+    static let LabelText = "label_text"
+    static let GreetOnAppDidBecomeActive = "greet_on_app_did_become_active"
 }

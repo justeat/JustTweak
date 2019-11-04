@@ -11,11 +11,7 @@ extension Bool: TweakValue {}
 extension Int: TweakValue {}
 extension Float: TweakValue {}
 extension Double: TweakValue {}
-extension String: TweakValue {
-    public var description: String {
-        get { return self }
-    }
-}
+extension String: TweakValue {}
 
 public extension TweakValue {
     
@@ -38,7 +34,6 @@ public extension TweakValue {
     var stringValue: String? {
         return self as? String
     }
-    
 }
 
 public func ==(lhs: TweakValue, rhs: TweakValue) -> Bool {
