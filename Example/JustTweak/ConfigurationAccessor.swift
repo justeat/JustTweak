@@ -11,7 +11,7 @@ import JustTweak
 
 class ConfigurationAccessor {
     
-    static var configurationsCoordinator: TweaksConfigurationsCoordinator = {
+    static let configurationsCoordinator: TweaksConfigurationsCoordinator = {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
         let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
         
