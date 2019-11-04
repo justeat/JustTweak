@@ -8,37 +8,32 @@ import Foundation
 public extension String {
     
     var tweakValue: TweakValue {
-        get {
-            let lowecase = lowercased()
-            if lowecase == "true" || lowecase == "false" {
-                return lowecase == "true"
-            }
-            else if let doubleValue = Double(self) {
-                return doubleValue
-            }
-            return self
+        if let bool = Bool(self.lowercased()) {
+            return bool
         }
+        else if let doubleValue = Double(self) {
+            return doubleValue
+        }
+        return self
     }
 }
 
 public extension NSNumber {
     
     var tweakValue: TweakValue {
-        get {
-            let encoding = String(cString: self.objCType)
-            switch encoding {
-            case "d":
-                return self.doubleValue
-                
-            case "f":
-                return self.floatValue
-                
-            case "c":
-                return self.boolValue
-                
-            default:
-                return self.intValue
-            }
+        let encoding = String(cString: self.objCType)
+        switch encoding {
+        case "d":
+            return self.doubleValue
+            
+        case "f":
+            return self.floatValue
+            
+        case "c":
+            return self.boolValue
+            
+        default:
+            return self.intValue
         }
     }
     
