@@ -11,7 +11,7 @@ import JustTweak
 
 class ConfigurationAccessor {
     
-    lazy var configurationsCoordinator: TweaksConfigurationsCoordinator = {
+    static var configurationsCoordinator: TweaksConfigurationsCoordinator = {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
         let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
         
@@ -27,25 +27,43 @@ class ConfigurationAccessor {
         return TweaksConfigurationsCoordinator(configurations: configurations)
     }()
     
-    var shouldShowAlert: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.General,
-                                                   variable: Variables.GreetOnAppDidBecomeActive)?.boolValue ?? false
+    private var configurationsCoordinator: TweaksConfigurationsCoordinator {
+        return Self.configurationsCoordinator
     }
     
-    var canShowRedView: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.DisplayRedView)?.boolValue ?? false
-    }
+    // MARK: - Via Property Wrappers
     
-    var canShowGreenView: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.DisplayGreenView)?.boolValue ?? false
-    }
+    @FeatureFlag(fallbackValue: false,
+                 feature: Features.General,
+                 variable: Variables.GreetOnAppDidBecomeActive,
+                 coordinator: configurationsCoordinator)
+    var shouldShowAlert: Bool
     
-    var labelText: String {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.LabelText)?.stringValue ?? ""
-    }
+    @FeatureFlag(fallbackValue: false,
+                 feature: Features.UICustomization,
+                 variable: Variables.DisplayRedView,
+                 coordinator: configurationsCoordinator)
+    var canShowRedView: Bool
+    
+    @FeatureFlag(fallbackValue: false,
+                 feature: Features.UICustomization,
+                 variable: Variables.DisplayGreenView,
+                 coordinator: configurationsCoordinator)
+    var canShowGreenView: Bool
+    
+    @FeatureFlag(fallbackValue: "",
+                 feature: Features.UICustomization,
+                 variable: Variables.LabelText,
+                 coordinator: configurationsCoordinator)
+    var labelText: String
+    
+    @FeatureFlagWrappingOptional(fallbackValue: nil,
+                                 feature: Features.UICustomization,
+                                 variable: Variables.MeaningOfLife,
+                                 coordinator: configurationsCoordinator)
+    var meaningOfLife: Int?
+    
+    // MARK: - Via ConfigurationsCoordinator
     
     var canShowYellowView: Bool {
         return configurationsCoordinator.tweakWith(feature: Features.UICustomization,

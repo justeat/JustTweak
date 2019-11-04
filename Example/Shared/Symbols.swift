@@ -19,4 +19,5 @@ struct Variables {
     static let TapToChangeViewColor = "tap_to_change_color_enabled"
     static let LabelText = "label_text"
     static let GreetOnAppDidBecomeActive = "greet_on_app_did_become_active"
+    static let MeaningOfLife = "meaning_of_life"
 }

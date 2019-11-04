@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		4F30EA6E21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */; };
 		4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */; };
-		4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */; };
 		4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */; };
+		4F38E0F1236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift */; };
+		4F38E0F3236E1E470070BD17 /* EphimeralTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */; };
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
@@ -56,6 +57,7 @@
 		4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyTweaksConfiguration.swift; sourceTree = "<group>"; };
 		4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EphimeralTweaksConfiguration.swift; sourceTree = "<group>"; };
 		4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
+		4F38E0F0236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagPropertyWrapperTests.swift; sourceTree = "<group>"; };
 		4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +119,6 @@
 			children = (
 				4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */,
 				4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */,
-				4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -216,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				61BE051D1DAE878600288EC7 /* TestHelpers.swift */,
+				4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */,
 			);
 			path = TestHelpers;
 			sourceTree = "<group>";
@@ -229,6 +231,7 @@
 				61F1DECD1DA7ECF700314DEC /* TweaksUtilitiesTests.swift */,
 				619938D71DA7F2DA00765852 /* TweakTests.swift */,
 				618A46CD1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift */,
+				4F38E0F0236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -464,7 +467,6 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */,
 				4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */,
-				4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,11 +482,13 @@
 				619938E01DA805BA00765852 /* JSONTweaksConfigurationTests.swift in Sources */,
 				614FED6E1DAF8F070036F17F /* FirebaseTweaksConfigurationTests.swift in Sources */,
 				61BE05201DAE88A100288EC7 /* TextTweakTableViewCellTests.swift in Sources */,
+				4F38E0F1236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift in Sources */,
 				618A46CE1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift in Sources */,
 				618A46CC1DAD481400B8F5CA /* TweakExtensionsTests.swift in Sources */,
 				4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */,
 				619938DC1DA7F6E600765852 /* TweaksConfigurationViewControllerTests.swift in Sources */,
 				61BE051E1DAE878600288EC7 /* TestHelpers.swift in Sources */,
+				4F38E0F3236E1E470070BD17 /* EphimeralTweaksConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
