@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     
     var accessor: Accessor!
+    var configurationsCoordinator: TweaksConfigurationsCoordinator!
+    
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
     deinit {
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-        accessor.configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
+        configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
             print("Tweak changed: \(tweak)")
             self?.updateView()
         }
@@ -57,7 +59,7 @@ class ViewController: UIViewController {
     }
     
     private var tweaksConfigurationViewController: TweaksConfigurationViewController {
-        return TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: accessor.configurationsCoordinator)
+        return TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
     }
     
     @IBAction func presentConfigurationViewController() {

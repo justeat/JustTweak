@@ -10,13 +10,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var configurationsCoordinator: TweaksConfigurationsCoordinator!
     var accessor: Accessor = Accessor()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let navigationController = window?.rootViewController as! UINavigationController
         let viewController = navigationController.topViewController as! ViewController
         viewController.accessor = accessor
+        viewController.configurationsCoordinator = accessor.configurationsCoordinator
         return true
     }
     
