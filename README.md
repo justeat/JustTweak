@@ -83,14 +83,34 @@ if enabled {
 
 2. Get the value of a flag for a given feature. JustTweak will return the value from the configuration with the highest priority and automatically fallback to the others if no set value is found.
 
+Use either `tweakWith(feature:variable:)` or `tweakWith(feature:variable:)`.
+
 ```swift
 // check for a tweak value
-let tweak = configurationsCoordinator.valueForTweakWith(feature: "some_feature", variable: "some_flag")
+let tweak = configurationsCoordinator.tweakWith(feature: "some_feature", variable: "some_flag")
 if let tweak = tweak {
     // tweak was found in some configuration, use tweak.value
 } else {
     // tweak was not found in any configuration
 }
+```
+
+`@FeatureFlag` and `@FeatureFlagWrappingOptional` are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `TweaksConfigurationsCoordinator` must be available.
+
+```
+@FeatureFlag(fallbackValue: <#fallback_value#>,
+             feature: <#feature_key#>,
+             variable: <#variable_key#>,
+             coordinator: <#tweaksConfigurationsCoordinator#>)
+var labelText: String
+```
+
+```
+@FeatureFlagWrappingOptional(fallbackValue: <#nillable_fallback_value#>,
+                             feature: <#feature_key#>,
+                             variable: <#variable_key#>,
+                             coordinator: <#tweaksConfigurationsCoordinator#>)
+var meaningOfLife: Int?
 ```
 
 3. Run an A/B test
