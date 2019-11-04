@@ -10,7 +10,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var configurationAccessor: ConfigurationAccessor = ConfigurationAccessor()
+    let configurationAccessor = ConfigurationAccessor()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let navigationController = window?.rootViewController as! UINavigationController
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     message: "Welcome to this Demo app!",
                                                     preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
-            window!.rootViewController!.present(alertController, animated: true, completion: nil)
+            window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
     }
 }
