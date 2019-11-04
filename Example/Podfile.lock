@@ -112,7 +112,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 166f9b9f82cbf60a204e8fe2daa9db3e3ec1fb15
   GoogleDataTransportCCTSupport: f6ab1962e9dc05ab1fb938b795e5b310209edeec
   GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
-  JustTweak: ff0e0a0ff2a59957d57ea639c7f8b4c70c87d114
+  JustTweak: 52f96d38171c7e1d1a994c5a1355ed191989bb42
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OptimizelySDKCore: 3f6018cc222b23de13ae9a71c2c15cd7fa397aed
   OptimizelySDKDatafileManager: 34edeb189ef170992677149460172ef44bfa7250
