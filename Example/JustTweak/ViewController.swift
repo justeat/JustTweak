@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var yellowView: UIView!
     @IBOutlet var mainLabel: UILabel!
     
-    var accessor: Accessor!
+    var configurationAccessor: ConfigurationAccessor!
     var configurationsCoordinator: TweaksConfigurationsCoordinator!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
@@ -33,11 +33,11 @@ class ViewController: UIViewController {
     
     internal func updateView() {
         setUpGesturesIfNeeded()
-        redView.isHidden = !accessor.canShowRedView
-        greenView.isHidden = !accessor.canShowGreenView
-        yellowView.isHidden = !accessor.canShowYellowView
-        mainLabel.text = accessor.labelText
-        redView.alpha = CGFloat(accessor.redViewAlpha)
+        redView.isHidden = !configurationAccessor.canShowRedView
+        greenView.isHidden = !configurationAccessor.canShowGreenView
+        yellowView.isHidden = !configurationAccessor.canShowYellowView
+        mainLabel.text = configurationAccessor.labelText
+        redView.alpha = CGFloat(configurationAccessor.redViewAlpha)
     }
     
     internal func setUpGesturesIfNeeded() {
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = accessor.isTapGestureToChangeColorEnabled
+        tapGestureRecognizer.isEnabled = configurationAccessor.isTapGestureToChangeColorEnabled
     }
     
     @objc internal func changeViewColor() {

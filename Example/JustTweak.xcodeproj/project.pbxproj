@@ -10,7 +10,7 @@
 		4F30EA6E21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */; };
 		4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */; };
 		4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */; };
-		4F38E0EF236DF6E20070BD17 /* Accessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0EE236DF6E20070BD17 /* Accessor.swift */; };
+		4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */; };
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
@@ -55,7 +55,7 @@
 		4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTweaksConfiguration.swift; sourceTree = "<group>"; };
 		4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyTweaksConfiguration.swift; sourceTree = "<group>"; };
 		4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EphimeralTweaksConfiguration.swift; sourceTree = "<group>"; };
-		4F38E0EE236DF6E20070BD17 /* Accessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessor.swift; sourceTree = "<group>"; };
+		4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
 		4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +161,7 @@
 				61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				4F38E0EE236DF6E20070BD17 /* Accessor.swift */,
+				4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -463,7 +463,7 @@
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */,
-				4F38E0EF236DF6E20070BD17 /* Accessor.swift in Sources */,
+				4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */,
 				4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  Accessor.swift
+//  ConfigurationAccessor.swift
 //  JustTweak_Example
 //
 //  Created by Alberto De Bortoli on 02/11/2019.
@@ -9,7 +9,7 @@
 import Foundation
 import JustTweak
 
-class Accessor {
+class ConfigurationAccessor {
     
     lazy var configurationsCoordinator: TweaksConfigurationsCoordinator = {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!

@@ -10,18 +10,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var accessor: Accessor = Accessor()
+    var configurationAccessor: ConfigurationAccessor = ConfigurationAccessor()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let navigationController = window?.rootViewController as! UINavigationController
         let viewController = navigationController.topViewController as! ViewController
-        viewController.accessor = accessor
-        viewController.configurationsCoordinator = accessor.configurationsCoordinator
+        viewController.configurationAccessor = configurationAccessor
+        viewController.configurationsCoordinator = configurationAccessor.configurationsCoordinator
         return true
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if accessor.shouldShowAlert {
+        if configurationAccessor.shouldShowAlert {
             let alertController = UIAlertController(title: "Hello",
                                                     message: "Welcome to this Demo app!",
                                                     preferredStyle: .alert)
