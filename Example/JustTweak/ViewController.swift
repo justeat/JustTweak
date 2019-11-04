@@ -25,6 +25,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(setAndShowMeaningOfLife))
+        tapGestureRecognizer.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tapGestureRecognizer)
         configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
             print("Tweak changed: \(tweak)")
             self?.updateView()
@@ -32,7 +35,7 @@ class ViewController: UIViewController {
     }
     
     internal func updateView() {
-        setUpGesturesIfNeeded()
+        setUpGestures()
         redView.isHidden = !configurationAccessor.canShowRedView
         greenView.isHidden = !configurationAccessor.canShowGreenView
         yellowView.isHidden = !configurationAccessor.canShowYellowView
@@ -40,12 +43,21 @@ class ViewController: UIViewController {
         redView.alpha = CGFloat(configurationAccessor.redViewAlpha)
     }
     
-    internal func setUpGesturesIfNeeded() {
+    internal func setUpGestures() {
         if tapGestureRecognizer == nil {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
         tapGestureRecognizer.isEnabled = configurationAccessor.isTapGestureToChangeColorEnabled
+    }
+    
+    @objc internal func setAndShowMeaningOfLife() {
+        configurationAccessor.meaningOfLife = Bool.random() ? 42 : nil
+        let alertController = UIAlertController(title: "The Meaning of Life",
+                                                message: String(describing: configurationAccessor.meaningOfLife),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc internal func changeViewColor() {

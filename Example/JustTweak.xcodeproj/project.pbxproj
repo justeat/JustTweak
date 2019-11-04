@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		4F30EA6E21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */; };
 		4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */; };
-		4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */; };
 		4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */; };
+		4F38E0F3236E1E470070BD17 /* EphimeralTweaksConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */; };
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
@@ -117,7 +117,6 @@
 			children = (
 				4F30EA6B21ADA06A00AECF77 /* FirebaseTweaksConfiguration.swift */,
 				4F30EA6C21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift */,
-				4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -216,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				61BE051D1DAE878600288EC7 /* TestHelpers.swift */,
+				4F30EA6D21ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift */,
 			);
 			path = TestHelpers;
 			sourceTree = "<group>";
@@ -464,7 +464,6 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				4F30EA6F21ADA06A00AECF77 /* OptimizelyTweaksConfiguration.swift in Sources */,
 				4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */,
-				4F30EA7021ADA06A00AECF77 /* EphimeralTweaksConfiguration.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,6 +484,7 @@
 				4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */,
 				619938DC1DA7F6E600765852 /* TweaksConfigurationViewControllerTests.swift in Sources */,
 				61BE051E1DAE878600288EC7 /* TestHelpers.swift in Sources */,
+				4F38E0F3236E1E470070BD17 /* EphimeralTweaksConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
