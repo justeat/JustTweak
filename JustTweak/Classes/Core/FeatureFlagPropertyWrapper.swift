@@ -1,6 +1,5 @@
 //
 //  FeatureFlagPropertyWrapper.swift
-//  APIClient
 //
 //  Created by Alberto De Bortoli on 20/10/2019.
 //  Copyright © 2019 Just Eat. All rights reserved.
