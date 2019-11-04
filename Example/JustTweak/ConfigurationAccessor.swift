@@ -31,7 +31,7 @@ class ConfigurationAccessor {
         return Self.configurationsCoordinator
     }
     
-    // MARK: - Examples of usages of property wrappers
+    // MARK: - Via Property Wrappers
     
     @FeatureFlag(fallbackValue: false,
                  feature: Features.General,
@@ -63,7 +63,7 @@ class ConfigurationAccessor {
                                  coordinator: configurationsCoordinator)
     var meaningOfLife: Int?
     
-    // MARK: - Examples of referencing the configurationsCoordinator directly
+    // MARK: - Via ConfigurationsCoordinator
     
     var canShowYellowView: Bool {
         return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
