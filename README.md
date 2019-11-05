@@ -83,7 +83,7 @@ if enabled {
 
 2. Get the value of a flag for a given feature. JustTweak will return the value from the configuration with the highest priority and automatically fallback to the others if no set value is found.
 
-Use either `tweakWith(feature:variable:)` or `tweakWith(feature:variable:)`.
+Use either `tweakWith(feature:variable:)` or the provided property wrappers: `@FeatureFlag` and `@FeatureFlagWrappingOptional`.
 
 ```swift
 // check for a tweak value
@@ -128,7 +128,7 @@ if let variation = variation {
 
 ### Caching
 
-The `TweaksConfigurationsCoordinator` provides the ability to enable caching of the values to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
+The `TweaksConfigurationsCoordinator` provides the option to cache the tweak values in order to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
 
 - call the `resetCache` method on the  `TweaksConfigurationsCoordinator`
 - post a `TweaksConfigurationDidChangeNotification` notification
