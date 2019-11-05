@@ -13,10 +13,20 @@ class ViewController: UIViewController {
     @IBOutlet var yellowView: UIView!
     @IBOutlet var mainLabel: UILabel!
     
-    var configurationAccessor: ConfigurationAccessor!
-    var configurationsCoordinator: TweaksConfigurationsCoordinator!
+    let configurationAccessor: ConfigurationAccessor
+    let configurationsCoordinator: TweaksConfigurationsCoordinator
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
+    
+    init?(coder: NSCoder, configurationAccessor: ConfigurationAccessor, configurationsCoordinator: TweaksConfigurationsCoordinator) {
+        self.configurationAccessor = configurationAccessor
+        self.configurationsCoordinator = configurationsCoordinator
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("You must create this view controller with a ConfigurationAccessor and a TweaksConfigurationsCoordinator.")
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)

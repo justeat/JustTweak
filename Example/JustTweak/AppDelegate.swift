@@ -13,10 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let configurationAccessor = ConfigurationAccessor()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        let navigationController = window?.rootViewController as! UINavigationController
-        let viewController = navigationController.topViewController as! ViewController
-        viewController.configurationAccessor = configurationAccessor
-        viewController.configurationsCoordinator = ConfigurationAccessor.configurationsCoordinator
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let vc = storyboard.instantiateViewController(identifier: "ViewController", creator: { coder in
+            return ViewController(coder: coder, configurationAccessor: self.configurationAccessor, configurationsCoordinator: ConfigurationAccessor.configurationsCoordinator)
+        })
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
+        navigationController.pushViewController(vc, animated: true)
+        window?.makeKeyAndVisible()
         return true
     }
     
