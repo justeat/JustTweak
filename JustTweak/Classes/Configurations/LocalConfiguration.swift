@@ -1,11 +1,11 @@
 //
-//  JSONTweaksConfiguration.swift
+//  LocalConfiguration.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
+final public class LocalConfiguration: Configuration {
     
     private enum EncodingKeys : String {
         case Title, Description, Group, Value
@@ -28,10 +28,6 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
             }
         }
         return storage
-    }
-    
-    public override var description: String {
-        get { return "\(super.description) { fileURL: \(fileURL) }" }
     }
     
     public init?(jsonURL: URL) {

@@ -7,11 +7,9 @@ import JustTweak
 import FirebaseCore
 import FirebaseRemoteConfig
 
-public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+public class FirebaseTweaksConfiguration: Configuration {
     
-    public override init() {
-        super.init()
-        
+    public init() {
         /* DOWNLOAD THE GoogleService.plist from the Firebase dashboard */
         let googleServicePlistURL = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist")
         if let _ = googleServicePlistURL {

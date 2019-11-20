@@ -5,7 +5,7 @@
 
 import Foundation
 
-final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguration {
+final public class TweaksConfigurationsCoordinator: Configuration {
     
     public var logClosure: TweaksLogClosure? {
         didSet {
@@ -17,13 +17,12 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
     
     public var useCache: Bool = false
     
-    public private(set) var configurations: [TweaksConfiguration]
+    public private(set) var configurations: [Configuration]
     private var tweaksCache = [String : [String : Tweak]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
-    public init(configurations: [TweaksConfiguration]) {
+    public init(configurations: [Configuration]) {
         self.configurations = configurations
-        super.init()
         for (index, _) in self.configurations.enumerated() {
             self.configurations[index].logClosure = logClosure
         }
@@ -97,9 +96,9 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
         return tweakWith(feature: feature, variable: variable)?.value
     }
     
-    public func topCustomizableConfiguration() -> MutableTweaksConfiguration? {
-        for configuration in configurations {
-            if let configuration = configuration as? MutableTweaksConfiguration {
+    public func topCustomizableConfiguration() -> MutableConfiguration? {
+        for configuration in configurations.reversed() {
+            if let configuration = configuration as? MutableConfiguration {
                 return configuration
             }
         }
@@ -155,7 +154,7 @@ final public class TweaksConfigurationsCoordinator: NSObject, TweaksConfiguratio
         }
     }
     
-    private var jsonConfiguration: JSONTweaksConfiguration? {
-        return configurations.filter { $0 is JSONTweaksConfiguration }.first as? JSONTweaksConfiguration
+    private var jsonConfiguration: LocalConfiguration? {
+        return configurations.filter { $0 is LocalConfiguration }.first as? LocalConfiguration
     }
 }

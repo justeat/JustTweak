@@ -5,7 +5,7 @@
 
 import UIKit
 
-class TextTweakTableViewCell: UITableViewCell, TweaksConfigurationViewControllerCell, UITextFieldDelegate {
+class TextTweakTableViewCell: UITableViewCell, TweaksViewControllerCell, UITextFieldDelegate {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -43,7 +43,7 @@ class TextTweakTableViewCell: UITableViewCell, TweaksConfigurationViewController
             }
         }
     }
-    weak var delegate: TweaksConfigurationViewControllerCellDelegate?
+    weak var delegate: TweaksViewControllerCellDelegate?
     
     var keyboardType: UIKeyboardType {
         get {

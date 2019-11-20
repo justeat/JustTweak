@@ -4,7 +4,7 @@ import XCTest
 
 class ConfigurationViewControllerTests: XCTestCase {
     
-    var viewController: TweaksConfigurationViewController!
+    var viewController: TweaksViewController!
     
     override func setUp() {
         super.setUp()
@@ -20,12 +20,12 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Generic Data Display
     
     func testDisplaysNoDataIfConfigurationWasNotSet() {
-        let viewController = TweaksConfigurationViewController()
+        let viewController = TweaksViewController()
         XCTAssertEqual(0, viewController.numberOfSections(in: viewController.tableView))
     }
     
     func testDisplaysCorrectDataIfConfigurationCoordinatorIsSetAfterInitialization() {
-        let otherViewController = TweaksConfigurationViewController()
+        let otherViewController = TweaksViewController()
         XCTAssertEqual(0, otherViewController.numberOfSections(in: viewController.tableView))
         otherViewController.configurationsCoordinator = viewController.configurationsCoordinator
         XCTAssertEqual(otherViewController.numberOfSections(in: viewController.tableView),
@@ -86,7 +86,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayRedView)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)
         XCTAssertEqual(cell.textLabel?.text, "Display Red View")
-        XCTAssertEqual((cell as! TweaksConfigurationViewControllerCell).title, "Display Red View")
+        XCTAssertEqual((cell as! TweaksViewControllerCell).title, "Display Red View")
     }
     
     func testDisplaysNumericTweaksCorrectly() {
@@ -121,27 +121,27 @@ class ConfigurationViewControllerTests: XCTestCase {
     
     func testDoesNotShowMessageWhenPresentedWithConfigurationsCoordinator_Plain() {
         let coordinator = viewController.configurationsCoordinator!
-        let vc = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: coordinator)
+        let vc = TweaksViewController(style: .plain, configurationsCoordinator: coordinator)
         let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
         XCTAssertTrue(backgroundView.isHidden)
     }
     
     func testDoesNotShowMessageWhenPresentedWithConfigurationsCoordinator_Grouped() {
         let coordinator = viewController.configurationsCoordinator!
-        let vc = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: coordinator)
+        let vc = TweaksViewController(style: .plain, configurationsCoordinator: coordinator)
         let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
         XCTAssertTrue(backgroundView.isHidden)
     }
     
     func testShowsMessageWhenPresentedWithoutConfigurationsCoordinator_Plain() {
-        let vc = TweaksConfigurationViewController(style: .plain)
+        let vc = TweaksViewController(style: .plain)
         let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
         XCTAssertEqual(backgroundView.text, "No Mutable Configurations Found")
         XCTAssertFalse(backgroundView.isHidden)
     }
     
     func testShowsMessageWhenPresentedWithoutConfigurationsCoordinator_Grouped() {
-        let vc = TweaksConfigurationViewController(style: .grouped)
+        let vc = TweaksViewController(style: .grouped)
         let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
         XCTAssertEqual(backgroundView.text, "No Mutable Configurations Found")
         XCTAssertFalse(backgroundView.isHidden)
@@ -150,7 +150,7 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Other Actions
     
     func testAsksToBeDismissedWhenDoneButtonIsTapped() {
-        class FakeViewController: TweaksConfigurationViewController {
+        class FakeViewController: TweaksViewController {
             fileprivate let mockPresentingViewController = MockPresentingViewController()
             override var presentingViewController: UIViewController? {
                 get {
@@ -168,11 +168,11 @@ class ConfigurationViewControllerTests: XCTestCase {
     private func buildViewControllerWithConfigurationFromFileNamed(_ fileName: String) {
         let bundle = Bundle(for: ConfigurationViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
-        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonURL!)!
+        let jsonConfiguration = LocalConfiguration(jsonURL: jsonURL!)!
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
-        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
+        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
         let configurations: [TweaksConfiguration] = [jsonConfiguration, userDefaultsConfiguration]
         let configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
-        viewController = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)
+        viewController = TweaksViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)
     }
 }

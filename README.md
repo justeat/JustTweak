@@ -43,7 +43,7 @@ private func setupJustTweak() {
 
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-    let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
+    let jsonConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
 
     // remote configurations (optional)
     let firebaseConfiguration = FirebaseTweaksConfiguration()
@@ -51,7 +51,7 @@ private func setupJustTweak() {
     optimizelyConfiguration.userId = <#user_id#>
     
     // local mutable configuration (to override tweaks from other configurations)
-    let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: UserDefaults.standard)
+    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
     
     // priority is defined by the order in the configurations array (from low to high)
     let configurations: [TweaksConfiguration] = [jsonConfiguration,
@@ -62,7 +62,7 @@ private func setupJustTweak() {
 }
 ```
 
-The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableTweaksConfiguration` with the highest priority, such as `UserDefaultsTweaksConfiguration` in the example above, will be used to load the `TweaksConfigurationViewController` UI. The `JSONTweaksConfiguration` should have the lowest priority as it provides the default values from a local configuration.
+The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableTweaksConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to load the `TweaksViewController` UI. The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration.
 
 
 ### Usage
@@ -138,8 +138,8 @@ The `TweaksConfigurationsCoordinator` provides the option to cache the tweak val
 JustTweak comes with a ViewController that allows the user to edit the `MutableTweaksConfiguration` with the highest priority.
 
 ```swift
-func presentTweaksConfigurationViewController() {
-    let tweaksViewController = TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+func presentTweaksViewController() {
+    let tweaksViewController = TweaksViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
     
     // either present it modally
     let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)
@@ -172,8 +172,8 @@ override func viewDidLoad() {
 
 JustTweak comes with two configurations out-of-the-box:
 
-- `UserDefaultsTweaksConfiguration` which is mutable and uses `UserDefaults` as a key/value store 
-- `JSONTweaksConfiguration` which is read-only and uses a JSON configuration file that is meant to be the default configuration
+- `UserDefaultsConfiguration` which is mutable and uses `UserDefaults` as a key/value store 
+- `LocalConfiguration` which is read-only and uses a JSON configuration file that is meant to be the default configuration
 
 In addition, JustTweak defines `TweaksConfiguration` and `MutableTweaksConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
 

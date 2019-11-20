@@ -5,19 +5,19 @@ import JustTweak
 class TweaksConfigurationCoordinatorTests: XCTestCase {
     
     var configurationCoordinator: TweaksConfigurationsCoordinator!
-    let jsonConfiguration: JSONTweaksConfiguration = {
+    let jsonConfiguration: LocalConfiguration = {
         let bundle = Bundle(for: TweaksConfigurationCoordinatorTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonConfigurationURL)!
+        let jsonConfiguration = LocalConfiguration(jsonURL: jsonConfigurationURL)!
         return jsonConfiguration
     }()
-    var userDefaultsConfiguration: UserDefaultsTweaksConfiguration!
+    var userDefaultsConfiguration: UserDefaultsConfiguration!
     
     override func setUp() {
         super.setUp()
         let mockFirebaseConfiguration = MockTweaksRemoteConfiguration()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
-        userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: testUserDefaults)
+        userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
         let configurations: [TweaksConfiguration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
         configurationCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
@@ -87,7 +87,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
 }
 
-class MockTweaksRemoteConfiguration: NSObject, TweaksConfiguration {
+class MockTweaksRemoteConfiguration: TweaksConfiguration {
     
     var logClosure: TweaksLogClosure?
     let features: [String : [String]] = [:]

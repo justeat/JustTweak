@@ -13,7 +13,7 @@ class ConfigurationAccessor {
     
     static let configurationsCoordinator: TweaksConfigurationsCoordinator = {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
+        let jsonConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
         
         // let firebaseConfiguration = FirebaseTweaksConfiguration()
         
@@ -21,9 +21,9 @@ class ConfigurationAccessor {
         // optimizelyConfiguration.userId = UUID().uuidString
         
         let userDefaults = UserDefaults.standard
-        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
+        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
         
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, /*firebaseConfiguration, optimizelyConfiguration,*/ userDefaultsConfiguration]
+        let configurations: [Configuration] = [jsonConfiguration, /*firebaseConfiguration, optimizelyConfiguration,*/ userDefaultsConfiguration]
         return TweaksConfigurationsCoordinator(configurations: configurations)
     }()
     

@@ -1,11 +1,11 @@
 //
-//  UserDefaultsTweaksConfiguration.swift
+//  UserDefaultsConfiguration.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfiguration {
+final public class UserDefaultsConfiguration: MutableConfiguration {
     
     private let userDefaults: UserDefaults
     
@@ -57,7 +57,7 @@ final public class UserDefaultsTweaksConfiguration: NSObject, MutableTweaksConfi
     }
     
     private func userDefaultsKeyForTweakWithIdentifier(_ identifier: String) -> String {
-        return "\(UserDefaultsTweaksConfiguration.userDefaultsKeyPrefix).\(identifier)"
+        return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
     }
     
     private func tweakValueFromUserDefaultsObject(_ object: AnyObject?) -> TweakValue? {

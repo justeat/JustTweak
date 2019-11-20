@@ -5,7 +5,7 @@
 
 import Foundation
 
-public protocol TweaksConfiguration {
+public protocol Configuration {
     
     var logClosure: TweaksLogClosure? { set get }    
     func isFeatureEnabled(_ feature: String) -> Bool
@@ -13,7 +13,7 @@ public protocol TweaksConfiguration {
     func activeVariation(for experiment: String) -> String?
 }
 
-public protocol MutableTweaksConfiguration: TweaksConfiguration {
+public protocol MutableConfiguration: Configuration {
     
     func deleteValue(feature: String, variable: String)
     func set(_ value: TweakValue, feature: String, variable: String)

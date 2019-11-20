@@ -6,7 +6,7 @@
 import JustTweak
 import OptimizelySDKiOS
 
-public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
+public class OptimizelyTweaksConfiguration: Configuration {
     
     private var optimizelyManager: OPTLYManager?
     private var optimizelyClient: OPTLYClient?
@@ -16,8 +16,7 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
     public var userId: String!
     public var attributes: [String : String]?
     
-    public override init() {
-        super.init()
+    public init() {
         /* DOWNLOAD THE Optimizely datafile from the Optimizely dashboard */
         optimizelyManager = OPTLYManager(builder: OPTLYManagerBuilder(block: { builder in
             guard let builder = builder,
