@@ -11,7 +11,7 @@ final public class UserDefaultsConfiguration: MutableConfiguration {
     
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults

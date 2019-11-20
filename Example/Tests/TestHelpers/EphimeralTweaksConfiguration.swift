@@ -8,7 +8,7 @@ import JustTweak
 
 extension NSMutableDictionary: MutableConfiguration {
     
-    public var logClosure: JustTweak.TweaksLogClosure? {
+    public var logClosure: LogClosure? {
         get { return nil }
         set { }
     }

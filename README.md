@@ -36,8 +36,8 @@ pod "JustTweak"
 - configure the JustTweak stack as following
 
 ```swift
-// create a TweaksConfigurationsCoordinator
-var configurationsCoordinator: TweaksConfigurationsCoordinator!
+// create a JustTweak instance
+var justTweak: JustTweak!
 
 private func setupJustTweak() {
 
@@ -58,7 +58,7 @@ private func setupJustTweak() {
                                            firebaseConfiguration,
                                            optimizelyConfiguration,
                                            userDefaultsConfiguration]
-    configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
+    configurationsCoordinator = JustTweak(configurations: configurations)
 }
 ```
 
@@ -67,7 +67,7 @@ The order of the objects in the `configurations` array defines the priority of t
 
 ### Usage
 
-The three main features of JustTweak can be accessed from the `TweaksConfigurationsCoordinator` instance to drive code path decisions.
+The three main features of JustTweak can be accessed from the `JustTweak` instance to drive code path decisions.
 
 1. Checking if a feature is enabled
 
@@ -95,13 +95,13 @@ if let tweak = tweak {
 }
 ```
 
-`@FeatureFlag` and `@FeatureFlagWrappingOptional` are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `TweaksConfigurationsCoordinator` must be available.
+`@FeatureFlag` and `@FeatureFlagWrappingOptional` are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `JustTweak` must be available.
 
 ```
 @FeatureFlag(fallbackValue: <#fallback_value#>,
              feature: <#feature_key#>,
              variable: <#variable_key#>,
-             coordinator: <#tweaksConfigurationsCoordinator#>)
+             coordinator: <#justTweak#>)
 var labelText: String
 ```
 
@@ -109,7 +109,7 @@ var labelText: String
 @FeatureFlagWrappingOptional(fallbackValue: <#nillable_fallback_value#>,
                              feature: <#feature_key#>,
                              variable: <#variable_key#>,
-                             coordinator: <#tweaksConfigurationsCoordinator#>)
+                             coordinator: <#justTweak#>)
 var meaningOfLife: Int?
 ```
 
@@ -128,9 +128,9 @@ if let variation = variation {
 
 ### Caching
 
-The `TweaksConfigurationsCoordinator` provides the option to cache the tweak values in order to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
+The `JustTweak` provides the option to cache the tweak values in order to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
 
-- call the `resetCache` method on the  `TweaksConfigurationsCoordinator`
+- call the `resetCache` method on the  `JustTweak`
 - post a `TweaksConfigurationDidChangeNotification` notification
 
 ### Update a configuration at runtime

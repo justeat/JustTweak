@@ -1,13 +1,13 @@
 //
-//  TweaksConfigurationsCoordinator.swift
+//  JustTweak.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-final public class TweaksConfigurationsCoordinator: Configuration {
+final public class JustTweak: Configuration {
     
-    public var logClosure: TweaksLogClosure? {
+    public var logClosure: LogClosure? {
         didSet {
             for (index, _) in configurations.enumerated() {
                 configurations[index].logClosure = logClosure

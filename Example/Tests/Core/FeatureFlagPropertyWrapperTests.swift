@@ -11,9 +11,9 @@ import JustTweak
 
 class Accessor {
     
-    static let coordinator: TweaksConfigurationsCoordinator = {
+    static let coordinator: JustTweak = {
         let ephimeralConfiguration: MutableConfiguration = NSMutableDictionary()
-        return TweaksConfigurationsCoordinator(configurations: [ephimeralConfiguration])
+        return JustTweak(configurations: [ephimeralConfiguration])
     }()
     
     @FeatureFlag(fallbackValue: "default",

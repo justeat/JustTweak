@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     
     var configurationAccessor: ConfigurationAccessor!
-    var configurationsCoordinator: TweaksConfigurationsCoordinator!
+    var configurationsCoordinator: JustTweak!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
     

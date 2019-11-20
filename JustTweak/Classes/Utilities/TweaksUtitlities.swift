@@ -30,8 +30,8 @@ public func |||(lhs: Bool?, rhs: Bool?) -> Bool {
     return rhs ?? false
 }
 
-public enum TweaksLogLevel: Int {
+public enum LogLevel: Int {
     case error, debug, verbose
 }
 
-public typealias TweaksLogClosure = (String, TweaksLogLevel) -> Void
+public typealias LogClosure = (String, LogLevel) -> Void

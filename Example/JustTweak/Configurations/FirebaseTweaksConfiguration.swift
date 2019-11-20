@@ -22,7 +22,7 @@ public class FirebaseTweaksConfiguration: Configuration {
         }
     }
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     // Google dependencies
     private var configured: Bool = false

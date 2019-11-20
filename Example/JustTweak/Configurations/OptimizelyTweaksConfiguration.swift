@@ -11,7 +11,7 @@ public class OptimizelyTweaksConfiguration: Configuration {
     private var optimizelyManager: OPTLYManager?
     private var optimizelyClient: OPTLYClient?
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     public var userId: String!
     public var attributes: [String : String]?

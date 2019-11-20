@@ -45,7 +45,7 @@ public class TweaksViewController: UITableViewController {
     
     private var sections = [Section]()
     private var filteredSections = [Section]()
-    public var configurationsCoordinator: TweaksConfigurationsCoordinator? {
+    public var configurationsCoordinator: JustTweak? {
         didSet {
             rebuildSections()
             updateBackgroundView()
@@ -67,7 +67,7 @@ public class TweaksViewController: UITableViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    public convenience init(style: UITableView.Style, configurationsCoordinator: TweaksConfigurationsCoordinator) {
+    public convenience init(style: UITableView.Style, configurationsCoordinator: JustTweak) {
         self.init(style: style)
         self.configurationsCoordinator = configurationsCoordinator
     }

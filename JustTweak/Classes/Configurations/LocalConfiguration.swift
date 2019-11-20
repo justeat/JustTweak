@@ -14,7 +14,7 @@ final public class LocalConfiguration: Configuration {
     private let configurationFile: [String : [String : [String : AnyObject]]]
     private let fileURL: URL
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]

@@ -12,9 +12,9 @@ public struct FeatureFlag<T: TweakValue> {
     let fallbackValue: T
     let feature: String
     let variable: String
-    let coordinator: TweaksConfigurationsCoordinator
+    let coordinator: JustTweak
     
-    public init(fallbackValue: T, feature: String, variable: String, coordinator: TweaksConfigurationsCoordinator) {
+    public init(fallbackValue: T, feature: String, variable: String, coordinator: JustTweak) {
         self.fallbackValue = fallbackValue
         self.feature = feature
         self.variable = variable
@@ -38,9 +38,9 @@ public struct FeatureFlagWrappingOptional<T: TweakValue> {
     let fallbackValue: T?
     let feature: String
     let variable: String
-    let coordinator: TweaksConfigurationsCoordinator
+    let coordinator: JustTweak
     
-    public init(fallbackValue: T?, feature: String, variable: String, coordinator: TweaksConfigurationsCoordinator) {
+    public init(fallbackValue: T?, feature: String, variable: String, coordinator: JustTweak) {
         self.fallbackValue = fallbackValue
         self.feature = feature
         self.variable = variable

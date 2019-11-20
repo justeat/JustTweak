@@ -11,7 +11,7 @@ import JustTweak
 
 class ConfigurationAccessor {
     
-    static let configurationsCoordinator: TweaksConfigurationsCoordinator = {
+    static let configurationsCoordinator: JustTweak = {
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
         let jsonConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
         
@@ -24,10 +24,10 @@ class ConfigurationAccessor {
         let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
         
         let configurations: [Configuration] = [jsonConfiguration, /*firebaseConfiguration, optimizelyConfiguration,*/ userDefaultsConfiguration]
-        return TweaksConfigurationsCoordinator(configurations: configurations)
+        return JustTweak(configurations: configurations)
     }()
     
-    private var configurationsCoordinator: TweaksConfigurationsCoordinator {
+    private var configurationsCoordinator: JustTweak {
         return Self.configurationsCoordinator
     }
     

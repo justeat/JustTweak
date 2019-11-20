@@ -4,7 +4,7 @@ import JustTweak
 
 class TweaksConfigurationCoordinatorTests: XCTestCase {
     
-    var configurationCoordinator: TweaksConfigurationsCoordinator!
+    var configurationCoordinator: JustTweak!
     let jsonConfiguration: LocalConfiguration = {
         let bundle = Bundle(for: TweaksConfigurationCoordinatorTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
@@ -19,7 +19,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
         userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
         let configurations: [Configuration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
-        configurationCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
+        configurationCoordinator = JustTweak(configurations: configurations)
     }
     
     override func tearDown() {
@@ -29,7 +29,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
     
     func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
-        let configurationCoordinator = TweaksConfigurationsCoordinator(configurations: [jsonConfiguration])
+        let configurationCoordinator = JustTweak(configurations: [jsonConfiguration])
         XCTAssertNil(configurationCoordinator.topCustomizableConfiguration())
     }
     
@@ -89,7 +89,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
 
 class MockTweaksRemoteConfiguration: Configuration {
     
-    var logClosure: TweaksLogClosure?
+    var logClosure: LogClosure?
     let features: [String : [String]] = [:]
     let knownValues = [Variables.DisplayRedView: ["Value": true],
                        Variables.DisplayYellowView: ["Value": false],
