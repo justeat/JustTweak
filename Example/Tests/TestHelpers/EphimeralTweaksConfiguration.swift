@@ -6,7 +6,7 @@
 import Foundation
 import JustTweak
 
-extension NSMutableDictionary: MutableTweaksConfiguration {
+extension NSMutableDictionary: MutableConfiguration {
     
     public var logClosure: JustTweak.TweaksLogClosure? {
         get { return nil }

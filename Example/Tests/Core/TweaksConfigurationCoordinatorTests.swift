@@ -18,7 +18,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         let mockFirebaseConfiguration = MockTweaksRemoteConfiguration()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
         userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
+        let configurations: [Configuration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
         configurationCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
     }
     
@@ -87,7 +87,7 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     }
 }
 
-class MockTweaksRemoteConfiguration: TweaksConfiguration {
+class MockTweaksRemoteConfiguration: Configuration {
     
     var logClosure: TweaksLogClosure?
     let features: [String : [String]] = [:]

@@ -171,7 +171,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         let jsonConfiguration = LocalConfiguration(jsonURL: jsonURL!)!
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
         let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, userDefaultsConfiguration]
+        let configurations: [Configuration] = [jsonConfiguration, userDefaultsConfiguration]
         let configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
         viewController = TweaksViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)
     }

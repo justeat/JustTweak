@@ -43,26 +43,26 @@ private func setupJustTweak() {
 
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-    let jsonConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
+    let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
 
     // remote configurations (optional)
-    let firebaseConfiguration = FirebaseTweaksConfiguration()
-    let optimizelyConfiguration = OptimizelyTweaksConfiguration()
+    let firebaseConfiguration = FirebaseConfiguration()
+    let optimizelyConfiguration = OptimizelyConfiguration()
     optimizelyConfiguration.userId = <#user_id#>
     
     // local mutable configuration (to override tweaks from other configurations)
     let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
     
     // priority is defined by the order in the configurations array (from low to high)
-    let configurations: [TweaksConfiguration] = [jsonConfiguration,
-                                                 firebaseConfiguration,
-                                                 optimizelyConfiguration,
-                                                 userDefaultsConfiguration]
+    let configurations: [Configuration] = [localConfiguration,
+                                           firebaseConfiguration,
+                                           optimizelyConfiguration,
+                                           userDefaultsConfiguration]
     configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
 }
 ```
 
-The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableTweaksConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to load the `TweaksViewController` UI. The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration.
+The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to load the `TweaksViewController` UI. The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration.
 
 
 ### Usage
@@ -135,7 +135,7 @@ The `TweaksConfigurationsCoordinator` provides the option to cache the tweak val
 
 ### Update a configuration at runtime
 
-JustTweak comes with a ViewController that allows the user to edit the `MutableTweaksConfiguration` with the highest priority.
+JustTweak comes with a ViewController that allows the user to edit the `MutableConfiguration` with the highest priority.
 
 ```swift
 func presentTweaksViewController() {
@@ -151,7 +151,7 @@ func presentTweaksViewController() {
 }
 ```
 
-When a value is modified in any `MutableTweaksConfiguration`, a notification is fired to give the clients the opportunity to react and reflect changes in the UI.
+When a value is modified in any `MutableConfiguration`, a notification is fired to give the clients the opportunity to react and reflect changes in the UI.
 
 ```swift
 override func viewDidLoad() {
@@ -175,7 +175,7 @@ JustTweak comes with two configurations out-of-the-box:
 - `UserDefaultsConfiguration` which is mutable and uses `UserDefaults` as a key/value store 
 - `LocalConfiguration` which is read-only and uses a JSON configuration file that is meant to be the default configuration
 
-In addition, JustTweak defines `TweaksConfiguration` and `MutableTweaksConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
+In addition, JustTweak defines `Configuration` and `MutableConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
 
 
 ## License
