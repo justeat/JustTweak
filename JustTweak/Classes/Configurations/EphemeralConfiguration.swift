@@ -6,7 +6,7 @@
 import Foundation
 import JustTweak
 
-extension NSMutableDictionary: MutableConfiguration {
+extension NSDictionary: Configuration {
     
     public var logClosure: LogClosure? {
         get { return nil }
@@ -14,12 +14,12 @@ extension NSMutableDictionary: MutableConfiguration {
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        guard let storedValue = object(forKey: feature) as? Bool else { return false }
+        guard let storedValue = self[feature] as? Bool else { return false }
         return storedValue
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let storedValue = object(forKey: variable) else { return nil }
+        guard let storedValue = self[variable] else { return nil }
         var value: TweakValue? = nil
         if let theValue = storedValue as? String {
             value = theValue
@@ -34,12 +34,15 @@ extension NSMutableDictionary: MutableConfiguration {
     public func activeVariation(for experiment: String) -> String? {
         return nil
     }
-    
-    public func deleteValue(feature: String, variable: String) {
-        removeObject(forKey: variable)
-    }
+}
+
+extension NSMutableDictionary: MutableConfiguration {
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
         self[variable] = value
+    }
+    
+    public func deleteValue(feature: String, variable: String) {
+        removeObject(forKey: variable)
     }
 }

@@ -100,12 +100,14 @@ extension TweakManager: MutableConfiguration {
         return activeVariation
     }
     
-    public func deleteValue(feature: String, variable: String) {
-        mutableConfiguration?.deleteValue(feature: feature, variable: variable)
+    public func set(_ value: TweakValue, feature: String, variable: String) {
+        guard var mutableConfiguration = self.mutableConfiguration else { return }
+        mutableConfiguration.set(value, feature: feature, variable: variable)
     }
     
-    public func set(_ value: TweakValue, feature: String, variable: String) {
-        mutableConfiguration?.set(value, feature: feature, variable: variable)
+    public func deleteValue(feature: String, variable: String) {
+        guard var mutableConfiguration = self.mutableConfiguration else { return }
+        mutableConfiguration.deleteValue(feature: feature, variable: variable)
     }
 }
 

@@ -17,7 +17,8 @@ class ConfigurationViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
-        tweakManager.mutableConfiguration?.deleteValue(feature: "feature_1", variable: "variable_1")
+        let mutableConfiguration = tweakManager.mutableConfiguration!
+        mutableConfiguration.deleteValue(feature: "feature_1", variable: "variable_1")
         viewController = nil
         super.tearDown()
     }

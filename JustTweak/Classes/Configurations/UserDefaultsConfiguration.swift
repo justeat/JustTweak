@@ -16,6 +16,9 @@ final public class UserDefaultsConfiguration {
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
+}
+
+extension UserDefaultsConfiguration: Configuration {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
         let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(feature)
@@ -33,6 +36,24 @@ final public class UserDefaultsConfiguration {
                      group: nil)
     }
     
+    public func activeVariation(for experiment: String) -> String? {
+        return nil
+    }
+}
+
+extension UserDefaultsConfiguration: MutableConfiguration {
+    
+    public func set(_ value: TweakValue, feature: String, variable: String) {
+        updateUserDefaults(value: value, feature: feature, variable: variable)
+    }
+
+    public func deleteValue(feature: String, variable: String) {
+        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(variable))
+    }
+}
+
+extension UserDefaultsConfiguration {
+    
     private func userDefaultsKeyForTweakWithIdentifier(_ identifier: String) -> String {
         return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
     }
@@ -45,21 +66,6 @@ final public class UserDefaultsConfiguration {
             return object.tweakValue
         }
         return nil
-    }
-}
-
-extension UserDefaultsConfiguration: MutableConfiguration {
-    
-    public func activeVariation(for experiment: String) -> String? {
-        return nil
-    }
-
-    public func deleteValue(feature: String, variable: String) {
-        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(variable))
-    }
-    
-    public func set(_ value: TweakValue, feature: String, variable: String) {
-        updateUserDefaults(value: value, feature: feature, variable: variable)
     }
         
     private func updateUserDefaults(value: TweakValue, feature: String, variable: String) {

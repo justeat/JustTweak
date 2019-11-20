@@ -61,8 +61,8 @@ class TweakManagerTests: XCTestCase {
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
-        let mutableConfiguration = tweakManager.mutableConfiguration
-        mutableConfiguration?.set(false, feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
+        let mutableConfiguration = tweakManager.mutableConfiguration!
+        mutableConfiguration.set(false, feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
         XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
     }
     

@@ -11,7 +11,6 @@
 		4F30EA6F21ADA06A00AECF77 /* OptimizelyConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */; };
 		4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */; };
 		4F38E0F1236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift */; };
-		4F38E0F3236E1E470070BD17 /* EphemeralConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6D21ADA06A00AECF77 /* EphemeralConfiguration.swift */; };
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
@@ -54,7 +53,6 @@
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfiguration.swift; sourceTree = "<group>"; };
 		4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyConfiguration.swift; sourceTree = "<group>"; };
-		4F30EA6D21ADA06A00AECF77 /* EphemeralConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EphemeralConfiguration.swift; sourceTree = "<group>"; };
 		4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
 		4F38E0F0236E1BB60070BD17 /* FeatureFlagPropertyWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagPropertyWrapperTests.swift; sourceTree = "<group>"; };
 		4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
@@ -214,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				61BE051D1DAE878600288EC7 /* TestHelpers.swift */,
-				4F30EA6D21ADA06A00AECF77 /* EphemeralConfiguration.swift */,
 			);
 			path = TestHelpers;
 			sourceTree = "<group>";
@@ -476,7 +473,6 @@
 				4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */,
 				619938DC1DA7F6E600765852 /* ConfigurationViewControllerTests.swift in Sources */,
 				61BE051E1DAE878600288EC7 /* TestHelpers.swift in Sources */,
-				4F38E0F3236E1E470070BD17 /* EphemeralConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
