@@ -1,3 +1,7 @@
+//
+//  LocalConfigurationTests.swift
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
+//
 
 import XCTest
 import JustTweak

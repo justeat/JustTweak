@@ -1,3 +1,7 @@
+//
+//  TestHelpers.swift
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
+//
 
 import Foundation
 @testable import JustTweak

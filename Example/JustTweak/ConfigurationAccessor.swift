@@ -1,9 +1,6 @@
 //
 //  ConfigurationAccessor.swift
-//  JustTweak_Example
-//
-//  Created by Alberto De Bortoli on 02/11/2019.
-//  Copyright © 2019 Just Eat. All rights reserved.
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +8,7 @@ import JustTweak
 
 class ConfigurationAccessor {
     
-    static let configurationsCoordinator: JustTweak = {
+    static let tweakManager: TweakManager = {
         let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
         
         // let optimizelyConfiguration = OptimizelyTweaksConfiguration()
@@ -23,11 +20,11 @@ class ConfigurationAccessor {
         let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
         
         let configurations: [Configuration] = [userDefaultsConfiguration, /*optimizelyConfiguration, firebaseConfiguration*/ localConfiguration]
-        return JustTweak(configurations: configurations)
+        return TweakManager(configurations: configurations)
     }()
     
-    private var configurationsCoordinator: JustTweak {
-        return Self.configurationsCoordinator
+    private var tweakManager: TweakManager {
+        return Self.tweakManager
     }
     
     // MARK: - Via Property Wrappers
@@ -35,47 +32,47 @@ class ConfigurationAccessor {
     @FeatureFlag(fallbackValue: false,
                  feature: Features.General,
                  variable: Variables.GreetOnAppDidBecomeActive,
-                 coordinator: configurationsCoordinator)
+                 tweakManager: tweakManager)
     var shouldShowAlert: Bool
     
     @FeatureFlag(fallbackValue: false,
                  feature: Features.UICustomization,
                  variable: Variables.DisplayRedView,
-                 coordinator: configurationsCoordinator)
+                 tweakManager: tweakManager)
     var canShowRedView: Bool
     
     @FeatureFlag(fallbackValue: false,
                  feature: Features.UICustomization,
                  variable: Variables.DisplayGreenView,
-                 coordinator: configurationsCoordinator)
+                 tweakManager: tweakManager)
     var canShowGreenView: Bool
     
     @FeatureFlag(fallbackValue: "",
                  feature: Features.UICustomization,
                  variable: Variables.LabelText,
-                 coordinator: configurationsCoordinator)
+                 tweakManager: tweakManager)
     var labelText: String
     
     @FeatureFlagWrappingOptional(fallbackValue: nil,
                                  feature: Features.UICustomization,
                                  variable: Variables.MeaningOfLife,
-                                 coordinator: configurationsCoordinator)
+                                 tweakManager: tweakManager)
     var meaningOfLife: Int?
     
-    // MARK: - Via ConfigurationsCoordinator
+    // MARK: - Via TweakManager
     
     var canShowYellowView: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.DisplayYellowView)?.boolValue ?? false
+        return tweakManager.tweakWith(feature: Features.UICustomization,
+                                      variable: Variables.DisplayYellowView)?.boolValue ?? false
     }
     
     var redViewAlpha: Float {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.RedViewAlpha)?.floatValue ?? 0.0
+        return tweakManager.tweakWith(feature: Features.UICustomization,
+                                      variable: Variables.RedViewAlpha)?.floatValue ?? 0.0
     }
     
     var isTapGestureToChangeColorEnabled: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.General,
-                                                   variable: Variables.TapToChangeViewColor)?.boolValue ?? false
+        return tweakManager.tweakWith(feature: Features.General,
+                                      variable: Variables.TapToChangeViewColor)?.boolValue ?? false
     }
 }

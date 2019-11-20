@@ -1,12 +1,12 @@
 //
-//  OptimizelyTweaksConfiguration.swift
+//  OptimizelyConfiguration.swift
 //  Copyright (c) 2018 Just Eat Holding Ltd. All rights reserved.
 //
 
 import JustTweak
 import OptimizelySDKiOS
 
-public class OptimizelyTweaksConfiguration: Configuration {
+public class OptimizelyConfiguration: Configuration {
     
     private var optimizelyManager: OPTLYManager?
     private var optimizelyClient: OPTLYClient?

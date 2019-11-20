@@ -1,3 +1,7 @@
+//
+//  ConfigurationViewControllerTests.swift
+//  Copyright (c) 2019 Just Eat Holding Ltd. All rights reserved.
+//
 
 import XCTest
 @testable import JustTweak
@@ -5,7 +9,7 @@ import XCTest
 class ConfigurationViewControllerTests: XCTestCase {
     
     var viewController: TweaksViewController!
-    var configurationsCoordinator: JustTweak!
+    var tweakManager: TweakManager!
     
     override func setUp() {
         super.setUp()
@@ -13,7 +17,7 @@ class ConfigurationViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
-        configurationsCoordinator.mutableConfiguration?.deleteValue(feature: "feature_1", variable: "variable_1")
+        tweakManager.mutableConfiguration?.deleteValue(feature: "feature_1", variable: "variable_1")
         viewController = nil
         super.tearDown()
     }
@@ -102,7 +106,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
         cell.switchControl.sendActions(for: .valueChanged)
-        XCTAssertTrue(configurationsCoordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
     }
     
     // MARK: Other Actions
@@ -116,7 +120,7 @@ class ConfigurationViewControllerTests: XCTestCase {
                 }
             }
         }
-        let vc = FakeViewController(style: .grouped, coordinator: configurationsCoordinator)
+        let vc = FakeViewController(style: .grouped, tweakManager: tweakManager)
         vc.dismissViewController()
         XCTAssertTrue(vc.mockPresentingViewController.didCallDismissal)
     }
@@ -126,11 +130,11 @@ class ConfigurationViewControllerTests: XCTestCase {
     private func buildViewControllerWithConfigurationFromFileNamed(_ fileName: String) {
         let bundle = Bundle(for: ConfigurationViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
-        let jsonConfiguration = LocalConfiguration(jsonURL: jsonURL!)!
+        let localConfiguration = LocalConfiguration(jsonURL: jsonURL!)!
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
         let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
-        let configurations: [Configuration] = [jsonConfiguration, userDefaultsConfiguration]
-        configurationsCoordinator = JustTweak(configurations: configurations)
-        viewController = TweaksViewController(style: .plain, coordinator: configurationsCoordinator)
+        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
+        tweakManager = TweakManager(configurations: configurations)
+        viewController = TweaksViewController(style: .plain, tweakManager: tweakManager)
     }
 }

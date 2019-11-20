@@ -1,11 +1,11 @@
 //
-//  JustTweak+Presentation.swift
+//  TweakManager+Presentation.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-extension JustTweak {
+extension TweakManager {
     
     var displayableTweaks: [Tweak] {
         guard let localConfiguration = self.localConfiguration else {

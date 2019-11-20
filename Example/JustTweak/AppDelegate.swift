@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = window?.rootViewController as! UINavigationController
         let viewController = navigationController.topViewController as! ViewController
         viewController.configurationAccessor = configurationAccessor
-        viewController.configurationsCoordinator = ConfigurationAccessor.configurationsCoordinator
+        viewController.tweakManager = ConfigurationAccessor.tweakManager
         return true
     }
     

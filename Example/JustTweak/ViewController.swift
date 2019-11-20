@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     
     var configurationAccessor: ConfigurationAccessor!
-    var configurationsCoordinator: JustTweak!
+    var tweakManager: TweakManager!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(setAndShowMeaningOfLife))
         tapGestureRecognizer.numberOfTapsRequired = 2
         view.addGestureRecognizer(tapGestureRecognizer)
-        configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
+        tweakManager.registerForConfigurationsUpdates(self) { [weak self] tweak in
             print("Tweak changed: \(tweak)")
             self?.updateView()
         }
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
     }
     
     private var tweaksViewController: TweaksViewController {
-        return TweaksViewController(style: .grouped, coordinator: configurationsCoordinator)
+        return TweaksViewController(style: .grouped, tweakManager: tweakManager)
     }
     
     @IBAction func presentConfigurationViewController() {

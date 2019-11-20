@@ -1,11 +1,11 @@
 //
-//  JustTweak.swift
+//  TweakManager.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-final public class JustTweak {
+final public class TweakManager {
     
     var configurations: [Configuration]
     
@@ -40,7 +40,7 @@ final public class JustTweak {
     }
 }
 
-extension JustTweak: MutableConfiguration {
+extension TweakManager: MutableConfiguration {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
         var enabled = false
@@ -109,7 +109,7 @@ extension JustTweak: MutableConfiguration {
     }
 }
 
-extension JustTweak {
+extension TweakManager {
     
     public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping (Tweak) -> Void) {
         deregisterFromConfigurationsUpdates(object)

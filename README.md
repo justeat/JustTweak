@@ -58,7 +58,7 @@ private func setupJustTweak() {
                                            optimizelyConfiguration,
                                            firebaseConfiguration,
                                            localConfiguration]
-    configurationsCoordinator = JustTweak(configurations: configurations)
+    tweakManager = TweakManager(configurations: configurations)
 }
 ```
 
@@ -73,7 +73,7 @@ The three main features of JustTweak can be accessed from the `JustTweak` instan
 
 ```swift
 // check for a feature to be enabled
-let enabled = configurationsCoordinator.isFeatureEnabled("some_feature")
+let enabled = tweakManager.isFeatureEnabled("some_feature")
 if enabled {
     // enable the feature
 } else {
@@ -87,7 +87,7 @@ Use either `tweakWith(feature:variable:)` or the provided property wrappers: `@F
 
 ```swift
 // check for a tweak value
-let tweak = configurationsCoordinator.tweakWith(feature: "some_feature", variable: "some_flag")
+let tweak = tweakManager.tweakWith(feature: "some_feature", variable: "some_flag")
 if let tweak = tweak {
     // tweak was found in some configuration, use tweak.value
 } else {
@@ -101,7 +101,7 @@ if let tweak = tweak {
 @FeatureFlag(fallbackValue: <#fallback_value#>,
              feature: <#feature_key#>,
              variable: <#variable_key#>,
-             coordinator: <#justTweak#>)
+             tweakManager: <#TweakManager#>)
 var labelText: String
 ```
 
@@ -109,7 +109,7 @@ var labelText: String
 @FeatureFlagWrappingOptional(fallbackValue: <#nillable_fallback_value#>,
                              feature: <#feature_key#>,
                              variable: <#variable_key#>,
-                             coordinator: <#justTweak#>)
+                             tweakManager: <#TweakManager#>)
 var meaningOfLife: Int?
 ```
 
@@ -117,7 +117,7 @@ var meaningOfLife: Int?
 
 ```swift
 // check for a tweak value
-let variation = configurationsCoordinator.activeVariation(for: "some_experiment")
+let variation = tweakManager.activeVariation(for: "some_experiment")
 if let variation = variation {
    // act according to the kind of variation (e.g. "control", "variation_1")
 } else {
@@ -139,7 +139,7 @@ JustTweak comes with a ViewController that allows the user to edit the `MutableC
 
 ```swift
 func presentTweaksViewController() {
-    let tweaksViewController = TweaksViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+let tweaksViewController = TweaksViewController(style: .grouped, tweakManager: <#TweakManager#>)
     
     // either present it modally
     let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)

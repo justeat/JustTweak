@@ -1,3 +1,7 @@
+//
+//  BooleanTweakTableViewCellTests.swift
+//  Copyright (c) 2019 Just Eat Holding Ltd. All rights reserved.
+//
 
 import XCTest
 @testable import JustTweak

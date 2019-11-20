@@ -46,7 +46,7 @@ public class TweaksViewController: UITableViewController {
     private var sections = [Section]()
     private var filteredSections = [Section]()
     
-    private let coordinator: JustTweak
+    private let tweakManager: TweakManager
     
     private class func justTweakResourcesBundle() -> Bundle {
         let podBundle = Bundle(for: TweaksViewController.self)
@@ -63,8 +63,8 @@ public class TweaksViewController: UITableViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    public init(style: UITableView.Style, coordinator: JustTweak) {
-        self.coordinator = coordinator
+    public init(style: UITableView.Style, tweakManager: TweakManager) {
+        self.tweakManager = tweakManager
         super.init(style: style)
         rebuildSections()
     }
@@ -184,7 +184,7 @@ extension TweaksViewController {
     }
     
     private func rebuildSections() {
-        let allTweaks = coordinator.displayableTweaks
+        let allTweaks = tweakManager.displayableTweaks
         var allSections = [Section]()
         var allGroups: Set<String> = []
         for tweak in allTweaks {
@@ -232,7 +232,7 @@ extension TweaksViewController: TweaksViewControllerCellDelegate {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let feature = tweak.feature
                 let variable = tweak.variable
-                coordinator.set(cell.value, feature: feature, variable: variable)
+                tweakManager.set(cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
         }

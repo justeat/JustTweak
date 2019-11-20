@@ -1,6 +1,6 @@
 //
 //  PropertyWrappers.swift
-//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
+//  Copyright (c) 2019 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
@@ -10,22 +10,22 @@ public struct FeatureFlag<T: TweakValue> {
     let fallbackValue: T
     let feature: String
     let variable: String
-    let coordinator: JustTweak
+    let tweakManager: TweakManager
     
-    public init(fallbackValue: T, feature: String, variable: String, coordinator: JustTweak) {
+    public init(fallbackValue: T, feature: String, variable: String, tweakManager: TweakManager) {
         self.fallbackValue = fallbackValue
         self.feature = feature
         self.variable = variable
-        self.coordinator = coordinator
+        self.tweakManager = tweakManager
     }
     
     public var wrappedValue: T {
         get {
-            let tweak = coordinator.tweakWith(feature: feature, variable: variable)
+            let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
             return (tweak?.value as? T) ?? fallbackValue
         }
         set {
-            coordinator.set(newValue, feature: feature, variable: variable)
+            tweakManager.set(newValue, feature: feature, variable: variable)
         }
     }
 }
@@ -35,26 +35,26 @@ public struct FeatureFlagWrappingOptional<T: TweakValue> {
     let fallbackValue: T?
     let feature: String
     let variable: String
-    let coordinator: JustTweak
+    let tweakManager: TweakManager
     
-    public init(fallbackValue: T?, feature: String, variable: String, coordinator: JustTweak) {
+    public init(fallbackValue: T?, feature: String, variable: String, tweakManager: TweakManager) {
         self.fallbackValue = fallbackValue
         self.feature = feature
         self.variable = variable
-        self.coordinator = coordinator
+        self.tweakManager = tweakManager
     }
     
     public var wrappedValue: T? {
         get {
-            let tweak = coordinator.tweakWith(feature: feature, variable: variable)
+            let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
             return (tweak?.value as? T) ?? fallbackValue
         }
         set {
             if let newValue = newValue {
-                coordinator.set(newValue, feature: feature, variable: variable)
+                tweakManager.set(newValue, feature: feature, variable: variable)
             }
             else {
-                coordinator.deleteValue(feature: feature, variable: variable)
+                tweakManager.deleteValue(feature: feature, variable: variable)
             }
         }
     }

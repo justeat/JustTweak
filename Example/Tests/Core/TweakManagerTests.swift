@@ -1,15 +1,18 @@
+//
+//  TweakManagerTests.swift
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
+//
 
 import XCTest
 @testable import JustTweak
 
-class TweaksConfigurationCoordinatorTests: XCTestCase {
+class TweakManagerTests: XCTestCase {
     
-    var coordinator: JustTweak!
-    let jsonConfiguration: LocalConfiguration = {
-        let bundle = Bundle(for: TweaksConfigurationCoordinatorTests.self)
+    var tweakManager: TweakManager!
+    let localConfiguration: LocalConfiguration = {
+        let bundle = Bundle(for: TweakManagerTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        let jsonConfiguration = LocalConfiguration(jsonURL: jsonConfigurationURL)!
-        return jsonConfiguration
+        return LocalConfiguration(jsonURL: jsonConfigurationURL)!
     }()
     var userDefaultsConfiguration: UserDefaultsConfiguration!
     
@@ -18,54 +21,54 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         let mockFirebaseConfiguration = MockTweaksRemoteConfiguration()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
         userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
-        let configurations: [Configuration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
-        coordinator = JustTweak(configurations: configurations)
+        let configurations: [Configuration] = [userDefaultsConfiguration, mockFirebaseConfiguration, localConfiguration]
+        tweakManager = TweakManager(configurations: configurations)
     }
     
     override func tearDown() {
         userDefaultsConfiguration.deleteValue(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
-        coordinator = nil
+        tweakManager = nil
         super.tearDown()
     }
     
     func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
-        let coordinator = JustTweak(configurations: [jsonConfiguration])
-        XCTAssertNil(coordinator.mutableConfiguration)
+        let tweakManager = TweakManager(configurations: [localConfiguration])
+        XCTAssertNil(tweakManager.mutableConfiguration)
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(coordinator.tweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
+        XCTAssertNil(tweakManager.tweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
     }
     
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
+        XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayGreenView)!.boolValue)
+        XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayGreenView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
     }
     
     func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(coordinator.tweakWith(feature: Features.General, variable: Variables.TapToChangeViewColor)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.General, variable: Variables.TapToChangeViewColor)!.boolValue)
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
-        let mutableConfiguration = coordinator.mutableConfiguration
+        let mutableConfiguration = tweakManager.mutableConfiguration
         mutableConfiguration?.set(false, feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
-        XCTAssertFalse(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
+        XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
     }
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {
         var didCallClosure = false
-        coordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
+        tweakManager.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
         }
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
@@ -76,10 +79,10 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     
     func testDoesNotCallClosureForDeregisteredObserverWhenAnyConfigurationChanges() {
         var didCallClosure = false
-        coordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
+        tweakManager.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
         }
-        coordinator.deregisterFromConfigurationsUpdates(self)
+        tweakManager.deregisterFromConfigurationsUpdates(self)
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
         let userInfo = [TweaksConfigurationDidChangeNotificationTweakKey: tweak]
         NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: self, userInfo: userInfo)
