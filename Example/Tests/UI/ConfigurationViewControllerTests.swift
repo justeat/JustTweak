@@ -8,7 +8,7 @@ import XCTest
 
 class ConfigurationViewControllerTests: XCTestCase {
     
-    var viewController: TweaksViewController!
+    var viewController: TweakViewController!
     var tweakManager: TweakManager!
     
     override func setUp() {
@@ -79,7 +79,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayRedView)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)
         XCTAssertEqual(cell.textLabel?.text, "Display Red View")
-        XCTAssertEqual((cell as! TweaksViewControllerCell).title, "Display Red View")
+        XCTAssertEqual((cell as! TweakViewControllerCell).title, "Display Red View")
     }
     
     func testDisplaysNumericTweaksCorrectly() {
@@ -113,7 +113,7 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Other Actions
     
     func testAsksToBeDismissedWhenDoneButtonIsTapped() {
-        class FakeViewController: TweaksViewController {
+        class FakeViewController: TweakViewController {
             fileprivate let mockPresentingViewController = MockPresentingViewController()
             override var presentingViewController: UIViewController? {
                 get {
@@ -131,11 +131,11 @@ class ConfigurationViewControllerTests: XCTestCase {
     private func buildViewControllerWithConfigurationFromFileNamed(_ fileName: String) {
         let bundle = Bundle(for: ConfigurationViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
-        let localConfiguration = LocalConfiguration(jsonURL: jsonURL!)!
+        let localConfiguration = LocalConfiguration(jsonURL: jsonURL!)
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
         let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
         let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
         tweakManager = TweakManager(configurations: configurations)
-        viewController = TweaksViewController(style: .plain, tweakManager: tweakManager)
+        viewController = TweakViewController(style: .plain, tweakManager: tweakManager)
     }
 }

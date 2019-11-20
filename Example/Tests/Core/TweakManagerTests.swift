@@ -12,7 +12,7 @@ class TweakManagerTests: XCTestCase {
     let localConfiguration: LocalConfiguration = {
         let bundle = Bundle(for: TweakManagerTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        return LocalConfiguration(jsonURL: jsonConfigurationURL)!
+        return LocalConfiguration(jsonURL: jsonConfigurationURL)
     }()
     var userDefaultsConfiguration: UserDefaultsConfiguration!
     

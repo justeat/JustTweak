@@ -13,64 +13,64 @@ class Accessor {
         return TweakManager(configurations: [ephemeralConfiguration])
     }()
     
-    @FeatureFlag(fallbackValue: "default",
-                 feature: "stringValue_feature",
-                 variable: "stringValue_variable",
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: "default",
+                   feature: "stringValue_feature",
+                   variable: "stringValue_variable",
+                   tweakManager: tweakManager)
     var stringValue: String
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: "boolValue_feature",
-                 variable: "boolValue_variable",
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: false,
+                   feature: "boolValue_feature",
+                   variable: "boolValue_variable",
+                   tweakManager: tweakManager)
     var boolValue: Bool
     
-    @FeatureFlag(fallbackValue: 42,
-                 feature: "intValue_feature",
-                 variable: "intValue_variable",
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: 42,
+                   feature: "intValue_feature",
+                   variable: "intValue_variable",
+                   tweakManager: tweakManager)
     var intValue: Int
     
-    @FeatureFlag(fallbackValue: 3.14,
-                 feature: "doubleValue_feature",
-                 variable: "doubleValue_variable",
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: 3.14,
+                   feature: "doubleValue_feature",
+                   variable: "doubleValue_variable",
+                   tweakManager: tweakManager)
     var doubleValue: Double
     
-    @FeatureFlag(fallbackValue: 108.0,
-                 feature: "floatValue_feature",
-                 variable: "floatValue_variable",
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: 108.0,
+                   feature: "floatValue_feature",
+                   variable: "floatValue_variable",
+                   tweakManager: tweakManager)
     var floatValue: Float
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: "optional_stringValue_feature",
-                                 variable: "optional_stringValue_variable",
-                                 tweakManager: tweakManager)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: "optional_stringValue_feature",
+                           variable: "optional_stringValue_variable",
+                           tweakManager: tweakManager)
     var optionalStringValue: String
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: "optional_boolValue_feature",
-                                 variable: "optional_boolValue_variable",
-                                 tweakManager: tweakManager)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: "optional_boolValue_feature",
+                           variable: "optional_boolValue_variable",
+                           tweakManager: tweakManager)
     var optionalBoolValue: Bool
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: "optional_intValue_feature",
-                                 variable: "optional_intValue_variable",
-                                 tweakManager: tweakManager)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: "optional_intValue_feature",
+                           variable: "optional_intValue_variable",
+                           tweakManager: tweakManager)
     var optionalIntValue: Int
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: "optional_doubleValue_feature",
-                                 variable: "optional_doubleValue_variable",
-                                 tweakManager: tweakManager)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: "optional_doubleValue_feature",
+                           variable: "optional_doubleValue_variable",
+                           tweakManager: tweakManager)
     var optionalDoubleValue: Double
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: "optional_floatValue_feature",
-                                 variable: "optional_floatValue_variable",
-                                 tweakManager: tweakManager)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: "optional_floatValue_feature",
+                           variable: "optional_floatValue_variable",
+                           tweakManager: tweakManager)
     var optionalFloatValue: Float
 }
 

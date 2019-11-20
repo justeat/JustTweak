@@ -26,15 +26,6 @@ class LocalConfigurationTests: XCTestCase {
         return LocalConfiguration(jsonURL: jsonURL)
     }
     
-    func testGetsNilInitialized_IfURLContainsNoData() {
-        let fileURL = URL(fileURLWithPath: "/none")
-        XCTAssertNil(LocalConfiguration(jsonURL: fileURL))
-    }
-    
-    func testGetsNilInitialized_IfJSONIsInvalid() {
-        XCTAssertNil(configurationWithFileNamed("test_configuration_invalid"))
-    }
-    
     func testParsesBoolTweak() {
         let redViewTweak = Tweak(feature: Features.UICustomization, variable: Variables.DisplayRedView, value: true, title: "Display Red View", group: "UI Customization")
         XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView))

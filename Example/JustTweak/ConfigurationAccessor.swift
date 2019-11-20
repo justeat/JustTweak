@@ -17,7 +17,7 @@ class ConfigurationAccessor {
         // let firebaseConfiguration = FirebaseTweaksConfiguration()
         
         let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
+        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
         
         let configurations: [Configuration] = [userDefaultsConfiguration, /*optimizelyConfiguration, firebaseConfiguration*/ localConfiguration]
         return TweakManager(configurations: configurations)
@@ -29,34 +29,34 @@ class ConfigurationAccessor {
     
     // MARK: - Via Property Wrappers
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: Features.General,
-                 variable: Variables.GreetOnAppDidBecomeActive,
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: false,
+                   feature: Features.General,
+                   variable: Variables.GreetOnAppDidBecomeActive,
+                   tweakManager: tweakManager)
     var shouldShowAlert: Bool
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: Features.UICustomization,
-                 variable: Variables.DisplayRedView,
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: false,
+                   feature: Features.UICustomization,
+                   variable: Variables.DisplayRedView,
+                   tweakManager: tweakManager)
     var canShowRedView: Bool
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: Features.UICustomization,
-                 variable: Variables.DisplayGreenView,
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: false,
+                   feature: Features.UICustomization,
+                   variable: Variables.DisplayGreenView,
+                   tweakManager: tweakManager)
     var canShowGreenView: Bool
     
-    @FeatureFlag(fallbackValue: "",
-                 feature: Features.UICustomization,
-                 variable: Variables.LabelText,
-                 tweakManager: tweakManager)
+    @TweakProperty(fallbackValue: "",
+                   feature: Features.UICustomization,
+                   variable: Variables.LabelText,
+                   tweakManager: tweakManager)
     var labelText: String
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: Features.UICustomization,
-                                 variable: Variables.MeaningOfLife,
-                                 tweakManager: tweakManager)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: Features.UICustomization,
+                           variable: Variables.MeaningOfLife,
+                           tweakManager: tweakManager)
     var meaningOfLife: Int?
     
     // MARK: - Via TweakManager

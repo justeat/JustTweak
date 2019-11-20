@@ -30,12 +30,10 @@ final public class LocalConfiguration {
         return storage
     }
     
-    public init?(jsonURL: URL) {
-        guard let data = try? Data(contentsOf: jsonURL) else { return nil }
+    public init(jsonURL: URL) {
+        let data = try! Data(contentsOf: jsonURL)
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        guard let configuration = json as? [String : [String : [String : AnyObject]]] else {
-            return nil
-        }
+        let configuration = json as! [String : [String : [String : AnyObject]]]
         configurationFile = configuration
         fileURL = jsonURL
     }

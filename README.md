@@ -41,28 +41,28 @@ var justTweak: JustTweak!
 
 private func setupJustTweak() {
 
-    // mutable configuration (to override tweaks from other configurations)
-    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-    
-    // remote configurations (optional)
-    let optimizelyConfiguration = OptimizelyConfiguration()
-    let firebaseConfiguration = FirebaseConfiguration()
-    optimizelyConfiguration.userId = <#user_id#>
-    
-    // local JSON configuration (default tweaks)
-    let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-    let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
+// mutable configuration (to override tweaks from other configurations)
+let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
 
-    // priority is defined by the order in the configurations array (from highest to lowest)
-    let configurations: [Configuration] = [userDefaultsConfiguration,
-                                           optimizelyConfiguration,
-                                           firebaseConfiguration,
-                                           localConfiguration]
-    tweakManager = TweakManager(configurations: configurations)
+// remote configurations (optional)
+let optimizelyConfiguration = OptimizelyConfiguration()
+let firebaseConfiguration = FirebaseConfiguration()
+optimizelyConfiguration.userId = <#user_id#>
+
+// local JSON configuration (default tweaks)
+let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
+
+// priority is defined by the order in the configurations array (from highest to lowest)
+let configurations: [Configuration] = [userDefaultsConfiguration,
+optimizelyConfiguration,
+firebaseConfiguration,
+localConfiguration]
+tweakManager = TweakManager(configurations: configurations)
 }
 ```
 
-The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to load the `TweaksViewController` UI. The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration.
+The order of the objects in the `configurations` array defines the priority of the configurations. The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to load the `TweakViewController` UI. The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration.
 
 
 ### Usage
@@ -75,41 +75,41 @@ The three main features of JustTweak can be accessed from the `JustTweak` instan
 // check for a feature to be enabled
 let enabled = tweakManager.isFeatureEnabled("some_feature")
 if enabled {
-    // enable the feature
+// enable the feature
 } else {
-    // default behaviour
+// default behaviour
 }
 ```
 
 2. Get the value of a flag for a given feature. JustTweak will return the value from the configuration with the highest priority and automatically fallback to the others if no set value is found.
 
-Use either `tweakWith(feature:variable:)` or the provided property wrappers: `@FeatureFlag` and `@FeatureFlagWrappingOptional`.
+Use either `tweakWith(feature:variable:)` or the provided property wrappers: `@FeatureFlag` and `@OptionalTweak`.
 
 ```swift
 // check for a tweak value
 let tweak = tweakManager.tweakWith(feature: "some_feature", variable: "some_flag")
 if let tweak = tweak {
-    // tweak was found in some configuration, use tweak.value
+// tweak was found in some configuration, use tweak.value
 } else {
-    // tweak was not found in any configuration
+// tweak was not found in any configuration
 }
 ```
 
-`@FeatureFlag` and `@FeatureFlagWrappingOptional` are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `JustTweak` must be available.
+`@FeatureFlag` and `@OptionalTweak` are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `JustTweak` must be available.
 
 ```
-@FeatureFlag(fallbackValue: <#fallback_value#>,
-             feature: <#feature_key#>,
-             variable: <#variable_key#>,
-             tweakManager: <#TweakManager#>)
+@TweakProperty(fallbackValue: <#fallback_value#>,
+feature: <#feature_key#>,
+variable: <#variable_key#>,
+tweakManager: <#TweakManager#>)
 var labelText: String
 ```
 
 ```
-@FeatureFlagWrappingOptional(fallbackValue: <#nillable_fallback_value#>,
-                             feature: <#feature_key#>,
-                             variable: <#variable_key#>,
-                             tweakManager: <#TweakManager#>)
+@OptionalTweak(fallbackValue: <#nillable_fallback_value#>,
+feature: <#feature_key#>,
+variable: <#variable_key#>,
+tweakManager: <#TweakManager#>)
 var meaningOfLife: Int?
 ```
 
@@ -119,9 +119,9 @@ var meaningOfLife: Int?
 // check for a tweak value
 let variation = tweakManager.activeVariation(for: "some_experiment")
 if let variation = variation {
-   // act according to the kind of variation (e.g. "control", "variation_1")
+// act according to the kind of variation (e.g. "control", "variation_1")
 } else {
-   // default behaviour
+// default behaviour
 }
 ```
 
@@ -138,16 +138,16 @@ The `JustTweak` provides the option to cache the tweak values in order to improv
 JustTweak comes with a ViewController that allows the user to edit the `MutableConfiguration` with the highest priority.
 
 ```swift
-func presentTweaksViewController() {
-let tweaksViewController = TweaksViewController(style: .grouped, tweakManager: <#TweakManager#>)
-    
-    // either present it modally
-    let tweaksNavigationController = UINavigationController(rootViewController:tweaksViewController)
-    tweaksNavigationController.navigationBar.prefersLargeTitles = true
-    present(tweaksNavigationController, animated: true, completion: nil)
-    
-    // or push it on an existing UINavigationController
-    navigationController?.pushViewController(tweaksViewController, animated: true)
+func presentTweakViewController() {
+let tweakViewController = TweakViewController(style: .grouped, tweakManager: <#TweakManager#>)
+
+// either present it modally
+let tweaksNavigationController = UINavigationController(rootViewController:tweakViewController)
+tweaksNavigationController.navigationBar.prefersLargeTitles = true
+present(tweaksNavigationController, animated: true, completion: nil)
+
+// or push it on an existing UINavigationController
+navigationController?.pushViewController(tweakViewController, animated: true)
 }
 ```
 
@@ -155,15 +155,15 @@ When a value is modified in any `MutableConfiguration`, a notification is fired 
 
 ```swift
 override func viewDidLoad() {
-    super.viewDidLoad()
-    NotificationCenter.defaultCenter().addObserver(self,
-                                                   selector: #selector(updateUI),
-                                                   name: TweaksConfigurationDidChangeNotification,
-                                                   object: nil)
+super.viewDidLoad()
+NotificationCenter.defaultCenter().addObserver(self,
+selector: #selector(updateUI),
+name: TweaksConfigurationDidChangeNotification,
+object: nil)
 }
 
 @objc func updateUI() {
-    // update the UI accordingly
+// update the UI accordingly
 }
 ```
 

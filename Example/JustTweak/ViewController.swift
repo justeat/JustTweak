@@ -70,17 +70,17 @@ class ViewController: UIViewController {
                                        alpha: 1.0)
     }
     
-    private var tweaksViewController: TweaksViewController {
-        return TweaksViewController(style: .grouped, tweakManager: tweakManager)
+    private var tweakViewController: TweakViewController {
+        return TweakViewController(style: .grouped, tweakManager: tweakManager)
     }
     
     @IBAction func presentConfigurationViewController() {
-        let tweaksNavigationController = UINavigationController(rootViewController: tweaksViewController)
+        let tweaksNavigationController = UINavigationController(rootViewController: tweakViewController)
         tweaksNavigationController.navigationBar.prefersLargeTitles = true
         present(tweaksNavigationController, animated: true, completion: nil)
     }
     
     @IBAction func pushConfigurationViewController() {
-        navigationController?.pushViewController(tweaksViewController, animated: true)
+        navigationController?.pushViewController(tweakViewController, animated: true)
     }
 }

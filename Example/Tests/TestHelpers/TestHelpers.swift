@@ -6,11 +6,11 @@
 import Foundation
 @testable import JustTweak
 
-class MockTweakCellDelegate: TweaksViewControllerCellDelegate {
+class MockTweakCellDelegate: TweakViewControllerCellDelegate {
     
     private(set) var didCallDelegate: Bool = false
     
-    func tweaksConfigurationCellDidChangeValue(_ cell: TweaksViewControllerCell) {
+    func tweaksConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
         didCallDelegate = true
     }
     

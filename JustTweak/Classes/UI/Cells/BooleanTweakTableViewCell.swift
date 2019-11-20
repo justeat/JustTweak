@@ -5,7 +5,7 @@
 
 import UIKit
 
-internal class BooleanTweakTableViewCell: UITableViewCell, TweaksViewControllerCell {
+internal class BooleanTweakTableViewCell: UITableViewCell, TweakViewControllerCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -41,7 +41,7 @@ internal class BooleanTweakTableViewCell: UITableViewCell, TweaksViewControllerC
             switchControl.isOn = newValue.boolValue
         }
     }
-    weak var delegate: TweaksViewControllerCellDelegate?
+    weak var delegate: TweakViewControllerCellDelegate?
     
     lazy var switchControl: UISwitch! = {
         let switchControl = UISwitch()

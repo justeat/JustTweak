@@ -6,7 +6,7 @@
 import Foundation
 
 @propertyWrapper
-public struct FeatureFlag<T: TweakValue> {
+public struct TweakProperty<T: TweakValue> {
     let fallbackValue: T
     let feature: String
     let variable: String
@@ -31,7 +31,7 @@ public struct FeatureFlag<T: TweakValue> {
 }
 
 @propertyWrapper
-public struct FeatureFlagWrappingOptional<T: TweakValue> {
+public struct OptionalTweakProperty<T: TweakValue> {
     let fallbackValue: T?
     let feature: String
     let variable: String

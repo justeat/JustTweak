@@ -1,22 +1,22 @@
 //
-//  TweaksViewController
+//  TweakViewController
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import UIKit
 
-internal protocol TweaksViewControllerCell: class {
+internal protocol TweakViewControllerCell: class {
     var title: String? { get set }
     var desc: String? { get set }
     var value: TweakValue { get set }
-    var delegate: TweaksViewControllerCellDelegate? { get set }
+    var delegate: TweakViewControllerCellDelegate? { get set }
 }
 
-internal protocol TweaksViewControllerCellDelegate: class {
-    func tweaksConfigurationCellDidChangeValue(_ cell: TweaksViewControllerCell)
+internal protocol TweakViewControllerCellDelegate: class {
+    func tweaksConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell)
 }
 
-public class TweaksViewController: UITableViewController {
+public class TweakViewController: UITableViewController {
     
     fileprivate struct Section {
         let title: String
@@ -49,7 +49,7 @@ public class TweaksViewController: UITableViewController {
     private let tweakManager: TweakManager
     
     private class func justTweakResourcesBundle() -> Bundle {
-        let podBundle = Bundle(for: TweaksViewController.self)
+        let podBundle = Bundle(for: TweakViewController.self)
         let resourcesBundleURL = podBundle.url(forResource: "JustTweak", withExtension: "bundle")!
         let justTweakResourcesBundle = Bundle(url: resourcesBundleURL)!
         return justTweakResourcesBundle
@@ -57,7 +57,7 @@ public class TweaksViewController: UITableViewController {
     
     private lazy var defaultGroupName: String! = {
         return NSLocalizedString("just_tweak_unnamed_tweaks_group_title",
-                                 bundle: TweaksViewController.justTweakResourcesBundle(),
+                                 bundle: TweakViewController.justTweakResourcesBundle(),
                                  comment: "")
     }()
     
@@ -75,7 +75,7 @@ public class TweaksViewController: UITableViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let bundle = TweaksViewController.justTweakResourcesBundle()
+        let bundle = TweakViewController.justTweakResourcesBundle()
         title = NSLocalizedString("just_tweak_configurations_vc_title",
                                   bundle: bundle,
                                   comment: "")
@@ -87,7 +87,7 @@ public class TweaksViewController: UITableViewController {
     }
 }
 
-extension TweaksViewController {
+extension TweakViewController {
 
     public override func numberOfSections(in tableView: UITableView) -> Int {
         return isFiltering() ? filteredSections.count : sections.count
@@ -101,7 +101,7 @@ extension TweaksViewController {
         let tweak = tweakAt(indexPath: indexPath)!
         let cellIdentifier = cellIdentifierForTweak(tweak)
         let cell = table.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        if let cell = cell as? TweaksViewControllerCell {
+        if let cell = cell as? TweakViewControllerCell {
             cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
             cell.desc = tweak.desc
             cell.value = tweak.value
@@ -151,7 +151,7 @@ extension TweaksViewController {
     }
 }
 
-extension TweaksViewController {
+extension TweakViewController {
     
     private func setupBarButtonItems() {
         if isModal() {
@@ -166,7 +166,7 @@ extension TweaksViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = NSLocalizedString("just_tweak_search_bar_placeholder_text",
-                                                                   bundle: TweaksViewController.justTweakResourcesBundle(),
+                                                                   bundle: TweakViewController.justTweakResourcesBundle(),
                                                                    comment: "")
         searchController.searchBar.sizeToFit()
         navigationItem.searchController = searchController
@@ -225,9 +225,9 @@ extension TweaksViewController {
     }
 }
 
-extension TweaksViewController: TweaksViewControllerCellDelegate {
+extension TweakViewController: TweakViewControllerCellDelegate {
     
-    internal func tweaksConfigurationCellDidChangeValue(_ cell: TweaksViewControllerCell) {
+    internal func tweaksConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let feature = tweak.feature
@@ -239,14 +239,14 @@ extension TweaksViewController: TweaksViewControllerCellDelegate {
     }
 }
 
-extension TweaksViewController: UISearchResultsUpdating {
+extension TweakViewController: UISearchResultsUpdating {
     
     public func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
 
-extension TweaksViewController {
+extension TweakViewController {
     
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
