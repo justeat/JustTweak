@@ -5,6 +5,10 @@
 
 import Foundation
 
+public enum LogLevel: Int {
+    case error, debug, verbose
+}
+
 public typealias LogClosure = (String, LogLevel) -> Void
 
 public protocol Configuration {
