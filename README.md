@@ -41,23 +41,23 @@ var justTweak: JustTweak!
 
 private func setupJustTweak() {
 
+    // mutable configuration (to override tweaks from other configurations)
+    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+    
+    // remote configurations (optional)
+    let optimizelyConfiguration = OptimizelyConfiguration()
+    let firebaseConfiguration = FirebaseConfiguration()
+    optimizelyConfiguration.userId = <#user_id#>
+    
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
     let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
 
-    // remote configurations (optional)
-    let firebaseConfiguration = FirebaseConfiguration()
-    let optimizelyConfiguration = OptimizelyConfiguration()
-    optimizelyConfiguration.userId = <#user_id#>
-    
-    // local mutable configuration (to override tweaks from other configurations)
-    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-    
-    // priority is defined by the order in the configurations array (from low to high)
-    let configurations: [Configuration] = [localConfiguration,
-                                           firebaseConfiguration,
+    // priority is defined by the order in the configurations array (from highest to lowest)
+    let configurations: [Configuration] = [userDefaultsConfiguration,
                                            optimizelyConfiguration,
-                                           userDefaultsConfiguration]
+                                           firebaseConfiguration,
+                                           localConfiguration]
     configurationsCoordinator = JustTweak(configurations: configurations)
 }
 ```

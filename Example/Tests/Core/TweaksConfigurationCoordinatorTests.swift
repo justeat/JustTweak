@@ -1,10 +1,10 @@
 
 import XCTest
-import JustTweak
+@testable import JustTweak
 
 class TweaksConfigurationCoordinatorTests: XCTestCase {
     
-    var configurationCoordinator: JustTweak!
+    var coordinator: JustTweak!
     let jsonConfiguration: LocalConfiguration = {
         let bundle = Bundle(for: TweaksConfigurationCoordinatorTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
@@ -19,53 +19,53 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
         userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
         let configurations: [Configuration] = [jsonConfiguration, mockFirebaseConfiguration, userDefaultsConfiguration]
-        configurationCoordinator = JustTweak(configurations: configurations)
+        coordinator = JustTweak(configurations: configurations)
     }
     
     override func tearDown() {
         userDefaultsConfiguration.deleteValue(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
-        configurationCoordinator = nil
+        coordinator = nil
         super.tearDown()
     }
     
     func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
-        let configurationCoordinator = JustTweak(configurations: [jsonConfiguration])
-        XCTAssertNil(configurationCoordinator.topCustomizableConfiguration())
+        let coordinator = JustTweak(configurations: [jsonConfiguration])
+        XCTAssertNil(coordinator.mutableConfiguration)
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
+        XCTAssertNil(coordinator.tweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
     }
     
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView) as! Bool)
+        XCTAssertTrue(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView) as! Bool)
+        XCTAssertFalse(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayGreenView) as! Bool)
+        XCTAssertFalse(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayGreenView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive) as! Bool)
+        XCTAssertTrue(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
     }
     
     func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(configurationCoordinator.valueForTweakWith(feature: Features.General, variable: Variables.TapToChangeViewColor) as! Bool)
+        XCTAssertTrue(coordinator.tweakWith(feature: Features.General, variable: Variables.TapToChangeViewColor)!.boolValue)
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
-        let mutableConfiguration = configurationCoordinator.topCustomizableConfiguration()
+        let mutableConfiguration = coordinator.mutableConfiguration
         mutableConfiguration?.set(false, feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
-        XCTAssertFalse(configurationCoordinator.valueForTweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive) as! Bool)
+        XCTAssertFalse(coordinator.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
     }
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {
         var didCallClosure = false
-        configurationCoordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
+        coordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
         }
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
@@ -76,10 +76,10 @@ class TweaksConfigurationCoordinatorTests: XCTestCase {
     
     func testDoesNotCallClosureForDeregisteredObserverWhenAnyConfigurationChanges() {
         var didCallClosure = false
-        configurationCoordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
+        coordinator.registerForConfigurationsUpdates(self) { tweakIdentifier in
             didCallClosure = true
         }
-        configurationCoordinator.deregisterFromConfigurationsUpdates(self)
+        coordinator.deregisterFromConfigurationsUpdates(self)
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
         let userInfo = [TweaksConfigurationDidChangeNotificationTweakKey: tweak]
         NotificationCenter.default.post(name: TweaksConfigurationDidChangeNotification, object: self, userInfo: userInfo)

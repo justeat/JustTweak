@@ -5,7 +5,9 @@
 
 import Foundation
 
-final public class JustTweak: Configuration {
+final public class JustTweak {
+    
+    var configurations: [Configuration]
     
     public var logClosure: LogClosure? {
         didSet {
@@ -17,9 +19,12 @@ final public class JustTweak: Configuration {
     
     public var useCache: Bool = false
     
-    public private(set) var configurations: [Configuration]
     private var tweaksCache = [String : [String : Tweak]]()
     private var observersMap = [NSObject : NSObjectProtocol]()
+    
+    var mutableConfiguration: MutableConfiguration? {
+        return configurations.first { $0 is MutableConfiguration } as? MutableConfiguration
+    }
     
     public init(configurations: [Configuration]) {
         self.configurations = configurations
@@ -33,10 +38,13 @@ final public class JustTweak: Configuration {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+}
+
+extension JustTweak: MutableConfiguration {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
         var enabled = false
-        for (_, configuration) in configurations.enumerated().reversed() {
+        for (_, configuration) in configurations.enumerated() {
             if configuration.isFeatureEnabled(feature) {
                 enabled = true
                 break
@@ -52,7 +60,7 @@ final public class JustTweak: Configuration {
         }
         
         var result: Tweak? = nil
-        for (_, configuration) in configurations.enumerated().reversed() {
+        for (_, configuration) in configurations.enumerated() {
             if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
                 logClosure?("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
                 result = Tweak(feature: feature,
@@ -85,46 +93,23 @@ final public class JustTweak: Configuration {
     
     public func activeVariation(for experiment: String) -> String? {
         var activeVariation: String? = nil
-        for (_, configuration) in configurations.enumerated().reversed() {
+        for (_, configuration) in configurations.enumerated() {
             activeVariation = configuration.activeVariation(for: experiment)
             if activeVariation != nil { break }
         }
         return activeVariation
     }
     
-    public func valueForTweakWith(feature: String, variable: String) -> TweakValue? {
-        return tweakWith(feature: feature, variable: variable)?.value
+    public func deleteValue(feature: String, variable: String) {
+        mutableConfiguration?.deleteValue(feature: feature, variable: variable)
     }
     
-    public func topCustomizableConfiguration() -> MutableConfiguration? {
-        for configuration in configurations.reversed() {
-            if let configuration = configuration as? MutableConfiguration {
-                return configuration
-            }
-        }
-        return nil
+    public func set(_ value: TweakValue, feature: String, variable: String) {
+        mutableConfiguration?.set(value, feature: feature, variable: variable)
     }
-    
-    public func displayableTweaks() -> [Tweak] {
-        var tweaks = [Tweak]()
-        if let features = jsonConfiguration?.features {
-            for (feature, variables) in features {
-                for variable in variables {
-                    if let tweak = tweakWith(feature: feature, variable: variable) {
-                        let jsonTweak = jsonConfiguration?.tweakWith(feature: feature, variable: variable)
-                        let aggregatedTweak = Tweak(feature: feature,
-                                                    variable: variable,
-                                                    value: tweak.value,
-                                                    title: jsonTweak?.title,
-                                                    description: jsonTweak?.desc,
-                                                    group: jsonTweak?.group)
-                        tweaks.append(aggregatedTweak)
-                    }
-                }
-            }
-        }
-        return tweaks
-    }
+}
+
+extension JustTweak {
     
     public func registerForConfigurationsUpdates(_ object: NSObject, closure: @escaping (Tweak) -> Void) {
         deregisterFromConfigurationsUpdates(object)
@@ -144,17 +129,13 @@ final public class JustTweak: Configuration {
         observersMap.removeValue(forKey: object)
     }
     
-    public func resetCache() {
-        tweaksCache = [String : [String : Tweak]]()
-    }
-    
     @objc private func configurationDidChange() {
         if useCache {
             resetCache()
         }
     }
     
-    private var jsonConfiguration: LocalConfiguration? {
-        return configurations.filter { $0 is LocalConfiguration }.first as? LocalConfiguration
+    public func resetCache() {
+        tweaksCache = [String : [String : Tweak]]()
     }
 }

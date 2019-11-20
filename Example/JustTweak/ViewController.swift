@@ -71,7 +71,7 @@ class ViewController: UIViewController {
     }
     
     private var tweaksViewController: TweaksViewController {
-        return TweaksViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+        return TweaksViewController(style: .grouped, coordinator: configurationsCoordinator)
     }
     
     @IBAction func presentConfigurationViewController() {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-final public class LocalConfiguration: Configuration {
+final public class LocalConfiguration {
     
     private enum EncodingKeys : String {
         case Title, Description, Group, Value
@@ -40,6 +40,23 @@ final public class LocalConfiguration: Configuration {
         fileURL = jsonURL
     }
     
+    private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
+        let value: TweakValue
+        if let numberValue = jsonObject as? NSNumber {
+            value = numberValue.tweakValue
+        }
+        else if let stringValue = jsonObject as? String {
+            value = stringValue
+        }
+        else {
+            value = false
+        }
+        return value
+    }
+}
+
+extension LocalConfiguration: Configuration {
+    
     public func isFeatureEnabled(_ feature: String) -> Bool {
         return configurationFile[feature] != nil
     }
@@ -60,19 +77,5 @@ final public class LocalConfiguration: Configuration {
     
     public func activeVariation(for experiment: String) -> String? {
         return nil
-    }
-    
-    private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
-        let value: TweakValue
-        if let numberValue = jsonObject as? NSNumber {
-            value = numberValue.tweakValue
-        }
-        else if let stringValue = jsonObject as? String {
-            value = stringValue
-        }
-        else {
-            value = false
-        }
-        return value
     }
 }

@@ -5,7 +5,7 @@
 
 import Foundation
 
-final public class UserDefaultsConfiguration: MutableConfiguration {
+final public class UserDefaultsConfiguration {
     
     private let userDefaults: UserDefaults
     
@@ -33,6 +33,23 @@ final public class UserDefaultsConfiguration: MutableConfiguration {
                      group: nil)
     }
     
+    private func userDefaultsKeyForTweakWithIdentifier(_ identifier: String) -> String {
+        return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
+    }
+    
+    private func tweakValueFromUserDefaultsObject(_ object: AnyObject?) -> TweakValue? {
+        if let object = object as? String {
+            return object
+        }
+        else if let object = object as? NSNumber {
+            return object.tweakValue
+        }
+        return nil
+    }
+}
+
+extension UserDefaultsConfiguration: MutableConfiguration {
+    
     public func activeVariation(for experiment: String) -> String? {
         return nil
     }
@@ -54,19 +71,5 @@ final public class UserDefaultsConfiguration: MutableConfiguration {
         notificationCenter.post(name: TweaksConfigurationDidChangeNotification,
                                 object: self,
                                 userInfo: userInfo)
-    }
-    
-    private func userDefaultsKeyForTweakWithIdentifier(_ identifier: String) -> String {
-        return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
-    }
-    
-    private func tweakValueFromUserDefaultsObject(_ object: AnyObject?) -> TweakValue? {
-        if let object = object as? String {
-            return object
-        }
-        else if let object = object as? NSNumber {
-            return object.tweakValue
-        }
-        return nil
     }
 }

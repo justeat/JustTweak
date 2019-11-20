@@ -45,12 +45,8 @@ public class TweaksViewController: UITableViewController {
     
     private var sections = [Section]()
     private var filteredSections = [Section]()
-    public var configurationsCoordinator: JustTweak? {
-        didSet {
-            rebuildSections()
-            updateBackgroundView()
-        }
-    }
+    
+    private let coordinator: JustTweak
     
     private class func justTweakResourcesBundle() -> Bundle {
         let podBundle = Bundle(for: TweaksViewController.self)
@@ -67,24 +63,23 @@ public class TweaksViewController: UITableViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    public convenience init(style: UITableView.Style, configurationsCoordinator: JustTweak) {
-        self.init(style: style)
-        self.configurationsCoordinator = configurationsCoordinator
+    public init(style: UITableView.Style, coordinator: JustTweak) {
+        self.coordinator = coordinator
+        super.init(style: style)
+        rebuildSections()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let backgroundView = TweaksErrorView()
         let bundle = TweaksViewController.justTweakResourcesBundle()
         title = NSLocalizedString("just_tweak_configurations_vc_title",
                                   bundle: bundle,
                                   comment: "")
-        backgroundView.text = NSLocalizedString("just_tweak_configurations_vc_no_configurations_message",
-                                                bundle: bundle,
-                                                comment: "")
-        tableView.backgroundView = backgroundView
         tableView.keyboardDismissMode = .onDrag
-        updateBackgroundView()
         setupBarButtonItems()
         setupSearchController()
         registerCellClasses()
@@ -189,32 +184,28 @@ extension TweaksViewController {
     }
     
     private func rebuildSections() {
+        let allTweaks = coordinator.displayableTweaks
         var allSections = [Section]()
-        if let configurationsCoordinator = configurationsCoordinator {
-            let allTweaks = configurationsCoordinator.displayableTweaks().sorted(by: { (lhs, rhs) -> Bool in
-                return lhs.displayTitle < rhs.displayTitle
-            })
-            var allGroups: Set<String> = []
+        var allGroups: Set<String> = []
+        for tweak in allTweaks {
+            allGroups.insert(tweak.group ?? defaultGroupName)
+        }
+        
+        for group in allGroups {
+            var items = [Tweak]()
             for tweak in allTweaks {
-                allGroups.insert(tweak.group ?? defaultGroupName)
+                if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
+                    let dto = Tweak(feature: tweak.feature,
+                                    variable: tweak.variable,
+                                    value: tweak.value,
+                                    title: tweak.title,
+                                    description: tweak.desc)
+                    items.append(dto)
+                }
             }
-            
-            for group in allGroups {
-                var items = [Tweak]()
-                for tweak in allTweaks {
-                    if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
-                        let dto = Tweak(feature: tweak.feature,
-                                        variable: tweak.variable,
-                                        value: tweak.value,
-                                        title: tweak.title,
-                                        description: tweak.desc)
-                        items.append(dto)
-                    }
-                }
-                if items.count > 0 {
-                    let section = Section(title: group, tweaks: items)
-                    allSections.append(section)
-                }
+            if items.count > 0 {
+                let section = Section(title: group, tweaks: items)
+                allSections.append(section)
             }
         }
         sections = allSections.sorted { (lhs, rhs) -> Bool in
@@ -222,10 +213,6 @@ extension TweaksViewController {
         }
         
         tableView.reloadData()
-    }
-    
-    private func updateBackgroundView() {
-        tableView.backgroundView?.isHidden = configurationsCoordinator?.topCustomizableConfiguration() != nil
     }
     
     @objc internal func dismissViewController() {
@@ -243,10 +230,9 @@ extension TweaksViewController: TweaksViewControllerCellDelegate {
     internal func tweaksConfigurationCellDidChangeValue(_ cell: TweaksViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
-                let configuration = configurationsCoordinator?.topCustomizableConfiguration()
                 let feature = tweak.feature
                 let variable = tweak.variable
-                configuration?.set(cell.value, feature: feature, variable: variable)
+                coordinator.set(cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
         }

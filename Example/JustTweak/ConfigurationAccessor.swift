@@ -12,18 +12,17 @@ import JustTweak
 class ConfigurationAccessor {
     
     static let configurationsCoordinator: JustTweak = {
-        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let jsonConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
-        
-        // let firebaseConfiguration = FirebaseTweaksConfiguration()
+        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
         
         // let optimizelyConfiguration = OptimizelyTweaksConfiguration()
         // optimizelyConfiguration.userId = UUID().uuidString
         
-        let userDefaults = UserDefaults.standard
-        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
+        // let firebaseConfiguration = FirebaseTweaksConfiguration()
         
-        let configurations: [Configuration] = [jsonConfiguration, /*firebaseConfiguration, optimizelyConfiguration,*/ userDefaultsConfiguration]
+        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
+        
+        let configurations: [Configuration] = [userDefaultsConfiguration, /*optimizelyConfiguration, firebaseConfiguration*/ localConfiguration]
         return JustTweak(configurations: configurations)
     }()
     
