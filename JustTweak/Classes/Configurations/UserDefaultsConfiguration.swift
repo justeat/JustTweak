@@ -27,8 +27,8 @@ extension UserDefaultsConfiguration: Configuration {
 
     public func tweakWith(feature: String, variable: String) -> Tweak? {
         let userDefaultsKey = keyForTweakWithIdentifier(variable)
-        let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
-        guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
+        let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey) as AnyObject?
+        guard let value = updateUserDefaults(userDefaultsValue) else { return nil }
         return Tweak(feature: feature,
                      variable: variable,
                      value: value,
@@ -58,7 +58,7 @@ extension UserDefaultsConfiguration {
         return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
     }
     
-    private func tweakValueFromUserDefaultsObject(_ object: AnyObject?) -> TweakValue? {
+    private func updateUserDefaults(_ object: AnyObject?) -> TweakValue? {
         if let object = object as? String {
             return object
         }
