@@ -10,7 +10,7 @@ class MockTweakCellDelegate: TweakViewControllerCellDelegate {
     
     private(set) var didCallDelegate: Bool = false
     
-    func tweaksConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
+    func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
         didCallDelegate = true
     }
     

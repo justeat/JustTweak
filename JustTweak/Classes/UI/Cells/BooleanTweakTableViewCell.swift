@@ -52,7 +52,7 @@ internal class BooleanTweakTableViewCell: UITableViewCell, TweakViewControllerCe
     }()
     
     @objc func didChangeTweakValue() {
-        delegate?.tweaksConfigurationCellDidChangeValue(self)
+        delegate?.tweakConfigurationCellDidChangeValue(self)
     }
     
 }

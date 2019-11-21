@@ -71,7 +71,7 @@ class TextTweakTableViewCell: UITableViewCell, TweakViewControllerCell, UITextFi
     }
     
     @objc func textEditingDidEnd() {
-        delegate?.tweaksConfigurationCellDidChangeValue(self)
+        delegate?.tweakConfigurationCellDidChangeValue(self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

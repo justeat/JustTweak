@@ -13,7 +13,7 @@ internal protocol TweakViewControllerCell: class {
 }
 
 internal protocol TweakViewControllerCellDelegate: class {
-    func tweaksConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell)
+    func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell)
 }
 
 public class TweakViewController: UITableViewController {
@@ -227,7 +227,7 @@ extension TweakViewController {
 
 extension TweakViewController: TweakViewControllerCellDelegate {
     
-    internal func tweaksConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
+    internal func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let feature = tweak.feature
