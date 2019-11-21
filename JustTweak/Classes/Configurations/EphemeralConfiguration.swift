@@ -13,7 +13,7 @@ extension NSDictionary: Configuration {
     }
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        guard let storedValue = self[feature] as? Bool else { return false }
+        self[feature] as? Bool ?? false
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
