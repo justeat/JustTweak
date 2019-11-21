@@ -70,7 +70,6 @@ extension UserDefaultsConfiguration {
         
     private func updateUserDefaults(value: TweakValue, feature: String, variable: String) {
         userDefaults.set(value, forKey: keyForTweakWithIdentifier(variable))
-        userDefaults.synchronize()
         let notificationCenter = NotificationCenter.default
         let tweak = Tweak(feature: feature, variable: variable, value: value)
         let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
