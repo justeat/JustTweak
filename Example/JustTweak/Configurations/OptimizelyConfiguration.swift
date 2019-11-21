@@ -1,23 +1,22 @@
 //
-//  OptimizelyTweaksConfiguration.swift
+//  OptimizelyConfiguration.swift
 //  Copyright (c) 2018 Just Eat Holding Ltd. All rights reserved.
 //
 
 import JustTweak
 import OptimizelySDKiOS
 
-public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
+public class OptimizelyConfiguration: Configuration {
     
     private var optimizelyManager: OPTLYManager?
     private var optimizelyClient: OPTLYClient?
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     public var userId: String!
     public var attributes: [String : String]?
     
-    public override init() {
-        super.init()
+    public init() {
         /* DOWNLOAD THE Optimizely datafile from the Optimizely dashboard */
         optimizelyManager = OPTLYManager(builder: OPTLYManagerBuilder(block: { builder in
             guard let builder = builder,
@@ -33,7 +32,7 @@ public class OptimizelyTweaksConfiguration: NSObject, TweaksConfiguration {
             case (nil, let client):
                 strongSelf.optimizelyClient = client
                 let notificationCentre = NotificationCenter.default
-                notificationCentre.post(name: TweaksConfigurationDidChangeNotification, object: strongSelf)
+                notificationCentre.post(name: TweakConfigurationDidChangeNotification, object: strongSelf)
             case (let error, _):
                 if let error = error {
                     strongSelf.logClosure?("Couldn't initialize Optimizely manager. \(error.localizedDescription)", .error)

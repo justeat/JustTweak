@@ -1,22 +1,22 @@
 //
-//  TweaksConfigurationViewController
+//  TweakViewController
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import UIKit
 
-internal protocol TweaksConfigurationViewControllerCell: class {
+internal protocol TweakViewControllerCell: class {
     var title: String? { get set }
     var desc: String? { get set }
     var value: TweakValue { get set }
-    var delegate: TweaksConfigurationViewControllerCellDelegate? { get set }
+    var delegate: TweakViewControllerCellDelegate? { get set }
 }
 
-internal protocol TweaksConfigurationViewControllerCellDelegate: class {
-    func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell)
+internal protocol TweakViewControllerCellDelegate: class {
+    func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell)
 }
 
-public class TweaksConfigurationViewController: UITableViewController {
+public class TweakViewController: UITableViewController {
     
     fileprivate struct Section {
         let title: String
@@ -45,15 +45,11 @@ public class TweaksConfigurationViewController: UITableViewController {
     
     private var sections = [Section]()
     private var filteredSections = [Section]()
-    public var configurationsCoordinator: TweaksConfigurationsCoordinator? {
-        didSet {
-            rebuildSections()
-            updateBackgroundView()
-        }
-    }
+    
+    private let tweakManager: TweakManager
     
     private class func justTweakResourcesBundle() -> Bundle {
-        let podBundle = Bundle(for: TweaksConfigurationViewController.self)
+        let podBundle = Bundle(for: TweakViewController.self)
         let resourcesBundleURL = podBundle.url(forResource: "JustTweak", withExtension: "bundle")!
         let justTweakResourcesBundle = Bundle(url: resourcesBundleURL)!
         return justTweakResourcesBundle
@@ -61,30 +57,29 @@ public class TweaksConfigurationViewController: UITableViewController {
     
     private lazy var defaultGroupName: String! = {
         return NSLocalizedString("just_tweak_unnamed_tweaks_group_title",
-                                 bundle: TweaksConfigurationViewController.justTweakResourcesBundle(),
+                                 bundle: TweakViewController.justTweakResourcesBundle(),
                                  comment: "")
     }()
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    public convenience init(style: UITableView.Style, configurationsCoordinator: TweaksConfigurationsCoordinator) {
-        self.init(style: style)
-        self.configurationsCoordinator = configurationsCoordinator
+    public init(style: UITableView.Style, tweakManager: TweakManager) {
+        self.tweakManager = tweakManager
+        super.init(style: style)
+        rebuildSections()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let backgroundView = TweaksErrorView()
-        let bundle = TweaksConfigurationViewController.justTweakResourcesBundle()
+        let bundle = TweakViewController.justTweakResourcesBundle()
         title = NSLocalizedString("just_tweak_configurations_vc_title",
                                   bundle: bundle,
                                   comment: "")
-        backgroundView.text = NSLocalizedString("just_tweak_configurations_vc_no_configurations_message",
-                                                bundle: bundle,
-                                                comment: "")
-        tableView.backgroundView = backgroundView
         tableView.keyboardDismissMode = .onDrag
-        updateBackgroundView()
         setupBarButtonItems()
         setupSearchController()
         registerCellClasses()
@@ -92,7 +87,7 @@ public class TweaksConfigurationViewController: UITableViewController {
     }
 }
 
-extension TweaksConfigurationViewController {
+extension TweakViewController {
 
     public override func numberOfSections(in tableView: UITableView) -> Int {
         return isFiltering() ? filteredSections.count : sections.count
@@ -106,7 +101,7 @@ extension TweaksConfigurationViewController {
         let tweak = tweakAt(indexPath: indexPath)!
         let cellIdentifier = cellIdentifierForTweak(tweak)
         let cell = table.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        if let cell = cell as? TweaksConfigurationViewControllerCell {
+        if let cell = cell as? TweakViewControllerCell {
             cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
             cell.desc = tweak.desc
             cell.value = tweak.value
@@ -156,7 +151,7 @@ extension TweaksConfigurationViewController {
     }
 }
 
-extension TweaksConfigurationViewController {
+extension TweakViewController {
     
     private func setupBarButtonItems() {
         if isModal() {
@@ -171,7 +166,7 @@ extension TweaksConfigurationViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = NSLocalizedString("just_tweak_search_bar_placeholder_text",
-                                                                   bundle: TweaksConfigurationViewController.justTweakResourcesBundle(),
+                                                                   bundle: TweakViewController.justTweakResourcesBundle(),
                                                                    comment: "")
         searchController.searchBar.sizeToFit()
         navigationItem.searchController = searchController
@@ -189,32 +184,28 @@ extension TweaksConfigurationViewController {
     }
     
     private func rebuildSections() {
+        let allTweaks = tweakManager.displayableTweaks
         var allSections = [Section]()
-        if let configurationsCoordinator = configurationsCoordinator {
-            let allTweaks = configurationsCoordinator.displayableTweaks().sorted(by: { (lhs, rhs) -> Bool in
-                return lhs.displayTitle < rhs.displayTitle
-            })
-            var allGroups: Set<String> = []
+        var allGroups: Set<String> = []
+        for tweak in allTweaks {
+            allGroups.insert(tweak.group ?? defaultGroupName)
+        }
+        
+        for group in allGroups {
+            var items = [Tweak]()
             for tweak in allTweaks {
-                allGroups.insert(tweak.group ?? defaultGroupName)
+                if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
+                    let dto = Tweak(feature: tweak.feature,
+                                    variable: tweak.variable,
+                                    value: tweak.value,
+                                    title: tweak.title,
+                                    description: tweak.desc)
+                    items.append(dto)
+                }
             }
-            
-            for group in allGroups {
-                var items = [Tweak]()
-                for tweak in allTweaks {
-                    if tweak.group == group || (tweak.group == nil && group == defaultGroupName) {
-                        let dto = Tweak(feature: tweak.feature,
-                                        variable: tweak.variable,
-                                        value: tweak.value,
-                                        title: tweak.title,
-                                        description: tweak.desc)
-                        items.append(dto)
-                    }
-                }
-                if items.count > 0 {
-                    let section = Section(title: group, tweaks: items)
-                    allSections.append(section)
-                }
+            if items.count > 0 {
+                let section = Section(title: group, tweaks: items)
+                allSections.append(section)
             }
         }
         sections = allSections.sorted { (lhs, rhs) -> Bool in
@@ -222,10 +213,6 @@ extension TweaksConfigurationViewController {
         }
         
         tableView.reloadData()
-    }
-    
-    private func updateBackgroundView() {
-        tableView.backgroundView?.isHidden = configurationsCoordinator?.topCustomizableConfiguration() != nil
     }
     
     @objc internal func dismissViewController() {
@@ -238,29 +225,28 @@ extension TweaksConfigurationViewController {
     }
 }
 
-extension TweaksConfigurationViewController: TweaksConfigurationViewControllerCellDelegate {
+extension TweakViewController: TweakViewControllerCellDelegate {
     
-    internal func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell) {
+    internal func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
         if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
             if let tweak = tweakAt(indexPath: indexPath) {
-                let configuration = configurationsCoordinator?.topCustomizableConfiguration()
                 let feature = tweak.feature
                 let variable = tweak.variable
-                configuration?.set(cell.value, feature: feature, variable: variable)
+                tweakManager.set(cell.value, feature: feature, variable: variable)
                 tweak.value = cell.value
             }
         }
     }
 }
 
-extension TweaksConfigurationViewController: UISearchResultsUpdating {
+extension TweakViewController: UISearchResultsUpdating {
     
     public func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
 
-extension TweaksConfigurationViewController {
+extension TweakViewController {
     
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true

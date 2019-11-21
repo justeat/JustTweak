@@ -1,10 +1,14 @@
+//
+//  LocalConfigurationTests.swift
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
+//
 
 import XCTest
 import JustTweak
 
-class JSONTweaksConfigurationTests: XCTestCase {
+class LocalConfigurationTests: XCTestCase {
     
-    var configuration: JSONTweaksConfiguration!
+    var configuration: LocalConfiguration!
     
     override func setUp() {
         super.setUp()
@@ -16,19 +20,10 @@ class JSONTweaksConfigurationTests: XCTestCase {
         super.tearDown()
     }
     
-    private func configurationWithFileNamed(_ fileName: String) -> JSONTweaksConfiguration? {
-        let bundle = Bundle(for: JSONTweaksConfigurationTests.self)
+    private func configurationWithFileNamed(_ fileName: String) -> LocalConfiguration? {
+        let bundle = Bundle(for: LocalConfigurationTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")!
-        return JSONTweaksConfiguration(jsonURL: jsonURL)
-    }
-    
-    func testGetsNilInitialized_IfURLContainsNoData() {
-        let fileURL = URL(fileURLWithPath: "/none")
-        XCTAssertNil(JSONTweaksConfiguration(jsonURL: fileURL))
-    }
-    
-    func testGetsNilInitialized_IfJSONIsInvalid() {
-        XCTAssertNil(configurationWithFileNamed("test_configuration_invalid"))
+        return LocalConfiguration(jsonURL: jsonURL)
     }
     
     func testParsesBoolTweak() {

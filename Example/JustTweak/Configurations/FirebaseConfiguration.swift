@@ -1,5 +1,5 @@
 //
-//  FirebaseTweaksConfiguration
+//  FirebaseConfiguration
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
@@ -7,11 +7,9 @@ import JustTweak
 import FirebaseCore
 import FirebaseRemoteConfig
 
-public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
+public class FirebaseConfiguration: Configuration {
     
-    public override init() {
-        super.init()
-        
+    public init() {
         /* DOWNLOAD THE GoogleService.plist from the Firebase dashboard */
         let googleServicePlistURL = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist")
         if let _ = googleServicePlistURL {
@@ -24,7 +22,7 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
         }
     }
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     // Google dependencies
     private var configured: Bool = false
@@ -46,7 +44,7 @@ public class FirebaseTweaksConfiguration: NSObject, TweaksConfiguration {
             else {
                 self?.remoteConfiguration.activate(completionHandler: nil) // You can pass a completion handler if you want the configuration to be applied immediately after being fetched; otherwise it will be applied on next launch
                 let notificationCentre = NotificationCenter.default
-                notificationCentre.post(name: TweaksConfigurationDidChangeNotification, object: self)
+                notificationCentre.post(name: TweakConfigurationDidChangeNotification, object: self)
             }
         }
     }

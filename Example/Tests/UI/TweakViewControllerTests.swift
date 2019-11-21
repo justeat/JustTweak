@@ -1,10 +1,15 @@
+//
+//  TweakViewControllerTests.swift
+//  Copyright (c) 2019 Just Eat Holding Ltd. All rights reserved.
+//
 
 import XCTest
 @testable import JustTweak
 
-class ConfigurationViewControllerTests: XCTestCase {
+class TweakViewControllerTests: XCTestCase {
     
-    var viewController: TweaksConfigurationViewController!
+    var viewController: TweakViewController!
+    var tweakManager: TweakManager!
     
     override func setUp() {
         super.setUp()
@@ -12,25 +17,13 @@ class ConfigurationViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
-        viewController.configurationsCoordinator?.topCustomizableConfiguration()?.deleteValue(feature: "feature_1", variable: "variable_1")
+        let mutableConfiguration = tweakManager.mutableConfiguration!
+        mutableConfiguration.deleteValue(feature: "feature_1", variable: "variable_1")
         viewController = nil
         super.tearDown()
     }
     
     // MARK: Generic Data Display
-    
-    func testDisplaysNoDataIfConfigurationWasNotSet() {
-        let viewController = TweaksConfigurationViewController()
-        XCTAssertEqual(0, viewController.numberOfSections(in: viewController.tableView))
-    }
-    
-    func testDisplaysCorrectDataIfConfigurationCoordinatorIsSetAfterInitialization() {
-        let otherViewController = TweaksConfigurationViewController()
-        XCTAssertEqual(0, otherViewController.numberOfSections(in: viewController.tableView))
-        otherViewController.configurationsCoordinator = viewController.configurationsCoordinator
-        XCTAssertEqual(otherViewController.numberOfSections(in: viewController.tableView),
-                       viewController.numberOfSections(in: viewController.tableView))
-    }
     
     func testHasExpectedNumberOfSections() {
         XCTAssertEqual(2, viewController.numberOfSections(in: viewController.tableView))
@@ -86,7 +79,7 @@ class ConfigurationViewControllerTests: XCTestCase {
         let indexPath = viewController.indexPathForTweak(with: Features.UICustomization, variable: Variables.DisplayRedView)!
         let cell = viewController.tableView(viewController.tableView, cellForRowAt: indexPath)
         XCTAssertEqual(cell.textLabel?.text, "Display Red View")
-        XCTAssertEqual((cell as! TweaksConfigurationViewControllerCell).title, "Display Red View")
+        XCTAssertEqual((cell as! TweakViewControllerCell).title, "Display Red View")
     }
     
     func testDisplaysNumericTweaksCorrectly() {
@@ -114,43 +107,13 @@ class ConfigurationViewControllerTests: XCTestCase {
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
         cell.switchControl.sendActions(for: .valueChanged)
-        XCTAssertTrue(viewController.configurationsCoordinator!.valueForTweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView) as! Bool)
-    }
-    
-    // MARK: No configuration view
-    
-    func testDoesNotShowMessageWhenPresentedWithConfigurationsCoordinator_Plain() {
-        let coordinator = viewController.configurationsCoordinator!
-        let vc = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: coordinator)
-        let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
-        XCTAssertTrue(backgroundView.isHidden)
-    }
-    
-    func testDoesNotShowMessageWhenPresentedWithConfigurationsCoordinator_Grouped() {
-        let coordinator = viewController.configurationsCoordinator!
-        let vc = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: coordinator)
-        let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
-        XCTAssertTrue(backgroundView.isHidden)
-    }
-    
-    func testShowsMessageWhenPresentedWithoutConfigurationsCoordinator_Plain() {
-        let vc = TweaksConfigurationViewController(style: .plain)
-        let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
-        XCTAssertEqual(backgroundView.text, "No Mutable Configurations Found")
-        XCTAssertFalse(backgroundView.isHidden)
-    }
-    
-    func testShowsMessageWhenPresentedWithoutConfigurationsCoordinator_Grouped() {
-        let vc = TweaksConfigurationViewController(style: .grouped)
-        let backgroundView = vc.tableView.backgroundView as! TweaksErrorView
-        XCTAssertEqual(backgroundView.text, "No Mutable Configurations Found")
-        XCTAssertFalse(backgroundView.isHidden)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
     }
     
     // MARK: Other Actions
     
     func testAsksToBeDismissedWhenDoneButtonIsTapped() {
-        class FakeViewController: TweaksConfigurationViewController {
+        class FakeViewController: TweakViewController {
             fileprivate let mockPresentingViewController = MockPresentingViewController()
             override var presentingViewController: UIViewController? {
                 get {
@@ -158,7 +121,7 @@ class ConfigurationViewControllerTests: XCTestCase {
                 }
             }
         }
-        let vc = FakeViewController()
+        let vc = FakeViewController(style: .grouped, tweakManager: tweakManager)
         vc.dismissViewController()
         XCTAssertTrue(vc.mockPresentingViewController.didCallDismissal)
     }
@@ -166,13 +129,13 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Helpers
     
     private func buildViewControllerWithConfigurationFromFileNamed(_ fileName: String) {
-        let bundle = Bundle(for: ConfigurationViewControllerTests.self)
+        let bundle = Bundle(for: TweakViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
-        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonURL!)!
+        let localConfiguration = LocalConfiguration(jsonURL: jsonURL!)
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
-        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, userDefaultsConfiguration]
-        let configurationsCoordinator = TweaksConfigurationsCoordinator(configurations: configurations)
-        viewController = TweaksConfigurationViewController(style: .plain, configurationsCoordinator: configurationsCoordinator)
+        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
+        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
+        tweakManager = TweakManager(configurations: configurations)
+        viewController = TweakViewController(style: .plain, tweakManager: tweakManager)
     }
 }

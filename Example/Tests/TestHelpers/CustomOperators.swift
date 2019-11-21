@@ -3,6 +3,8 @@
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
+import Foundation
+
 precedencegroup ComparisonPrecedence {
     associativity: left
     higherThan: LogicalConjunctionPrecedence
@@ -29,9 +31,3 @@ public func |||(lhs: Bool?, rhs: Bool?) -> Bool {
     }
     return rhs ?? false
 }
-
-public enum TweaksLogLevel: Int {
-    case error, debug, verbose
-}
-
-public typealias TweaksLogClosure = (String, TweaksLogLevel) -> Void

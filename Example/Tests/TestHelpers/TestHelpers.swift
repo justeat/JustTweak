@@ -1,12 +1,16 @@
+//
+//  TestHelpers.swift
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
+//
 
 import Foundation
 @testable import JustTweak
 
-class MockTweakCellDelegate: TweaksConfigurationViewControllerCellDelegate {
+class MockTweakCellDelegate: TweakViewControllerCellDelegate {
     
     private(set) var didCallDelegate: Bool = false
     
-    func tweaksConfigurationCellDidChangeValue(_ cell: TweaksConfigurationViewControllerCell) {
+    func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
         didCallDelegate = true
     }
     

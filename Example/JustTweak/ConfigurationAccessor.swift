@@ -1,9 +1,6 @@
 //
 //  ConfigurationAccessor.swift
-//  JustTweak_Example
-//
-//  Created by Alberto De Bortoli on 02/11/2019.
-//  Copyright © 2019 Just Eat. All rights reserved.
+//  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
@@ -11,72 +8,72 @@ import JustTweak
 
 class ConfigurationAccessor {
     
-    static let configurationsCoordinator: TweaksConfigurationsCoordinator = {
-        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let jsonConfiguration = JSONTweaksConfiguration(jsonURL: jsonFileURL)!
-        
-        // let firebaseConfiguration = FirebaseTweaksConfiguration()
+    static let tweakManager: TweakManager = {
+        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
         
         // let optimizelyConfiguration = OptimizelyTweaksConfiguration()
         // optimizelyConfiguration.userId = UUID().uuidString
         
-        let userDefaults = UserDefaults.standard
-        let userDefaultsConfiguration = UserDefaultsTweaksConfiguration(userDefaults: userDefaults)
+        // let firebaseConfiguration = FirebaseTweaksConfiguration()
         
-        let configurations: [TweaksConfiguration] = [jsonConfiguration, /*firebaseConfiguration, optimizelyConfiguration,*/ userDefaultsConfiguration]
-        return TweaksConfigurationsCoordinator(configurations: configurations)
+        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
+        
+        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
+//        let configurations: [Configuration] = [userDefaultsConfiguration, optimizelyConfiguration, firebaseConfiguration, localConfiguration]
+        return TweakManager(configurations: configurations)
     }()
     
-    private var configurationsCoordinator: TweaksConfigurationsCoordinator {
-        return Self.configurationsCoordinator
+    private var tweakManager: TweakManager {
+        return Self.tweakManager
     }
     
     // MARK: - Via Property Wrappers
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: Features.General,
-                 variable: Variables.GreetOnAppDidBecomeActive,
-                 coordinator: configurationsCoordinator)
+    @TweakProperty(fallbackValue: false,
+                   feature: Features.General,
+                   variable: Variables.GreetOnAppDidBecomeActive,
+                   tweakManager: tweakManager)
     var shouldShowAlert: Bool
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: Features.UICustomization,
-                 variable: Variables.DisplayRedView,
-                 coordinator: configurationsCoordinator)
+    @TweakProperty(fallbackValue: false,
+                   feature: Features.UICustomization,
+                   variable: Variables.DisplayRedView,
+                   tweakManager: tweakManager)
     var canShowRedView: Bool
     
-    @FeatureFlag(fallbackValue: false,
-                 feature: Features.UICustomization,
-                 variable: Variables.DisplayGreenView,
-                 coordinator: configurationsCoordinator)
+    @TweakProperty(fallbackValue: false,
+                   feature: Features.UICustomization,
+                   variable: Variables.DisplayGreenView,
+                   tweakManager: tweakManager)
     var canShowGreenView: Bool
     
-    @FeatureFlag(fallbackValue: "",
-                 feature: Features.UICustomization,
-                 variable: Variables.LabelText,
-                 coordinator: configurationsCoordinator)
+    @TweakProperty(fallbackValue: "",
+                   feature: Features.UICustomization,
+                   variable: Variables.LabelText,
+                   tweakManager: tweakManager)
     var labelText: String
     
-    @FeatureFlagWrappingOptional(fallbackValue: nil,
-                                 feature: Features.UICustomization,
-                                 variable: Variables.MeaningOfLife,
-                                 coordinator: configurationsCoordinator)
+    @OptionalTweakProperty(fallbackValue: nil,
+                           feature: Features.UICustomization,
+                           variable: Variables.MeaningOfLife,
+                           tweakManager: tweakManager)
     var meaningOfLife: Int?
     
-    // MARK: - Via ConfigurationsCoordinator
+    // MARK: - Via TweakManager
     
     var canShowYellowView: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.DisplayYellowView)?.boolValue ?? false
+        return tweakManager.tweakWith(feature: Features.UICustomization,
+                                      variable: Variables.DisplayYellowView)?.boolValue ?? false
     }
     
     var redViewAlpha: Float {
-        return configurationsCoordinator.tweakWith(feature: Features.UICustomization,
-                                                   variable: Variables.RedViewAlpha)?.floatValue ?? 0.0
+        return tweakManager.tweakWith(feature: Features.UICustomization,
+                                      variable: Variables.RedViewAlpha)?.floatValue ?? 0.0
     }
     
     var isTapGestureToChangeColorEnabled: Bool {
-        return configurationsCoordinator.tweakWith(feature: Features.General,
-                                                   variable: Variables.TapToChangeViewColor)?.boolValue ?? false
+        return tweakManager.tweakWith(feature: Features.General,
+                                      variable: Variables.TapToChangeViewColor)?.boolValue ?? false
     }
 }

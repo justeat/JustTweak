@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     
     var configurationAccessor: ConfigurationAccessor!
-    var configurationsCoordinator: TweaksConfigurationsCoordinator!
+    var tweakManager: TweakManager!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(setAndShowMeaningOfLife))
         tapGestureRecognizer.numberOfTapsRequired = 2
         view.addGestureRecognizer(tapGestureRecognizer)
-        configurationsCoordinator.registerForConfigurationsUpdates(self) { [weak self] tweak in
+        tweakManager.registerForConfigurationsUpdates(self) { [weak self] tweak in
             print("Tweak changed: \(tweak)")
             self?.updateView()
         }
@@ -70,17 +70,17 @@ class ViewController: UIViewController {
                                        alpha: 1.0)
     }
     
-    private var tweaksConfigurationViewController: TweaksConfigurationViewController {
-        return TweaksConfigurationViewController(style: .grouped, configurationsCoordinator: configurationsCoordinator)
+    private var tweakViewController: TweakViewController {
+        return TweakViewController(style: .grouped, tweakManager: tweakManager)
     }
     
-    @IBAction func presentConfigurationViewController() {
-        let tweaksNavigationController = UINavigationController(rootViewController: tweaksConfigurationViewController)
-        tweaksNavigationController.navigationBar.prefersLargeTitles = true
-        present(tweaksNavigationController, animated: true, completion: nil)
+    @IBAction func presentTweakViewController() {
+        let tweakNavigationController = UINavigationController(rootViewController: tweakViewController)
+        tweakNavigationController.navigationBar.prefersLargeTitles = true
+        present(tweakNavigationController, animated: true, completion: nil)
     }
     
-    @IBAction func pushConfigurationViewController() {
-        navigationController?.pushViewController(tweaksConfigurationViewController, animated: true)
+    @IBAction func pushTweakViewController() {
+        navigationController?.pushViewController(tweakViewController, animated: true)
     }
 }

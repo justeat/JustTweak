@@ -1,11 +1,11 @@
 //
-//  JSONTweaksConfiguration.swift
+//  LocalConfiguration.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
+final public class LocalConfiguration {
     
     private enum EncodingKeys : String {
         case Title, Description, Group, Value
@@ -14,7 +14,7 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     private let configurationFile: [String : [String : [String : AnyObject]]]
     private let fileURL: URL
     
-    public var logClosure: TweaksLogClosure?
+    public var logClosure: LogClosure?
     
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]
@@ -30,19 +30,30 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
         return storage
     }
     
-    public override var description: String {
-        get { return "\(super.description) { fileURL: \(fileURL) }" }
-    }
-    
-    public init?(jsonURL: URL) {
-        guard let data = try? Data(contentsOf: jsonURL) else { return nil }
+    public init(jsonURL: URL) {
+        let data = try! Data(contentsOf: jsonURL)
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        guard let configuration = json as? [String : [String : [String : AnyObject]]] else {
-            return nil
-        }
+        let configuration = json as! [String : [String : [String : AnyObject]]]
         configurationFile = configuration
         fileURL = jsonURL
     }
+    
+    private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
+        let value: TweakValue
+        if let numberValue = jsonObject as? NSNumber {
+            value = numberValue.tweakValue
+        }
+        else if let stringValue = jsonObject as? String {
+            value = stringValue
+        }
+        else {
+            value = false
+        }
+        return value
+    }
+}
+
+extension LocalConfiguration: Configuration {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
         return configurationFile[feature] != nil
@@ -64,19 +75,5 @@ final public class JSONTweaksConfiguration: NSObject, TweaksConfiguration {
     
     public func activeVariation(for experiment: String) -> String? {
         return nil
-    }
-    
-    private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
-        let value: TweakValue
-        if let numberValue = jsonObject as? NSNumber {
-            value = numberValue.tweakValue
-        }
-        else if let stringValue = jsonObject as? String {
-            value = stringValue
-        }
-        else {
-            value = false
-        }
-        return value
     }
 }
