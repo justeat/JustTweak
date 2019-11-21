@@ -60,7 +60,7 @@ static let tweakManager: TweakManager = {
 
 The order of the objects in the `configurations` array defines the priority of the configurations.
 
-The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration and it's the one used by the `TweaksConfigurationViewController` to populate the UI.
+The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration and it's the one used by the `TweakViewController` to populate the UI.
 
 
 ### Usage

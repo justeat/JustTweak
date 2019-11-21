@@ -1,12 +1,12 @@
 //
-//  ConfigurationViewControllerTests.swift
+//  TweakViewControllerTests.swift
 //  Copyright (c) 2019 Just Eat Holding Ltd. All rights reserved.
 //
 
 import XCTest
 @testable import JustTweak
 
-class ConfigurationViewControllerTests: XCTestCase {
+class TweakViewControllerTests: XCTestCase {
     
     var viewController: TweakViewController!
     var tweakManager: TweakManager!
@@ -129,7 +129,7 @@ class ConfigurationViewControllerTests: XCTestCase {
     // MARK: Helpers
     
     private func buildViewControllerWithConfigurationFromFileNamed(_ fileName: String) {
-        let bundle = Bundle(for: ConfigurationViewControllerTests.self)
+        let bundle = Bundle(for: TweakViewControllerTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")
         let localConfiguration = LocalConfiguration(jsonURL: jsonURL!)
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!

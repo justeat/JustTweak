@@ -24,7 +24,7 @@
 		618A46CC1DAD481400B8F5CA /* TweakExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A46CB1DAD481400B8F5CA /* TweakExtensionsTests.swift */; };
 		618A46CE1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A46CD1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift */; };
 		619938D81DA7F2DA00765852 /* TweakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619938D71DA7F2DA00765852 /* TweakTests.swift */; };
-		619938DC1DA7F6E600765852 /* ConfigurationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619938DB1DA7F6E600765852 /* ConfigurationViewControllerTests.swift */; };
+		619938DC1DA7F6E600765852 /* TweakViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619938DB1DA7F6E600765852 /* TweakViewControllerTests.swift */; };
 		619938DE1DA7F9FA00765852 /* test_configuration_no_displayable_ungrouped.json in Resources */ = {isa = PBXBuildFile; fileRef = 619938DD1DA7F9FA00765852 /* test_configuration_no_displayable_ungrouped.json */; };
 		619938E01DA805BA00765852 /* LocalConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619938DF1DA805BA00765852 /* LocalConfigurationTests.swift */; };
 		619938E21DA8061900765852 /* test_configuration_invalid.json in Resources */ = {isa = PBXBuildFile; fileRef = 619938E11DA8061900765852 /* test_configuration_invalid.json */; };
@@ -71,7 +71,7 @@
 		618A46CB1DAD481400B8F5CA /* TweakExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakExtensionsTests.swift; sourceTree = "<group>"; };
 		618A46CD1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsTweaksConfigurationTests.swift; sourceTree = "<group>"; };
 		619938D71DA7F2DA00765852 /* TweakTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakTests.swift; sourceTree = "<group>"; };
-		619938DB1DA7F6E600765852 /* ConfigurationViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewControllerTests.swift; sourceTree = "<group>"; };
+		619938DB1DA7F6E600765852 /* TweakViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakViewControllerTests.swift; sourceTree = "<group>"; };
 		619938DD1DA7F9FA00765852 /* test_configuration_no_displayable_ungrouped.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration_no_displayable_ungrouped.json; sourceTree = "<group>"; };
 		619938DF1DA805BA00765852 /* LocalConfigurationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConfigurationTests.swift; sourceTree = "<group>"; };
 		619938E11DA8061900765852 /* test_configuration_invalid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration_invalid.json; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		61F1DECB1DA7ECD300314DEC /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				619938DB1DA7F6E600765852 /* ConfigurationViewControllerTests.swift */,
+				619938DB1DA7F6E600765852 /* TweakViewControllerTests.swift */,
 				61BE051A1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift */,
 				61BE051F1DAE88A100288EC7 /* TextTweakTableViewCellTests.swift */,
 			);
@@ -475,7 +475,7 @@
 				618A46CE1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift in Sources */,
 				618A46CC1DAD481400B8F5CA /* TweakExtensionsTests.swift in Sources */,
 				4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */,
-				619938DC1DA7F6E600765852 /* ConfigurationViewControllerTests.swift in Sources */,
+				619938DC1DA7F6E600765852 /* TweakViewControllerTests.swift in Sources */,
 				61BE051E1DAE878600288EC7 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
