@@ -77,7 +77,7 @@ class ViewController: UIViewController {
     @IBAction func presentTweakViewController() {
         let tweakNavigationController = UINavigationController(rootViewController: tweakViewController)
         tweakNavigationController.navigationBar.prefersLargeTitles = true
-        present(tweaksNavigationController, animated: true, completion: nil)
+        present(tweakNavigationController, animated: true, completion: nil)
     }
     
     @IBAction func pushTweakViewController() {
