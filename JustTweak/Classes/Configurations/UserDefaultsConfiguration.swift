@@ -21,12 +21,12 @@ final public class UserDefaultsConfiguration {
 extension UserDefaultsConfiguration: Configuration {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
-        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(feature)
+        let userDefaultsKey = keyForTweakWithIdentifier(feature)
         return userDefaults.bool(forKey: userDefaultsKey)
     }
 
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        let userDefaultsKey = userDefaultsKeyForTweakWithIdentifier(variable)
+        let userDefaultsKey = keyForTweakWithIdentifier(variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey)
         guard let value = tweakValueFromUserDefaultsObject(userDefaultsValue as AnyObject?) else { return nil }
         return Tweak(feature: feature,
@@ -48,13 +48,13 @@ extension UserDefaultsConfiguration: MutableConfiguration {
     }
 
     public func deleteValue(feature: String, variable: String) {
-        userDefaults.removeObject(forKey: userDefaultsKeyForTweakWithIdentifier(variable))
+        userDefaults.removeObject(forKey: keyForTweakWithIdentifier(variable))
     }
 }
 
 extension UserDefaultsConfiguration {
     
-    private func userDefaultsKeyForTweakWithIdentifier(_ identifier: String) -> String {
+    private func keyForTweakWithIdentifier(_ identifier: String) -> String {
         return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
     }
     
@@ -69,7 +69,7 @@ extension UserDefaultsConfiguration {
     }
         
     private func updateUserDefaults(value: TweakValue, feature: String, variable: String) {
-        userDefaults.set(value, forKey: userDefaultsKeyForTweakWithIdentifier(variable))
+        userDefaults.set(value, forKey: keyForTweakWithIdentifier(variable))
         userDefaults.synchronize()
         let notificationCenter = NotificationCenter.default
         let tweak = Tweak(feature: feature, variable: variable, value: value)
