@@ -44,7 +44,7 @@ public class FirebaseConfiguration: Configuration {
             else {
                 self?.remoteConfiguration.activate(completionHandler: nil) // You can pass a completion handler if you want the configuration to be applied immediately after being fetched; otherwise it will be applied on next launch
                 let notificationCentre = NotificationCenter.default
-                notificationCentre.post(name: TweaksConfigurationDidChangeNotification, object: self)
+                notificationCentre.post(name: TweakConfigurationDidChangeNotification, object: self)
             }
         }
     }

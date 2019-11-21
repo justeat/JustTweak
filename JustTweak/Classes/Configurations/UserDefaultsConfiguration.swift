@@ -73,8 +73,8 @@ extension UserDefaultsConfiguration {
         userDefaults.synchronize()
         let notificationCenter = NotificationCenter.default
         let tweak = Tweak(feature: feature, variable: variable, value: value)
-        let userInfo = [TweaksConfigurationDidChangeNotificationTweakKey: tweak]
-        notificationCenter.post(name: TweaksConfigurationDidChangeNotification,
+        let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
+        notificationCenter.post(name: TweakConfigurationDidChangeNotification,
                                 object: self,
                                 userInfo: userInfo)
     }
