@@ -18,10 +18,10 @@ class TweakManagerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let mockFirebaseConfiguration = MockTweaksRemoteConfiguration()
-        let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.Tests")!
+        let mockConfiguration = MockConfiguration()
+        let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.TweakManagerTests")!
         userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
-        let configurations: [Configuration] = [userDefaultsConfiguration, mockFirebaseConfiguration, localConfiguration]
+        let configurations: [Configuration] = [userDefaultsConfiguration, mockConfiguration, localConfiguration]
         tweakManager = TweakManager(configurations: configurations)
     }
     
@@ -90,7 +90,7 @@ class TweakManagerTests: XCTestCase {
     }
 }
 
-class MockTweaksRemoteConfiguration: Configuration {
+fileprivate class MockConfiguration: Configuration {
     
     var logClosure: LogClosure?
     let features: [String : [String]] = [:]

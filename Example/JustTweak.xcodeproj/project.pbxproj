@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */; };
 		4F30EA6E21ADA06A00AECF77 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */; };
 		4F30EA6F21ADA06A00AECF77 /* OptimizelyConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */; };
 		4F38E0EF236DF6E20070BD17 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		2A3A7CF0048CBC9CF1917718 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakManagerCacheTests.swift; sourceTree = "<group>"; };
 		4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfiguration.swift; sourceTree = "<group>"; };
 		4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyConfiguration.swift; sourceTree = "<group>"; };
 		4F38E0EE236DF6E20070BD17 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				619938DF1DA805BA00765852 /* LocalConfigurationTests.swift */,
 				618A46CB1DAD481400B8F5CA /* TweakExtensionsTests.swift */,
 				61F1DEC91DA7ECD300314DEC /* TweakManagerTests.swift */,
+				4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */,
 				61F1DECD1DA7ECF700314DEC /* TweaksUtilitiesTests.swift */,
 				619938D71DA7F2DA00765852 /* TweakTests.swift */,
 				618A46CD1DAD4DC500B8F5CA /* UserDefaultsTweaksConfigurationTests.swift */,
@@ -465,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				619938D81DA7F2DA00765852 /* TweakTests.swift in Sources */,
+				4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */,
 				61BE051B1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift in Sources */,
 				61F1DECE1DA7ECF700314DEC /* TweaksUtilitiesTests.swift in Sources */,
 				61F1DECF1DA7EE6C00314DEC /* TweakManagerTests.swift in Sources */,
