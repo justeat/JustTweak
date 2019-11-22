@@ -60,7 +60,7 @@ class TweakManagerCacheTests: XCTestCase {
         tweakFetch(useCache: false)
     }
     
-    func testTweakFetch_SetValue_CacheEnabled() {
+    func testTweakFetch_CacheEnabled() {
         tweakFetch(useCache: true)
     }
     
