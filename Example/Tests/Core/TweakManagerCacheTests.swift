@@ -73,9 +73,12 @@ class TweakManagerCacheTests: XCTestCase {
         XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, 1)
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
         XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, useCache ? 1 : 2)
-        tweakManager.resetCache()
+        tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
         XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, useCache ? 2 : 3)
+        tweakManager.resetCache()
+        XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
+        XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, useCache ? 3 : 4)
     }
     
     // MARK: - activeVariation(experiment:)
