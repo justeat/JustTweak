@@ -17,9 +17,17 @@ final public class TweakManager {
         }
     }
     
-    public var useCache: Bool = false
+    public var useCache: Bool = false {
+        didSet {
+            if useCache != oldValue {
+                resetCache()
+            }
+        }
+    }
     
-    private var tweaksCache = [String : [String : Tweak]]()
+    private var featureCache = [String : Bool]()
+    private var tweakCache = [String : [String : Tweak]]()
+    private var experimentCache = [String : String]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
     var mutableConfiguration: MutableConfiguration? {
@@ -43,6 +51,11 @@ final public class TweakManager {
 extension TweakManager: MutableConfiguration {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
+        if useCache, let cachedFeature = featureCache[feature] {
+            logClosure?("Feature '\(cachedFeature)' found in cache.)", .verbose)
+            return cachedFeature
+        }
+        
         var enabled = false
         for (_, configuration) in configurations.enumerated() {
             if configuration.isFeatureEnabled(feature) {
@@ -50,11 +63,14 @@ extension TweakManager: MutableConfiguration {
                 break
             }
         }
+        if useCache {
+            featureCache[feature] = enabled
+        }
         return enabled
     }
     
     public func tweakWith(feature: String, variable: String) -> Tweak? {
-        if useCache, let cachedTweaks = tweaksCache[feature], let cachedTweak = cachedTweaks[variable] {
+        if useCache, let cachedTweaks = tweakCache[feature], let cachedTweak = cachedTweaks[variable] {
             logClosure?("Tweak '\(cachedTweak)' found in cache.)", .verbose)
             return cachedTweak
         }
@@ -78,10 +94,10 @@ extension TweakManager: MutableConfiguration {
         if let result = result {
             logClosure?("Tweak with feature '\(feature)' and variable '\(variable)' resolved. Using '\(result)'.", .debug)
             if useCache {
-                if let _ = tweaksCache[feature] {
-                    tweaksCache[feature]?[variable] = result
+                if let _ = tweakCache[feature] {
+                    tweakCache[feature]?[variable] = result
                 } else {
-                    tweaksCache[feature] = [variable : result]
+                    tweakCache[feature] = [variable : result]
                 }
             }
         }
@@ -92,21 +108,37 @@ extension TweakManager: MutableConfiguration {
     }
     
     public func activeVariation(for experiment: String) -> String? {
+        if useCache, let cachedExperiment = experimentCache[experiment] {
+            logClosure?("Experiment '\(cachedExperiment)' found in cache.)", .verbose)
+            return cachedExperiment
+        }
+        
         var activeVariation: String? = nil
         for (_, configuration) in configurations.enumerated() {
             activeVariation = configuration.activeVariation(for: experiment)
             if activeVariation != nil { break }
+        }
+        if useCache {
+            experimentCache[experiment] = activeVariation
         }
         return activeVariation
     }
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
         guard let mutableConfiguration = self.mutableConfiguration else { return }
+        if useCache {
+            // cannot use write-through cache because tweakWith(feature:variable:) returns a Tweak, but here we only have a TweakValue
+            // we simply set the entry to nil so the next fetch will go through the list of configurations and subsequently re-cache
+            tweakCache[feature]?[variable] = nil
+        }
         mutableConfiguration.set(value, feature: feature, variable: variable)
     }
     
     public func deleteValue(feature: String, variable: String) {
         guard let mutableConfiguration = self.mutableConfiguration else { return }
+        if useCache {
+            tweakCache[feature]?[variable] = nil
+        }
         mutableConfiguration.deleteValue(feature: feature, variable: variable)
     }
 }
@@ -136,8 +168,13 @@ extension TweakManager {
             resetCache()
         }
     }
+}
+
+extension TweakManager {
     
     public func resetCache() {
-        tweaksCache = [String : [String : Tweak]]()
+        featureCache = [String : Bool]()
+        tweakCache = [String : [String : Tweak]]()
+        experimentCache = [String : String]()
     }
 }
