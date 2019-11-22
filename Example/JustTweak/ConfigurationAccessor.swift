@@ -20,7 +20,7 @@ class ConfigurationAccessor {
         let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
         
         let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
-//        let configurations: [Configuration] = [userDefaultsConfiguration, optimizelyConfiguration, firebaseConfiguration, localConfiguration]
+        // let configurations: [Configuration] = [userDefaultsConfiguration, optimizelyConfiguration, firebaseConfiguration, localConfiguration]
         return TweakManager(configurations: configurations)
     }()
     
