@@ -47,7 +47,7 @@ static let tweakManager: TweakManager = {
 
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-    let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)!
+    let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
 
     // priority is defined by the order in the configurations array (from highest to lowest)
     let configurations: [Configuration] = [userDefaultsConfiguration,
