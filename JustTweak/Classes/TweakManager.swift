@@ -133,25 +133,25 @@ extension TweakManager: MutableConfiguration {
     }
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
-        queue.sync {
-            guard let mutableConfiguration = self.mutableConfiguration else { return }
-            if self.useCache {
+        guard let mutableConfiguration = self.mutableConfiguration else { return }
+        if useCache {
+            queue.sync {
                 // cannot use write-through cache because tweakWith(feature:variable:) returns a Tweak, but here we only have a TweakValue
                 // we simply set the entry to nil so the next fetch will go through the list of configurations and subsequently re-cache
-                self.tweakCache[feature]?[variable] = nil
+                tweakCache[feature]?[variable] = nil
             }
-            mutableConfiguration.set(value, feature: feature, variable: variable)
         }
+        mutableConfiguration.set(value, feature: feature, variable: variable)
     }
-    
+
     public func deleteValue(feature: String, variable: String) {
-        queue.sync {
-            guard let mutableConfiguration = self.mutableConfiguration else { return }
-            if self.useCache {
-                self.tweakCache[feature]?[variable] = nil
+        guard let mutableConfiguration = self.mutableConfiguration else { return }
+        if useCache {
+            queue.sync {
+                tweakCache[feature]?[variable] = nil
             }
-            mutableConfiguration.deleteValue(feature: feature, variable: variable)
         }
+        mutableConfiguration.deleteValue(feature: feature, variable: variable)
     }
 }
 
@@ -167,15 +167,15 @@ extension TweakManager {
                 guard let tweak = notification.userInfo?[TweakConfigurationDidChangeNotificationTweakKey] as? Tweak else { return }
                 closure(tweak)
             }
-            self.observersMap[object] = observer
+            observersMap[object] = observer
         }
     }
     
     public func deregisterFromConfigurationsUpdates(_ object: NSObject) {
         queue.sync {
-            guard let observer = self.observersMap[object] else { return }
+            guard let observer = observersMap[object] else { return }
             NotificationCenter.default.removeObserver(observer)
-            self.observersMap.removeValue(forKey: object)
+            observersMap.removeValue(forKey: object)
         }
     }
     
@@ -190,9 +190,9 @@ extension TweakManager {
     
     public func resetCache() {
         queue.sync {
-            self.featureCache = [String : Bool]()
-            self.tweakCache = [String : [String : Tweak]]()
-            self.experimentCache = [String : String]()
+            featureCache = [String : Bool]()
+            tweakCache = [String : [String : Tweak]]()
+            experimentCache = [String : String]()
         }
     }
 }
