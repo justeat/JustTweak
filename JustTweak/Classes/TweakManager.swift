@@ -133,25 +133,25 @@ extension TweakManager: MutableConfiguration {
     }
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
-        queue.sync {
-            guard let mutableConfiguration = self.mutableConfiguration else { return }
-            if self.useCache {
+        guard let mutableConfiguration = self.mutableConfiguration else { return }
+        if self.useCache {
+            queue.sync {
                 // cannot use write-through cache because tweakWith(feature:variable:) returns a Tweak, but here we only have a TweakValue
                 // we simply set the entry to nil so the next fetch will go through the list of configurations and subsequently re-cache
                 self.tweakCache[feature]?[variable] = nil
             }
-            mutableConfiguration.set(value, feature: feature, variable: variable)
         }
+        mutableConfiguration.set(value, feature: feature, variable: variable)
     }
-    
+
     public func deleteValue(feature: String, variable: String) {
-        queue.sync {
-            guard let mutableConfiguration = self.mutableConfiguration else { return }
-            if self.useCache {
+        guard let mutableConfiguration = self.mutableConfiguration else { return }
+        if self.useCache {
+            queue.sync {
                 self.tweakCache[feature]?[variable] = nil
             }
-            mutableConfiguration.deleteValue(feature: feature, variable: variable)
         }
+        mutableConfiguration.deleteValue(feature: feature, variable: variable)
     }
 }
 
