@@ -59,3 +59,29 @@ public struct OptionalTweakProperty<T: TweakValue> {
         }
     }
 }
+
+@propertyWrapper
+struct Atomic<Value> {
+
+    let queue = DispatchQueue(label: "com.justeat.AtomicPropertyWrapper", attributes: .concurrent)
+    var value: Value
+
+    init(wrappedValue: Value) {
+        self.value = wrappedValue
+    }
+
+    var wrappedValue: Value {
+        get {
+            return queue.sync { value }
+        }
+        set {
+            queue.sync(flags: .barrier) { value = newValue }
+        }
+    }
+
+    mutating func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
+        try queue.sync(flags: .barrier) {
+            try mutation(&value)
+        }
+    }
+}

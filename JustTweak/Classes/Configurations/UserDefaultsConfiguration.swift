@@ -70,11 +70,13 @@ extension UserDefaultsConfiguration {
         
     private func updateUserDefaults(value: TweakValue, feature: String, variable: String) {
         userDefaults.set(value, forKey: keyForTweakWithIdentifier(variable))
-        let notificationCenter = NotificationCenter.default
-        let tweak = Tweak(feature: feature, variable: variable, value: value)
-        let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
-        notificationCenter.post(name: TweakConfigurationDidChangeNotification,
-                                object: self,
-                                userInfo: userInfo)
+        DispatchQueue.main.async {
+            let notificationCenter = NotificationCenter.default
+            let tweak = Tweak(feature: feature, variable: variable, value: value)
+            let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
+            notificationCenter.post(name: TweakConfigurationDidChangeNotification,
+                                    object: self,
+                                    userInfo: userInfo)
+        }
     }
 }
