@@ -47,31 +47,31 @@ class Accessor {
                            feature: "optional_stringValue_feature",
                            variable: "optional_stringValue_variable",
                            tweakManager: tweakManager)
-    var optionalStringValue: String
+    var optionalStringValue: String?
     
     @OptionalTweakProperty(fallbackValue: nil,
                            feature: "optional_boolValue_feature",
                            variable: "optional_boolValue_variable",
                            tweakManager: tweakManager)
-    var optionalBoolValue: Bool
+    var optionalBoolValue: Bool?
     
     @OptionalTweakProperty(fallbackValue: nil,
                            feature: "optional_intValue_feature",
                            variable: "optional_intValue_variable",
                            tweakManager: tweakManager)
-    var optionalIntValue: Int
+    var optionalIntValue: Int?
     
     @OptionalTweakProperty(fallbackValue: nil,
                            feature: "optional_doubleValue_feature",
                            variable: "optional_doubleValue_variable",
                            tweakManager: tweakManager)
-    var optionalDoubleValue: Double
+    var optionalDoubleValue: Double?
     
     @OptionalTweakProperty(fallbackValue: nil,
                            feature: "optional_floatValue_feature",
                            variable: "optional_floatValue_variable",
                            tweakManager: tweakManager)
-    var optionalFloatValue: Float
+    var optionalFloatValue: Float?
 }
 
 class FeatureFlagPropertyWrapperTests: XCTestCase {

@@ -1,0 +1,26 @@
+{
+  "ui_customization": {
+    "display_blue_view": {
+      "Title": "Display Blue View",
+      "Group": "UI Customization",
+      "Value": true
+    },
+    "display_yellow_view": {
+      "Title": "Display Yellow View",
+      "Group": "UI Customization",
+      "Value": true
+    },
+    "label_text": {
+      "Title": "Label Text",
+      "Group": "UI Customization",
+      "Value": "Overridden value"
+    }
+  },
+  "general": {
+    "tap_to_change_color_enabled": {
+      "Title": "Tap to change views color",
+      "Group": "General",
+      "Value": false
+    }
+  }
+}
