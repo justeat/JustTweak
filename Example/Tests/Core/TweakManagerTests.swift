@@ -36,10 +36,6 @@ class TweakManagerTests: XCTestCase {
         XCTAssertNil(tweakManager.mutableConfiguration)
     }
     
-    func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(tweakManager.tweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
-    }
-    
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
         XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView)!.boolValue)
     }
