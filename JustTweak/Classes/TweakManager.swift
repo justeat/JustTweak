@@ -93,7 +93,12 @@ extension TweakManager: MutableConfiguration {
                     break
                 }
                 else {
-                    logClosure?("Tweak with identifier '\(variable)' NOT found in configuration \(configuration))", .verbose)
+                    let errorMessage = "Tweak with identifier '\(variable)' NOT found in configuration \(configuration))"
+                    if configuration is LocalConfiguration {
+                      fatalError(errorMessage)
+                    } else {
+                      logClosure?(errorMessage, .verbose)
+                    }
                 }
             }
             if let result = result {
