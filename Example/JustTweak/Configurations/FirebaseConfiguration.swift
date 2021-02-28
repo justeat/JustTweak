@@ -42,7 +42,7 @@ public class FirebaseConfiguration: Configuration {
                 strongSelf.logClosure?("Error while fetching Firebase configuration => \(error)", .error)
             }
             else {
-                self?.remoteConfiguration.activate(completionHandler: nil) // You can pass a completion handler if you want the configuration to be applied immediately after being fetched; otherwise it will be applied on next launch
+                self?.remoteConfiguration.activate(completion: nil) // You can pass a completion handler if you want the configuration to be applied immediately after being fetched; otherwise it will be applied on next launch
                 let notificationCentre = NotificationCenter.default
                 notificationCentre.post(name: TweakConfigurationDidChangeNotification, object: self)
             }
