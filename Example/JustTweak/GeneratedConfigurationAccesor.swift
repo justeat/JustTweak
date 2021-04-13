@@ -38,21 +38,6 @@ class GeneratedConfigurationAccesor {
     }
 
     @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayGreenView,
-                   tweakManager: tweakManager)
-    var displayGreenView: Bool
-
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayYellowView,
-                   tweakManager: tweakManager)
-    var displayYellowView: Bool
-
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayRedView,
-                   tweakManager: tweakManager)
-    var displayRedView: Bool
-
-    @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.labelText,
                    tweakManager: tweakManager)
     var labelText: String
@@ -62,13 +47,28 @@ class GeneratedConfigurationAccesor {
                    tweakManager: tweakManager)
     var redViewAlphaComponent: Double
 
-    @TweakProperty(feature: Features.general,
-                   variable: Variables.tapToChangeColorEnabled,
+    @TweakProperty(feature: Features.uiCustomization,
+                   variable: Variables.displayRedView,
                    tweakManager: tweakManager)
-    var tapToChangeColorEnabled: Bool
+    var displayRedView: Bool
+
+    @TweakProperty(feature: Features.uiCustomization,
+                   variable: Variables.displayYellowView,
+                   tweakManager: tweakManager)
+    var displayYellowView: Bool
+
+    @TweakProperty(feature: Features.uiCustomization,
+                   variable: Variables.displayGreenView,
+                   tweakManager: tweakManager)
+    var displayGreenView: Bool
 
     @TweakProperty(feature: Features.general,
                    variable: Variables.greetOnAppDidBecomeActive,
                    tweakManager: tweakManager)
     var greetOnAppDidBecomeActive: Bool
+
+    @TweakProperty(feature: Features.general,
+                   variable: Variables.tapToChangeColorEnabled,
+                   tweakManager: tweakManager)
+    var tapToChangeColorEnabled: Bool
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 let scriptName = "TweaksGenerator"
 let scriptVersion = "1.1"
@@ -296,33 +297,51 @@ class AccessorCodeGenerator {
     }
 }
 
-func main() {
-    print("\(scriptName) - v\(scriptVersion)")
+struct TweakPropertyGenerator: ParsableCommand {
     
-    guard CommandLine.argc == 4 else {
-        let errorMessage = """
-             Incorrect number of parameters - Expected 3
-             """
-        print(errorMessage)
-        return
+//    @Flag(help: "Include a counter with each repetition.")
+//    var includeCounter = false
+//
+//    @Option(name: .shortAndLong, help: "The number of times to repeat 'phrase'.")
+//    var count: Int?
+
+    @Argument(help: "The output file.")
+    var outputFile: String
+    
+    @Argument(help: "The class name.")
+    var className: String
+    
+    @Argument(help: "The local configuration file path.")
+    var localConfigurationFilePath: String
+    
+    func run() throws {
+        print("\(scriptName) - v\(scriptVersion)")
+        
+//        guard CommandLine.argc == 4 else {
+//            let errorMessage = """
+//                 Incorrect number of parameters - Expected 3
+//                 """
+//            print(errorMessage)
+//            return
+//        }
+        
+//        let outputFile = CommandLine.arguments[1]
+//        let className = CommandLine.arguments[2]
+//        let localConfigurationFilePath = CommandLine.arguments[3]
+        
+        let url = URL(fileURLWithPath: outputFile)
+        
+        let accessorCodeGenerator = AccessorCodeGenerator()
+        let localConfigurationReader = LocalConfigurationReader()
+        let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
+        
+        let localConfigurationFilename = String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
+        let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
+                                                     className: className,
+                                                     localConfigurationContent: localConfigurationContent)
+        
+        try! content.write(to: url, atomically: true, encoding: .utf8)
     }
-    
-    let outputFile = CommandLine.arguments[1]
-    let className = CommandLine.arguments[2]
-    let localConfigurationFilePath = CommandLine.arguments[3]
-    
-    let url = URL(fileURLWithPath: outputFile)
-    
-    let accessorCodeGenerator = AccessorCodeGenerator()
-    let localConfigurationReader = LocalConfigurationReader()
-    let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
-    
-    let localConfigurationFilename = String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
-    let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
-                                                 className: className,
-                                                 localConfigurationContent: localConfigurationContent)
-    
-    try! content.write(to: url, atomically: true, encoding: .utf8)
 }
 
-main()
+TweakPropertyGenerator.main()
