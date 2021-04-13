@@ -52,16 +52,20 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "$SRCROOT/../Example/JustTweak/GeneratedConfigurationAccesor.swift"
+            argument = "-l $SRCROOT/../Example/JustTweak/ExampleConfiguration.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "GeneratedConfigurationAccesor"
+            argument = "-o $SRCROOT/../Example/JustTweak/GeneratedConfigurationAccesor.swift"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$SRCROOT/../Example/JustTweak/ExampleConfiguration.json"
+            argument = "-c /Config.yaml"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--help"
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

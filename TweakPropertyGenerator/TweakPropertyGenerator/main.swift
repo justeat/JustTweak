@@ -298,44 +298,27 @@ class AccessorCodeGenerator {
 }
 
 struct TweakPropertyGenerator: ParsableCommand {
-    
-//    @Flag(help: "Include a counter with each repetition.")
-//    var includeCounter = false
-//
-//    @Option(name: .shortAndLong, help: "The number of times to repeat 'phrase'.")
-//    var count: Int?
 
-    @Argument(help: "The output file.")
-    var outputFile: String
-    
-    @Argument(help: "The class name.")
-    var className: String
-    
-    @Argument(help: "The local configuration file path.")
+    @Option(name: .shortAndLong, help: "The local configuration file path.")
     var localConfigurationFilePath: String
+    
+    @Option(name: .shortAndLong, help: "The output file path.")
+    var outputFilePath: String
+    
+    @Option(name: .shortAndLong, help: "The configuration file path.")
+    var configuration: String
     
     func run() throws {
         print("\(scriptName) - v\(scriptVersion)")
-        
-//        guard CommandLine.argc == 4 else {
-//            let errorMessage = """
-//                 Incorrect number of parameters - Expected 3
-//                 """
-//            print(errorMessage)
-//            return
-//        }
-        
-//        let outputFile = CommandLine.arguments[1]
-//        let className = CommandLine.arguments[2]
-//        let localConfigurationFilePath = CommandLine.arguments[3]
-        
-        let url = URL(fileURLWithPath: outputFile)
+
+        let url = URL(fileURLWithPath: outputFilePath)
         
         let accessorCodeGenerator = AccessorCodeGenerator()
         let localConfigurationReader = LocalConfigurationReader()
         let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
         
         let localConfigurationFilename = String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
+        let className = String(outputFilePath.split(separator: "/").last!.split(separator: ".").first!)
         let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
                                                      className: className,
                                                      localConfigurationContent: localConfigurationContent)

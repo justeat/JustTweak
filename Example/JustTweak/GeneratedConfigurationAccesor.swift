@@ -37,10 +37,25 @@ class GeneratedConfigurationAccesor {
         return Self.tweakManager
     }
 
+    @TweakProperty(feature: Features.general,
+                   variable: Variables.greetOnAppDidBecomeActive,
+                   tweakManager: tweakManager)
+    var greetOnAppDidBecomeActive: Bool
+
+    @TweakProperty(feature: Features.general,
+                   variable: Variables.tapToChangeColorEnabled,
+                   tweakManager: tweakManager)
+    var tapToChangeColorEnabled: Bool
+
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.labelText,
                    tweakManager: tweakManager)
     var labelText: String
+
+    @TweakProperty(feature: Features.uiCustomization,
+                   variable: Variables.displayYellowView,
+                   tweakManager: tweakManager)
+    var displayYellowView: Bool
 
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.redViewAlphaComponent,
@@ -53,22 +68,7 @@ class GeneratedConfigurationAccesor {
     var displayRedView: Bool
 
     @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayYellowView,
-                   tweakManager: tweakManager)
-    var displayYellowView: Bool
-
-    @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.displayGreenView,
                    tweakManager: tweakManager)
     var displayGreenView: Bool
-
-    @TweakProperty(feature: Features.general,
-                   variable: Variables.greetOnAppDidBecomeActive,
-                   tweakManager: tweakManager)
-    var greetOnAppDidBecomeActive: Bool
-
-    @TweakProperty(feature: Features.general,
-                   variable: Variables.tapToChangeColorEnabled,
-                   tweakManager: tweakManager)
-    var tapToChangeColorEnabled: Bool
 }

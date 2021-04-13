@@ -100,7 +100,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: 2841e353accfe688150781deebeb245e3fe16c2f
   GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
-  JustTweak: 8e510814b92e67d610b1ce8531f9690923b3fc82
+  JustTweak: dc29c5ba966b506c18e566c52095106d36c005ef
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   OptimizelySDKCore: c20c9e903d8d9330eafb6171ea938164d806451d
   OptimizelySDKDatafileManager: 6a8228ca2daad92c7350e35f480aead19ca2a99d
