@@ -30,28 +30,28 @@ class ConfigurationAccessor {
     
     // MARK: - Via Property Wrappers
     
-    @TweakProperty(fallbackValue: false,
-                   feature: Features.General,
-                   variable: Variables.GreetOnAppDidBecomeActive,
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: false,
+                           feature: Features.General,
+                           variable: Variables.GreetOnAppDidBecomeActive,
+                           tweakManager: tweakManager)
     var shouldShowAlert: Bool
     
-    @TweakProperty(fallbackValue: false,
-                   feature: Features.UICustomization,
-                   variable: Variables.DisplayRedView,
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: false,
+                           feature: Features.UICustomization,
+                           variable: Variables.DisplayRedView,
+                           tweakManager: tweakManager)
     var canShowRedView: Bool
     
-    @TweakProperty(fallbackValue: false,
-                   feature: Features.UICustomization,
-                   variable: Variables.DisplayGreenView,
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: false,
+                           feature: Features.UICustomization,
+                           variable: Variables.DisplayGreenView,
+                           tweakManager: tweakManager)
     var canShowGreenView: Bool
     
-    @TweakProperty(fallbackValue: "",
-                   feature: Features.UICustomization,
-                   variable: Variables.LabelText,
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: "",
+                           feature: Features.UICustomization,
+                           variable: Variables.LabelText,
+                           tweakManager: tweakManager)
     var labelText: String
     
     @OptionalTweakProperty(fallbackValue: nil,
@@ -77,3 +77,4 @@ class ConfigurationAccessor {
                                       variable: Variables.TapToChangeViewColor)?.boolValue ?? false
     }
 }
+
