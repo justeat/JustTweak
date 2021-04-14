@@ -15,15 +15,15 @@ class AccessorCodeGenerator {
     private let classContentConst = "<CLASS_CONTENT>"
     private let tweakManagerConst = "<TWEAK_MANAGER_CONTENT>"
     
-    func generate(localConfigurationFilename: String, className: String, localConfigurationContent: TweaksFormat) -> String {
-        let enclosingContent = self.enclosingContent(className: className)
+    func generate(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
+        let template = self.template(className: className)
         
         let featureConstants = self.featureConstants(localConfigurationContent: localConfigurationContent)
         let variableConstants = self.variableConstants(localConfigurationContent: localConfigurationContent)
         let tweakManager = self.tweakManager(localConfigurationFilename: localConfigurationFilename)
         let classContent = self.classContent(localConfigurationContent: localConfigurationContent)
         
-        let content = enclosingContent
+        let content = template
             .replacingOccurrences(of: featureConstantsConst, with: featureConstants)
             .replacingOccurrences(of: variableConstantsConst, with: variableConstants)
             .replacingOccurrences(of: tweakManagerConst, with: tweakManager)
@@ -31,27 +31,12 @@ class AccessorCodeGenerator {
         
         return content
     }
+}
+
+extension AccessorCodeGenerator {
     
-    private func tweakManager(localConfigurationFilename: String) -> String {
-        return """
-            static let tweakManager: TweakManager = {
-                let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-                
-                let jsonFileURL = Bundle.main.url(forResource: "\(localConfigurationFilename)", withExtension: "json")!
-                let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-                
-                let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
-                return TweakManager(configurations: configurations)
-            }()
-                
-            private var tweakManager: TweakManager {
-                return Self.tweakManager
-            }
+    private func template(className: String) -> String {
         """
-    }
-    
-    private func enclosingContent(className: String) -> String {
-        let enclosingContent = """
         //
         //  \(className).swift
         //  Generated via JustTweak
@@ -71,76 +56,79 @@ class AccessorCodeGenerator {
         \(classContentConst)
         }
         """
-        return enclosingContent
     }
     
-    private func type(for value: Any) -> String {
-        switch value {
-        case _ as String: return "String"
-        case let numberValue as NSNumber: return numberValue.tweakType
-        case _ as Bool: return "Bool"
-        case _ as Double: return "Double"
-        default: return "String"
+    private func featureConstants(localConfigurationContent: Configuration) -> String {
+        var features = Set<FeatureKey>()
+        for tweak in localConfigurationContent.tweaks {
+            features.insert(tweak.feature)
         }
-    }
-    
-    private func toTweakProperty(_ feature: String, _ key: String, _ tweak: [String: Any]) -> String {
-        return """
-            @TweakProperty(feature: \(featuresConst).\(feature.camelCased()),
-                           variable: \(variablesConst).\(key.camelCased()),
-                           tweakManager: tweakManager)
-            var \(key.camelCased()): \(type(for: tweak["Value"]!))
-        """
-    }
-    
-    private func featureConstants(localConfigurationContent: TweaksFormat) -> String {
-        var content: [String] = []
-        for (feature, _) in localConfigurationContent {
-            let constRow = """
-                    static let \(feature.camelCased()) = "\(feature)"
+        let content: [String] = features.map {
             """
-            content.append(constRow)
+                    static let \($0.camelCased()) = "\($0)"
+            """
         }
-        
-        let featureConstants = Array(content).sorted().joined(separator: "\n")
         return """
             struct \(featuresConst) {
-        \(featureConstants)
+        \(Array(content).sorted().joined(separator: "\n"))
             }
         """
     }
     
-    private func variableConstants(localConfigurationContent: TweaksFormat) -> String {
-        var content: Set<String> = []
-        for (_, variables) in localConfigurationContent {
-            for (variable, _) in variables {
-                let constRow = """
-                        static let \(variable.camelCased()) = "\(variable)"
-                """
-                content.insert(constRow)
-            }
+    private func variableConstants(localConfigurationContent: Configuration) -> String {
+        var variables = Set<VariableKey>()
+        for tweak in localConfigurationContent.tweaks {
+            variables.insert(tweak.variable)
         }
-        
-        let variableConstants = Array(content).sorted().joined(separator: "\n")
+        let content: [String] = variables.map {
+            """
+                    static let \($0.camelCased()) = "\($0)"
+            """
+        }
         return """
             struct \(variablesConst) {
-        \(variableConstants)
+        \(Array(content).sorted().joined(separator: "\n"))
             }
         """
     }
     
-    private func classContent(localConfigurationContent: TweaksFormat) -> String {
+    private func tweakManager(localConfigurationFilename: String) -> String {
+        """
+            static let tweakManager: TweakManager = {
+                let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+                
+                let jsonFileURL = Bundle.main.url(forResource: "\(localConfigurationFilename)", withExtension: "json")!
+                let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
+                
+                let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
+                return TweakManager(configurations: configurations)
+            }()
+                
+            private var tweakManager: TweakManager {
+                return Self.tweakManager
+            }
+        """
+    }
+    
+    private func classContent(localConfigurationContent: Configuration) -> String {
         var content: [String] = []
         var properties: Set<String> = []
-        for (feature, variables) in localConfigurationContent {
-            for (variable, tweak) in variables {
-                let key = variable.camelCased()
-                if !properties.contains(key) {
-                    properties.insert(key)
-                    content.append(toTweakProperty(feature, variable, tweak))
-                }
+        for tweak in localConfigurationContent.tweaks {
+            let key = tweak.variable.camelCased()
+            if !properties.contains(key) {
+                properties.insert(key)
+                content.append(tweakProperty(for: tweak))
             }
         }
         return content.sorted().joined(separator: "\n\n")
+    }
+    
+    private func tweakProperty(for tweak: Tweak) -> String {
+        """
+            @TweakProperty(feature: \(featuresConst).\(tweak.feature.camelCased()),
+                           variable: \(variablesConst).\(tweak.variable.camelCased()),
+                           tweakManager: tweakManager)
+            var \(tweak.variable.camelCased()): \(tweak.valueType)
+        """
     }
 }
