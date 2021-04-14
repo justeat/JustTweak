@@ -16,14 +16,11 @@ public extension NSNumber {
         case "q":
             return "Int"
             
-        case "f":
-            return "Float"
-            
         case "c":
             return "Bool"
             
         default:
-            return "unknown"
+            assert(false, "Unsupported objCType for NSNumber \(self)")
         }
     }
 }

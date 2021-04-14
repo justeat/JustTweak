@@ -27,7 +27,7 @@ class GeneratedConfigurationAccessor {
     static let tweakManager: TweakManager = {
         let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
         
-        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let jsonFileURL = Bundle.main.url(forResource: "ValidConfiguration", withExtension: "json")!
         let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
         
         let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]

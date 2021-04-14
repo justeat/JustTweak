@@ -27,7 +27,7 @@ struct TweakPropertyGenerator: ParsableCommand {
         
         let accessorCodeGenerator = AccessorCodeGenerator()
         let localConfigurationParser = LocalConfigurationParser()
-        let localConfigurationContent = localConfigurationParser.loadConfiguration(configurationFilePath: localConfigurationFilePath)
+        let localConfigurationContent = try localConfigurationParser.loadConfiguration(configurationFilePath: localConfigurationFilePath)
         
         let localConfigurationFilename = String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
         let className = String(outputFilePath.split(separator: "/").last!.split(separator: ".").first!)
