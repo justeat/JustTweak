@@ -289,6 +289,6 @@ class AccessorCodeGenerator {
                 }
             }
         }
-        return content.joined(separator: "\n\n")
+        return content.sorted().joined(separator: "\n\n")
     }
 }

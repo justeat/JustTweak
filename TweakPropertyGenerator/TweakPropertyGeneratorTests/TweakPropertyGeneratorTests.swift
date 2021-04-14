@@ -8,25 +8,25 @@
 import XCTest
 
 class TweakPropertyGeneratorTests: XCTestCase {
+    
+    func test_tweakPropertyGenerator_output() {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let bundle = Bundle(for: type(of: self))
+        let localConfigurationFilename = "ExampleConfiguration"
+        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        let className = "GeneratedConfigurationAccessorContent"
+        
+        let accessorCodeGenerator = AccessorCodeGenerator()
+        let localConfigurationReader = LocalConfigurationReader()
+        let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
+        
+        let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
+                                                     className: className,
+                                                     localConfigurationContent: localConfigurationContent)
+        
+        let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
+        let testContent = try! String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
+        
+        XCTAssertEqual(content, testContent)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

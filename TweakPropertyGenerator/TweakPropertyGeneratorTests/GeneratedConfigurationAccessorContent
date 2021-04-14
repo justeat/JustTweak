@@ -1,12 +1,12 @@
 //
-//  GeneratedConfigurationAccesor.swift
+//  GeneratedConfigurationAccessorContent.swift
 //  Generated via JustTweak
 //
 
 import Foundation
 import JustTweak
 
-class GeneratedConfigurationAccesor {
+class GeneratedConfigurationAccessorContent {
 
     struct Features {
         static let general = "general"

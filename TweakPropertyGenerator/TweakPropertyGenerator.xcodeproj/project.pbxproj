@@ -12,6 +12,8 @@
 		12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */; };
 		12BE96552626FAAC00C1B6C3 /* TweakPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */; };
 		12BE96562626FAAC00C1B6C3 /* TweakPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */; };
+		12BE987A2627243D00C1B6C3 /* ExampleConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 12BE98792627243D00C1B6C3 /* ExampleConfiguration.json */; };
+		12BE989D26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent in Resources */ = {isa = PBXBuildFile; fileRef = 12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +35,8 @@
 		12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakPropertyGeneratorTests.swift; sourceTree = "<group>"; };
 		12BE964E2626FA5000C1B6C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakPropertyGenerator.swift; sourceTree = "<group>"; };
+		12BE98792627243D00C1B6C3 /* ExampleConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration.json; sourceTree = "<group>"; };
+		12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */ = {isa = PBXFileReference; lastKnownFileType = text; path = GeneratedConfigurationAccessorContent; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +88,9 @@
 		12BE964B2626FA5000C1B6C3 /* TweakPropertyGeneratorTests */ = {
 			isa = PBXGroup;
 			children = (
+				12BE98792627243D00C1B6C3 /* ExampleConfiguration.json */,
 				12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */,
+				12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */,
 				12BE964E2626FA5000C1B6C3 /* Info.plist */,
 			);
 			path = TweakPropertyGeneratorTests;
@@ -174,6 +180,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12BE989D26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent in Resources */,
+				12BE987A2627243D00C1B6C3 /* ExampleConfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
