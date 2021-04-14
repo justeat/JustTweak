@@ -14,8 +14,8 @@
 		12BE989D26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent in Resources */ = {isa = PBXBuildFile; fileRef = 12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */; };
 		4F7750762627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
 		4F7750772627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
-		4F7750782627338700A0A3F5 /* LocalConfigurationReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationReader.swift */; };
-		4F7750792627338700A0A3F5 /* LocalConfigurationReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationReader.swift */; };
+		4F7750782627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */; };
+		4F7750792627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */; };
 		4F77507A2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */; };
 		4F77507B2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */; };
 		4F7750862627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */; };
@@ -49,7 +49,7 @@
 		12BE98792627243D00C1B6C3 /* ExampleConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration.json; sourceTree = "<group>"; };
 		12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */ = {isa = PBXFileReference; lastKnownFileType = text; path = GeneratedConfigurationAccessorContent; sourceTree = "<group>"; };
 		4F7750732627338700A0A3F5 /* TweakValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakValue.swift; sourceTree = "<group>"; };
-		4F7750742627338700A0A3F5 /* LocalConfigurationReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConfigurationReader.swift; sourceTree = "<group>"; };
+		4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConfigurationParser.swift; sourceTree = "<group>"; };
 		4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessorCodeGenerator.swift; sourceTree = "<group>"; };
 		4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNumber+ValueTypes.swift"; sourceTree = "<group>"; };
 		4F7750822627338E00A0A3F5 /* String+Casing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Casing.swift"; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */,
-				4F7750742627338700A0A3F5 /* LocalConfigurationReader.swift */,
+				4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */,
 				4F775096262751EE00A0A3F5 /* Models.swift */,
 				4F77509B262751FD00A0A3F5 /* Types.swift */,
 				4F7750732627338700A0A3F5 /* TweakValue.swift */,
@@ -233,7 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F7750762627338700A0A3F5 /* TweakValue.swift in Sources */,
-				4F7750782627338700A0A3F5 /* LocalConfigurationReader.swift in Sources */,
+				4F7750782627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */,
 				4F77509C262751FD00A0A3F5 /* Types.swift in Sources */,
 				12273D1B2625D6BE00732559 /* main.swift in Sources */,
 				4F77507A2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */,
@@ -248,7 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F7750772627338700A0A3F5 /* TweakValue.swift in Sources */,
-				4F7750792627338700A0A3F5 /* LocalConfigurationReader.swift in Sources */,
+				4F7750792627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */,
 				4F77509D262751FD00A0A3F5 /* Types.swift in Sources */,
 				12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */,
 				4F77507B2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */,

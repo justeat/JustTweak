@@ -7,7 +7,7 @@ import Foundation
 
 extension String: Error {}
 
-class LocalConfigurationReader {
+class LocalConfigurationParser {
     
     private func type(for value: Any) -> String {
         switch value {
@@ -36,7 +36,7 @@ class LocalConfigurationReader {
                      valueType: type(for: value))
     }
     
-    func loadTweaks(configurationFilePath: String) -> Configuration {
+    func loadConfiguration(configurationFilePath: String) -> Configuration {
         let url = URL(fileURLWithPath: configurationFilePath)
         do {
             let data = try Data(contentsOf: url)

@@ -15,8 +15,8 @@ class TweakPropertyGeneratorTests: XCTestCase {
         let className = "GeneratedConfigurationAccessor"
         
         let accessorCodeGenerator = AccessorCodeGenerator()
-        let localConfigurationReader = LocalConfigurationReader()
-        let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
+        let localConfigurationParser = LocalConfigurationParser()
+        let localConfigurationContent = localConfigurationParser.loadConfiguration(configurationFilePath: localConfigurationFilePath)
         
         let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
                                                      className: className,
