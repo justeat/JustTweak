@@ -14,7 +14,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
         let bundle = Bundle(for: type(of: self))
         let localConfigurationFilename = "ExampleConfiguration"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
-        let className = "GeneratedConfigurationAccessorContent"
+        let className = "GeneratedConfigurationAccessor"
         
         let accessorCodeGenerator = AccessorCodeGenerator()
         let localConfigurationReader = LocalConfigurationReader()
