@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		12273D1B2625D6BE00732559 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12273D1A2625D6BE00732559 /* main.swift */; };
 		12273D382625E45F00732559 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 12273D372625E45F00732559 /* ArgumentParser */; };
+		12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */; };
+		12BE96552626FAAC00C1B6C3 /* TweakPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */; };
+		12BE96562626FAAC00C1B6C3 /* TweakPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +29,10 @@
 /* Begin PBXFileReference section */
 		12273D172625D6BE00732559 /* TweakPropertyGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TweakPropertyGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		12273D1A2625D6BE00732559 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		12BE964A2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweakPropertyGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakPropertyGeneratorTests.swift; sourceTree = "<group>"; };
+		12BE964E2626FA5000C1B6C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakPropertyGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +44,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		12BE96472626FA5000C1B6C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -44,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				12273D192625D6BE00732559 /* TweakPropertyGenerator */,
+				12BE964B2626FA5000C1B6C3 /* TweakPropertyGeneratorTests */,
 				12273D182625D6BE00732559 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				12273D172625D6BE00732559 /* TweakPropertyGenerator */,
+				12BE964A2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,8 +76,18 @@
 			isa = PBXGroup;
 			children = (
 				12273D1A2625D6BE00732559 /* main.swift */,
+				12BE96542626FAAC00C1B6C3 /* TweakPropertyGenerator.swift */,
 			);
 			path = TweakPropertyGenerator;
+			sourceTree = "<group>";
+		};
+		12BE964B2626FA5000C1B6C3 /* TweakPropertyGeneratorTests */ = {
+			isa = PBXGroup;
+			children = (
+				12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */,
+				12BE964E2626FA5000C1B6C3 /* Info.plist */,
+			);
+			path = TweakPropertyGeneratorTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +113,23 @@
 			productReference = 12273D172625D6BE00732559 /* TweakPropertyGenerator */;
 			productType = "com.apple.product-type.tool";
 		};
+		12BE96492626FA5000C1B6C3 /* TweakPropertyGeneratorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12BE96512626FA5000C1B6C3 /* Build configuration list for PBXNativeTarget "TweakPropertyGeneratorTests" */;
+			buildPhases = (
+				12BE96462626FA5000C1B6C3 /* Sources */,
+				12BE96472626FA5000C1B6C3 /* Frameworks */,
+				12BE96482626FA5000C1B6C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TweakPropertyGeneratorTests;
+			productName = TweakPropertyGeneratorTests;
+			productReference = 12BE964A2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -97,6 +140,9 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					12273D162625D6BE00732559 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					12BE96492626FA5000C1B6C3 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -118,9 +164,20 @@
 			projectRoot = "";
 			targets = (
 				12273D162625D6BE00732559 /* TweakPropertyGenerator */,
+				12BE96492626FA5000C1B6C3 /* TweakPropertyGeneratorTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		12BE96482626FA5000C1B6C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		12273D132625D6BE00732559 /* Sources */ = {
@@ -128,6 +185,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				12273D1B2625D6BE00732559 /* main.swift in Sources */,
+				12BE96552626FAAC00C1B6C3 /* TweakPropertyGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12BE96462626FA5000C1B6C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */,
+				12BE96562626FAAC00C1B6C3 /* TweakPropertyGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +338,42 @@
 			};
 			name = Release;
 		};
+		12BE964F2626FA5000C1B6C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = ZKPN288GRK;
+				INFOPLIST_FILE = TweakPropertyGeneratorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.justeattakeaway.TweakPropertyGeneratorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		12BE96502626FA5000C1B6C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = ZKPN288GRK;
+				INFOPLIST_FILE = TweakPropertyGeneratorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.justeattakeaway.TweakPropertyGeneratorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -288,6 +391,15 @@
 			buildConfigurations = (
 				12273D1F2625D6BE00732559 /* Debug */,
 				12273D202625D6BE00732559 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12BE96512626FA5000C1B6C3 /* Build configuration list for PBXNativeTarget "TweakPropertyGeneratorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12BE964F2626FA5000C1B6C3 /* Debug */,
+				12BE96502626FA5000C1B6C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

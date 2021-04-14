@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "12BE96492626FA5000C1B6C3"
+               BuildableName = "TweakPropertyGeneratorTests.xctest"
+               BlueprintName = "TweakPropertyGeneratorTests"
+               ReferencedContainer = "container:TweakPropertyGenerator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
