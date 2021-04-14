@@ -14,11 +14,4 @@ extension String {
             .map { $0.offset > 0 ? $0.element.capitalized : $0.element.lowercased() }
             .joined()
     }
-    
-    func pascalCased(with separator: Character = "_") -> String {
-        self.lowercased()
-            .split(separator: separator)
-            .map { $0.capitalized }
-            .joined()
-    }
 }
