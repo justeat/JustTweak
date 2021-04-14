@@ -1,8 +1,6 @@
 //
 //  TweakPropertyGeneratorTests.swift
-//  TweakPropertyGeneratorTests
-//
-//  Created by Andrew Grant on 14/04/2021.
+//  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
 import XCTest

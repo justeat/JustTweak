@@ -1,15 +1,13 @@
 //
 //  main.swift
-//  TweakPropertyGenerator
-//
-//  Created by Andrew Grant on 13/04/2021.
+//  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
 import Foundation
 import ArgumentParser
 
 let scriptName = "TweakPropertyGenerator"
-let scriptVersion = "1.1"
+let scriptVersion = "1.0"
 
 struct TweakPropertyGenerator: ParsableCommand {
 
