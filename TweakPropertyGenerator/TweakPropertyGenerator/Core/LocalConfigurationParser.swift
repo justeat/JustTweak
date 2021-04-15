@@ -9,8 +9,8 @@ extension String: Error {}
 
 class LocalConfigurationParser {
     
-    func loadConfiguration(configurationFilePath: String) throws -> Configuration {
-        let url = URL(fileURLWithPath: configurationFilePath)
+    func loadConfiguration(_ filePath: String) throws -> Configuration {
+        let url = URL(fileURLWithPath: filePath)
         let data = try Data(contentsOf: url)
         let content = try JSONSerialization.jsonObject(with: data) as! LocalConfigurationFormat
         
@@ -31,13 +31,14 @@ class LocalConfigurationParser {
         return configuration
     }
     
-    func type(for value: Any) -> String {
+    func type(for value: Any) throws -> String {
         switch value {
         case _ as String: return "String"
         case let numberValue as NSNumber: return numberValue.tweakType
         case _ as Bool: return "Bool"
         case _ as Double: return "Double"
-        default: return "unkwown"
+        default:
+            throw "Unsupported value type \(Swift.type(of: value))"
         }
     }
     
@@ -59,6 +60,6 @@ class LocalConfigurationParser {
                      title: title,
                      description: description,
                      group: group,
-                     valueType: type(for: value))
+                     valueType: try type(for: value))
     }
 }

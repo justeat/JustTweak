@@ -24,7 +24,7 @@ class LocalConfigurationParserTests: XCTestCase {
         let localConfigurationFilename = "ValidConfiguration"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
-        let localConfigurationContent = try sut.loadConfiguration(configurationFilePath: localConfigurationFilePath)
+        let localConfigurationContent = try sut.loadConfiguration(localConfigurationFilePath)
         
         let tweaks = [
             Tweak(feature: "general",
@@ -85,42 +85,41 @@ class LocalConfigurationParserTests: XCTestCase {
         let localConfigurationFilename = "InvalidConfiguration"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
-        XCTAssertThrowsError(try sut.loadConfiguration(configurationFilePath: localConfigurationFilePath))
+        XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
     }
     
     func test_typeForValue_String() {
         let expectedValue = "String"
-        XCTAssertEqual(sut.type(for: "some string"), expectedValue)
+        XCTAssertEqual(try sut.type(for: "some string"), expectedValue)
     }
     
     func test_typeForValue_NSNumber_Double() {
         let expectedValue = "Double"
-        XCTAssertEqual(sut.type(for: NSNumber(value: 3.14)), expectedValue)
+        XCTAssertEqual(try sut.type(for: NSNumber(value: 3.14)), expectedValue)
     }
     
     func test_typeForValue_NSNumber_Int() {
         let expectedValue = "Int"
-        XCTAssertEqual(sut.type(for: NSNumber(value: 42)), expectedValue)
+        XCTAssertEqual(try sut.type(for: NSNumber(value: 42)), expectedValue)
     }
     
     func test_typeForValue_NSNumber_Bool() {
         let expectedValue = "Bool"
-        XCTAssertEqual(sut.type(for: NSNumber(value: true)), expectedValue)
+        XCTAssertEqual(try sut.type(for: NSNumber(value: true)), expectedValue)
     }
     
     func test_typeForValue_Bool() {
         let expectedValue = "Bool"
-        XCTAssertEqual(sut.type(for: true), expectedValue)
+        XCTAssertEqual(try sut.type(for: true), expectedValue)
     }
     
     func test_typeForValue_Double() {
         let expectedValue = "Double"
-        XCTAssertEqual(sut.type(for: 3.14), expectedValue)
+        XCTAssertEqual(try sut.type(for: 3.14), expectedValue)
     }
     
-    func test_typeForValue_Unkwnown() {
-        let expectedValue = "unkwown"
-        XCTAssertEqual(sut.type(for: [""]), expectedValue)
+    func test_typeForValue_Unsupported() {
+        XCTAssertThrowsError(try sut.type(for: [""]))
     }
     
     func test_tweakForDictionary_AllRequiredValuesPresent() throws {
