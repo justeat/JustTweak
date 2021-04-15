@@ -8,14 +8,14 @@ import XCTest
 class Array_DuplicatesTests: XCTestCase {
 
     func test_noDuplicatesFound() {
-        let noDuplicates = ["some", "array", "with", "no", "duplicates"]
+        let arrayWithNoDuplicates = ["some", "array", "with", "no", "duplicates"]
         let expectedValue: [String] = []
-        XCTAssertEqual(noDuplicates.duplicates(), expectedValue)
+        XCTAssertEqual(arrayWithNoDuplicates.duplicates, expectedValue)
     }
     
     func test_duplicatesFound() {
-        let noDuplicates = ["some", "array", "with", "some", "duplicates", "here", "here", "and", "here"]
+        let arrayWithDuplicates = ["some", "array", "with", "some", "duplicates", "here", "here", "and", "here"]
         let expectedValue = ["here", "some"]
-        XCTAssertEqual(noDuplicates.duplicates().sorted(), expectedValue)
+        XCTAssertEqual(arrayWithDuplicates.duplicates.sorted(), expectedValue)
     }
 }

@@ -101,14 +101,14 @@ class LocalConfigurationParserTests: XCTestCase {
         let localConfigurationFilename = "InvalidConfiguration_MissingValues"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
-        XCTAssertThrowsError(try sut.loadConfiguration(configurationFilePath: localConfigurationFilePath))
+        XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
     }
     
     func test_loadConfiguration_failure_duplicateGeneratedPropertyName() throws {
         let bundle = Bundle(for: type(of: self))
         let localConfigurationFilename = "InvalidConfiguration_DuplicateGeneratedPropertyName"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
-        XCTAssertThrowsError(try sut.loadConfiguration(configurationFilePath: localConfigurationFilePath))
+        XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
     }
     
     func test_typeForValue_String() {

@@ -32,7 +32,7 @@ class LocalConfigurationParser {
     
     func validate(_ tweaks: [Tweak]) throws {
         let propertyNames = tweaks.map { $0.propertyName }.compactMap { $0 }
-        let duplicates = propertyNames.duplicates()
+        let duplicates = propertyNames.duplicates
         if duplicates.count > 0 {
             throw "Found duplicate 'GeneratedPropertyName': \(duplicates)"
         }
