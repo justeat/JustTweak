@@ -6,9 +6,6 @@
 import Foundation
 import ArgumentParser
 
-let scriptName = "TweakPropertyGenerator"
-let scriptVersion = "1.0"
-
 struct TweakPropertyGenerator: ParsableCommand {
     
     @Option(name: .shortAndLong, help: "The local configuration file path.")
@@ -21,16 +18,16 @@ struct TweakPropertyGenerator: ParsableCommand {
     var configuration: String
     
     private var className: String {
-        String(outputFilePath.split(separator: "/").last!.split(separator: ".").first!)
+        let url = URL(fileURLWithPath: outputFilePath)
+        return String(url.lastPathComponent.split(separator: ".").first!)
     }
     
     private var localConfigurationFilename: String {
-        String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
+        let url = URL(fileURLWithPath: localConfigurationFilePath)
+        return String(url.lastPathComponent.split(separator: ".").first!)
     }
     
     func run() throws {
-        print("\(scriptName) - v\(scriptVersion)")
-        
         let codeGenerator = TweakPropertyCodeGenerator()
         let localConfigurationParser = LocalConfigurationParser()
         let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
@@ -53,8 +50,14 @@ extension TweakPropertyGenerator {
                        codeGenerator: TweakPropertyCodeGenerator,
                        localConfigurationContent: Configuration,
                        outputFilePath: String) {
-        
-        let url = (type == .constants) ? constantsUrl(with: outputFilePath) : URL(fileURLWithPath: outputFilePath)
+        let url: URL = {
+            switch type {
+            case .constants:
+                return constantsUrl(with: outputFilePath)
+            case .accessor:
+                return URL(fileURLWithPath: outputFilePath)
+            }
+        }()
         
         let constants = codeGenerator.generate(type: type,
                                                localConfigurationFilename: localConfigurationFilename,
