@@ -6,11 +6,8 @@
 import Foundation
 import ArgumentParser
 
-let scriptName = "TweakPropertyGenerator"
-let scriptVersion = "1.0"
-
 struct TweakPropertyGenerator: ParsableCommand {
-
+    
     @Option(name: .shortAndLong, help: "The local configuration file path.")
     var localConfigurationFilePath: String
     
@@ -20,22 +17,58 @@ struct TweakPropertyGenerator: ParsableCommand {
     @Option(name: .shortAndLong, help: "The configuration file path.")
     var configuration: String
     
-    func run() throws {
-        print("\(scriptName) - v\(scriptVersion)")
-
+    private var className: String {
         let url = URL(fileURLWithPath: outputFilePath)
-        
-        let accessorCodeGenerator = AccessorCodeGenerator()
+        return String(url.lastPathComponent.split(separator: ".").first!)
+    }
+    
+    private var localConfigurationFilename: String {
+        let url = URL(fileURLWithPath: localConfigurationFilePath)
+        return String(url.lastPathComponent.split(separator: ".").first!)
+    }
+    
+    func run() throws {
+        let codeGenerator = TweakPropertyCodeGenerator()
         let localConfigurationParser = LocalConfigurationParser()
         let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
         
-        let localConfigurationFilename = String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
-        let className = String(outputFilePath.split(separator: "/").last!.split(separator: ".").first!)
-        let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
-                                                     className: className,
-                                                     localConfigurationContent: localConfigurationContent)
+        write(type: .constants,
+              codeGenerator: codeGenerator,
+              localConfigurationContent: localConfigurationContent,
+              outputFilePath: outputFilePath)
         
-        try! content.write(to: url, atomically: true, encoding: .utf8)
+        write(type: .accessor,
+              codeGenerator: codeGenerator,
+              localConfigurationContent: localConfigurationContent,
+              outputFilePath: outputFilePath)
+    }
+}
+
+extension TweakPropertyGenerator {
+    
+    private func write(type: TweakPropertyCodeGeneratorContentType,
+                       codeGenerator: TweakPropertyCodeGenerator,
+                       localConfigurationContent: Configuration,
+                       outputFilePath: String) {
+        let url: URL = {
+            switch type {
+            case .constants:
+                return constantsUrl(with: outputFilePath)
+            case .accessor:
+                return URL(fileURLWithPath: outputFilePath)
+            }
+        }()
+        
+        let constants = codeGenerator.generate(type: type,
+                                               localConfigurationFilename: localConfigurationFilename,
+                                               className: className,
+                                               localConfigurationContent: localConfigurationContent)
+        try! constants.write(to: url, atomically: true, encoding: .utf8)
+    }
+    
+    private func constantsUrl(with filePath: String) -> URL {
+        let path = filePath.replacingOccurrences(of: className, with: className + "+Constants")
+        return URL(fileURLWithPath: path)
     }
 }
 
