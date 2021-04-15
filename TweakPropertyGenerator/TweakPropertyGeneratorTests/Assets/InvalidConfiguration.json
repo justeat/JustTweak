@@ -1,0 +1,26 @@
+{
+  "ui_customization": {
+    "display_red_view": {
+      "Description": "shows a red view in the main view controller",
+      "Group": "UI Customization",
+      "Value": false
+    },
+    "display_yellow_view": {
+      "Title": "Display Yellow View",
+      "Group": "UI Customization",
+      "Value": false
+    },
+    "display_green_view": {
+      "Title": "Display Green View",
+      "Description": "shows a green view in the main view controller",
+      "Value": true
+    }
+  },
+  "general": {
+    "answer_to_the_universe": {
+      "Title": "Definitive answer",
+      "Description": "Answer to the Ultimate Question of Life, the Universe, and Everything",
+      "Group": "General"
+    }
+  }
+}

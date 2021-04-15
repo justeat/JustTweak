@@ -1,15 +1,13 @@
 //
 //  main.swift
-//  TweakPropertyGenerator
-//
-//  Created by Andrew Grant on 13/04/2021.
+//  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
 import Foundation
 import ArgumentParser
 
 let scriptName = "TweakPropertyGenerator"
-let scriptVersion = "1.1"
+let scriptVersion = "1.0"
 
 struct TweakPropertyGenerator: ParsableCommand {
 
@@ -28,8 +26,8 @@ struct TweakPropertyGenerator: ParsableCommand {
         let url = URL(fileURLWithPath: outputFilePath)
         
         let accessorCodeGenerator = AccessorCodeGenerator()
-        let localConfigurationReader = LocalConfigurationReader()
-        let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
+        let localConfigurationParser = LocalConfigurationParser()
+        let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
         
         let localConfigurationFilename = String(localConfigurationFilePath.split(separator: "/").last!.split(separator: ".").first!)
         let className = String(outputFilePath.split(separator: "/").last!.split(separator: ".").first!)

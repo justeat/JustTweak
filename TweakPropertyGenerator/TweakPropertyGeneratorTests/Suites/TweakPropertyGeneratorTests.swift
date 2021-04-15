@@ -1,31 +1,28 @@
 //
 //  TweakPropertyGeneratorTests.swift
-//  TweakPropertyGeneratorTests
-//
-//  Created by Andrew Grant on 14/04/2021.
+//  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
 import XCTest
 
 class TweakPropertyGeneratorTests: XCTestCase {
     
-    func test_tweakPropertyGenerator_output() {
-
+    func test_tweakPropertyGenerator_output() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "ExampleConfiguration"
+        let localConfigurationFilename = "ValidConfiguration"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
-        let className = "GeneratedConfigurationAccessorContent"
+        let className = "GeneratedConfigurationAccessor"
         
         let accessorCodeGenerator = AccessorCodeGenerator()
-        let localConfigurationReader = LocalConfigurationReader()
-        let localConfigurationContent = localConfigurationReader.loadTweaks(configurationFilePath: localConfigurationFilePath)
+        let localConfigurationParser = LocalConfigurationParser()
+        let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
         
         let content = accessorCodeGenerator.generate(localConfigurationFilename: localConfigurationFilename,
                                                      className: className,
                                                      localConfigurationContent: localConfigurationContent)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
-        let testContent = try! String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
+        let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         
         XCTAssertEqual(content, testContent)
     }

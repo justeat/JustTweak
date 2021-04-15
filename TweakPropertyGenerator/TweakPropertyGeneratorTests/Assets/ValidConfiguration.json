@@ -32,6 +32,12 @@
     }
   },
   "general": {
+    "answer_to_the_universe": {
+      "Title": "Definitive answer",
+      "Description": "Answer to the Ultimate Question of Life, the Universe, and Everything",
+      "Group": "General",
+      "Value": 42
+    },
     "greet_on_app_did_become_active": {
       "Title": "Greet on app launch",
       "Description": "shows an alert on applicationDidBecomeActive",
