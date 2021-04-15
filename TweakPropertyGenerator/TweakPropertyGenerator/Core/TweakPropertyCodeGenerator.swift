@@ -23,26 +23,26 @@ class TweakPropertyCodeGenerator {
     func generate(type: TweakPropertyCodeGeneratorContentType,
                   localConfigurationFilename: String,
                   className: String,
-                  localConfigurationContent: Configuration) -> String {
+                  tweaks: [Tweak]) -> String {
         switch type {
         case .constants:
             return generateConstants(localConfigurationFilename: localConfigurationFilename,
                                      className: className,
-                                     localConfigurationContent: localConfigurationContent)
+                                     tweaks: tweaks)
         case .accessor:
             return generateAccessor(localConfigurationFilename: localConfigurationFilename,
                                     className: className,
-                                    localConfigurationContent: localConfigurationContent)
+                                    tweaks: tweaks)
         }
     }
 }
 
 extension TweakPropertyCodeGenerator {
     
-    private func generateConstants(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
+    private func generateConstants(localConfigurationFilename: String, className: String, tweaks: [Tweak]) -> String {
         let template = self.constantsTemplate(className: className)
-        let featureConstants = self.featureConstants(localConfigurationContent: localConfigurationContent)
-        let variableConstants = self.variableConstants(localConfigurationContent: localConfigurationContent)
+        let featureConstants = self.featureConstants(tweaks: tweaks)
+        let variableConstants = self.variableConstants(tweaks: tweaks)
         
         let content = template
             .replacingOccurrences(of: featureConstantsConst, with: featureConstants)
@@ -50,10 +50,10 @@ extension TweakPropertyCodeGenerator {
         return content
     }
     
-    private func generateAccessor(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
+    private func generateAccessor(localConfigurationFilename: String, className: String, tweaks: [Tweak]) -> String {
         let template = self.accessorTemplate(className: className)
         let tweakManager = self.tweakManager(localConfigurationFilename: localConfigurationFilename)
-        let classContent = self.classContent(localConfigurationContent: localConfigurationContent)
+        let classContent = self.classContent(tweaks: tweaks)
         
         let content = template
             .replacingOccurrences(of: tweakManagerConst, with: tweakManager)
@@ -98,9 +98,9 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func featureConstants(localConfigurationContent: Configuration) -> String {
+    private func featureConstants(tweaks: [Tweak]) -> String {
         var features = Set<FeatureKey>()
-        for tweak in localConfigurationContent.tweaks {
+        for tweak in tweaks {
             features.insert(tweak.feature)
         }
         let content: [String] = features.map {
@@ -115,9 +115,9 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func variableConstants(localConfigurationContent: Configuration) -> String {
+    private func variableConstants(tweaks: [Tweak]) -> String {
         var variables = Set<VariableKey>()
-        for tweak in localConfigurationContent.tweaks {
+        for tweak in tweaks {
             variables.insert(tweak.variable)
         }
         let content: [String] = variables.map {
@@ -150,9 +150,9 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func classContent(localConfigurationContent: Configuration) -> String {
+    private func classContent(tweaks: [Tweak]) -> String {
         var content: Set<String> = []
-        localConfigurationContent.tweaks.forEach {
+        tweaks.forEach {
             content.insert(tweakProperty(for: $0))
         }
         return content.sorted().joined(separator: "\n\n")

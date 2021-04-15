@@ -5,10 +5,6 @@
 
 import Foundation
 
-struct Configuration: Equatable {
-    let tweaks: [Tweak]
-}
-
 struct Tweak: Equatable {
     let feature: String
     let variable: String

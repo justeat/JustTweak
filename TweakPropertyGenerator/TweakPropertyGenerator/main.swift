@@ -30,16 +30,16 @@ struct TweakPropertyGenerator: ParsableCommand {
     func run() throws {
         let codeGenerator = TweakPropertyCodeGenerator()
         let localConfigurationParser = LocalConfigurationParser()
-        let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
+        let tweaks = try localConfigurationParser.load(localConfigurationFilePath)
         
         write(type: .constants,
               codeGenerator: codeGenerator,
-              localConfigurationContent: localConfigurationContent,
+              tweaks: tweaks,
               outputFilePath: outputFilePath)
         
         write(type: .accessor,
               codeGenerator: codeGenerator,
-              localConfigurationContent: localConfigurationContent,
+              tweaks: tweaks,
               outputFilePath: outputFilePath)
     }
 }
@@ -48,7 +48,7 @@ extension TweakPropertyGenerator {
     
     private func write(type: TweakPropertyCodeGeneratorContentType,
                        codeGenerator: TweakPropertyCodeGenerator,
-                       localConfigurationContent: Configuration,
+                       tweaks: [Tweak],
                        outputFilePath: String) {
         let url: URL = {
             switch type {
@@ -62,7 +62,7 @@ extension TweakPropertyGenerator {
         let constants = codeGenerator.generate(type: type,
                                                localConfigurationFilename: localConfigurationFilename,
                                                className: className,
-                                               localConfigurationContent: localConfigurationContent)
+                                               tweaks: tweaks)
         try! constants.write(to: url, atomically: true, encoding: .utf8)
     }
     

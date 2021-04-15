@@ -13,7 +13,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
     private let generatedClassName = "GeneratedConfigurationAccessor"
     private var codeGenerator: TweakPropertyCodeGenerator!
     private var localConfigurationParser: LocalConfigurationParser!
-    private var localConfigurationContent: Configuration!
+    private var tweaks: [Tweak]!
     
     override func setUpWithError() throws {
         bundle = Bundle(for: type(of: self))
@@ -21,7 +21,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
         
         codeGenerator = TweakPropertyCodeGenerator()
         localConfigurationParser = LocalConfigurationParser()
-        localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
+        tweaks = try localConfigurationParser.load(localConfigurationFilePath)
     }
     
     override func tearDownWithError() throws {
@@ -29,14 +29,14 @@ class TweakPropertyGeneratorTests: XCTestCase {
         localConfigurationFilePath = nil
         codeGenerator = nil
         localConfigurationParser = nil
-        localConfigurationContent = nil
+        tweaks = nil
     }
     
     func test_generateConstants_output() throws {
         let content = codeGenerator.generate(type: .constants,
                                              localConfigurationFilename: localConfigurationFilename,
                                              className: generatedClassName,
-                                             localConfigurationContent: localConfigurationContent)
+                                             tweaks: tweaks)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessor+ConstantsContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
@@ -48,7 +48,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
         let content = codeGenerator.generate(type: .accessor,
                                              localConfigurationFilename: localConfigurationFilename,
                                              className: generatedClassName,
-                                             localConfigurationContent: localConfigurationContent)
+                                             tweaks: tweaks)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
