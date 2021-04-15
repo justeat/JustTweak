@@ -20,17 +20,22 @@ class LocalConfigurationParser {
             try tweaks.map { (variableKey: String, value: [String: Any]) throws -> Tweak in
                 try tweak(for: value, feature: featureKey, variable: variableKey)
             }
-            .sorted {
-                $0.variable < $1.variable
-            }
+            .sorted { $0.variable < $1.variable }
         }
         .flatMap { $0 }
-        .sorted {
-            $0.feature < $1.feature
-        }
+        .sorted { $0.feature < $1.feature }
         
-        let configuration = Configuration(tweaks: tweaks)
-        return configuration
+        try validate(tweaks)
+        
+        return Configuration(tweaks: tweaks)
+    }
+    
+    func validate(_ tweaks: [Tweak]) throws {
+        let propertyNames = tweaks.map { $0.propertyName }.compactMap { $0 }
+        let duplicates = propertyNames.duplicates()
+        if duplicates.count > 0 {
+            throw "Found duplicate 'GeneratedPropertyName': \(duplicates)"
+        }
     }
     
     func type(for value: Any) throws -> String {

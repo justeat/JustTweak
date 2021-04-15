@@ -1,0 +1,11 @@
+{
+  "general": {
+    "answer_to_the_universe": {
+      "Title": "Definitive answer"
+      "Description": "Answer to the Ultimate Question of Life, the Universe, and Everything"
+      "Group": "General"
+      "Value": 42
+      "GeneratedPropertyName": "definitiveAnswer"
+    }
+  }
+}

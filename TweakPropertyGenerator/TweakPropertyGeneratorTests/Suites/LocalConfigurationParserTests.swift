@@ -19,7 +19,7 @@ class LocalConfigurationParserTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_loadConfiguration_successCase() throws {
+    func test_loadConfiguration_success() throws {
         let bundle = Bundle(for: type(of: self))
         let localConfigurationFilename = "ValidConfiguration"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
@@ -88,12 +88,27 @@ class LocalConfigurationParserTests: XCTestCase {
         XCTAssertEqual(localConfigurationContent, expectedConfiguration)
     }
     
-    func test_loadConfiguration_failureCase() throws {
+    func test_loadConfiguration_failure_invalidJSON() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidConfiguration"
+        let localConfigurationFilename = "InvalidConfiguration_InvalidJSON"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
         XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
+    }
+    
+    func test_loadConfiguration_failure_missingValues() throws {
+        let bundle = Bundle(for: type(of: self))
+        let localConfigurationFilename = "InvalidConfiguration_MissingValues"
+        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        
+        XCTAssertThrowsError(try sut.loadConfiguration(configurationFilePath: localConfigurationFilePath))
+    }
+    
+    func test_loadConfiguration_failure_duplicateGeneratedPropertyName() throws {
+        let bundle = Bundle(for: type(of: self))
+        let localConfigurationFilename = "InvalidConfiguration_DuplicateGeneratedPropertyName"
+        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        XCTAssertThrowsError(try sut.loadConfiguration(configurationFilePath: localConfigurationFilePath))
     }
     
     func test_typeForValue_String() {
