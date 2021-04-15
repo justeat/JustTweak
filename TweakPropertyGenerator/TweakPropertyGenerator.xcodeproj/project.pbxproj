@@ -16,8 +16,8 @@
 		4F7750772627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
 		4F7750782627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */; };
 		4F7750792627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */; };
-		4F77507A2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */; };
-		4F77507B2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */; };
+		4F77507A2627338700A0A3F5 /* TweakPropertyCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */; };
+		4F77507B2627338700A0A3F5 /* TweakPropertyCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */; };
 		4F7750862627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */; };
 		4F7750872627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */; };
 		4F7750882627338E00A0A3F5 /* String+Casing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750822627338E00A0A3F5 /* String+Casing.swift */; };
@@ -59,7 +59,7 @@
 		12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */ = {isa = PBXFileReference; lastKnownFileType = text; path = GeneratedConfigurationAccessorContent; sourceTree = "<group>"; };
 		4F7750732627338700A0A3F5 /* TweakValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakValue.swift; sourceTree = "<group>"; };
 		4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConfigurationParser.swift; sourceTree = "<group>"; };
-		4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessorCodeGenerator.swift; sourceTree = "<group>"; };
+		4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakPropertyCodeGenerator.swift; sourceTree = "<group>"; };
 		4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNumber+ValueTypes.swift"; sourceTree = "<group>"; };
 		4F7750822627338E00A0A3F5 /* String+Casing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Casing.swift"; sourceTree = "<group>"; };
 		4F775096262751EE00A0A3F5 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		4F775035262718DE00A0A3F5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				4F7750752627338700A0A3F5 /* AccessorCodeGenerator.swift */,
+				4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */,
 				4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */,
 				4F775096262751EE00A0A3F5 /* Models.swift */,
 				4F77509B262751FD00A0A3F5 /* Types.swift */,
@@ -281,7 +281,7 @@
 				4F77509C262751FD00A0A3F5 /* Types.swift in Sources */,
 				12273D1B2625D6BE00732559 /* main.swift in Sources */,
 				4FD52706262841C7000F6780 /* Array+Duplicates.swift in Sources */,
-				4F77507A2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */,
+				4F77507A2627338700A0A3F5 /* TweakPropertyCodeGenerator.swift in Sources */,
 				4F775097262751EE00A0A3F5 /* Models.swift in Sources */,
 				4F7750882627338E00A0A3F5 /* String+Casing.swift in Sources */,
 				4F7750862627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */,
@@ -300,7 +300,7 @@
 				4F7750B32627626100A0A3F5 /* String+CasingTests.swift in Sources */,
 				4F7750AA2627603A00A0A3F5 /* NSNumber+ValueTypesTests.swift in Sources */,
 				12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */,
-				4F77507B2627338700A0A3F5 /* AccessorCodeGenerator.swift in Sources */,
+				4F77507B2627338700A0A3F5 /* TweakPropertyCodeGenerator.swift in Sources */,
 				4F775098262751EE00A0A3F5 /* Models.swift in Sources */,
 				4F7750892627338E00A0A3F5 /* String+Casing.swift in Sources */,
 				4F7750872627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */,
