@@ -119,11 +119,12 @@ extension AccessorCodeGenerator {
     }
     
     private func tweakProperty(for tweak: Tweak) -> String {
-        """
+        let propertyName = tweak.propertyName ?? tweak.variable.camelCased()
+        return """
             @TweakProperty(feature: \(featuresConst).\(tweak.feature.camelCased()),
                            variable: \(variablesConst).\(tweak.variable.camelCased()),
                            tweakManager: tweakManager)
-            var \(tweak.variable.camelCased()): \(tweak.valueType)
+            var \(propertyName): \(tweak.valueType)
         """
     }
 }

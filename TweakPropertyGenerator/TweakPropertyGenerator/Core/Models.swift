@@ -16,4 +16,5 @@ struct Tweak: Equatable {
     let description: String
     let group: String
     let valueType: String
+    let propertyName: String?
 }

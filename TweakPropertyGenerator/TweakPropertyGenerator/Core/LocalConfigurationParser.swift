@@ -62,6 +62,7 @@ class LocalConfigurationParser {
                      title: title,
                      description: description,
                      group: group,
-                     valueType: try type(for: value))
+                     valueType: try type(for: value),
+                     propertyName: dictionary["GeneratedPropertyName"] as? String)
     }
 }
