@@ -17,9 +17,10 @@ class TweakPropertyGeneratorTests: XCTestCase {
         let localConfigurationParser = LocalConfigurationParser()
         let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
         
-        let content = codeGenerator.generateConstants(localConfigurationFilename: localConfigurationFilename,
-                                                      className: className,
-                                                      localConfigurationContent: localConfigurationContent)
+        let content = codeGenerator.generate(type: .constants,
+                                             localConfigurationFilename: localConfigurationFilename,
+                                             className: className,
+                                             localConfigurationContent: localConfigurationContent)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessor+ConstantsContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
@@ -37,9 +38,10 @@ class TweakPropertyGeneratorTests: XCTestCase {
         let localConfigurationParser = LocalConfigurationParser()
         let localConfigurationContent = try localConfigurationParser.loadConfiguration(configurationFilePath: localConfigurationFilePath)
         
-        let content = codeGenerator.generateAccessor(localConfigurationFilename: localConfigurationFilename,
-                                                     className: className,
-                                                     localConfigurationContent: localConfigurationContent)
+        let content = codeGenerator.generate(type: .accessor,
+                                             localConfigurationFilename: localConfigurationFilename,
+                                             className: className,
+                                             localConfigurationContent: localConfigurationContent)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)

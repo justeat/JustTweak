@@ -5,6 +5,11 @@
 
 import Foundation
 
+enum TweakPropertyCodeGeneratorContentType {
+    case constants
+    case accessor
+}
+
 class TweakPropertyCodeGenerator {
     
     private let featuresConst = "Features"
@@ -15,7 +20,26 @@ class TweakPropertyCodeGenerator {
     private let classContentConst = "<CLASS_CONTENT>"
     private let tweakManagerConst = "<TWEAK_MANAGER_CONTENT>"
     
-    func generateConstants(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
+    func generate(type: TweakPropertyCodeGeneratorContentType,
+                  localConfigurationFilename: String,
+                  className: String,
+                  localConfigurationContent: Configuration) -> String {
+        switch type {
+        case .constants:
+            return generateConstants(localConfigurationFilename: localConfigurationFilename,
+                                     className: className,
+                                     localConfigurationContent: localConfigurationContent)
+        case .accessor:
+            return generateAccessor(localConfigurationFilename: localConfigurationFilename,
+                                    className: className,
+                                    localConfigurationContent: localConfigurationContent)
+        }
+    }
+}
+
+extension TweakPropertyCodeGenerator {
+    
+    private func generateConstants(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
         let template = self.constantsTemplate(className: className)
         let featureConstants = self.featureConstants(localConfigurationContent: localConfigurationContent)
         let variableConstants = self.variableConstants(localConfigurationContent: localConfigurationContent)
@@ -26,7 +50,7 @@ class TweakPropertyCodeGenerator {
         return content
     }
     
-    func generateAccessor(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
+    private func generateAccessor(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
         let template = self.accessorTemplate(className: className)
         let tweakManager = self.tweakManager(localConfigurationFilename: localConfigurationFilename)
         let classContent = self.classContent(localConfigurationContent: localConfigurationContent)
@@ -36,9 +60,6 @@ class TweakPropertyCodeGenerator {
             .replacingOccurrences(of: classContentConst, with: classContent)
         return content
     }
-}
-
-extension TweakPropertyCodeGenerator {
     
     private func constantsTemplate(className: String) -> String {
         """
