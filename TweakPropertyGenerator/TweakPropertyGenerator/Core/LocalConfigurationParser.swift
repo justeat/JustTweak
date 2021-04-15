@@ -12,7 +12,9 @@ class LocalConfigurationParser {
     func loadConfiguration(_ filePath: String) throws -> Configuration {
         let url = URL(fileURLWithPath: filePath)
         let data = try Data(contentsOf: url)
-        let content = try JSONSerialization.jsonObject(with: data) as! LocalConfigurationFormat
+        guard let content = try JSONSerialization.jsonObject(with: data) as? LocalConfigurationFormat else {
+            throw "Invalid JSON format for file \(filePath)"
+        }
         
         let tweaks = try content.map { (featureKey: String, tweaks: [String: [String: Any]]) throws -> [Tweak] in
             try tweaks.map { (variableKey: String, value: [String: Any]) throws -> Tweak in

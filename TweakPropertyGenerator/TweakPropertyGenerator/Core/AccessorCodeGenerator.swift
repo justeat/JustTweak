@@ -111,14 +111,9 @@ extension AccessorCodeGenerator {
     }
     
     private func classContent(localConfigurationContent: Configuration) -> String {
-        var content: [String] = []
-        var properties: Set<String> = []
-        for tweak in localConfigurationContent.tweaks {
-            let key = tweak.variable.camelCased()
-            if !properties.contains(key) {
-                properties.insert(key)
-                content.append(tweakProperty(for: tweak))
-            }
+        var content: Set<String> = []
+        localConfigurationContent.tweaks.forEach {
+            content.insert(tweakProperty(for: $0))
         }
         return content.sorted().joined(separator: "\n\n")
     }
