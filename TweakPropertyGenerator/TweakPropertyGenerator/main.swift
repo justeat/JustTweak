@@ -53,7 +53,7 @@ extension TweakPropertyGenerator {
                                 outputFilePath: String) {
         let url = self.constantsUrl(with: outputFilePath)
         
-        let constants = codeGenerator.generateConstants(with: localConfigurationFilename,
+        let constants = codeGenerator.generateConstants(localConfigurationFilename: localConfigurationFilename,
                                                         className: className,
                                                         localConfigurationContent: localConfigurationContent)
         try! constants.write(to: url, atomically: true, encoding: .utf8)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120B0A1E26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent in Resources */ = {isa = PBXBuildFile; fileRef = 120B0A1D26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent */; };
 		12273D1B2625D6BE00732559 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12273D1A2625D6BE00732559 /* main.swift */; };
 		12273D382625E45F00732559 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 12273D372625E45F00732559 /* ArgumentParser */; };
 		12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		120B0A1D26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GeneratedConfigurationAccessor+ConstantsContent"; sourceTree = "<group>"; };
 		12273D172625D6BE00732559 /* TweakPropertyGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TweakPropertyGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		12273D1A2625D6BE00732559 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		12BE964A2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweakPropertyGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 				4FD526FD26283F91000F6780 /* InvalidConfiguration_InvalidJSON.json */,
 				4F7750C026277B6300A0A3F5 /* InvalidConfiguration_MissingValues.json */,
 				12BE98792627243D00C1B6C3 /* ValidConfiguration.json */,
+				120B0A1D26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent */,
 				12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */,
 			);
 			path = Assets;
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				120B0A1E26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent in Resources */,
 				4FD526FE26283F91000F6780 /* InvalidConfiguration_InvalidJSON.json in Resources */,
 				4FD526F826283EBB000F6780 /* InvalidConfiguration_DuplicateGeneratedPropertyName.json in Resources */,
 				4F7750C126277B6300A0A3F5 /* InvalidConfiguration_MissingValues.json in Resources */,

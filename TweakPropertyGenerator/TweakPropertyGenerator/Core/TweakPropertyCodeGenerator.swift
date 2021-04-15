@@ -15,7 +15,7 @@ class TweakPropertyCodeGenerator {
     private let classContentConst = "<CLASS_CONTENT>"
     private let tweakManagerConst = "<TWEAK_MANAGER_CONTENT>"
     
-    func generateConstants(with localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
+    func generateConstants(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
         let template = self.constantsTemplate(className: className)
         let featureConstants = self.featureConstants(localConfigurationContent: localConfigurationContent)
         let variableConstants = self.variableConstants(localConfigurationContent: localConfigurationContent)
