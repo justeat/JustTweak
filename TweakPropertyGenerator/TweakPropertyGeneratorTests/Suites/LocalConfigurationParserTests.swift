@@ -19,7 +19,7 @@ class LocalConfigurationParserTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_loadConfiguration_successCase() throws {
+    func test_loadConfiguration_success() throws {
         let bundle = Bundle(for: type(of: self))
         let localConfigurationFilename = "ValidConfiguration"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
@@ -32,59 +32,82 @@ class LocalConfigurationParserTests: XCTestCase {
                   title: "Definitive answer",
                   description: "Answer to the Ultimate Question of Life, the Universe, and Everything",
                   group: "General",
-                  valueType: "Int"),
+                  valueType: "Int",
+                  propertyName: "definitiveAnswer"),
             Tweak(feature: "general",
                   variable: "greet_on_app_did_become_active",
                   title: "Greet on app launch",
                   description: "shows an alert on applicationDidBecomeActive",
                   group: "General",
-                  valueType: "Bool"),
+                  valueType: "Bool",
+                  propertyName: nil),
             Tweak(feature: "general",
                   variable: "tap_to_change_color_enabled",
                   title: "Tap to change views color",
                   description: "change the colour of the main view when receiving a tap",
                   group: "General",
-                  valueType: "Bool"),
+                  valueType: "Bool",
+                  propertyName: nil),
             Tweak(feature: "ui_customization",
                   variable: "display_green_view",
                   title: "Display Green View",
                   description: "shows a green view in the main view controller",
                   group: "UI Customization",
-                  valueType: "Bool"),
+                  valueType: "Bool",
+                  propertyName: nil),
             Tweak(feature: "ui_customization",
                   variable: "display_red_view",
                   title: "Display Red View",
                   description: "shows a red view in the main view controller",
                   group: "UI Customization",
-                  valueType: "Bool"),
+                  valueType: "Bool",
+                  propertyName: nil),
             Tweak(feature: "ui_customization",
                   variable: "display_yellow_view",
                   title: "Display Yellow View",
                   description: "shows a yellow view in the main view controller",
                   group: "UI Customization",
-                  valueType: "Bool"),
+                  valueType: "Bool",
+                  propertyName: nil),
             Tweak(feature: "ui_customization",
                   variable: "label_text",
                   title: "Label Text",
                   description: "the title of the main label",
                   group: "UI Customization",
-                  valueType: "String"),
+                  valueType: "String",
+                  propertyName: nil),
             Tweak(feature: "ui_customization",
                   variable: "red_view_alpha_component",
                   title: "Red View Alpha Component",
                   description: "defines the alpha level of the red view",
                   group: "UI Customization",
-                  valueType: "Double")]
+                  valueType: "Double",
+                  propertyName: nil)]
         let expectedConfiguration = Configuration(tweaks: tweaks)
         
         XCTAssertEqual(localConfigurationContent, expectedConfiguration)
     }
     
-    func test_loadConfiguration_failureCase() throws {
+    func test_loadConfiguration_failure_invalidJSON() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidConfiguration"
+        let localConfigurationFilename = "InvalidConfiguration_InvalidJSON"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
+        XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
+    }
+    
+    func test_loadConfiguration_failure_missingValues() throws {
+        let bundle = Bundle(for: type(of: self))
+        let localConfigurationFilename = "InvalidConfiguration_MissingValues"
+        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        
+        XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
+    }
+    
+    func test_loadConfiguration_failure_duplicateGeneratedPropertyName() throws {
+        let bundle = Bundle(for: type(of: self))
+        let localConfigurationFilename = "InvalidConfiguration_DuplicateGeneratedPropertyName"
+        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         XCTAssertThrowsError(try sut.loadConfiguration(localConfigurationFilePath))
     }
     
@@ -139,7 +162,8 @@ class LocalConfigurationParserTests: XCTestCase {
                                   title: title,
                                   description: description,
                                   group: group,
-                                  valueType: "Double")
+                                  valueType: "Double",
+                                  propertyName: nil)
         let testValue = try sut.tweak(for: dictionary,
                                       feature: feature,
                                       variable: variable)

@@ -41,7 +41,7 @@ class GeneratedConfigurationAccessor {
     @TweakProperty(feature: Features.general,
                    variable: Variables.answerToTheUniverse,
                    tweakManager: tweakManager)
-    var answerToTheUniverse: Int
+    var definitiveAnswer: Int
 
     @TweakProperty(feature: Features.general,
                    variable: Variables.greetOnAppDidBecomeActive,
