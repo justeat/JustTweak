@@ -9,18 +9,26 @@ import JustTweak
 class ConfigurationAccessor {
     
     static let tweakManager: TweakManager = {
-        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-        
+        var configurations: [Configuration] = []
+
+        // UserDefaultsConfiguration
+        let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+        configurations.append(userDefaultsConfiguration_1)
+
+        // Optimizely
         // let optimizelyConfiguration = OptimizelyTweaksConfiguration()
         // optimizelyConfiguration.userId = UUID().uuidString
+        // configurations.append(optimizelyConfiguration)
         
+        // Firebase
         // let firebaseConfiguration = FirebaseTweaksConfiguration()
+        // configurations.append(firebaseConfiguration)
         
-        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
+        // LocalConfiguration
+        let jsonFileURL_1 = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
+        configurations.append(localConfiguration_1)
         
-        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
-        // let configurations: [Configuration] = [userDefaultsConfiguration, optimizelyConfiguration, firebaseConfiguration, localConfiguration]
         return TweakManager(configurations: configurations)
     }()
     
