@@ -31,29 +31,32 @@ pod "JustTweak"
 
 ### Integration
 
-- define a JSON configuration file including your features (you can use the included `ExampleConfiguration.json` as a template)
+- define a JSON configuration file including your features (you can use the included `ExampleConfiguration_*.json` as a template)
 - define your features and A/B tests in your services such as Firebase and Optmizely (optional)
 - configure the JustTweak stack as following
 
 ```swift
 static let tweakManager: TweakManager = {
-    // mutable configuration (to override tweaks from other configurations)
-    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+    var configurations: [Configuration] = []
 
-    // remote configurations (optional)
-    let optimizelyConfiguration = OptimizelyConfiguration()
-    optimizelyConfiguration.userId = <#user_id#>
-    let firebaseConfiguration = FirebaseConfiguration()
+    // Mutable configuration (to override tweaks from other configurations)
+    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+    configurations.append(userDefaultsConfiguration)
+    
+    // Optimizely (remote configuration)
+    let optimizelyConfiguration = OptimizelyTweaksConfiguration()
+    optimizelyConfiguration.userId = UUID().uuidString
+    configurations.append(optimizelyConfiguration)
+
+    // Firebase Remote Config (remote configuration)
+    let firebaseConfiguration = FirebaseTweaksConfiguration()
+    configurations.append(firebaseConfiguration)
 
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
     let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-
-    // priority is defined by the order in the configurations array (from highest to lowest)
-    let configurations: [Configuration] = [userDefaultsConfiguration,
-                                           optimizelyConfiguration,
-                                           firebaseConfiguration,
-                                           localConfiguration]
+    configurations.append(localConfiguration)
+    
     return TweakManager(configurations: configurations)
 }()
 ```

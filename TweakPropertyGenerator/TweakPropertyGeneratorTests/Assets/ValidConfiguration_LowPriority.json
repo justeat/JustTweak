@@ -4,29 +4,25 @@
       "Title": "Display Red View",
       "Description": "shows a red view in the main view controller",
       "Group": "UI Customization",
-      "Value": false,
-      "GeneratedPropertyName": "canShowRedView"
+      "Value": false
     },
     "display_yellow_view": {
       "Title": "Display Yellow View",
       "Description": "shows a yellow view in the main view controller",
       "Group": "UI Customization",
-      "Value": false,
-      "GeneratedPropertyName": "canShowYellowView"
+      "Value": false
     },
     "display_green_view": {
       "Title": "Display Green View",
       "Description": "shows a green view in the main view controller",
       "Group": "UI Customization",
-      "Value": true,
-      "GeneratedPropertyName": "canShowGreenView"
+      "Value": true
     },
     "red_view_alpha_component": {
       "Title": "Red View Alpha Component",
       "Description": "defines the alpha level of the red view",
       "Group": "UI Customization",
-      "Value": 1.0,
-      "GeneratedPropertyName": "redViewAlpha"
+      "Value": 1.0
     },
     "label_text": {
       "Title": "Label Text",
@@ -41,21 +37,19 @@
       "Description": "Answer to the Ultimate Question of Life, the Universe, and Everything",
       "Group": "General",
       "Value": 42,
-      "GeneratedPropertyName": "meaningOfLife"
+      "GeneratedPropertyName": "definitiveAnswer"
     },
     "greet_on_app_did_become_active": {
       "Title": "Greet on app launch",
       "Description": "shows an alert on applicationDidBecomeActive",
       "Group": "General",
-      "Value": false,
-      "GeneratedPropertyName": "shouldShowAlert"
+      "Value": false
     },
     "tap_to_change_color_enabled": {
       "Title": "Tap to change views color",
       "Description": "change the colour of the main view when receiving a tap",
       "Group": "General",
-      "Value": true,
-      "GeneratedPropertyName": "isTapGestureToChangeColorEnabled"
+      "Value": true
     }
   }
 }

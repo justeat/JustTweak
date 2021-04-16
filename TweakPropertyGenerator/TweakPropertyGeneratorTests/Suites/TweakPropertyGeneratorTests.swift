@@ -44,8 +44,15 @@ class TweakPropertyGeneratorTests: XCTestCase {
     
     func test_generateAccessor_output() throws {
         let configurations = [
-            Configuration(type: "UserDefaultsConfiguration", parameter: "UserDefaults.standard"),
-            Configuration(type: "LocalConfiguration", parameter: "ValidConfiguration")
+            Configuration(type: "UserDefaultsConfiguration",
+                          parameter: "UserDefaults.standard",
+                          macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
+            Configuration(type: "LocalConfiguration",
+                          parameter: "ValidConfiguration_TopPriority",
+                          macros: ["DEBUG"]),
+            Configuration(type: "LocalConfiguration",
+                          parameter: "ValidConfiguration_LowPriority",
+                          macros: nil)
         ]
         let content = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
                                                                 className: generatedClassName,

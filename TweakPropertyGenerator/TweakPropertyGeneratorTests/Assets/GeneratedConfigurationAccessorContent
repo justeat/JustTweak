@@ -12,13 +12,22 @@ class GeneratedConfigurationAccessor {
         var configurations: [Configuration] = []
 
         // UserDefaultsConfiguration
+        #if DEBUG || CONFIGURATION_DEBUG
         let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
         configurations.append(userDefaultsConfiguration_1)
+        #endif
 
         // LocalConfiguration
-        let jsonFileURL_1 = Bundle.main.url(forResource: "ValidConfiguration", withExtension: "json")!
+        #if DEBUG
+        let jsonFileURL_1 = Bundle.main.url(forResource: "ValidConfiguration_TopPriority", withExtension: "json")!
         let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
         configurations.append(localConfiguration_1)
+        #endif
+
+        // LocalConfiguration
+        let jsonFileURL_2 = Bundle.main.url(forResource: "ValidConfiguration_LowPriority", withExtension: "json")!
+        let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
+        configurations.append(localConfiguration_2)
 
         return TweakManager(configurations: configurations)
     }()

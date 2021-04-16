@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var yellowView: UIView!
     @IBOutlet var mainLabel: UILabel!
     
-    var configurationAccessor: ConfigurationAccessor!
+    var configurationAccessor: GeneratedConfigurationAccessor!
     var tweakManager: TweakManager!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
     
     @objc internal func setAndShowMeaningOfLife() {
-        configurationAccessor.meaningOfLife = Bool.random() ? 42 : nil
+        configurationAccessor.meaningOfLife = Bool.random() ? 42 : 108
         let alertController = UIAlertController(title: "The Meaning of Life",
                                                 message: String(describing: configurationAccessor.meaningOfLife),
                                                 preferredStyle: .alert)

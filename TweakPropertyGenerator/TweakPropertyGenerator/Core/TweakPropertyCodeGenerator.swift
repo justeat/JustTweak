@@ -146,32 +146,53 @@ extension TweakPropertyCodeGenerator {
             let index = currentIndexByConf[configuration.type]!
             let configuration = value[index]
             let configurationName = "\(configuration.type.lowercaseFirstChar())_\(index+1)"
+            var generatedString: [String] = []
+            let macros = configuration.macros?.joined(separator: " || ")
+            
+            let jsonFileURL = "jsonFileURL_\(index+1)"
+            let headerComment = """
+                        // \(configuration.type)
+                """
+            generatedString.append(headerComment)
+                
+            if macros != nil {
+                let macroStarting = """
+                        #if \(macros!)
+                """
+                generatedString.append(macroStarting)
+            }
             
             switch configuration.type {
             case "UserDefaultsConfiguration":
-                let generatedString =
+                let configurationAllocation =
                     """
-                            // \(configuration.type)
                             let \(configurationName) = \(configuration.type)(userDefaults: \(configuration.parameter))
-                            configurations.append(\(configurationName))\n
-                    """                
-                configurationsString.append(generatedString)
+                            configurations.append(\(configurationName))
+                    """
+                generatedString.append(configurationAllocation)
                 
             case "LocalConfiguration":
-                let jsonFileURL = "jsonFileURL_\(index+1)"
-                let generatedString =
+                let configurationAllocation =
                     """
-                            // \(configuration.type)
                             let \(jsonFileURL) = Bundle.main.url(forResource: \"\(configuration.parameter)\", withExtension: "json")!
                             let \(configurationName) = \(configuration.type)(jsonURL: \(jsonFileURL))
-                            configurations.append(\(configurationName))\n
+                            configurations.append(\(configurationName))
                     """
-                configurationsString.append(generatedString)
+                generatedString.append(configurationAllocation)
                 
             default:
                 break
             }
             
+            if macros != nil {
+                let macroClosing = """
+                        #endif
+                """
+                generatedString.append(macroClosing)
+            }
+            generatedString.append("")
+            
+            configurationsString.append(contentsOf: generatedString)
             currentIndexByConf[configuration.type] = currentIndexByConf[configuration.type]! + 1
         }
         

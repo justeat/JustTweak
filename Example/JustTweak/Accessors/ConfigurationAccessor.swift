@@ -10,11 +10,13 @@ class ConfigurationAccessor {
     
     static let tweakManager: TweakManager = {
         var configurations: [Configuration] = []
-
+        
         // UserDefaultsConfiguration
+        #if DEBUG || CONFIGURATION_DEBUG
         let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
         configurations.append(userDefaultsConfiguration_1)
-
+        #endif
+        
         // Optimizely
         // let optimizelyConfiguration = OptimizelyTweaksConfiguration()
         // optimizelyConfiguration.userId = UUID().uuidString
@@ -25,9 +27,16 @@ class ConfigurationAccessor {
         // configurations.append(firebaseConfiguration)
         
         // LocalConfiguration
-        let jsonFileURL_1 = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        #if CONFIGURATION_DEBUG
+        let jsonFileURL_1 = Bundle.main.url(forResource: "ExampleConfiguration_TopPriority", withExtension: "json")!
         let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
         configurations.append(localConfiguration_1)
+        #endif
+        
+        // LocalConfiguration
+        let jsonFileURL_2 = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
+        configurations.append(localConfiguration_2)
         
         return TweakManager(configurations: configurations)
     }()
@@ -62,11 +71,18 @@ class ConfigurationAccessor {
                            tweakManager: tweakManager)
     var labelText: String
     
+    @FallbackTweakProperty(fallbackValue: 42,
+                           feature: Features.UICustomization,
+                           variable: Variables.MeaningOfLife,
+                           tweakManager: tweakManager)
+    var meaningOfLife: Int
+    
     @OptionalTweakProperty(fallbackValue: nil,
                            feature: Features.UICustomization,
                            variable: Variables.MeaningOfLife,
                            tweakManager: tweakManager)
-    var meaningOfLife: Int?
+    var optionalMeaningOfLife: Int?
+    
     
     // MARK: - Via TweakManager
     

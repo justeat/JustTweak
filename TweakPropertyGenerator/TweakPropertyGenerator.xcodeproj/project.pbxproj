@@ -13,6 +13,8 @@
 		12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */; };
 		12BE987A2627243D00C1B6C3 /* ValidConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 12BE98792627243D00C1B6C3 /* ValidConfiguration.json */; };
 		12BE989D26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent in Resources */ = {isa = PBXBuildFile; fileRef = 12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */; };
+		4F65E88B2629CF8C009E8C3B /* ValidConfiguration_TopPriority.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E8892629CF8C009E8C3B /* ValidConfiguration_TopPriority.json */; };
+		4F65E88C2629CF8C009E8C3B /* ValidConfiguration_LowPriority.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E88A2629CF8C009E8C3B /* ValidConfiguration_LowPriority.json */; };
 		4F7750762627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
 		4F7750772627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
 		4F7750782627338700A0A3F5 /* LocalConfigurationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */; };
@@ -59,6 +61,8 @@
 		12BE964E2626FA5000C1B6C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12BE98792627243D00C1B6C3 /* ValidConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidConfiguration.json; sourceTree = "<group>"; };
 		12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */ = {isa = PBXFileReference; lastKnownFileType = text; path = GeneratedConfigurationAccessorContent; sourceTree = "<group>"; };
+		4F65E8892629CF8C009E8C3B /* ValidConfiguration_TopPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidConfiguration_TopPriority.json; sourceTree = "<group>"; };
+		4F65E88A2629CF8C009E8C3B /* ValidConfiguration_LowPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidConfiguration_LowPriority.json; sourceTree = "<group>"; };
 		4F7750732627338700A0A3F5 /* TweakValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakValue.swift; sourceTree = "<group>"; };
 		4F7750742627338700A0A3F5 /* LocalConfigurationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalConfigurationParser.swift; sourceTree = "<group>"; };
 		4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakPropertyCodeGenerator.swift; sourceTree = "<group>"; };
@@ -164,8 +168,10 @@
 				4FD526FD26283F91000F6780 /* InvalidConfiguration_InvalidJSON.json */,
 				4F7750C026277B6300A0A3F5 /* InvalidConfiguration_MissingValues.json */,
 				12BE98792627243D00C1B6C3 /* ValidConfiguration.json */,
-				120B0A1D26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent */,
+				4F65E88A2629CF8C009E8C3B /* ValidConfiguration_LowPriority.json */,
+				4F65E8892629CF8C009E8C3B /* ValidConfiguration_TopPriority.json */,
 				12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */,
+				120B0A1D26285CE70066F2C2 /* GeneratedConfigurationAccessor+ConstantsContent */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -280,6 +286,8 @@
 				4F7750C126277B6300A0A3F5 /* InvalidConfiguration_MissingValues.json in Resources */,
 				12BE989D26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent in Resources */,
 				12BE987A2627243D00C1B6C3 /* ValidConfiguration.json in Resources */,
+				4F65E88C2629CF8C009E8C3B /* ValidConfiguration_LowPriority.json in Resources */,
+				4F65E88B2629CF8C009E8C3B /* ValidConfiguration_TopPriority.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

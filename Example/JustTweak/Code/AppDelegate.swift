@@ -10,7 +10,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let configurationAccessor = ConfigurationAccessor()
+    let configurationAccessor = GeneratedConfigurationAccessor()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let navigationController = window?.rootViewController as! UINavigationController
