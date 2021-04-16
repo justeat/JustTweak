@@ -319,6 +319,7 @@
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JustTweak_Example" */;
 			buildPhases = (
 				D768FEA0BAC54557A2874E32 /* [CP] Check Pods Manifest.lock */,
+				AA7B2EE29485C67374274BED /* [CP-User] JustTweak_Example */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
@@ -422,6 +423,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AA7B2EE29485C67374274BED /* [CP-User] JustTweak_Example */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] JustTweak_Example";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = " ../JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \\\n               -l $SRCROOT/JustTweak/Configurations/ExampleConfiguration.json \\\n               -o $SRCROOT/JustTweak/Accessors/GeneratedConfigurationAccessor.swift \\\n               -c $SRCROOT/../TweakPropertyGenerator/TweakPropertyGenerator/Assets/Configuration.json";
+		};
 		D2F894A2A9B802CCF5D931F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

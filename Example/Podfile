@@ -5,6 +5,12 @@ use_frameworks!
 
 target 'JustTweak_Example' do
   pod 'JustTweak', :path => '../'
+  script_phase :name => 'JustTweak_Example',
+               :script => ' ../JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \
+               -l $SRCROOT/JustTweak/Configurations/ExampleConfiguration.json \
+               -o $SRCROOT/JustTweak/Accessors/GeneratedConfigurationAccessor.swift \
+               -c $SRCROOT/../TweakPropertyGenerator/TweakPropertyGenerator/Assets/Configuration.json',
+               :execution_position => :before_compile
   
 #  pod 'Firebase/RemoteConfig'
 #  pod 'OptimizelySDKiOS'

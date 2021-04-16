@@ -8,16 +8,17 @@ import JustTweak
 
 struct Features {
     static let UICustomization = "ui_customization"
-    static let General = "general"
+    static let general = "general"
 }
 
 struct Variables {
-    static let RedViewAlpha = "red_view_alpha_component"
-    static let DisplayRedView = "display_red_view"
-    static let DisplayGreenView = "display_green_view"
-    static let DisplayYellowView = "display_yellow_view"
-    static let TapToChangeViewColor = "tap_to_change_color_enabled"
-    static let LabelText = "label_text"
-    static let GreetOnAppDidBecomeActive = "greet_on_app_did_become_active"
-    static let MeaningOfLife = "meaning_of_life"
+    static let redViewAlpha = "red_view_alpha_component"
+    static let displayRedView = "display_red_view"
+    static let displayGreenView = "display_green_view"
+    static let displayYellowView = "display_yellow_view"
+    static let tapToChangeViewColor = "tap_to_change_color_enabled"
+    static let labelText = "label_text"
+    static let greetOnAppDidBecomeActive = "greet_on_app_did_become_active"
+    static let answerToTheUniverse = "answer_to_the_universe"
+    static let meaningOfLife = "meaning_of_life"
 }

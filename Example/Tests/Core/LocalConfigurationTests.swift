@@ -27,17 +27,17 @@ class LocalConfigurationTests: XCTestCase {
     }
     
     func testParsesBoolTweak() {
-        let redViewTweak = Tweak(feature: Features.UICustomization, variable: Variables.DisplayRedView, value: true, title: "Display Red View", group: "UI Customization")
-        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView))
+        let redViewTweak = Tweak(feature: Features.UICustomization, variable: Variables.displayRedView, value: true, title: "Display Red View", group: "UI Customization")
+        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.displayRedView))
     }
     
     func testParsesFloatTweak() {
-        let redViewAlphaTweak = Tweak(feature: Features.UICustomization, variable: Variables.RedViewAlpha, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
-        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.RedViewAlpha))
+        let redViewAlphaTweak = Tweak(feature: Features.UICustomization, variable: Variables.redViewAlpha, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
+        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.redViewAlpha))
     }
     
     func testParsesStringTweak() {
-        let buttonLabelTweak = Tweak(feature: Features.UICustomization, variable: Variables.LabelText, value: "Test value", title: "Label Text", group: "UI Customization")
-        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.LabelText))
+        let buttonLabelTweak = Tweak(feature: Features.UICustomization, variable: Variables.labelText, value: "Test value", title: "Label Text", group: "UI Customization")
+        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.UICustomization, variable: Variables.labelText))
     }
 }
