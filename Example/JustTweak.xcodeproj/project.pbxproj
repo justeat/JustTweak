@@ -125,6 +125,7 @@
 			children = (
 				4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */,
 				4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */,
+				61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration.json */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -135,6 +136,44 @@
 				4F6422A521A4205B002B69F0 /* Symbols.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		4F65E6142629B82A009E8C3B /* Accessors */ = {
+			isa = PBXGroup;
+			children = (
+				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
+				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
+				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
+			);
+			path = Accessors;
+			sourceTree = "<group>";
+		};
+		4F65E6172629B86F009E8C3B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		4F65E6182629B880009E8C3B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */,
+				4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		4F65E61B2629B8A2009E8C3B /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
+			);
+			path = Code;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -162,19 +201,12 @@
 		607FACD21AFB9204008FA782 /* Example for JustTweak */ = {
 			isa = PBXGroup;
 			children = (
+				4F65E6142629B82A009E8C3B /* Accessors */,
+				4F65E6182629B880009E8C3B /* Assets */,
+				4F65E61B2629B8A2009E8C3B /* Code */,
 				4F30EA6A21ADA06A00AECF77 /* Configurations */,
-				61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration.json */,
-				4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */,
-				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
-				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
-				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
-				61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */,
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				4F65E6172629B86F009E8C3B /* UI */,
 			);
 			name = "Example for JustTweak";
 			path = JustTweak;
