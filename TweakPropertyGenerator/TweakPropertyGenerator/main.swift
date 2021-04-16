@@ -76,8 +76,11 @@ extension TweakPropertyGenerator {
     }
     
     private func constantsUrl(with filePath: String) -> URL {
-        let path = filePath.replacingOccurrences(of: className, with: className + "+Constants")
-        return URL(fileURLWithPath: path)
+        let url = URL(fileURLWithPath: filePath)
+        let ext = url.pathExtension
+        let extensionName = "Constants"
+        let newUrl = url.deletingLastPathComponent().appendingPathComponent("\(className)+\(extensionName).\(ext)")
+        return newUrl
     }
 }
 
