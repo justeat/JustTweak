@@ -10,8 +10,6 @@
 		120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */; };
 		12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */; };
 		4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */; };
-		4F30EA6E21ADA06A00AECF77 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */; };
-		4F30EA6F21ADA06A00AECF77 /* OptimizelyConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */; };
 		4F38E0F1236E1BB60070BD17 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */; };
 		4F43583223E732DD00FD60A7 /* TweakManager+PresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F43583123E732DD00FD60A7 /* TweakManager+PresentationTests.swift */; };
 		4F43583423E7332D00FD60A7 /* test_configuration_override.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F43583323E7332D00FD60A7 /* test_configuration_override.json */; };
@@ -431,41 +429,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JustTweak/JustTweak.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKCore/OptimizelySDKCore.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKDatafileManager/OptimizelySDKDatafileManager.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKEventDispatcher/OptimizelySDKEventDispatcher.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKShared/OptimizelySDKShared.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKUserProfileService/OptimizelySDKUserProfileService.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKiOS/OptimizelySDKiOS.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JustTweak.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKDatafileManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKEventDispatcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKShared.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKUserProfileService.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKiOS.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -479,13 +447,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F30EA6E21ADA06A00AECF77 /* FirebaseConfiguration.swift in Sources */,
 				4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */,
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
 				120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */,
-				4F30EA6F21ADA06A00AECF77 /* OptimizelyConfiguration.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
