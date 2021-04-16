@@ -8,8 +8,9 @@ import XCTest
 
 class TweakViewControllerTests: XCTestCase {
     
-    var viewController: TweakViewController!
-    var tweakManager: TweakManager!
+    private var rootWindow: UIWindow!
+    private var viewController: TweakViewController!
+    private var tweakManager: TweakManager!
     
     override func setUp() {
         super.setUp()
@@ -20,6 +21,15 @@ class TweakViewControllerTests: XCTestCase {
         let mutableConfiguration = tweakManager.mutableConfiguration!
         mutableConfiguration.deleteValue(feature: "feature_1", variable: "variable_1")
         viewController = nil
+        
+        let rootViewController = rootWindow!.rootViewController!
+        rootViewController.viewWillDisappear(false)
+        rootViewController.viewDidDisappear(false)
+        rootWindow.rootViewController = nil
+        rootWindow.isHidden = true
+        self.rootWindow = nil
+        self.viewController = nil
+        
         super.tearDown()
     }
     
@@ -99,7 +109,6 @@ class TweakViewControllerTests: XCTestCase {
     // MARK: Cells Actions
     
     func testUpdatesValueOfTweak_WhenUserTooglesSwitchOnBooleanCell() {
-        
         viewController.beginAppearanceTransition(true, animated: false)
         viewController.endAppearanceTransition()
         
@@ -137,5 +146,13 @@ class TweakViewControllerTests: XCTestCase {
         let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
         tweakManager = TweakManager(configurations: configurations)
         viewController = TweakViewController(style: .plain, tweakManager: tweakManager)
+        
+        rootWindow = UIWindow(frame: UIScreen.main.bounds)
+        rootWindow.makeKeyAndVisible()
+        rootWindow.isHidden = false
+        rootWindow.rootViewController = viewController
+        _ = viewController.view
+        viewController.viewWillAppear(false)
+        viewController.viewDidAppear(false)
     }
 }
