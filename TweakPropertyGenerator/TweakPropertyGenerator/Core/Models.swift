@@ -14,3 +14,8 @@ struct Tweak: Equatable {
     let valueType: String
     let propertyName: String?
 }
+
+struct Configuration: Decodable {
+    let type: String
+    let parameter: String
+}

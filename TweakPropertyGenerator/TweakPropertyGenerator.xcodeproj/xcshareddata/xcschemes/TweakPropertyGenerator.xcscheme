@@ -71,7 +71,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-c /Config.yaml"
+            argument = "-c $SRCROOT/TweakPropertyGenerator/Assets/Configuration.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

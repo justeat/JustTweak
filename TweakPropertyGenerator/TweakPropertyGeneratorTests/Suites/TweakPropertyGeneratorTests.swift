@@ -33,10 +33,8 @@ class TweakPropertyGeneratorTests: XCTestCase {
     }
     
     func test_generateConstants_output() throws {
-        let content = codeGenerator.generate(type: .constants,
-                                             localConfigurationFilename: localConfigurationFilename,
-                                             className: generatedClassName,
-                                             tweaks: tweaks)
+        let content = codeGenerator.generateConstantsFileContent(className: generatedClassName,
+                                                                 tweaks: tweaks)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessor+ConstantsContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
@@ -45,10 +43,14 @@ class TweakPropertyGeneratorTests: XCTestCase {
     }
     
     func test_generateAccessor_output() throws {
-        let content = codeGenerator.generate(type: .accessor,
-                                             localConfigurationFilename: localConfigurationFilename,
-                                             className: generatedClassName,
-                                             tweaks: tweaks)
+        let configurations = [
+            Configuration(type: "UserDefaultsConfiguration", parameter: "UserDefaults.standard"),
+            Configuration(type: "LocalConfiguration", parameter: "ValidConfiguration")
+        ]
+        let content = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
+                                                                className: generatedClassName,
+                                                                tweaks: tweaks,
+                                                                configurations: configurations)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)

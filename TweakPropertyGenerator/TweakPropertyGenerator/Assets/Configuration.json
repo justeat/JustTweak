@@ -1,0 +1,10 @@
+[
+        {
+            "type": "UserDefaultsConfiguration",
+            "parameter": "UserDefaults.standard"
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ValidConfiguration"
+        }
+    ]

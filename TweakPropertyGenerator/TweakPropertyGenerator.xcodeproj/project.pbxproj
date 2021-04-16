@@ -74,6 +74,7 @@
 		4FD526FD26283F91000F6780 /* InvalidConfiguration_InvalidJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidConfiguration_InvalidJSON.json; sourceTree = "<group>"; };
 		4FD52705262841C7000F6780 /* Array+Duplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Duplicates.swift"; sourceTree = "<group>"; };
 		4FD5270B262842B3000F6780 /* Array+DuplicatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+DuplicatesTests.swift"; sourceTree = "<group>"; };
+		4FD5296926288700000F6780 /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +117,7 @@
 		12273D192625D6BE00732559 /* TweakPropertyGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				4FD5296A26288707000F6780 /* Assets */,
 				4F775035262718DE00A0A3F5 /* Core */,
 				4F775034262718D600A0A3F5 /* Extensions */,
 				12273D1A2625D6BE00732559 /* main.swift */,
@@ -178,6 +180,14 @@
 				12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */,
 			);
 			path = Suites;
+			sourceTree = "<group>";
+		};
+		4FD5296A26288707000F6780 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4FD5296926288700000F6780 /* Configuration.json */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

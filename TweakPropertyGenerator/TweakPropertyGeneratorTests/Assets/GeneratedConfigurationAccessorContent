@@ -9,12 +9,17 @@ import JustTweak
 class GeneratedConfigurationAccessor {
 
     static let tweakManager: TweakManager = {
-        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-        
-        let jsonFileURL = Bundle.main.url(forResource: "ValidConfiguration", withExtension: "json")!
-        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-        
-        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
+        var configurations: [Configuration] = []
+
+        // UserDefaultsConfiguration
+        let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+        configurations.append(userDefaultsConfiguration_1)
+
+        // LocalConfiguration
+        let jsonFileURL_1 = Bundle.main.url(forResource: "ValidConfiguration", withExtension: "json")!
+        let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
+        configurations.append(localConfiguration_1)
+
         return TweakManager(configurations: configurations)
     }()
         
