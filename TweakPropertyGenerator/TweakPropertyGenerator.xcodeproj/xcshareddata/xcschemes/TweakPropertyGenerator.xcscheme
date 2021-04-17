@@ -67,11 +67,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-o $SRCROOT/../Example/JustTweak/Accessors/GeneratedConfigurationAccessor.swift"
+            argument = "-o $SRCROOT/../Example/JustTweak/Accessors/"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-c $SRCROOT/TweakPropertyGenerator/Assets/Configuration.json"
+            argument = "-c $SRCROOT/TweakPropertyGenerator/Assets/TestConfiguration2.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

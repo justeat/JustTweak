@@ -12,15 +12,10 @@ struct TweakPropertyGenerator: ParsableCommand {
     var localConfigurationFilePath: String
     
     @Option(name: .shortAndLong, help: "The output file path.")
-    var outputFilePath: String
+    var outputFolder: String
     
     @Option(name: .shortAndLong, help: "The configuration file path.")
     var configurationFilePath: String
-    
-    private var className: String {
-        let url = URL(fileURLWithPath: outputFilePath)
-        return String(url.lastPathComponent.split(separator: ".").first!)
-    }
     
     private var localConfigurationFilename: String {
         let url = URL(fileURLWithPath: localConfigurationFilePath)
@@ -43,11 +38,12 @@ struct TweakPropertyGenerator: ParsableCommand {
         
         writeConstantsFile(codeGenerator: codeGenerator,
                            tweaks: tweaks,
-                           outputFilePath: outputFilePath)
+                           outputFolder: outputFolder,
+                           configuration: configuration)
         
         writeAccessorFile(codeGenerator: codeGenerator,
                           tweaks: tweaks,
-                          outputFilePath: outputFilePath,
+                          outputFolder: outputFolder,
                           configuration: configuration)
     }
 }
@@ -56,11 +52,11 @@ extension TweakPropertyGenerator {
     
     private func writeAccessorFile(codeGenerator: TweakPropertyCodeGenerator,
                                    tweaks: [Tweak],
-                                   outputFilePath: String,
+                                   outputFolder: String,
                                    configuration: Configuration) {
-        let url: URL = URL(fileURLWithPath: outputFilePath)
+        let fileName = "\(configuration.stackName).swift"
+        let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
         let constants = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
-                                                                  className: className,
                                                                   tweaks: tweaks,
                                                                   configuration: configuration)
         try! constants.write(to: url, atomically: true, encoding: .utf8)
@@ -68,19 +64,13 @@ extension TweakPropertyGenerator {
     
     private func writeConstantsFile(codeGenerator: TweakPropertyCodeGenerator,
                                     tweaks: [Tweak],
-                                    outputFilePath: String) {
-        let url: URL = constantsUrl(with: outputFilePath)
-        let constants = codeGenerator.generateConstantsFileContent(className: className,
-                                                                   tweaks: tweaks)
+                                    outputFolder: String,
+                                    configuration: Configuration) {
+        let fileName = "\(configuration.stackName)+Constants.swift"
+        let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
+        let constants = codeGenerator.generateConstantsFileContent(tweaks: tweaks,
+                                                                   configuration: configuration)
         try! constants.write(to: url, atomically: true, encoding: .utf8)
-    }
-    
-    private func constantsUrl(with filePath: String) -> URL {
-        let url = URL(fileURLWithPath: filePath)
-        let ext = url.pathExtension
-        let extensionName = "Constants"
-        let newUrl = url.deletingLastPathComponent().appendingPathComponent("\(className)+\(extensionName).\(ext)")
-        return newUrl
     }
 }
 

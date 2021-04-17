@@ -31,9 +31,19 @@ pod "JustTweak"
 
 ### Integration
 
-- define a JSON configuration file including your features (you can use the included `ExampleConfiguration_*.json` as a template)
-- define your features and A/B tests in your services such as Firebase and Optmizely (optional)
-- configure the JustTweak stack as following
+- define a JSON configuration file including your features (you can use the included `ExampleConfiguration.json` as a template)
+- optionally define your features and A/B tests in your services such as Firebase and Optmizely
+
+#### Configure stack
+
+You have 2 ways of creating the JustTweak stack:
+
+- manually
+- automatic (levaraging the code generator tool that comes with JustTweak)
+
+##### Manual integration
+
+Configure the JustTweak stack as following
 
 ```swift
 static let tweakManager: TweakManager = {
@@ -60,6 +70,47 @@ static let tweakManager: TweakManager = {
     return TweakManager(configurations: configurations)
 }()
 ```
+
+##### Using the code generator tool
+
+Define the stack configuration in a `.json` file:
+
+```
+{
+    "configurations": [
+        {
+            "type": "UserDefaultsConfiguration",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration_TopPriority",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration"
+        }
+    ],
+    "shouldCacheTweaks": true
+}
+```
+
+Add the following to your `Podfile`
+
+```
+script_phase :name => 'JustTweak_Example',
+             :script => '$PODS_ROOT/JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \
+             -l $SRCROOT/<path_to_the_local_configuration_json_file> \
+             -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
+             -c $SRCROOT/<path_to_the_configuration_json_file_for_the_code_to_be_generated>',
+             :execution_position => :before_compile
+```
+
+Add the generated files to you project and start using the stack.
+
+////////////////
 
 The order of the objects in the `configurations` array defines the priority of the configurations.
 

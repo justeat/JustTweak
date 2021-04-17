@@ -69,6 +69,7 @@
 		4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration.json; sourceTree = "<group>"; };
 		4F7103ED23859CFD0021E4AF /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedConfigurationAccessor.swift; sourceTree = "<group>"; };
+		4FFF3DC5262B1789002A674D /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +180,14 @@
 			path = Code;
 			sourceTree = "<group>";
 		};
+		4FFF3DC4262B1789002A674D /* CodeGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				4FFF3DC5262B1789002A674D /* Configuration.json */,
+			);
+			path = CodeGeneration;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +216,7 @@
 				4F65E6142629B82A009E8C3B /* Accessors */,
 				4F65E6182629B880009E8C3B /* Assets */,
 				4F65E61B2629B8A2009E8C3B /* Code */,
+				4FFF3DC4262B1789002A674D /* CodeGeneration */,
 				4F30EA6A21ADA06A00AECF77 /* Configurations */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				4F65E6172629B86F009E8C3B /* UI */,
@@ -431,7 +441,7 @@
 			name = "[CP-User] JustTweak_Example";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = " ../JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \\\n               -l $SRCROOT/JustTweak/Configurations/ExampleConfiguration.json \\\n               -o $SRCROOT/JustTweak/Accessors/GeneratedConfigurationAccessor.swift \\\n               -c $SRCROOT/../TweakPropertyGenerator/TweakPropertyGenerator/Assets/Configuration.json";
+			shellScript = "../JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \\\n               -l $SRCROOT/JustTweak/Configurations/ExampleConfiguration.json \\\n               -o $SRCROOT/JustTweak/Accessors/ \\\n               -c $SRCROOT/JustTweak/CodeGeneration/Configuration.json";
 		};
 		D2F894A2A9B802CCF5D931F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

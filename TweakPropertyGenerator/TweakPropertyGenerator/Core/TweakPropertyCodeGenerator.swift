@@ -18,9 +18,9 @@ class TweakPropertyCodeGenerator {
 
 extension TweakPropertyCodeGenerator {
     
-    func generateConstantsFileContent(className: String,
-                                      tweaks: [Tweak]) -> String {
-        let template = self.constantsTemplate(className: className)
+    func generateConstantsFileContent(tweaks: [Tweak],
+                                      configuration: Configuration) -> String {
+        let template = self.constantsTemplate(className: configuration.stackName)
         let featureConstants = self.featureConstantsCodeBlock(tweaks: tweaks)
         let variableConstants = self.variableConstantsCodeBlock(tweaks: tweaks)
         
@@ -31,10 +31,9 @@ extension TweakPropertyCodeGenerator {
     }
     
     func generateAccessorFileContent(localConfigurationFilename: String,
-                                     className: String,
                                      tweaks: [Tweak],
                                      configuration: Configuration) -> String {
-        let template = self.accessorTemplate(className: className)
+        let template = self.accessorTemplate(className: configuration.stackName)
         let tweakManager = self.tweakManagerCodeBlock(configuration: configuration)
         let classContent = self.classContent(tweaks: tweaks)
         
@@ -182,7 +181,17 @@ extension TweakPropertyCodeGenerator {
                     """
                 generatedString.append(configurationAllocation)
                 
+            case "CustomConfiguration":
+                assert(configuration.propertyName != nil, "Missing value 'propertyName' for configuration '\(configuration)'")
+                let configurationAllocation =
+                    """
+                            \(configuration.parameter)
+                            configurations.append(\(configuration.propertyName!))
+                    """
+                generatedString.append(configurationAllocation)
+                
             default:
+                assertionFailure("Unsupported configuration \(configuration)")
                 break
             }
             

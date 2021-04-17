@@ -61,6 +61,8 @@
 		12BE964E2626FA5000C1B6C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12BE98792627243D00C1B6C3 /* ValidConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidConfiguration.json; sourceTree = "<group>"; };
 		12BE989C26272D6200C1B6C3 /* GeneratedConfigurationAccessorContent */ = {isa = PBXFileReference; lastKnownFileType = text; path = GeneratedConfigurationAccessorContent; sourceTree = "<group>"; };
+		4F01D978262AF93600863AAA /* TestConfiguration2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestConfiguration2.json; sourceTree = "<group>"; };
+		4F01D979262AF93600863AAA /* TestConfiguration1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestConfiguration1.json; sourceTree = "<group>"; };
 		4F65E8892629CF8C009E8C3B /* ValidConfiguration_TopPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidConfiguration_TopPriority.json; sourceTree = "<group>"; };
 		4F65E88A2629CF8C009E8C3B /* ValidConfiguration_LowPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidConfiguration_LowPriority.json; sourceTree = "<group>"; };
 		4F7750732627338700A0A3F5 /* TweakValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakValue.swift; sourceTree = "<group>"; };
@@ -78,7 +80,6 @@
 		4FD526FD26283F91000F6780 /* InvalidConfiguration_InvalidJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidConfiguration_InvalidJSON.json; sourceTree = "<group>"; };
 		4FD52705262841C7000F6780 /* Array+Duplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Duplicates.swift"; sourceTree = "<group>"; };
 		4FD5270B262842B3000F6780 /* Array+DuplicatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+DuplicatesTests.swift"; sourceTree = "<group>"; };
-		4FD5296926288700000F6780 /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +192,8 @@
 		4FD5296A26288707000F6780 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				4FD5296926288700000F6780 /* Configuration.json */,
+				4F01D979262AF93600863AAA /* TestConfiguration1.json */,
+				4F01D978262AF93600863AAA /* TestConfiguration2.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";

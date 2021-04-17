@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "type": "UserDefaultsConfiguration",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "CustomConfiguration",
+            "parameter": "let optimizelyConfiguration = OptimizelyConfiguration()\n\t\toc.someValue = 42",
+            "propertyName": "optimizelyConfiguration",
+            "macros": ["CONFIGURATION_APPSTORE"]
+        },
+        {
+            "type": "CustomConfiguration",
+            "parameter": "let firebaseConfiguration = FirebaseConfiguration()\n\t\tfc.someValue = true",
+            "propertyName": "firebaseConfiguration",
+            "macros": ["CONFIGURATION_APPSTORE"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration_TopPriority",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration"
+        }
+    ],
+    "shouldCacheTweaks": true,
+    "stackName": "GeneratedConfigurationAccessor"
+}

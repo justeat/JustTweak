@@ -15,5 +15,6 @@
             "parameter": "ExampleConfiguration"
         }
     ],
-    "shouldCacheTweaks": true
+    "shouldCacheTweaks": true,
+    "stackName": "GeneratedConfigurationAccessor"
 }

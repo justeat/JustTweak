@@ -18,10 +18,12 @@ struct Tweak: Equatable {
 struct Configuration: Decodable {
     let configurations: [TweakConfiguration]
     let shouldCacheTweaks: Bool
+    let stackName: String
 }
 
 struct TweakConfiguration: Decodable {
     let type: String
     let parameter: String
+    let propertyName: String?
     let macros: [String]?
 }
