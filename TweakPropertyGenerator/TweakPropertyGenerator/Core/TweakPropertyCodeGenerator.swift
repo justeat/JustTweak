@@ -121,7 +121,9 @@ extension TweakPropertyCodeGenerator {
         return """
             static let tweakManager: TweakManager = {
         \(configurationsCodeBlock)
-                return TweakManager(configurations: configurations)
+                let tweakManager = TweakManager(configurations: configurations)
+                tweakManager.useCache = \(configuration.shouldCacheTweaks)
+                return tweakManager
             }()
                 
             private var tweakManager: TweakManager {

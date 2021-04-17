@@ -54,7 +54,8 @@ class TweakPropertyGeneratorTests: XCTestCase {
                                parameter: "ValidConfiguration_LowPriority",
                                macros: nil)
         ]
-        let configuration = Configuration(configurations: configurations)
+        let configuration = Configuration(configurations: configurations,
+                                          shouldCacheTweaks: true)
         let content = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
                                                                 className: generatedClassName,
                                                                 tweaks: tweaks,

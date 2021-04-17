@@ -17,6 +17,7 @@ struct Tweak: Equatable {
 
 struct Configuration: Decodable {
     let configurations: [TweakConfiguration]
+    let shouldCacheTweaks: Bool
 }
 
 struct TweakConfiguration: Decodable {

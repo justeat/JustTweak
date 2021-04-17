@@ -14,5 +14,6 @@
             "type": "LocalConfiguration",
             "parameter": "ExampleConfiguration"
         }
-    ]
+    ],
+    "shouldCacheTweaks": true
 }

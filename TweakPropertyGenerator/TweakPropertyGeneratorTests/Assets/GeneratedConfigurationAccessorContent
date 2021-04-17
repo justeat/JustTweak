@@ -29,7 +29,9 @@ class GeneratedConfigurationAccessor {
         let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
         configurations.append(localConfiguration_2)
 
-        return TweakManager(configurations: configurations)
+        let tweakManager = TweakManager(configurations: configurations)
+        tweakManager.useCache = true
+        return tweakManager
     }()
         
     private var tweakManager: TweakManager {
