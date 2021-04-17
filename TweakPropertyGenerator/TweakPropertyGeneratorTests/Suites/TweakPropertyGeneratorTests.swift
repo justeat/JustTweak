@@ -44,20 +44,21 @@ class TweakPropertyGeneratorTests: XCTestCase {
     
     func test_generateAccessor_output() throws {
         let configurations = [
-            Configuration(type: "UserDefaultsConfiguration",
-                          parameter: "UserDefaults.standard",
-                          macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
-            Configuration(type: "LocalConfiguration",
-                          parameter: "ValidConfiguration_TopPriority",
-                          macros: ["DEBUG"]),
-            Configuration(type: "LocalConfiguration",
-                          parameter: "ValidConfiguration_LowPriority",
-                          macros: nil)
+            TweakConfiguration(type: "UserDefaultsConfiguration",
+                               parameter: "UserDefaults.standard",
+                               macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
+            TweakConfiguration(type: "LocalConfiguration",
+                               parameter: "ValidConfiguration_TopPriority",
+                               macros: ["DEBUG"]),
+            TweakConfiguration(type: "LocalConfiguration",
+                               parameter: "ValidConfiguration_LowPriority",
+                               macros: nil)
         ]
+        let configuration = Configuration(configurations: configurations)
         let content = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
                                                                 className: generatedClassName,
                                                                 tweaks: tweaks,
-                                                                configurations: configurations)
+                                                                configuration: configuration)
         
         let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)

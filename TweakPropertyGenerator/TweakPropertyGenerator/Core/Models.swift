@@ -16,6 +16,10 @@ struct Tweak: Equatable {
 }
 
 struct Configuration: Decodable {
+    let configurations: [TweakConfiguration]
+}
+
+struct TweakConfiguration: Decodable {
     let type: String
     let parameter: String
     let macros: [String]?

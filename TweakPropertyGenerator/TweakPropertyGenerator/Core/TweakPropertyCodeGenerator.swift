@@ -33,9 +33,9 @@ extension TweakPropertyCodeGenerator {
     func generateAccessorFileContent(localConfigurationFilename: String,
                                      className: String,
                                      tweaks: [Tweak],
-                                     configurations: [Configuration]) -> String {
+                                     configuration: Configuration) -> String {
         let template = self.accessorTemplate(className: className)
-        let tweakManager = self.tweakManagerCodeBlock(configurations: configurations)
+        let tweakManager = self.tweakManagerCodeBlock(configuration: configuration)
         let classContent = self.classContent(tweaks: tweaks)
         
         let content = template
@@ -115,8 +115,8 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func tweakManagerCodeBlock(configurations: [Configuration]) -> String {
-        let configurationsCodeBlock = self.configurationsCodeBlock(configurations: configurations)
+    private func tweakManagerCodeBlock(configuration: Configuration) -> String {
+        let configurationsCodeBlock = self.configurationsCodeBlock(configuration: configuration)
         
         return """
             static let tweakManager: TweakManager = {
@@ -130,8 +130,8 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func configurationsCodeBlock(configurations: [Configuration]) -> String {
-        let grouping = Dictionary(grouping: configurations) { $0.type }
+    private func configurationsCodeBlock(configuration: Configuration) -> String {
+        let grouping = Dictionary(grouping: configuration.configurations) { $0.type }
         
         var configurationsString: [String] = [
             """
@@ -141,7 +141,7 @@ extension TweakPropertyCodeGenerator {
         
         var currentIndexByConf: [String: Int] = grouping.mapValues{ _ in 0 }
         
-        for configuration in configurations {
+        for configuration in configuration.configurations {
             let value = grouping[configuration.type]!
             let index = currentIndexByConf[configuration.type]!
             let configuration = value[index]

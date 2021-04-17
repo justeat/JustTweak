@@ -27,10 +27,10 @@ struct TweakPropertyGenerator: ParsableCommand {
         return String(url.lastPathComponent.split(separator: ".").first!)
     }
     
-    private func loadConfigurationFromJson() -> [Configuration] {
+    private func loadConfigurationFromJson() -> Configuration {
         let url = URL(fileURLWithPath: configurationFilePath)
         let jsonData = try! Data(contentsOf: url)
-        let decodedResult = try! JSONDecoder().decode([Configuration].self, from: jsonData)
+        let decodedResult = try! JSONDecoder().decode(Configuration.self, from: jsonData)
         return decodedResult
     }
     
@@ -39,7 +39,7 @@ struct TweakPropertyGenerator: ParsableCommand {
         let localConfigurationParser = LocalConfigurationParser()
         let tweaks = try localConfigurationParser.load(localConfigurationFilePath)
         
-        let configurations = loadConfigurationFromJson()
+        let configuration = loadConfigurationFromJson()
         
         writeConstantsFile(codeGenerator: codeGenerator,
                            tweaks: tweaks,
@@ -48,7 +48,7 @@ struct TweakPropertyGenerator: ParsableCommand {
         writeAccessorFile(codeGenerator: codeGenerator,
                           tweaks: tweaks,
                           outputFilePath: outputFilePath,
-                          configurations: configurations)
+                          configuration: configuration)
     }
 }
 
@@ -57,12 +57,12 @@ extension TweakPropertyGenerator {
     private func writeAccessorFile(codeGenerator: TweakPropertyCodeGenerator,
                                    tweaks: [Tweak],
                                    outputFilePath: String,
-                                   configurations: [Configuration]) {
+                                   configuration: Configuration) {
         let url: URL = URL(fileURLWithPath: outputFilePath)
         let constants = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
                                                                   className: className,
                                                                   tweaks: tweaks,
-                                                                  configurations: configurations)
+                                                                  configuration: configuration)
         try! constants.write(to: url, atomically: true, encoding: .utf8)
     }
     
