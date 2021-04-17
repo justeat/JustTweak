@@ -31,19 +31,17 @@ pod "JustTweak"
 
 ### Integration
 
-- define a JSON configuration file including your features (you can use the included `ExampleConfiguration.json` as a template)
-- optionally define your features and A/B tests in your services such as Firebase and Optmizely
+- Define a `LocalConfiguration` JSON file including your features (you can use the included `ExampleConfiguration.json` as a template)
+- Configure the stack
 
-#### Configure stack
+To configure stack, you have to options: 
 
-You have 2 ways of creating the JustTweak stack:
+- by implementing the stack manually
+- by levaraging the code generator tool
 
-- manually
-- automatic (levaraging the code generator tool that comes with JustTweak)
+#### Manual integration
 
-##### Manual integration
-
-Configure the JustTweak stack as following
+- Configure the JustTweak stack as following
 
 ```swift
 static let tweakManager: TweakManager = {
@@ -71,9 +69,13 @@ static let tweakManager: TweakManager = {
 }()
 ```
 
-##### Using the code generator tool
+- Implement the properties and constant for your features, backed by the `LocalConfiguration`.
 
-Define the stack configuration in a `.json` file:
+See `ConfigurationAccessor.swift` for more info.
+
+#### Using the code generator tool
+
+- Define the stack configuration in a `.json` file:
 
 ```
 {
@@ -97,10 +99,10 @@ Define the stack configuration in a `.json` file:
 }
 ```
 
-Add the following to your `Podfile`
+- Add the following to your `Podfile`
 
 ```
-script_phase :name => 'JustTweak_Example',
+script_phase :name => '<your_app_target_name>',
              :script => '$PODS_ROOT/JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \
              -l $SRCROOT/<path_to_the_local_configuration_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
@@ -108,16 +110,33 @@ script_phase :name => 'JustTweak_Example',
              :execution_position => :before_compile
 ```
 
-Add the generated files to you project and start using the stack.
+Every time you build the target, the code generator tool will regenerate the code for the stack. Crucially, it will include all the properties backing the features definded in the `LocalConfiguration`.
 
-////////////////
+- Add the generated files to you project and start using the stack.
+
+### Implementation details
 
 The order of the objects in the `configurations` array defines the priority of the configurations.
 
 The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration and it's the one used by the `TweakViewController` to populate the UI.
 
 
-### Usage
+### Usage (basic)
+
+If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the stack object and use it to access the feature flags.
+
+```
+let accessor = GeneratedConfigurationAccessor()
+if accessor.meaningOfLife == 42 {
+    ...
+}
+```
+
+See `GeneratedConfigurationAccessor.swift` for more info.
+
+### Usage (advanced)
+
+If you decided to implement the stack code yourself, you'll have to implemented code for accessing the features via the `TweakManager`.
 
 The three main features of JustTweak can be accessed from the `TweakManager` instance to drive code path decisions.
 
@@ -176,6 +195,8 @@ if let variation = variation {
     // default behaviour
 }
 ```
+
+See `ConfigurationAccessor.swift` for more info.
 
 
 ### Caching
