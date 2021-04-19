@@ -21,6 +21,7 @@ public extension NSNumber {
             
         default:
             assert(false, "Unsupported objCType for NSNumber \(self)")
+            return ""
         }
     }
 }

@@ -312,7 +312,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp $SRCROOT/../Example/DerivedData/JustTweak/Build/Products/Debug/TweakPropertyGenerator \\\n$SRCROOT/../JustTweak/Assets/TweakPropertyGenerator.bundle/\n";
+			shellScript = "cp $SRCROOT/../Example/DerivedData/JustTweak/Build/Products/Release/TweakPropertyGenerator \\\n$SRCROOT/../JustTweak/Assets/TweakPropertyGenerator.bundle/\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
