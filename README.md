@@ -31,39 +31,124 @@ pod "JustTweak"
 
 ### Integration
 
-- define a JSON configuration file including your features (you can use the included `ExampleConfiguration.json` as a template)
-- define your features and A/B tests in your services such as Firebase and Optmizely (optional)
-- configure the JustTweak stack as following
+- Define a `LocalConfiguration` JSON file including your features. Refer to `ExampleConfiguration.json` for a starting point.
+- Configure the stack
+
+To configure the stack, you have two options: 
+
+- implement the stack manually
+- leverage the code generator tool
+
+#### Manual integration
+
+- Configure the JustTweak stack as following:
 
 ```swift
 static let tweakManager: TweakManager = {
-    // mutable configuration (to override tweaks from other configurations)
-    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+    var configurations: [Configuration] = []
 
-    // remote configurations (optional)
-    let optimizelyConfiguration = OptimizelyConfiguration()
-    optimizelyConfiguration.userId = <#user_id#>
-    let firebaseConfiguration = FirebaseConfiguration()
+    // Mutable configuration (to override tweaks from other configurations)
+    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+    configurations.append(userDefaultsConfiguration)
+    
+    // Optimizely (remote configuration)
+    let optimizelyConfiguration = OptimizelyTweaksConfiguration()
+    optimizelyConfiguration.userId = UUID().uuidString
+    configurations.append(optimizelyConfiguration)
+
+    // Firebase Remote Config (remote configuration)
+    let firebaseConfiguration = FirebaseTweaksConfiguration()
+    configurations.append(firebaseConfiguration)
 
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
     let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-
-    // priority is defined by the order in the configurations array (from highest to lowest)
-    let configurations: [Configuration] = [userDefaultsConfiguration,
-                                           optimizelyConfiguration,
-                                           firebaseConfiguration,
-                                           localConfiguration]
+    configurations.append(localConfiguration)
+    
     return TweakManager(configurations: configurations)
 }()
 ```
+
+- Implement the properties and constants for your features, backed by the `LocalConfiguration`. Refer to `ConfigurationAccessor.swift` for a starting point.
+
+#### Using the code generator tool
+
+- Define the stack configuration in a `.json` file in the following format:
+
+```
+{
+    "configurations": [
+        {
+            "type": "UserDefaultsConfiguration",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration_TopPriority",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration"
+        }
+    ],
+    "shouldCacheTweaks": true,
+    "stackName": "GeneratedConfigurationAccessor"
+}
+```
+
+In the case whereby a custom configuration is needed, its setup code should be implemented in the configuration. E.g.
+
+```
+...
+{
+    "type": "CustomConfiguration",
+    "parameter": "let fc = FirebaseConfiguration()\n\t\tfc.someValue = true",
+    "propertyName": "fc",
+    "macros": ["CONFIGURATION_APPSTORE"]
+},
+...
+```
+
+- Add the following to your `Podfile`
+
+```
+script_phase :name => '<your_app_target_name>',
+             :script => '$PODS_ROOT/JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \
+             -l $SRCROOT/<path_to_the_local_configuration_json_file> \
+             -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
+             -c $SRCROOT/<path_to_the_configuration_json_file>',
+             :execution_position => :before_compile
+```
+
+Every time the target is built, the code generator tool will regenerate the code for the stack. It will include all the properties backing the features defined in the `LocalConfiguration`.
+
+- Add the generated files to you project and start using the stack.
+
+### Implementation details
 
 The order of the objects in the `configurations` array defines the priority of the configurations.
 
 The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration and it's the one used by the `TweakViewController` to populate the UI.
 
 
-### Usage
+### Usage (basic)
+
+If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object (which name you have defined in the `.json` configuration and use it to access the feature flags.
+
+```
+let accessor = GeneratedConfigurationAccessor()
+if accessor.meaningOfLife == 42 {
+    ...
+}
+```
+
+See `GeneratedConfigurationAccessor.swift` and `GeneratedConfigurationAccessor+Constants.swift` for an example of generated code.
+
+### Usage (advanced)
+
+If you decided to implement the stack code yourself, you'll have to implemented code for accessing the features via the `TweakManager`.
 
 The three main features of JustTweak can be accessed from the `TweakManager` instance to drive code path decisions.
 
@@ -123,6 +208,8 @@ if let variation = variation {
 }
 ```
 
+See `ConfigurationAccessor.swift` for more info.
+
 
 ### Caching
 
@@ -176,6 +263,11 @@ JustTweak comes with three configurations out-of-the-box:
 - `EphemeralConfiguration` which is simply an instance of `NSMutableDictionary`
 
 In addition, JustTweak defines `Configuration` and `MutableConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
+
+
+### Notes for the maintainers
+
+The `TweakPropertyGenerator` scheme generates the executable that is shipped as part of JustTweak. When releasing a new version that includes changes in `TweakPropertyGenerator`, make sure that the new binary is copied from the `Build/Products` folder  in the `TweakPropertyGenerator.bundle`.
 
 
 ## License

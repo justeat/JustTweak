@@ -9,7 +9,7 @@ extension String: Error {}
 
 class LocalConfigurationParser {
     
-    func loadConfiguration(_ filePath: String) throws -> Configuration {
+    func load(_ filePath: String) throws -> [Tweak] {
         let url = URL(fileURLWithPath: filePath)
         let data = try Data(contentsOf: url)
         guard let content = try JSONSerialization.jsonObject(with: data) as? LocalConfigurationFormat else {
@@ -27,7 +27,7 @@ class LocalConfigurationParser {
         
         try validate(tweaks)
         
-        return Configuration(tweaks: tweaks)
+        return tweaks
     }
     
     func validate(_ tweaks: [Tweak]) throws {

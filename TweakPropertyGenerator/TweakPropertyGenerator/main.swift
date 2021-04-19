@@ -11,64 +11,65 @@ struct TweakPropertyGenerator: ParsableCommand {
     @Option(name: .shortAndLong, help: "The local configuration file path.")
     var localConfigurationFilePath: String
     
-    @Option(name: .shortAndLong, help: "The output file path.")
-    var outputFilePath: String
+    @Option(name: .shortAndLong, help: "The output folder.")
+    var outputFolder: String
     
     @Option(name: .shortAndLong, help: "The configuration file path.")
-    var configuration: String
-    
-    private var className: String {
-        let url = URL(fileURLWithPath: outputFilePath)
-        return String(url.lastPathComponent.split(separator: ".").first!)
-    }
+    var configurationFilePath: String
     
     private var localConfigurationFilename: String {
         let url = URL(fileURLWithPath: localConfigurationFilePath)
         return String(url.lastPathComponent.split(separator: ".").first!)
     }
     
+    private func loadConfigurationFromJson() -> Configuration {
+        let url = URL(fileURLWithPath: configurationFilePath)
+        let jsonData = try! Data(contentsOf: url)
+        let decodedResult = try! JSONDecoder().decode(Configuration.self, from: jsonData)
+        return decodedResult
+    }
+    
     func run() throws {
         let codeGenerator = TweakPropertyCodeGenerator()
         let localConfigurationParser = LocalConfigurationParser()
-        let localConfigurationContent = try localConfigurationParser.loadConfiguration(localConfigurationFilePath)
+        let tweaks = try localConfigurationParser.load(localConfigurationFilePath)
+        let configuration = loadConfigurationFromJson()
         
-        write(type: .constants,
-              codeGenerator: codeGenerator,
-              localConfigurationContent: localConfigurationContent,
-              outputFilePath: outputFilePath)
+        writeConstantsFile(codeGenerator: codeGenerator,
+                           tweaks: tweaks,
+                           outputFolder: outputFolder,
+                           configuration: configuration)
         
-        write(type: .accessor,
-              codeGenerator: codeGenerator,
-              localConfigurationContent: localConfigurationContent,
-              outputFilePath: outputFilePath)
+        writeAccessorFile(codeGenerator: codeGenerator,
+                          tweaks: tweaks,
+                          outputFolder: outputFolder,
+                          configuration: configuration)
     }
 }
 
 extension TweakPropertyGenerator {
     
-    private func write(type: TweakPropertyCodeGeneratorContentType,
-                       codeGenerator: TweakPropertyCodeGenerator,
-                       localConfigurationContent: Configuration,
-                       outputFilePath: String) {
-        let url: URL = {
-            switch type {
-            case .constants:
-                return constantsUrl(with: outputFilePath)
-            case .accessor:
-                return URL(fileURLWithPath: outputFilePath)
-            }
-        }()
-        
-        let constants = codeGenerator.generate(type: type,
-                                               localConfigurationFilename: localConfigurationFilename,
-                                               className: className,
-                                               localConfigurationContent: localConfigurationContent)
+    private func writeAccessorFile(codeGenerator: TweakPropertyCodeGenerator,
+                                   tweaks: [Tweak],
+                                   outputFolder: String,
+                                   configuration: Configuration) {
+        let fileName = "\(configuration.stackName).swift"
+        let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
+        let constants = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
+                                                                  tweaks: tweaks,
+                                                                  configuration: configuration)
         try! constants.write(to: url, atomically: true, encoding: .utf8)
     }
     
-    private func constantsUrl(with filePath: String) -> URL {
-        let path = filePath.replacingOccurrences(of: className, with: className + "+Constants")
-        return URL(fileURLWithPath: path)
+    private func writeConstantsFile(codeGenerator: TweakPropertyCodeGenerator,
+                                    tweaks: [Tweak],
+                                    outputFolder: String,
+                                    configuration: Configuration) {
+        let fileName = "\(configuration.stackName)+Constants.swift"
+        let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
+        let constants = codeGenerator.generateConstantsFileContent(tweaks: tweaks,
+                                                                   configuration: configuration)
+        try! constants.write(to: url, atomically: true, encoding: .utf8)
     }
 }
 

@@ -10,14 +10,13 @@
 		120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */; };
 		12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */; };
 		4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */; };
-		4F30EA6E21ADA06A00AECF77 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */; };
-		4F30EA6F21ADA06A00AECF77 /* OptimizelyConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */; };
 		4F38E0F1236E1BB60070BD17 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */; };
 		4F43583223E732DD00FD60A7 /* TweakManager+PresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F43583123E732DD00FD60A7 /* TweakManager+PresentationTests.swift */; };
 		4F43583423E7332D00FD60A7 /* test_configuration_override.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F43583323E7332D00FD60A7 /* test_configuration_override.json */; };
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
+		4F65E89F2629D083009E8C3B /* ExampleConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */; };
 		4F7103EE23859CFE0021E4AF /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7103ED23859CFD0021E4AF /* CustomOperators.swift */; };
 		4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */; };
 		51A8BD6A5E5948F41EEC2E66 /* Pods_JustTweak_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F594AA2DDEDFFA4C835EACCF /* Pods_JustTweak_Tests.framework */; };
@@ -38,7 +37,7 @@
 		61BE051B1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE051A1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift */; };
 		61BE051E1DAE878600288EC7 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE051D1DAE878600288EC7 /* TestHelpers.swift */; };
 		61BE05201DAE88A100288EC7 /* TextTweakTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE051F1DAE88A100288EC7 /* TextTweakTableViewCellTests.swift */; };
-		61D2DEBB1D9ECD4D00E6C6FA /* ExampleConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration.json */; };
+		61D2DEBB1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json in Resources */ = {isa = PBXBuildFile; fileRef = 61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json */; };
 		61F1DECE1DA7ECF700314DEC /* TweaksUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F1DECD1DA7ECF700314DEC /* TweaksUtilitiesTests.swift */; };
 		61F1DECF1DA7EE6C00314DEC /* TweakManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F1DEC91DA7ECD300314DEC /* TweakManagerTests.swift */; };
 		8D0BA4A3FCD875282B8A3ED3 /* Pods_JustTweak_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B347460C9476DF9F5F7BDF32 /* Pods_JustTweak_Example.framework */; };
@@ -67,8 +66,10 @@
 		4F43583323E7332D00FD60A7 /* test_configuration_override.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration_override.json; sourceTree = "<group>"; };
 		4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
+		4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration.json; sourceTree = "<group>"; };
 		4F7103ED23859CFD0021E4AF /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedConfigurationAccessor.swift; sourceTree = "<group>"; };
+		4FFF3DC5262B1789002A674D /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +91,7 @@
 		61BE051A1DAE868900288EC7 /* BooleanTweakTableViewCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanTweakTableViewCellTests.swift; sourceTree = "<group>"; };
 		61BE051D1DAE878600288EC7 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		61BE051F1DAE88A100288EC7 /* TextTweakTableViewCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTweakTableViewCellTests.swift; sourceTree = "<group>"; };
-		61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration.json; sourceTree = "<group>"; };
+		61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration_TopPriority.json; sourceTree = "<group>"; };
 		61F1DEC91DA7ECD300314DEC /* TweakManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakManagerTests.swift; sourceTree = "<group>"; };
 		61F1DECD1DA7ECF700314DEC /* TweaksUtilitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweaksUtilitiesTests.swift; sourceTree = "<group>"; };
 		6817DC526CBFCF55440CC371 /* Pods-JustTweak_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +128,8 @@
 			children = (
 				4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */,
 				4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */,
+				4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */,
+				61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -137,6 +140,52 @@
 				4F6422A521A4205B002B69F0 /* Symbols.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		4F65E6142629B82A009E8C3B /* Accessors */ = {
+			isa = PBXGroup;
+			children = (
+				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
+				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
+				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
+			);
+			path = Accessors;
+			sourceTree = "<group>";
+		};
+		4F65E6172629B86F009E8C3B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		4F65E6182629B880009E8C3B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */,
+				4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		4F65E61B2629B8A2009E8C3B /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		4FFF3DC4262B1789002A674D /* CodeGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				4FFF3DC5262B1789002A674D /* Configuration.json */,
+			);
+			path = CodeGeneration;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -164,19 +213,13 @@
 		607FACD21AFB9204008FA782 /* Example for JustTweak */ = {
 			isa = PBXGroup;
 			children = (
+				4F65E6142629B82A009E8C3B /* Accessors */,
+				4F65E6182629B880009E8C3B /* Assets */,
+				4F65E61B2629B8A2009E8C3B /* Code */,
+				4FFF3DC4262B1789002A674D /* CodeGeneration */,
 				4F30EA6A21ADA06A00AECF77 /* Configurations */,
-				61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration.json */,
-				4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */,
-				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
-				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
-				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
-				61A561381DA6AC4B00839F7F /* GoogleService-Info.plist */,
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				4F65E6172629B86F009E8C3B /* UI */,
 			);
 			name = "Example for JustTweak";
 			path = JustTweak;
@@ -286,6 +329,7 @@
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JustTweak_Example" */;
 			buildPhases = (
 				D768FEA0BAC54557A2874E32 /* [CP] Check Pods Manifest.lock */,
+				AA7B2EE29485C67374274BED /* [CP-User] JustTweak_Example */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
@@ -366,8 +410,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				61D2DEBB1D9ECD4D00E6C6FA /* ExampleConfiguration.json in Resources */,
+				61D2DEBB1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json in Resources */,
 				61A561391DA6AC4B00839F7F /* GoogleService-Info.plist in Resources */,
+				4F65E89F2629D083009E8C3B /* ExampleConfiguration.json in Resources */,
 				4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -388,6 +433,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AA7B2EE29485C67374274BED /* [CP-User] JustTweak_Example */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] JustTweak_Example";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/../JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \\\n               -l $SRCROOT/JustTweak/Configurations/ExampleConfiguration.json \\\n               -o $SRCROOT/JustTweak/Accessors/ \\\n               -c $SRCROOT/JustTweak/CodeGeneration/Configuration.json\n";
+		};
 		D2F894A2A9B802CCF5D931F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,41 +486,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JustTweak/JustTweak.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKCore/OptimizelySDKCore.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKDatafileManager/OptimizelySDKDatafileManager.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKEventDispatcher/OptimizelySDKEventDispatcher.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKShared/OptimizelySDKShared.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKUserProfileService/OptimizelySDKUserProfileService.framework",
-				"${BUILT_PRODUCTS_DIR}/OptimizelySDKiOS/OptimizelySDKiOS.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JustTweak.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKDatafileManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKEventDispatcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKShared.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKUserProfileService.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OptimizelySDKiOS.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -479,13 +504,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F30EA6E21ADA06A00AECF77 /* FirebaseConfiguration.swift in Sources */,
 				4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */,
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
 				120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */,
-				4F30EA6F21ADA06A00AECF77 /* OptimizelyConfiguration.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,6 +616,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DCONFIGURATION_DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -643,6 +667,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DCONFIGURATION_DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;

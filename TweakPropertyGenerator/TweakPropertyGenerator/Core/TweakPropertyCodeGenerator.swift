@@ -5,11 +5,6 @@
 
 import Foundation
 
-enum TweakPropertyCodeGeneratorContentType {
-    case constants
-    case accessor
-}
-
 class TweakPropertyCodeGenerator {
     
     private let featuresConst = "Features"
@@ -19,30 +14,15 @@ class TweakPropertyCodeGenerator {
     private let variableConstantsConst = "<VARIABLE_CONSTANTS_CONST>"
     private let classContentConst = "<CLASS_CONTENT>"
     private let tweakManagerConst = "<TWEAK_MANAGER_CONTENT>"
-    
-    func generate(type: TweakPropertyCodeGeneratorContentType,
-                  localConfigurationFilename: String,
-                  className: String,
-                  localConfigurationContent: Configuration) -> String {
-        switch type {
-        case .constants:
-            return generateConstants(localConfigurationFilename: localConfigurationFilename,
-                                     className: className,
-                                     localConfigurationContent: localConfigurationContent)
-        case .accessor:
-            return generateAccessor(localConfigurationFilename: localConfigurationFilename,
-                                    className: className,
-                                    localConfigurationContent: localConfigurationContent)
-        }
-    }
 }
 
 extension TweakPropertyCodeGenerator {
     
-    private func generateConstants(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
-        let template = self.constantsTemplate(className: className)
-        let featureConstants = self.featureConstants(localConfigurationContent: localConfigurationContent)
-        let variableConstants = self.variableConstants(localConfigurationContent: localConfigurationContent)
+    func generateConstantsFileContent(tweaks: [Tweak],
+                                      configuration: Configuration) -> String {
+        let template = self.constantsTemplate(with: configuration.stackName)
+        let featureConstants = self.featureConstantsCodeBlock(with: tweaks)
+        let variableConstants = self.variableConstantsCodeBlock(with: tweaks)
         
         let content = template
             .replacingOccurrences(of: featureConstantsConst, with: featureConstants)
@@ -50,10 +30,12 @@ extension TweakPropertyCodeGenerator {
         return content
     }
     
-    private func generateAccessor(localConfigurationFilename: String, className: String, localConfigurationContent: Configuration) -> String {
-        let template = self.accessorTemplate(className: className)
-        let tweakManager = self.tweakManager(localConfigurationFilename: localConfigurationFilename)
-        let classContent = self.classContent(localConfigurationContent: localConfigurationContent)
+    func generateAccessorFileContent(localConfigurationFilename: String,
+                                     tweaks: [Tweak],
+                                     configuration: Configuration) -> String {
+        let template = self.accessorTemplate(with: configuration.stackName)
+        let tweakManager = self.tweakManagerCodeBlock(with: configuration)
+        let classContent = self.classContent(with: tweaks)
         
         let content = template
             .replacingOccurrences(of: tweakManagerConst, with: tweakManager)
@@ -61,7 +43,7 @@ extension TweakPropertyCodeGenerator {
         return content
     }
     
-    private func constantsTemplate(className: String) -> String {
+    func constantsTemplate(with className: String) -> String {
         """
         //
         //  \(className)+Constants.swift
@@ -79,7 +61,7 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func accessorTemplate(className: String) -> String {
+    private func accessorTemplate(with className: String) -> String {
         """
         //
         //  \(className).swift
@@ -98,9 +80,9 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func featureConstants(localConfigurationContent: Configuration) -> String {
+    private func featureConstantsCodeBlock(with tweaks: [Tweak]) -> String {
         var features = Set<FeatureKey>()
-        for tweak in localConfigurationContent.tweaks {
+        for tweak in tweaks {
             features.insert(tweak.feature)
         }
         let content: [String] = features.map {
@@ -110,14 +92,14 @@ extension TweakPropertyCodeGenerator {
         }
         return """
             struct \(featuresConst) {
-        \(Array(content).sorted().joined(separator: "\n"))
+        \(content.sorted().joined(separator: "\n"))
             }
         """
     }
     
-    private func variableConstants(localConfigurationContent: Configuration) -> String {
+    private func variableConstantsCodeBlock(with tweaks: [Tweak]) -> String {
         var variables = Set<VariableKey>()
-        for tweak in localConfigurationContent.tweaks {
+        for tweak in tweaks {
             variables.insert(tweak.variable)
         }
         let content: [String] = variables.map {
@@ -127,21 +109,20 @@ extension TweakPropertyCodeGenerator {
         }
         return """
             struct \(variablesConst) {
-        \(Array(content).sorted().joined(separator: "\n"))
+        \(content.sorted().joined(separator: "\n"))
             }
         """
     }
     
-    private func tweakManager(localConfigurationFilename: String) -> String {
-        """
+    private func tweakManagerCodeBlock(with configuration: Configuration) -> String {
+        let configurationsCodeBlock = self.configurationsCodeBlock(with: configuration)
+        
+        return """
             static let tweakManager: TweakManager = {
-                let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-                
-                let jsonFileURL = Bundle.main.url(forResource: "\(localConfigurationFilename)", withExtension: "json")!
-                let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-                
-                let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
-                return TweakManager(configurations: configurations)
+        \(configurationsCodeBlock)
+                let tweakManager = TweakManager(configurations: configurations)
+                tweakManager.useCache = \(configuration.shouldCacheTweaks)
+                return tweakManager
             }()
                 
             private var tweakManager: TweakManager {
@@ -150,9 +131,88 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func classContent(localConfigurationContent: Configuration) -> String {
+    private func configurationsCodeBlock(with configuration: Configuration) -> String {
+        let grouping = Dictionary(grouping: configuration.configurations) { $0.type }
+        
+        var configurationsString: [String] = [
+            """
+                    var configurations: [Configuration] = []\n
+            """
+        ]
+        
+        var currentIndexByConf: [String: Int] = grouping.mapValues{ _ in 0 }
+        
+        for configuration in configuration.configurations {
+            let value = grouping[configuration.type]!
+            let index = currentIndexByConf[configuration.type]!
+            let configuration = value[index]
+            let configurationName = "\(configuration.type.lowercaseFirstChar())_\(index+1)"
+            var generatedString: [String] = []
+            let macros = configuration.macros?.joined(separator: " || ")
+            
+            let jsonFileURL = "jsonFileURL_\(index+1)"
+            let headerComment = """
+                        // \(configuration.type)
+                """
+            generatedString.append(headerComment)
+                
+            if macros != nil {
+                let macroStarting = """
+                        #if \(macros!)
+                """
+                generatedString.append(macroStarting)
+            }
+            
+            switch configuration.type {
+            case "UserDefaultsConfiguration":
+                let configurationAllocation =
+                    """
+                            let \(configurationName) = \(configuration.type)(userDefaults: \(configuration.parameter))
+                            configurations.append(\(configurationName))
+                    """
+                generatedString.append(configurationAllocation)
+                
+            case "LocalConfiguration":
+                let configurationAllocation =
+                    """
+                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(configuration.parameter)\", withExtension: "json")!
+                            let \(configurationName) = \(configuration.type)(jsonURL: \(jsonFileURL))
+                            configurations.append(\(configurationName))
+                    """
+                generatedString.append(configurationAllocation)
+                
+            case "CustomConfiguration":
+                assert(configuration.propertyName != nil, "Missing value 'propertyName' for configuration '\(configuration)'")
+                let configurationAllocation =
+                    """
+                            \(configuration.parameter)
+                            configurations.append(\(configuration.propertyName!))
+                    """
+                generatedString.append(configurationAllocation)
+                
+            default:
+                assertionFailure("Unsupported configuration \(configuration)")
+                break
+            }
+            
+            if macros != nil {
+                let macroClosing = """
+                        #endif
+                """
+                generatedString.append(macroClosing)
+            }
+            generatedString.append("")
+            
+            configurationsString.append(contentsOf: generatedString)
+            currentIndexByConf[configuration.type] = currentIndexByConf[configuration.type]! + 1
+        }
+        
+        return configurationsString.joined(separator: "\n")
+    }
+    
+    private func classContent(with tweaks: [Tweak]) -> String {
         var content: Set<String> = []
-        localConfigurationContent.tweaks.forEach {
+        tweaks.forEach {
             content.insert(tweakProperty(for: $0))
         }
         return content.sorted().joined(separator: "\n\n")

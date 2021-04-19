@@ -1,115 +1,16 @@
 PODS:
-  - Firebase/CoreOnly (7.10.0):
-    - FirebaseCore (= 7.10.0)
-  - Firebase/RemoteConfig (7.10.0):
-    - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 7.10.0)
-  - FirebaseABTesting (7.10.0):
-    - FirebaseCore (~> 7.0)
-  - FirebaseCore (7.10.0):
-    - FirebaseCoreDiagnostics (~> 7.4)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GoogleUtilities/Logger (~> 7.0)
-  - FirebaseCoreDiagnostics (7.10.0):
-    - GoogleDataTransport (~> 8.4)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GoogleUtilities/Logger (~> 7.0)
-    - nanopb (~> 2.30908.0)
-  - FirebaseInstallations (7.10.0):
-    - FirebaseCore (~> 7.0)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GoogleUtilities/UserDefaults (~> 7.0)
-    - PromisesObjC (~> 1.2)
-  - FirebaseRemoteConfig (7.10.0):
-    - FirebaseABTesting (~> 7.0)
-    - FirebaseCore (~> 7.0)
-    - FirebaseInstallations (~> 7.0)
-    - GoogleUtilities/Environment (~> 7.0)
-    - "GoogleUtilities/NSData+zlib (~> 7.0)"
-  - GoogleDataTransport (8.4.0):
-    - GoogleUtilities/Environment (~> 7.2)
-    - nanopb (~> 2.30908.0)
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Environment (7.3.1):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.3.1):
-    - GoogleUtilities/Environment
-  - "GoogleUtilities/NSData+zlib (7.3.1)"
-  - GoogleUtilities/UserDefaults (7.3.1):
-    - GoogleUtilities/Logger
   - JustTweak (5.2.0)
-  - nanopb (2.30908.0):
-    - nanopb/decode (= 2.30908.0)
-    - nanopb/encode (= 2.30908.0)
-  - nanopb/decode (2.30908.0)
-  - nanopb/encode (2.30908.0)
-  - OptimizelySDKCore (3.1.5)
-  - OptimizelySDKDatafileManager (3.1.5):
-    - OptimizelySDKCore (= 3.1.5)
-    - OptimizelySDKShared (= 3.1.5)
-  - OptimizelySDKEventDispatcher (3.1.5):
-    - OptimizelySDKCore (= 3.1.5)
-    - OptimizelySDKShared (= 3.1.5)
-  - OptimizelySDKiOS (3.1.5):
-    - OptimizelySDKCore (= 3.1.5)
-    - OptimizelySDKDatafileManager (= 3.1.5)
-    - OptimizelySDKEventDispatcher (= 3.1.5)
-    - OptimizelySDKShared (= 3.1.5)
-    - OptimizelySDKUserProfileService (= 3.1.5)
-  - OptimizelySDKShared (3.1.5):
-    - OptimizelySDKCore (= 3.1.5)
-  - OptimizelySDKUserProfileService (3.1.5):
-    - OptimizelySDKCore (= 3.1.5)
-    - OptimizelySDKShared (= 3.1.5)
-  - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
-  - Firebase/RemoteConfig
   - JustTweak (from `../`)
-  - OptimizelySDKiOS
-
-SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Firebase
-    - FirebaseABTesting
-    - FirebaseCore
-    - FirebaseCoreDiagnostics
-    - FirebaseInstallations
-    - FirebaseRemoteConfig
-    - GoogleDataTransport
-    - GoogleUtilities
-    - nanopb
-    - OptimizelySDKCore
-    - OptimizelySDKDatafileManager
-    - OptimizelySDKEventDispatcher
-    - OptimizelySDKiOS
-    - OptimizelySDKShared
-    - OptimizelySDKUserProfileService
-    - PromisesObjC
 
 EXTERNAL SOURCES:
   JustTweak:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Firebase: fffddd0bab8677d07376538365faa93ff3889b39
-  FirebaseABTesting: 457bc058cf6de8bcffc6fd9a2a4c933b24bfc264
-  FirebaseCore: ec566d917b2195fc2610aeb148dae99f57a788f9
-  FirebaseCoreDiagnostics: 5662a3823ffcc0acbaa9a21ba5ed302fac634705
-  FirebaseInstallations: bf2ec8dbf36ff4c91af6b9a003d15855757680c1
-  FirebaseRemoteConfig: 2841e353accfe688150781deebeb245e3fe16c2f
-  GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
-  GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
-  JustTweak: dc29c5ba966b506c18e566c52095106d36c005ef
-  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  OptimizelySDKCore: c20c9e903d8d9330eafb6171ea938164d806451d
-  OptimizelySDKDatafileManager: 6a8228ca2daad92c7350e35f480aead19ca2a99d
-  OptimizelySDKEventDispatcher: a1580c4fefb81d765d4f5ea0dedc812dbd9d4270
-  OptimizelySDKiOS: 45b4e25f55c5006e6a38465277261561e0ab8fe1
-  OptimizelySDKShared: 3068b91286c0957bfff4050119221adf15bbea3a
-  OptimizelySDKUserProfileService: 9887eeeeff2146d4cc1905c35e4d252e5813d8c0
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  JustTweak: 8eb98832bb45457c962a63d1f33e3e025e4c57ea
 
-PODFILE CHECKSUM: a7b727d37e751c9d933eb79a0171bbf9b553766d
+PODFILE CHECKSUM: 2001cd3541647783468f8cc4d0b36c28d0ae72a5
 
 COCOAPODS: 1.8.4

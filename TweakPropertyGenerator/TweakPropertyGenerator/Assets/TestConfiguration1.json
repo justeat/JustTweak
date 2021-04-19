@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "type": "UserDefaultsConfiguration",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration_TopPriority",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalConfiguration",
+            "parameter": "ExampleConfiguration"
+        }
+    ],
+    "shouldCacheTweaks": true,
+    "stackName": "GeneratedConfigurationAccessor"
+}

@@ -38,7 +38,7 @@ class UserDefaultsConfigurationTests: XCTestCase {
     }
     
     func testReturnsNilForTweaksThatHaveNoUserDefaultValue() {
-        let tweak = userDefaultsConfiguration.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView)
+        let tweak = userDefaultsConfiguration.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)
         XCTAssertNil(tweak)
     }
     

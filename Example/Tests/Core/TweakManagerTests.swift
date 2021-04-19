@@ -26,7 +26,7 @@ class TweakManagerTests: XCTestCase {
     }
     
     override func tearDown() {
-        userDefaultsConfiguration.deleteValue(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
+        userDefaultsConfiguration.deleteValue(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
         tweakManager = nil
         super.tearDown()
     }
@@ -37,33 +37,33 @@ class TweakManagerTests: XCTestCase {
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(tweakManager.tweakWith(feature: Features.UICustomization, variable: "some_undefined_tweak"))
+        XCTAssertNil(tweakManager.tweakWith(feature: Features.uiCustomization, variable: "some_undefined_tweak"))
     }
     
     func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayRedView)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayYellowView)!.boolValue)
+        XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.DisplayGreenView)!.boolValue)
+        XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)!.boolValue)
     }
     
     func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)!.boolValue)
     }
     
     func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.General, variable: Variables.TapToChangeViewColor)!.boolValue)
+        XCTAssertTrue(tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor)!.boolValue)
     }
     
     func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
         let mutableConfiguration = tweakManager.mutableConfiguration!
-        mutableConfiguration.set(false, feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)
-        XCTAssertFalse(tweakManager.tweakWith(feature: Features.UICustomization, variable: Variables.GreetOnAppDidBecomeActive)!.boolValue)
+        mutableConfiguration.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
+        XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)!.boolValue)
     }
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {
@@ -94,10 +94,10 @@ fileprivate class MockConfiguration: Configuration {
     
     var logClosure: LogClosure?
     let features: [String : [String]] = [:]
-    let knownValues = [Variables.DisplayRedView: ["Value": true],
-                       Variables.DisplayYellowView: ["Value": false],
-                       Variables.DisplayGreenView: ["Value": false],
-                       Variables.GreetOnAppDidBecomeActive: ["Value": true]]
+    let knownValues = [Variables.displayRedView: ["Value": true],
+                       Variables.displayYellowView: ["Value": false],
+                       Variables.displayGreenView: ["Value": false],
+                       Variables.greetOnAppDidBecomeActive: ["Value": true]]
     
     func isFeatureEnabled(_ feature: String) -> Bool {
         return false

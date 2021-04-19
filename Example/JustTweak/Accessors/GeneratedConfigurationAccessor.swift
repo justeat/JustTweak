@@ -9,13 +9,29 @@ import JustTweak
 class GeneratedConfigurationAccessor {
 
     static let tweakManager: TweakManager = {
-        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-        
-        let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
-        let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-        
-        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
-        return TweakManager(configurations: configurations)
+        var configurations: [Configuration] = []
+
+        // UserDefaultsConfiguration
+        #if DEBUG || CONFIGURATION_DEBUG
+        let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+        configurations.append(userDefaultsConfiguration_1)
+        #endif
+
+        // LocalConfiguration
+        #if DEBUG
+        let jsonFileURL_1 = Bundle.main.url(forResource: "ExampleConfiguration_TopPriority", withExtension: "json")!
+        let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
+        configurations.append(localConfiguration_1)
+        #endif
+
+        // LocalConfiguration
+        let jsonFileURL_2 = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
+        configurations.append(localConfiguration_2)
+
+        let tweakManager = TweakManager(configurations: configurations)
+        tweakManager.useCache = true
+        return tweakManager
     }()
         
     private var tweakManager: TweakManager {
@@ -25,32 +41,32 @@ class GeneratedConfigurationAccessor {
     @TweakProperty(feature: Features.general,
                    variable: Variables.answerToTheUniverse,
                    tweakManager: tweakManager)
-    var definitiveAnswer: Int
+    var meaningOfLife: Int
 
     @TweakProperty(feature: Features.general,
                    variable: Variables.greetOnAppDidBecomeActive,
                    tweakManager: tweakManager)
-    var greetOnAppDidBecomeActive: Bool
+    var shouldShowAlert: Bool
 
     @TweakProperty(feature: Features.general,
                    variable: Variables.tapToChangeColorEnabled,
                    tweakManager: tweakManager)
-    var tapToChangeColorEnabled: Bool
+    var isTapGestureToChangeColorEnabled: Bool
 
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.displayGreenView,
                    tweakManager: tweakManager)
-    var displayGreenView: Bool
+    var canShowGreenView: Bool
 
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.displayRedView,
                    tweakManager: tweakManager)
-    var displayRedView: Bool
+    var canShowRedView: Bool
 
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.displayYellowView,
                    tweakManager: tweakManager)
-    var displayYellowView: Bool
+    var canShowYellowView: Bool
 
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.labelText,
@@ -60,5 +76,5 @@ class GeneratedConfigurationAccessor {
     @TweakProperty(feature: Features.uiCustomization,
                    variable: Variables.redViewAlphaComponent,
                    tweakManager: tweakManager)
-    var redViewAlphaComponent: Double
+    var redViewAlpha: Double
 }

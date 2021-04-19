@@ -18,4 +18,10 @@ class String_CasingTests: XCTestCase {
         let expectedValue = "some-propertyKey1-Value1"
         XCTAssertEqual(expectedValue, sut.camelCased(with: ":"))
     }
+    
+    func test_lowercaseFirstChar() {
+        let sut = "SomeName"
+        let expectedValue = "someName"
+        XCTAssertEqual(expectedValue, sut.lowercaseFirstChar())
+    }
 }
