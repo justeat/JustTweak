@@ -31,7 +31,7 @@ pod "JustTweak"
 
 ### Integration
 
-- Define a `LocalConfiguration` JSON file including your features. Refer to `LocalTweakProvider_example.json` for a starting point.
+- Define a `LocalTweakProvider` JSON file including your features. Refer to `LocalTweakProvider_example.json` for a starting point.
 - Configure the stack
 
 To configure the stack, you have two options: 
@@ -48,7 +48,7 @@ static let tweakManager: TweakManager = {
     var configurations: [Configuration] = []
 
     // Mutable configuration (to override tweaks from other configurations)
-    let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
+    let userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)
     configurations.append(userDefaultsConfiguration)
     
     // Optimizely (remote configuration)
@@ -62,14 +62,14 @@ static let tweakManager: TweakManager = {
 
     // local JSON configuration (default tweaks)
     let jsonFileURL = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
-    let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
-    configurations.append(localConfiguration)
+    let localTweakProvider = LocalTweakProvider(jsonURL: jsonFileURL)
+    configurations.append(localTweakProvider)
     
     return TweakManager(configurations: configurations)
 }()
 ```
 
-- Implement the properties and constants for your features, backed by the `LocalConfiguration`. Refer to `ConfigurationAccessor.swift` for a starting point.
+- Implement the properties and constants for your features, backed by the `LocalTweakProvider`. Refer to `ConfigurationAccessor.swift` for a starting point.
 
 #### Using the code generator tool
 
@@ -79,17 +79,17 @@ static let tweakManager: TweakManager = {
 {
     "configurations": [
         {
-            "type": "UserDefaultsConfiguration",
+            "type": "UserDefaultsTweakProvider",
             "parameter": "UserDefaults.standard",
             "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
+            "type": "LocalTweakProvider",
             "parameter": "LocalTweakProvider_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
+            "type": "LocalTweakProvider",
             "parameter": "LocalTweakProvider_example"
         }
     ],
@@ -103,7 +103,7 @@ In the case whereby a custom configuration is needed, its setup code should be i
 ```
 ...
 {
-    "type": "CustomConfiguration",
+    "type": "CustomTweakProvider",
     "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true",
     "propertyName": "fc",
     "macros": ["CONFIGURATION_APPSTORE"]
@@ -122,15 +122,15 @@ script_phase :name => '<your_app_target_name>',
              :execution_position => :before_compile
 ```
 
-Every time the target is built, the code generator tool will regenerate the code for the stack. It will include all the properties backing the features defined in the `LocalConfiguration`.
+Every time the target is built, the code generator tool will regenerate the code for the stack. It will include all the properties backing the features defined in the `LocalTweakProvider`.
 
 - Add the generated files to you project and start using the stack.
 
 ### Implementation details
 
-The order of the objects in the `configurations` array defines the priority of the configurations.
+The order of the objects in the `tweakProviders` array defines the priority of the configurations.
 
-The `MutableConfiguration` with the highest priority, such as `UserDefaultsConfiguration` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalConfiguration` should have the lowest priority as it provides the default values from a local configuration and it's the one used by the `TweakViewController` to populate the UI.
+The `MutableTweakProvider` with the highest priority, such as `UserDefaultsTweakProvider` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalTweakProvider` should have the lowest priority as it provides the default values from a local configuration and it's the one used by the `TweakViewController` to populate the UI.
 
 
 ### Usage (basic)
@@ -258,11 +258,11 @@ override func viewDidLoad() {
 
 JustTweak comes with three configurations out-of-the-box:
 
-- `UserDefaultsConfiguration` which is mutable and uses `UserDefaults` as a key/value store 
-- `LocalConfiguration` which is read-only and uses a JSON configuration file that is meant to be the default configuration
-- `EphemeralConfiguration` which is simply an instance of `NSMutableDictionary`
+- `UserDefaultsTweakProvider` which is mutable and uses `UserDefaults` as a key/value store 
+- `LocalTweakProvider` which is read-only and uses a JSON configuration file that is meant to be the default configuration
+- `EphemeralTweakProvider` which is simply an instance of `NSMutableDictionary`
 
-In addition, JustTweak defines `Configuration` and `MutableConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
+In addition, JustTweak defines `TweakProvider` and `MutableTweakProvider` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
 
 
 ## License

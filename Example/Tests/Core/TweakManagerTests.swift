@@ -9,20 +9,20 @@ import XCTest
 class TweakManagerTests: XCTestCase {
     
     var tweakManager: TweakManager!
-    let localConfiguration: LocalConfiguration = {
+    let localConfiguration: TweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        return LocalConfiguration(jsonURL: jsonConfigurationURL)
+        let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider", withExtension: "json")!
+        return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
-    var userDefaultsConfiguration: UserDefaultsConfiguration!
+    var userDefaultsConfiguration: UserDefaultsTweakProvider!
     
     override func setUp() {
         super.setUp()
-        let mockConfiguration = MockConfiguration()
+        let mockConfiguration = MockTweakProvider()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.TweakManagerTests")!
-        userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
-        let configurations: [Configuration] = [userDefaultsConfiguration, mockConfiguration, localConfiguration]
-        tweakManager = TweakManager(configurations: configurations)
+        userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: testUserDefaults)
+        let tweakProviders: [TweakProvider] = [userDefaultsConfiguration, mockConfiguration, localConfiguration]
+        tweakManager = TweakManager(tweakProviders: tweakProviders)
     }
     
     override func tearDown() {
@@ -32,8 +32,8 @@ class TweakManagerTests: XCTestCase {
     }
     
     func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
-        let tweakManager = TweakManager(configurations: [localConfiguration])
-        XCTAssertNil(tweakManager.mutableConfiguration)
+        let tweakManager = TweakManager(tweakProviders: [localConfiguration])
+        XCTAssertNil(tweakManager.mutableTweakProvider)
     }
     
     func testReturnsNil_ForUndefinedTweak() {
@@ -60,9 +60,9 @@ class TweakManagerTests: XCTestCase {
         XCTAssertTrue(tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor)!.boolValue)
     }
     
-    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
-        let mutableConfiguration = tweakManager.mutableConfiguration!
-        mutableConfiguration.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
+    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsTweakProvider() {
+        let mutableTweakProvider = tweakManager.mutableTweakProvider!
+        mutableTweakProvider.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
         XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)!.boolValue)
     }
     
@@ -90,7 +90,7 @@ class TweakManagerTests: XCTestCase {
     }
 }
 
-fileprivate class MockConfiguration: Configuration {
+fileprivate class MockTweakProvider: TweakProvider {
     
     var logClosure: LogClosure?
     let features: [String : [String]] = [:]

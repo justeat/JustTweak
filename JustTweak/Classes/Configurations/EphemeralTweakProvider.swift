@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension NSDictionary: Configuration {
+extension NSDictionary: TweakProvider {
     
     public var logClosure: LogClosure? {
         get { return nil }
@@ -34,7 +34,7 @@ extension NSDictionary: Configuration {
     }
 }
 
-extension NSMutableDictionary: MutableConfiguration {
+extension NSMutableDictionary: MutableTweakProvider {
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
         self[variable] = value

@@ -1,21 +1,21 @@
 //
-//  ConfigurationAccessor.swift
+//  UserDefaultsTweakProviderTests.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import XCTest
 import JustTweak
 
-class UserDefaultsConfigurationTests: XCTestCase {
+class UserDefaultsTweakProviderTests: XCTestCase {
     
-    var userDefaultsConfiguration: UserDefaultsConfiguration!
-    let userDefaults = UserDefaults(suiteName: String(describing: UserDefaultsConfigurationTests.self))!
+    var userDefaultsConfiguration: UserDefaultsTweakProvider!
+    let userDefaults = UserDefaults(suiteName: String(describing: UserDefaultsTweakProviderTests.self))!
 
     private let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
 
     override func setUp() {
         super.setUp()
-        userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
+        userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: userDefaults)
     }
     
     override func tearDown() {
@@ -25,7 +25,7 @@ class UserDefaultsConfigurationTests: XCTestCase {
     }
     
     func testReturnsCorrectTweaksIdentifiersWhenInitializedAndTweaksHaveBeenSet() {
-        let anotherConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
+        let anotherConfiguration = UserDefaultsTweakProvider(userDefaults: userDefaults)
         anotherConfiguration.set("hello", feature: "feature_1", variable: "variable_4")
         anotherConfiguration.set(true, feature: "feature_1", variable: "variable_3")
         anotherConfiguration.set(12.34, feature: "feature_1", variable: "variable_2")

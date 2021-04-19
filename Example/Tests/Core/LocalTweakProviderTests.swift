@@ -1,5 +1,5 @@
 //
-//  LocalConfigurationTests.swift
+//  LocalTweakProviderTests.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
@@ -8,36 +8,36 @@ import JustTweak
 
 class LocalConfigurationTests: XCTestCase {
     
-    var configuration: LocalConfiguration!
+    var tweakProvider: LocalTweakProvider!
     
     override func setUp() {
         super.setUp()
-        configuration = configurationWithFileNamed("test_configuration")!
+        tweakProvider = tweakProviderWithFileNamed("test_tweak_provider")!
     }
     
     override func tearDown() {
-        configuration = nil
+        tweakProvider = nil
         super.tearDown()
     }
     
-    private func configurationWithFileNamed(_ fileName: String) -> LocalConfiguration? {
+    private func tweakProviderWithFileNamed(_ fileName: String) -> LocalTweakProvider? {
         let bundle = Bundle(for: LocalConfigurationTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")!
-        return LocalConfiguration(jsonURL: jsonURL)
+        return LocalTweakProvider(jsonURL: jsonURL)
     }
     
     func testParsesBoolTweak() {
         let redViewTweak = Tweak(feature: Features.uiCustomization, variable: Variables.displayRedView, value: true, title: "Display Red View", group: "UI Customization")
-        XCTAssertEqual(redViewTweak, configuration.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView))
+        XCTAssertEqual(redViewTweak, tweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView))
     }
     
     func testParsesFloatTweak() {
         let redViewAlphaTweak = Tweak(feature: Features.uiCustomization, variable: Variables.redViewAlpha, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
-        XCTAssertEqual(redViewAlphaTweak, configuration.tweakWith(feature: Features.uiCustomization, variable: Variables.redViewAlpha))
+        XCTAssertEqual(redViewAlphaTweak, tweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.redViewAlpha))
     }
     
     func testParsesStringTweak() {
         let buttonLabelTweak = Tweak(feature: Features.uiCustomization, variable: Variables.labelText, value: "Test value", title: "Label Text", group: "UI Customization")
-        XCTAssertEqual(buttonLabelTweak, configuration.tweakWith(feature: Features.uiCustomization, variable: Variables.labelText))
+        XCTAssertEqual(buttonLabelTweak, tweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.labelText))
     }
 }

@@ -16,18 +16,18 @@ fileprivate struct Constants {
 
 class TweakManagerCacheTests: XCTestCase {
     
-    fileprivate var mockConfiguration: MockConfiguration!
+    fileprivate var mockTweakProvider: MockTweakProvider!
     var tweakManager: TweakManager!
 
     override func setUp() {
         super.setUp()
-        mockConfiguration = MockConfiguration()
-        tweakManager = TweakManager(configurations: [mockConfiguration])
+        mockTweakProvider = MockTweakProvider()
+        tweakManager = TweakManager(tweakProviders: [mockTweakProvider])
         tweakManager.useCache = true
     }
     
     override func tearDown() {
-        mockConfiguration = nil
+        mockTweakProvider = nil
         tweakManager = nil
         super.tearDown()
     }
@@ -44,14 +44,14 @@ class TweakManagerCacheTests: XCTestCase {
     
     private func testFeatureEnabled(useCache: Bool) {
         tweakManager.useCache = useCache
-        XCTAssertEqual(mockConfiguration.isFeatureEnabledCallsCounter, 0)
+        XCTAssertEqual(mockTweakProvider.isFeatureEnabledCallsCounter, 0)
         XCTAssertEqual(tweakManager.isFeatureEnabled(Constants.feature), Constants.featureActiveValue)
-        XCTAssertEqual(mockConfiguration.isFeatureEnabledCallsCounter, 1)
+        XCTAssertEqual(mockTweakProvider.isFeatureEnabledCallsCounter, 1)
         XCTAssertEqual(tweakManager.isFeatureEnabled(Constants.feature), Constants.featureActiveValue)
-        XCTAssertEqual(mockConfiguration.isFeatureEnabledCallsCounter, useCache ? 1 : 2)
+        XCTAssertEqual(mockTweakProvider.isFeatureEnabledCallsCounter, useCache ? 1 : 2)
         tweakManager.resetCache()
         XCTAssertEqual(tweakManager.isFeatureEnabled(Constants.feature), Constants.featureActiveValue)
-        XCTAssertEqual(mockConfiguration.isFeatureEnabledCallsCounter, useCache ? 2 : 3)
+        XCTAssertEqual(mockTweakProvider.isFeatureEnabledCallsCounter, useCache ? 2 : 3)
     }
     
     // MARK: - tweakWith(feature:variable:)
@@ -66,19 +66,19 @@ class TweakManagerCacheTests: XCTestCase {
     
     private func tweakFetch(useCache: Bool) {
         tweakManager.useCache = useCache
-        XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, 0)
+        XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, 0)
         let value = true
         tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
-        XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, 1)
+        XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, 1)
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
-        XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, useCache ? 1 : 2)
+        XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 1 : 2)
         tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
-        XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, useCache ? 2 : 3)
+        XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 2 : 3)
         tweakManager.resetCache()
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
-        XCTAssertEqual(mockConfiguration.tweakWithFeatureVariableCallsCounter, useCache ? 3 : 4)
+        XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 3 : 4)
     }
     
     // MARK: - activeVariation(experiment:)
@@ -93,18 +93,18 @@ class TweakManagerCacheTests: XCTestCase {
     
     private func testActiveVariation(useCache: Bool) {
         tweakManager.useCache = useCache
-        XCTAssertEqual(mockConfiguration.activeVariationCallsCounter, 0)
+        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, 0)
         XCTAssertEqual(tweakManager.activeVariation(for: Constants.experiment), Constants.activeVariation)
-        XCTAssertEqual(mockConfiguration.activeVariationCallsCounter, 1)
+        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, 1)
         XCTAssertEqual(tweakManager.activeVariation(for: Constants.experiment), Constants.activeVariation)
-        XCTAssertEqual(mockConfiguration.activeVariationCallsCounter, useCache ? 1 : 2)
+        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, useCache ? 1 : 2)
         tweakManager.resetCache()
         XCTAssertEqual(tweakManager.activeVariation(for: Constants.experiment), Constants.activeVariation)
-        XCTAssertEqual(mockConfiguration.activeVariationCallsCounter, useCache ? 2 : 3)
+        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, useCache ? 2 : 3)
     }
 }
 
-fileprivate class MockConfiguration: MutableConfiguration {
+fileprivate class MockTweakProvider: MutableTweakProvider {
     
     var logClosure: LogClosure?
     

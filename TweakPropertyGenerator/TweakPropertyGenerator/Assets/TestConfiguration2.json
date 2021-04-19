@@ -1,7 +1,7 @@
 {
     "tweakProviders": [
         {
-            "type": "UserDefaultsConfiguration",
+            "type": "UserDefaultsTweakProvider",
             "parameter": "UserDefaults.standard",
             "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
         },

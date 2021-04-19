@@ -9,34 +9,34 @@ import JustTweak
 class ConfigurationAccessor {
     
     static let tweakManager: TweakManager = {
-        var tweakProviders: [Configuration] = []
+        var tweakProviders: [TweakProvider] = []
         
-        // UserDefaultsConfiguration
+        // UserDefaultsTweakProvider
         #if DEBUG || CONFIGURATION_DEBUG
         let userDefaultsTweakProvider_1 = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)
         tweakProviders.append(userDefaultsTweakProvider_1)
         #endif
         
-        // Optimizely
+        // OptimizelyTweakProvider
         // let optimizelyTweakProvider = OptimizelyTweaksConfiguration()
         // optimizelyTweakProvider.userId = UUID().uuidString
         // tweakProviders.append(optimizelyTweakProvider)
         
-        // Firebase
+        // FirebaseTweakProvider
         // let firebaseTweakProvider = FirebaseTweaksConfiguration()
         // tweakProviders.append(firebaseTweakProvider)
         
-        // LocalConfiguration
+        // LocalTweakProvider
         #if CONFIGURATION_DEBUG
         let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweakProvider_TopPriority_example", withExtension: "json")!
         let localTweakProvider_1 = LocalTweakProvider(jsonURL: jsonFileURL_1)
         tweakProviders.append(localTweakProvider_1)
         #endif
         
-        // LocalConfiguration
+        // LocalTweakProvider
         let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
         let localTweakProvider_2 = LocalTweakProvider(jsonURL: jsonFileURL_2)
-        tweakProviders.append(localConfiguration_2)
+        tweakProviders.append(localTweakProvider_2)
         
         return TweakManager(tweakProviders: tweakProviders)
     }()

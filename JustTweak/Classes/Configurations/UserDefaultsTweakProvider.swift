@@ -1,11 +1,11 @@
 //
-//  UserDefaultsConfiguration.swift
+//  UserDefaultsTweakProvider.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 
-final public class UserDefaultsConfiguration {
+final public class UserDefaultsTweakProvider {
     
     private let userDefaults: UserDefaults
     
@@ -18,7 +18,7 @@ final public class UserDefaultsConfiguration {
     }
 }
 
-extension UserDefaultsConfiguration: Configuration {
+extension UserDefaultsTweakProvider: TweakProvider {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
         let userDefaultsKey = keyForTweakWithIdentifier(feature)
@@ -41,7 +41,7 @@ extension UserDefaultsConfiguration: Configuration {
     }
 }
 
-extension UserDefaultsConfiguration: MutableConfiguration {
+extension UserDefaultsTweakProvider: MutableTweakProvider {
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
         updateUserDefaults(value: value, feature: feature, variable: variable)
@@ -52,10 +52,10 @@ extension UserDefaultsConfiguration: MutableConfiguration {
     }
 }
 
-extension UserDefaultsConfiguration {
+extension UserDefaultsTweakProvider {
     
     private func keyForTweakWithIdentifier(_ identifier: String) -> String {
-        return "\(UserDefaultsConfiguration.userDefaultsKeyPrefix).\(identifier)"
+        return "\(UserDefaultsTweakProvider.userDefaultsKeyPrefix).\(identifier)"
     }
     
     private func updateUserDefaults(_ object: AnyObject?) -> TweakValue? {
