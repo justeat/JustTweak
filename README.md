@@ -31,7 +31,7 @@ pod "JustTweak"
 
 ### Integration
 
-- Define a `LocalConfiguration` JSON file including your features. Refer to `ExampleConfiguration.json` for a starting point.
+- Define a `LocalConfiguration` JSON file including your features. Refer to `LocalTweakProvider_example.json` for a starting point.
 - Configure the stack
 
 To configure the stack, you have two options: 
@@ -52,16 +52,16 @@ static let tweakManager: TweakManager = {
     configurations.append(userDefaultsConfiguration)
     
     // Optimizely (remote configuration)
-    let optimizelyConfiguration = OptimizelyTweaksConfiguration()
-    optimizelyConfiguration.userId = UUID().uuidString
-    configurations.append(optimizelyConfiguration)
+    let optimizelyTweakProvider = OptimizelyTweaksConfiguration()
+    optimizelyTweakProvider.userId = UUID().uuidString
+    configurations.append(optimizelyTweakProvider)
 
     // Firebase Remote Config (remote configuration)
-    let firebaseConfiguration = FirebaseTweaksConfiguration()
-    configurations.append(firebaseConfiguration)
+    let firebaseTweakProvider = FirebaseTweaksConfiguration()
+    configurations.append(firebaseTweakProvider)
 
     // local JSON configuration (default tweaks)
-    let jsonFileURL = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+    let jsonFileURL = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
     let localConfiguration = LocalConfiguration(jsonURL: jsonFileURL)
     configurations.append(localConfiguration)
     
@@ -85,12 +85,12 @@ static let tweakManager: TweakManager = {
         },
         {
             "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration_TopPriority",
+            "parameter": "LocalTweakProvider_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
             "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration"
+            "parameter": "LocalTweakProvider_example"
         }
     ],
     "shouldCacheTweaks": true,
@@ -104,7 +104,7 @@ In the case whereby a custom configuration is needed, its setup code should be i
 ...
 {
     "type": "CustomConfiguration",
-    "parameter": "let fc = FirebaseConfiguration()\n\t\tfc.someValue = true",
+    "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true",
     "propertyName": "fc",
     "macros": ["CONFIGURATION_APPSTORE"]
 },

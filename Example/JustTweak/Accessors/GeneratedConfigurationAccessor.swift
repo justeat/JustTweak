@@ -19,13 +19,13 @@ class GeneratedConfigurationAccessor {
 
         // LocalConfiguration
         #if DEBUG
-        let jsonFileURL_1 = Bundle.main.url(forResource: "ExampleConfiguration_TopPriority", withExtension: "json")!
+        let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweakProvider_TopPriority_example", withExtension: "json")!
         let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
         configurations.append(localConfiguration_1)
         #endif
 
         // LocalConfiguration
-        let jsonFileURL_2 = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
         let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
         configurations.append(localConfiguration_2)
 

@@ -7,12 +7,12 @@
         },
         {
             "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration_TopPriority",
+            "parameter": "LocalTweakProvider_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
             "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration"
+            "parameter": "LocalTweakProvider_example"
         }
     ],
     "shouldCacheTweaks": true,

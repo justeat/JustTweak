@@ -18,23 +18,23 @@ class ConfigurationAccessor {
         #endif
         
         // Optimizely
-        // let optimizelyConfiguration = OptimizelyTweaksConfiguration()
-        // optimizelyConfiguration.userId = UUID().uuidString
-        // configurations.append(optimizelyConfiguration)
+        // let optimizelyTweakProvider = OptimizelyTweaksConfiguration()
+        // optimizelyTweakProvider.userId = UUID().uuidString
+        // configurations.append(optimizelyTweakProvider)
         
         // Firebase
-        // let firebaseConfiguration = FirebaseTweaksConfiguration()
-        // configurations.append(firebaseConfiguration)
+        // let firebaseTweakProvider = FirebaseTweaksConfiguration()
+        // configurations.append(firebaseTweakProvider)
         
         // LocalConfiguration
         #if CONFIGURATION_DEBUG
-        let jsonFileURL_1 = Bundle.main.url(forResource: "ExampleConfiguration_TopPriority", withExtension: "json")!
+        let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweakProvider_TopPriority_example", withExtension: "json")!
         let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
         configurations.append(localConfiguration_1)
         #endif
         
         // LocalConfiguration
-        let jsonFileURL_2 = Bundle.main.url(forResource: "ExampleConfiguration", withExtension: "json")!
+        let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
         let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
         configurations.append(localConfiguration_2)
         

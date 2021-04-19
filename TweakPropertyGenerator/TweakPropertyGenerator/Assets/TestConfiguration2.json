@@ -7,24 +7,24 @@
         },
         {
             "type": "CustomConfiguration",
-            "parameter": "let oc = OptimizelyConfiguration()\n\toc.someValue = 42",
+            "parameter": "let oc = OptimizelyTweakProvider()\n\toc.someValue = 42",
             "propertyName": "oc",
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {
             "type": "CustomConfiguration",
-            "parameter": "let fc = FirebaseConfiguration()\n\t\tfc.someValue = true",
+            "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true",
             "propertyName": "fc",
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {
             "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration_TopPriority",
+            "parameter": "LocalTweakProvider_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
             "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration"
+            "parameter": "LocalTweakProvider_example"
         }
     ],
     "shouldCacheTweaks": true,

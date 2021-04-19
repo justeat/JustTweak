@@ -19,16 +19,16 @@ class GeneratedConfigurationAccessor {
 
         // CustomConfiguration
         #if CONFIGURATION_APPSTORE
-        let optimizelyConfiguration = OptimizelyConfiguration()
-        oc.someValue = 42
-        configurations.append(optimizelyConfiguration)
+        let optimizelyTweakProvider = OptimizelyTweakProvider()
+        optimizelyTweakProvider.someValue = 42
+        configurations.append(optimizelyTweakProvider)
         #endif
 
         // CustomConfiguration
         #if CONFIGURATION_APPSTORE
-        let firebaseConfiguration = FirebaseConfiguration()
-        fc.someValue = true
-        configurations.append(firebaseConfiguration)
+        let firebaseTweakProvider = FirebaseTweakProvider()
+        firebaseTweakProvider.someValue = true
+        configurations.append(firebaseTweakProvider)
         #endif
 
         // LocalConfiguration

@@ -1,5 +1,5 @@
 //
-//  FirebaseConfiguration
+//  FirebaseTweakProvider.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
@@ -7,7 +7,7 @@ import JustTweak
 import FirebaseCore
 import FirebaseRemoteConfig
 
-public class FirebaseConfiguration: Configuration {
+public class FirebaseTweakProvider: Configuration {
     
     public init() {
         /* DOWNLOAD THE GoogleService.plist from the Firebase dashboard */

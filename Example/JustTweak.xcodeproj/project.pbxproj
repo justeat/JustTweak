@@ -16,7 +16,7 @@
 		4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */; };
 		4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
-		4F65E89F2629D083009E8C3B /* ExampleConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */; };
+		4F65E89F2629D083009E8C3B /* ExampleTweakProvider.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E89E2629D083009E8C3B /* ExampleTweakProvider.json */; };
 		4F7103EE23859CFE0021E4AF /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7103ED23859CFD0021E4AF /* CustomOperators.swift */; };
 		4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */; };
 		51A8BD6A5E5948F41EEC2E66 /* Pods_JustTweak_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F594AA2DDEDFFA4C835EACCF /* Pods_JustTweak_Tests.framework */; };
@@ -59,14 +59,14 @@
 		2A3A7CF0048CBC9CF1917718 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakManagerCacheTests.swift; sourceTree = "<group>"; };
-		4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfiguration.swift; sourceTree = "<group>"; };
-		4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyConfiguration.swift; sourceTree = "<group>"; };
+		4F30EA6B21ADA06A00AECF77 /* FirebaseTweakProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTweakProvider.swift; sourceTree = "<group>"; };
+		4F30EA6C21ADA06A00AECF77 /* OptimizelyTweakProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyTweakProvider.swift; sourceTree = "<group>"; };
 		4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappersTests.swift; sourceTree = "<group>"; };
 		4F43583123E732DD00FD60A7 /* TweakManager+PresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TweakManager+PresentationTests.swift"; sourceTree = "<group>"; };
 		4F43583323E7332D00FD60A7 /* test_configuration_override.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_configuration_override.json; sourceTree = "<group>"; };
 		4F6422A221A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
-		4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleConfiguration.json; sourceTree = "<group>"; };
+		4F65E89E2629D083009E8C3B /* ExampleTweakProvider.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleTweakProvider.json; sourceTree = "<group>"; };
 		4F7103ED23859CFD0021E4AF /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedConfigurationAccessor.swift; sourceTree = "<group>"; };
 		4FFF3DC5262B1789002A674D /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
@@ -123,15 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F30EA6A21ADA06A00AECF77 /* Configurations */ = {
+		4F30EA6A21ADA06A00AECF77 /* TweakProviders */ = {
 			isa = PBXGroup;
 			children = (
-				4F30EA6B21ADA06A00AECF77 /* FirebaseConfiguration.swift */,
-				4F30EA6C21ADA06A00AECF77 /* OptimizelyConfiguration.swift */,
-				4F65E89E2629D083009E8C3B /* ExampleConfiguration.json */,
+				4F30EA6B21ADA06A00AECF77 /* FirebaseTweakProvider.swift */,
+				4F30EA6C21ADA06A00AECF77 /* OptimizelyTweakProvider.swift */,
+				4F65E89E2629D083009E8C3B /* ExampleTweakProvider.json */,
 				61D2DEBA1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json */,
 			);
-			path = Configurations;
+			path = TweakProviders;
 			sourceTree = "<group>";
 		};
 		4F6422A421A4205B002B69F0 /* Shared */ = {
@@ -217,7 +217,7 @@
 				4F65E6182629B880009E8C3B /* Assets */,
 				4F65E61B2629B8A2009E8C3B /* Code */,
 				4FFF3DC4262B1789002A674D /* CodeGeneration */,
-				4F30EA6A21ADA06A00AECF77 /* Configurations */,
+				4F30EA6A21ADA06A00AECF77 /* TweakProviders */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				4F65E6172629B86F009E8C3B /* UI */,
 			);
@@ -412,7 +412,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				61D2DEBB1D9ECD4D00E6C6FA /* ExampleConfiguration_TopPriority.json in Resources */,
 				61A561391DA6AC4B00839F7F /* GoogleService-Info.plist in Resources */,
-				4F65E89F2629D083009E8C3B /* ExampleConfiguration.json in Resources */,
+				4F65E89F2629D083009E8C3B /* ExampleTweakProvider.json in Resources */,
 				4F6422A321A2FF8A002B69F0 /* ExampleOptimizelyDatafile.json in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
