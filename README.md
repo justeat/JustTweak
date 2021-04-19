@@ -265,11 +265,6 @@ JustTweak comes with three configurations out-of-the-box:
 In addition, JustTweak defines `Configuration` and `MutableConfiguration` protocols you can implement to create your own configurations to fit your needs. In the example project you can find a few example configurations which you can use as a starting point.
 
 
-### Notes for the maintainers
-
-The `TweakPropertyGenerator` scheme generates the executable that is shipped as part of JustTweak. When releasing a new version that includes changes in `TweakPropertyGenerator`, make sure that the new binary is copied from the `Build/Products` folder  in the `TweakPropertyGenerator.bundle`.
-
-
 ## License
 
 JustTweak is available under the Apache 2.0 license. See the LICENSE file for more info.
