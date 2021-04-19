@@ -8,7 +8,7 @@ import XCTest
 class TweakPropertyGeneratorTests: XCTestCase {
     
     private var bundle: Bundle!
-    private let localConfigurationFilename = "ValidConfiguration_LowPriority"
+    private let localConfigurationFilename = "ValidTweakProvider_LowPriority"
     private var localConfigurationFilePath: String!
     private let generatedClassName = "GeneratedConfigurationAccessor"
     private var codeGenerator: TweakPropertyCodeGenerator!
@@ -32,7 +32,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
     }
     
     func test_generateConstants_output() throws {
-        let configuration = Configuration(configurations: [],
+        let configuration = Configuration(tweakProviders: [],
                                           shouldCacheTweaks: true,
                                           stackName: "GeneratedConfigurationAccessor")
         let content = codeGenerator.generateConstantsFileContent(tweaks: tweaks, configuration: configuration)
@@ -42,29 +42,29 @@ class TweakPropertyGeneratorTests: XCTestCase {
     }
     
     func test_generateAccessor_output() throws {
-        let configurations = [
-            TweakConfiguration(type: "UserDefaultsConfiguration",
-                               parameter: "UserDefaults.standard",
-                               propertyName: nil,
-                               macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
-            TweakConfiguration(type: "CustomConfiguration",
-                               parameter: "let optimizelyTweakProvider = OptimizelyTweakProvider()\n        optimizelyTweakProvider.someValue = 42",
-                               propertyName: "optimizelyTweakProvider",
-                               macros: ["CONFIGURATION_APPSTORE"]),
-            TweakConfiguration(type: "CustomConfiguration",
-                               parameter: "let firebaseTweakProvider = FirebaseTweakProvider()\n        firebaseTweakProvider.someValue = true",
-                               propertyName: "firebaseTweakProvider",
-                               macros: ["CONFIGURATION_APPSTORE"]),
-            TweakConfiguration(type: "LocalConfiguration",
-                               parameter: "ValidConfiguration_TopPriority",
-                               propertyName: nil,
-                               macros: ["DEBUG"]),
-            TweakConfiguration(type: "LocalConfiguration",
-                               parameter: "ValidConfiguration_LowPriority",
-                               propertyName: nil,
-                               macros: nil)
+        let tweakProviders = [
+            TweakProvider(type: "UserDefaultsTweakProvider",
+                          parameter: "UserDefaults.standard",
+                          propertyName: nil,
+                          macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
+            TweakProvider(type: "CustomTweakProvider",
+                          parameter: "let optimizelyTweakProvider = OptimizelyTweakProvider()\n        optimizelyTweakProvider.someValue = 42",
+                          propertyName: "optimizelyTweakProvider",
+                          macros: ["CONFIGURATION_APPSTORE"]),
+            TweakProvider(type: "CustomTweakProvider",
+                          parameter: "let firebaseTweakProvider = FirebaseTweakProvider()\n        firebaseTweakProvider.someValue = true",
+                          propertyName: "firebaseTweakProvider",
+                          macros: ["CONFIGURATION_APPSTORE"]),
+            TweakProvider(type: "LocalTweakProvider",
+                          parameter: "ValidTweakProvider_TopPriority",
+                          propertyName: nil,
+                          macros: ["DEBUG"]),
+            TweakProvider(type: "LocalTweakProvider",
+                          parameter: "ValidTweakProvider_LowPriority",
+                          propertyName: nil,
+                          macros: nil)
         ]
-        let configuration = Configuration(configurations: configurations,
+        let configuration = Configuration(tweakProviders: tweakProviders,
                                           shouldCacheTweaks: true,
                                           stackName: "GeneratedConfigurationAccessor")
         let content = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,

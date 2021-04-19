@@ -9,36 +9,36 @@ import JustTweak
 class ConfigurationAccessor {
     
     static let tweakManager: TweakManager = {
-        var configurations: [Configuration] = []
+        var tweakProviders: [Configuration] = []
         
         // UserDefaultsConfiguration
         #if DEBUG || CONFIGURATION_DEBUG
-        let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-        configurations.append(userDefaultsConfiguration_1)
+        let userDefaultsTweakProvider_1 = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)
+        tweakProviders.append(userDefaultsTweakProvider_1)
         #endif
         
         // Optimizely
         // let optimizelyTweakProvider = OptimizelyTweaksConfiguration()
         // optimizelyTweakProvider.userId = UUID().uuidString
-        // configurations.append(optimizelyTweakProvider)
+        // tweakProviders.append(optimizelyTweakProvider)
         
         // Firebase
         // let firebaseTweakProvider = FirebaseTweaksConfiguration()
-        // configurations.append(firebaseTweakProvider)
+        // tweakProviders.append(firebaseTweakProvider)
         
         // LocalConfiguration
         #if CONFIGURATION_DEBUG
         let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweakProvider_TopPriority_example", withExtension: "json")!
-        let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
-        configurations.append(localConfiguration_1)
+        let localTweakProvider_1 = LocalTweakProvider(jsonURL: jsonFileURL_1)
+        tweakProviders.append(localTweakProvider_1)
         #endif
         
         // LocalConfiguration
         let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
-        let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
-        configurations.append(localConfiguration_2)
+        let localTweakProvider_2 = LocalTweakProvider(jsonURL: jsonFileURL_2)
+        tweakProviders.append(localConfiguration_2)
         
-        return TweakManager(configurations: configurations)
+        return TweakManager(tweakProviders: tweakProviders)
     }()
     
     private var tweakManager: TweakManager {

@@ -9,27 +9,27 @@ import JustTweak
 class GeneratedConfigurationAccessor {
 
     static let tweakManager: TweakManager = {
-        var configurations: [Configuration] = []
+        var tweakProviders: [TweakProvider] = []
 
-        // UserDefaultsConfiguration
+        // UserDefaultsTweakProvider
         #if DEBUG || CONFIGURATION_DEBUG
-        let userDefaultsConfiguration_1 = UserDefaultsConfiguration(userDefaults: UserDefaults.standard)
-        configurations.append(userDefaultsConfiguration_1)
+        let userDefaultsTweakProvider_1 = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)
+        tweakProviders.append(userDefaultsTweakProvider_1)
         #endif
 
-        // LocalConfiguration
+        // LocalTweakProvider
         #if DEBUG
         let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweakProvider_TopPriority_example", withExtension: "json")!
-        let localConfiguration_1 = LocalConfiguration(jsonURL: jsonFileURL_1)
-        configurations.append(localConfiguration_1)
+        let localTweakProvider_1 = LocalTweakProvider(jsonURL: jsonFileURL_1)
+        tweakProviders.append(localTweakProvider_1)
         #endif
 
-        // LocalConfiguration
+        // LocalTweakProvider
         let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
-        let localConfiguration_2 = LocalConfiguration(jsonURL: jsonFileURL_2)
-        configurations.append(localConfiguration_2)
+        let localTweakProvider_2 = LocalTweakProvider(jsonURL: jsonFileURL_2)
+        tweakProviders.append(localTweakProvider_2)
 
-        let tweakManager = TweakManager(configurations: configurations)
+        let tweakManager = TweakManager(tweakProviders: tweakProviders)
         tweakManager.useCache = true
         return tweakManager
     }()

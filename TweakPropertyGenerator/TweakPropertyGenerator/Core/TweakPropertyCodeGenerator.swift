@@ -115,12 +115,12 @@ extension TweakPropertyCodeGenerator {
     }
     
     private func tweakManagerCodeBlock(with configuration: Configuration) -> String {
-        let configurationsCodeBlock = self.configurationsCodeBlock(with: configuration)
+        let tweakProvidersCodeBlock = self.tweakProvidersCodeBlock(with: configuration)
         
         return """
             static let tweakManager: TweakManager = {
-        \(configurationsCodeBlock)
-                let tweakManager = TweakManager(configurations: configurations)
+        \(tweakProvidersCodeBlock)
+                let tweakManager = TweakManager(tweakProviders: tweakProviders)
                 tweakManager.useCache = \(configuration.shouldCacheTweaks)
                 return tweakManager
             }()
@@ -131,28 +131,28 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func configurationsCodeBlock(with configuration: Configuration) -> String {
-        let grouping = Dictionary(grouping: configuration.configurations) { $0.type }
+    private func tweakProvidersCodeBlock(with configuration: Configuration) -> String {
+        let grouping = Dictionary(grouping: configuration.tweakProviders) { $0.type }
         
-        var configurationsString: [String] = [
+        var tweakProvidersString: [String] = [
             """
-                    var configurations: [Configuration] = []\n
+                    var tweakProviders: [TweakProvider] = []\n
             """
         ]
         
         var currentIndexByConf: [String: Int] = grouping.mapValues{ _ in 0 }
         
-        for configuration in configuration.configurations {
-            let value = grouping[configuration.type]!
-            let index = currentIndexByConf[configuration.type]!
-            let configuration = value[index]
-            let configurationName = "\(configuration.type.lowercaseFirstChar())_\(index+1)"
+        for tweakProvider in configuration.tweakProviders {
+            let value = grouping[tweakProvider.type]!
+            let index = currentIndexByConf[tweakProvider.type]!
+            let tweakProvider = value[index]
+            let tweakProviderName = "\(tweakProvider.type.lowercaseFirstChar())_\(index+1)"
             var generatedString: [String] = []
-            let macros = configuration.macros?.joined(separator: " || ")
+            let macros = tweakProvider.macros?.joined(separator: " || ")
             
             let jsonFileURL = "jsonFileURL_\(index+1)"
             let headerComment = """
-                        // \(configuration.type)
+                        // \(tweakProvider.type)
                 """
             generatedString.append(headerComment)
                 
@@ -163,35 +163,35 @@ extension TweakPropertyCodeGenerator {
                 generatedString.append(macroStarting)
             }
             
-            switch configuration.type {
-            case "UserDefaultsConfiguration":
-                let configurationAllocation =
+            switch tweakProvider.type {
+            case "UserDefaultsTweakProvider":
+                let tweakProviderAllocation =
                     """
-                            let \(configurationName) = \(configuration.type)(userDefaults: \(configuration.parameter))
-                            configurations.append(\(configurationName))
+                            let \(tweakProviderName) = \(tweakProvider.type)(userDefaults: \(tweakProvider.parameter))
+                            tweakProviders.append(\(tweakProviderName))
                     """
-                generatedString.append(configurationAllocation)
+                generatedString.append(tweakProviderAllocation)
                 
-            case "LocalConfiguration":
-                let configurationAllocation =
+            case "LocalTweakProvider":
+                let tweakProviderAllocation =
                     """
-                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(configuration.parameter)\", withExtension: "json")!
-                            let \(configurationName) = \(configuration.type)(jsonURL: \(jsonFileURL))
-                            configurations.append(\(configurationName))
+                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(tweakProvider.parameter)\", withExtension: "json")!
+                            let \(tweakProviderName) = \(tweakProvider.type)(jsonURL: \(jsonFileURL))
+                            tweakProviders.append(\(tweakProviderName))
                     """
-                generatedString.append(configurationAllocation)
+                generatedString.append(tweakProviderAllocation)
                 
-            case "CustomConfiguration":
-                assert(configuration.propertyName != nil, "Missing value 'propertyName' for configuration '\(configuration)'")
-                let configurationAllocation =
+            case "CustomTweakProvider":
+                assert(tweakProvider.propertyName != nil, "Missing value 'propertyName' for TweakProvider '\(tweakProvider)'")
+                let tweakProviderAllocation =
                     """
-                            \(configuration.parameter)
-                            configurations.append(\(configuration.propertyName!))
+                            \(tweakProvider.parameter)
+                            tweakProviders.append(\(tweakProvider.propertyName!))
                     """
-                generatedString.append(configurationAllocation)
+                generatedString.append(tweakProviderAllocation)
                 
             default:
-                assertionFailure("Unsupported configuration \(configuration)")
+                assertionFailure("Unsupported TweakProvider \(tweakProvider)")
                 break
             }
             
@@ -203,11 +203,11 @@ extension TweakPropertyCodeGenerator {
             }
             generatedString.append("")
             
-            configurationsString.append(contentsOf: generatedString)
-            currentIndexByConf[configuration.type] = currentIndexByConf[configuration.type]! + 1
+            tweakProvidersString.append(contentsOf: generatedString)
+            currentIndexByConf[tweakProvider.type] = currentIndexByConf[tweakProvider.type]! + 1
         }
         
-        return configurationsString.joined(separator: "\n")
+        return tweakProvidersString.joined(separator: "\n")
     }
     
     private func classContent(with tweaks: [Tweak]) -> String {

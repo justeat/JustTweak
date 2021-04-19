@@ -21,7 +21,7 @@ class LocalConfigurationParserTests: XCTestCase {
     
     func test_loadConfiguration_success() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "ValidConfiguration"
+        let localConfigurationFilename = "TweakProvider"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
         let testTweaks = try sut.load(localConfigurationFilePath)
@@ -88,7 +88,7 @@ class LocalConfigurationParserTests: XCTestCase {
     
     func test_loadConfiguration_failure_invalidJSON() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidConfiguration_InvalidJSON"
+        let localConfigurationFilename = "InvalidTweakProvider_InvalidJSON"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
         XCTAssertThrowsError(try sut.load(localConfigurationFilePath))
@@ -96,7 +96,7 @@ class LocalConfigurationParserTests: XCTestCase {
     
     func test_loadConfiguration_failure_missingValues() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidConfiguration_MissingValues"
+        let localConfigurationFilename = "InvalidTweakProvider_MissingValues"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         
         XCTAssertThrowsError(try sut.load(localConfigurationFilePath))
@@ -104,7 +104,7 @@ class LocalConfigurationParserTests: XCTestCase {
     
     func test_loadConfiguration_failure_duplicateGeneratedPropertyName() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidConfiguration_DuplicateGeneratedPropertyName"
+        let localConfigurationFilename = "InvalidTweakProvider_DuplicateGeneratedPropertyName"
         let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
         XCTAssertThrowsError(try sut.load(localConfigurationFilePath))
     }

@@ -1,17 +1,17 @@
 {
-    "configurations": [
+    "tweakProviders": [
         {
-            "type": "UserDefaultsConfiguration",
+            "type": "UserDefaultsTweakProvider",
             "parameter": "UserDefaults.standard",
             "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
+            "type": "LocalTweakProvider",
             "parameter": "LocalTweakProvider_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
+            "type": "LocalTweakProvider",
             "parameter": "LocalTweakProvider_example"
         }
     ],

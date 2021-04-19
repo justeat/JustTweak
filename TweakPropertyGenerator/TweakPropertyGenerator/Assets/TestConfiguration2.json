@@ -1,5 +1,5 @@
 {
-    "configurations": [
+    "tweakProviders": [
         {
             "type": "UserDefaultsConfiguration",
             "parameter": "UserDefaults.standard",
@@ -18,12 +18,12 @@
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {
-            "type": "LocalConfiguration",
+            "type": "LocalTweakProvider",
             "parameter": "LocalTweakProvider_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
+            "type": "LocalTweakProvider",
             "parameter": "LocalTweakProvider_example"
         }
     ],
