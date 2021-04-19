@@ -54,31 +54,31 @@ class ConfigurationAccessor {
     var shouldShowAlert: Bool
     
     @FallbackTweakProperty(fallbackValue: false,
-                           feature: Features.UICustomization,
+                           feature: Features.uiCustomization,
                            variable: Variables.displayRedView,
                            tweakManager: tweakManager)
     var canShowRedView: Bool
     
     @FallbackTweakProperty(fallbackValue: false,
-                           feature: Features.UICustomization,
+                           feature: Features.uiCustomization,
                            variable: Variables.displayGreenView,
                            tweakManager: tweakManager)
     var canShowGreenView: Bool
     
     @FallbackTweakProperty(fallbackValue: "",
-                           feature: Features.UICustomization,
+                           feature: Features.uiCustomization,
                            variable: Variables.labelText,
                            tweakManager: tweakManager)
     var labelText: String
     
     @FallbackTweakProperty(fallbackValue: 42,
-                           feature: Features.UICustomization,
+                           feature: Features.uiCustomization,
                            variable: Variables.meaningOfLife,
                            tweakManager: tweakManager)
     var meaningOfLife: Int
     
     @OptionalTweakProperty(fallbackValue: nil,
-                           feature: Features.UICustomization,
+                           feature: Features.uiCustomization,
                            variable: Variables.answerToTheUniverse,
                            tweakManager: tweakManager)
     var optionalMeaningOfLife: Int?
@@ -87,12 +87,12 @@ class ConfigurationAccessor {
     // MARK: - Via TweakManager
     
     var canShowYellowView: Bool {
-        return tweakManager.tweakWith(feature: Features.UICustomization,
+        return tweakManager.tweakWith(feature: Features.uiCustomization,
                                       variable: Variables.displayYellowView)?.boolValue ?? false
     }
     
     var redViewAlpha: Float {
-        return tweakManager.tweakWith(feature: Features.UICustomization,
+        return tweakManager.tweakWith(feature: Features.uiCustomization,
                                       variable: Variables.redViewAlpha)?.floatValue ?? 0.0
     }
     

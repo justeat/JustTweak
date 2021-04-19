@@ -7,7 +7,7 @@ import UIKit
 import JustTweak
 
 struct Features {
-    static let UICustomization = "ui_customization"
+    static let uiCustomization = "ui_customization"
     static let general = "general"
 }
 

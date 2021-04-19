@@ -11,7 +11,7 @@ struct TweakPropertyGenerator: ParsableCommand {
     @Option(name: .shortAndLong, help: "The local configuration file path.")
     var localConfigurationFilePath: String
     
-    @Option(name: .shortAndLong, help: "The output file path.")
+    @Option(name: .shortAndLong, help: "The output folder.")
     var outputFolder: String
     
     @Option(name: .shortAndLong, help: "The configuration file path.")
@@ -33,7 +33,6 @@ struct TweakPropertyGenerator: ParsableCommand {
         let codeGenerator = TweakPropertyCodeGenerator()
         let localConfigurationParser = LocalConfigurationParser()
         let tweaks = try localConfigurationParser.load(localConfigurationFilePath)
-        
         let configuration = loadConfigurationFromJson()
         
         writeConstantsFile(codeGenerator: codeGenerator,

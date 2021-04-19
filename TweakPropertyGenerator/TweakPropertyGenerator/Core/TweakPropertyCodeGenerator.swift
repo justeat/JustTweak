@@ -20,9 +20,9 @@ extension TweakPropertyCodeGenerator {
     
     func generateConstantsFileContent(tweaks: [Tweak],
                                       configuration: Configuration) -> String {
-        let template = self.constantsTemplate(className: configuration.stackName)
-        let featureConstants = self.featureConstantsCodeBlock(tweaks: tweaks)
-        let variableConstants = self.variableConstantsCodeBlock(tweaks: tweaks)
+        let template = self.constantsTemplate(with: configuration.stackName)
+        let featureConstants = self.featureConstantsCodeBlock(with: tweaks)
+        let variableConstants = self.variableConstantsCodeBlock(with: tweaks)
         
         let content = template
             .replacingOccurrences(of: featureConstantsConst, with: featureConstants)
@@ -33,9 +33,9 @@ extension TweakPropertyCodeGenerator {
     func generateAccessorFileContent(localConfigurationFilename: String,
                                      tweaks: [Tweak],
                                      configuration: Configuration) -> String {
-        let template = self.accessorTemplate(className: configuration.stackName)
-        let tweakManager = self.tweakManagerCodeBlock(configuration: configuration)
-        let classContent = self.classContent(tweaks: tweaks)
+        let template = self.accessorTemplate(with: configuration.stackName)
+        let tweakManager = self.tweakManagerCodeBlock(with: configuration)
+        let classContent = self.classContent(with: tweaks)
         
         let content = template
             .replacingOccurrences(of: tweakManagerConst, with: tweakManager)
@@ -43,7 +43,7 @@ extension TweakPropertyCodeGenerator {
         return content
     }
     
-    func constantsTemplate(className: String) -> String {
+    func constantsTemplate(with className: String) -> String {
         """
         //
         //  \(className)+Constants.swift
@@ -61,7 +61,7 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func accessorTemplate(className: String) -> String {
+    private func accessorTemplate(with className: String) -> String {
         """
         //
         //  \(className).swift
@@ -80,7 +80,7 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func featureConstantsCodeBlock(tweaks: [Tweak]) -> String {
+    private func featureConstantsCodeBlock(with tweaks: [Tweak]) -> String {
         var features = Set<FeatureKey>()
         for tweak in tweaks {
             features.insert(tweak.feature)
@@ -97,7 +97,7 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func variableConstantsCodeBlock(tweaks: [Tweak]) -> String {
+    private func variableConstantsCodeBlock(with tweaks: [Tweak]) -> String {
         var variables = Set<VariableKey>()
         for tweak in tweaks {
             variables.insert(tweak.variable)
@@ -114,8 +114,8 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func tweakManagerCodeBlock(configuration: Configuration) -> String {
-        let configurationsCodeBlock = self.configurationsCodeBlock(configuration: configuration)
+    private func tweakManagerCodeBlock(with configuration: Configuration) -> String {
+        let configurationsCodeBlock = self.configurationsCodeBlock(with: configuration)
         
         return """
             static let tweakManager: TweakManager = {
@@ -131,7 +131,7 @@ extension TweakPropertyCodeGenerator {
         """
     }
     
-    private func configurationsCodeBlock(configuration: Configuration) -> String {
+    private func configurationsCodeBlock(with configuration: Configuration) -> String {
         let grouping = Dictionary(grouping: configuration.configurations) { $0.type }
         
         var configurationsString: [String] = [
@@ -210,7 +210,7 @@ extension TweakPropertyCodeGenerator {
         return configurationsString.joined(separator: "\n")
     }
     
-    private func classContent(tweaks: [Tweak]) -> String {
+    private func classContent(with tweaks: [Tweak]) -> String {
         var content: Set<String> = []
         tweaks.forEach {
             content.insert(tweakProperty(for: $0))

@@ -7,14 +7,14 @@
         },
         {
             "type": "CustomConfiguration",
-            "parameter": "let optimizelyConfiguration = OptimizelyConfiguration()\n\t\toc.someValue = 42",
-            "propertyName": "optimizelyConfiguration",
+            "parameter": "let oc = OptimizelyConfiguration()\n\toc.someValue = 42",
+            "propertyName": "oc",
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {
             "type": "CustomConfiguration",
-            "parameter": "let firebaseConfiguration = FirebaseConfiguration()\n\t\tfc.someValue = true",
-            "propertyName": "firebaseConfiguration",
+            "parameter": "let fc = FirebaseConfiguration()\n\t\tfc.someValue = true",
+            "propertyName": "fc",
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {
