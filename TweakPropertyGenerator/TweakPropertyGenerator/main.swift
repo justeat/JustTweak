@@ -31,8 +31,8 @@ struct TweakPropertyGenerator: ParsableCommand {
     
     func run() throws {
         let codeGenerator = TweakPropertyCodeGenerator()
-        let localConfigurationParser = TweakParser()
-        let tweaks = try localConfigurationParser.load(tweaksFilePath)
+        let tweakLoader = TweakLoader()
+        let tweaks = try tweakLoader.load(tweaksFilePath)
         let configuration = loadConfigurationFromJson()
         
         writeConstantsFile(codeGenerator: codeGenerator,

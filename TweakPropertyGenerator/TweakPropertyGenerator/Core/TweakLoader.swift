@@ -1,5 +1,5 @@
 //
-//  TweakParser.swift
+//  TweakLoader.swift
 //  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
@@ -7,7 +7,7 @@ import Foundation
 
 extension String: Error {}
 
-class TweakParser {
+class TweakLoader {
     
     func load(_ filePath: String) throws -> [Tweak] {
         let url = URL(fileURLWithPath: filePath)

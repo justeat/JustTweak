@@ -1,17 +1,17 @@
 //
-//  TweakParserTests.swift
+//  TweakLoaderTests.swift
 //  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
 import XCTest
 
-class TweakParserTests: XCTestCase {
+class TweakLoaderTests: XCTestCase {
     
-    var sut: TweakParser!
+    var sut: TweakLoader!
     
     override func setUp() {
         super.setUp()
-        sut = TweakParser()
+        sut = TweakLoader()
     }
     
     override func tearDown() {

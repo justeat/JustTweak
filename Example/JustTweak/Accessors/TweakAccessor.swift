@@ -18,12 +18,12 @@ class TweakAccessor {
         #endif
         
         // OptimizelyTweakProvider
-        // let optimizelyTweakProvider = OptimizelyTweaksConfiguration()
+        // let optimizelyTweakProvider = OptimizelyTweakProvider()
         // optimizelyTweakProvider.userId = UUID().uuidString
         // tweakProviders.append(optimizelyTweakProvider)
         
         // FirebaseTweakProvider
-        // let firebaseTweakProvider = FirebaseTweaksConfiguration()
+        // let firebaseTweakProvider = FirebaseTweakProvider()
         // tweakProviders.append(firebaseTweakProvider)
         
         // LocalTweakProvider

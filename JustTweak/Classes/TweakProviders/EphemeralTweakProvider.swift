@@ -1,5 +1,5 @@
 //
-//  EphemeralConfiguration.swift
+//  EphemeralTweakProvider.swift
 //  Copyright (c) 2018 Just Eat Holding Ltd. All rights reserved.
 //
 

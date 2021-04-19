@@ -14,24 +14,24 @@ class TweakManagerTests: XCTestCase {
         let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
-    var userDefaultsConfiguration: UserDefaultsTweakProvider!
+    var userDefaultsTweakProvider: UserDefaultsTweakProvider!
     
     override func setUp() {
         super.setUp()
-        let mockConfiguration = MockTweakProvider()
+        let mockTweakProvider = MockTweakProvider()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.TweakManagerTests")!
-        userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: testUserDefaults)
-        let tweakProviders: [TweakProvider] = [userDefaultsConfiguration, mockConfiguration, localTweakProvider]
+        userDefaultsTweakProvider = UserDefaultsTweakProvider(userDefaults: testUserDefaults)
+        let tweakProviders: [TweakProvider] = [userDefaultsTweakProvider, mockTweakProvider, localTweakProvider]
         tweakManager = TweakManager(tweakProviders: tweakProviders)
     }
     
     override func tearDown() {
-        userDefaultsConfiguration.deleteValue(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
+        userDefaultsTweakProvider.deleteValue(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
         tweakManager = nil
         super.tearDown()
     }
     
-    func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
+    func testReturnsNoMutableTweakProvider_IfNoneHasBeenPassedToInitializer() {
         let tweakManager = TweakManager(tweakProviders: [localTweakProvider])
         XCTAssertNil(tweakManager.mutableTweakProvider)
     }

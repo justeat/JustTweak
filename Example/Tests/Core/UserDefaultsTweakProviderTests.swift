@@ -8,19 +8,19 @@ import JustTweak
 
 class UserDefaultsTweakProviderTests: XCTestCase {
     
-    var userDefaultsConfiguration: UserDefaultsTweakProvider!
+    var userDefaultsTweakProvider: UserDefaultsTweakProvider!
     let userDefaults = UserDefaults(suiteName: String(describing: UserDefaultsTweakProviderTests.self))!
 
     private let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
 
     override func setUp() {
         super.setUp()
-        userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: userDefaults)
+        userDefaultsTweakProvider = UserDefaultsTweakProvider(userDefaults: userDefaults)
     }
     
     override func tearDown() {
         userDefaults.removeObject(forKey: "\(userDefaultsKeyPrefix).display_red_view")
-        userDefaultsConfiguration = nil
+        userDefaultsTweakProvider = nil
         super.tearDown()
     }
     
@@ -38,37 +38,37 @@ class UserDefaultsTweakProviderTests: XCTestCase {
     }
     
     func testReturnsNilForTweaksThatHaveNoUserDefaultValue() {
-        let tweak = userDefaultsConfiguration.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)
+        let tweak = userDefaultsTweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)
         XCTAssertNil(tweak)
     }
     
     func testUpdatesValueForTweak_withBool() {
-        userDefaultsConfiguration.set(true, feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
+        userDefaultsTweakProvider.set(true, feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == true)
     }
     
     func testUpdatesValueForTweak_withInteger() {
-        userDefaultsConfiguration.set(42, feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
+        userDefaultsTweakProvider.set(42, feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == 42)
     }
     
     func testUpdatesValueForTweak_withFloat() {
-        userDefaultsConfiguration.set(Float(12.34), feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
+        userDefaultsTweakProvider.set(Float(12.34), feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == Float(12.34))
     }
     
     func testUpdatesValueForTweak_withDouble() {
-        userDefaultsConfiguration.set(Double(23.45), feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
+        userDefaultsTweakProvider.set(Double(23.45), feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == Double(23.45))
     }
     
     func testUpdatesValueForTweak_withString() {
-        userDefaultsConfiguration.set("Hello", feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")
+        userDefaultsTweakProvider.set("Hello", feature: "feature_1", variable: "variable_1")
+        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == "Hello")
     }    
 }

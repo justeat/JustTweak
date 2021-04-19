@@ -27,17 +27,31 @@ class LocalTweakProviderTests: XCTestCase {
     }
     
     func testParsesBoolTweak() {
-        let redViewTweak = Tweak(feature: Features.uiCustomization, variable: Variables.displayRedView, value: true, title: "Display Red View", group: "UI Customization")
-        XCTAssertEqual(redViewTweak, tweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView))
+        let redViewTweak = Tweak(feature: Features.uiCustomization,
+                                 variable: Variables.displayRedView,
+                                 value: true,
+                                 title: "Display Red View",
+                                 group: "UI Customization")
+        XCTAssertEqual(redViewTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
+                                                             variable: Variables.displayRedView))
     }
     
     func testParsesFloatTweak() {
-        let redViewAlphaTweak = Tweak(feature: Features.uiCustomization, variable: Variables.redViewAlpha, value: 1.0, title: "Red View Alpha Component", group: "UI Customization")
-        XCTAssertEqual(redViewAlphaTweak, tweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.redViewAlpha))
+        let redViewAlphaTweak = Tweak(feature: Features.uiCustomization,
+                                      variable: Variables.redViewAlpha,
+                                      value: 1.0,
+                                      title: "Red View Alpha Component",
+                                      group: "UI Customization")
+        XCTAssertEqual(redViewAlphaTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
+                                                                  variable: Variables.redViewAlpha))
     }
     
     func testParsesStringTweak() {
-        let buttonLabelTweak = Tweak(feature: Features.uiCustomization, variable: Variables.labelText, value: "Test value", title: "Label Text", group: "UI Customization")
-        XCTAssertEqual(buttonLabelTweak, tweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.labelText))
+        let buttonLabelTweak = Tweak(feature: Features.uiCustomization,
+                                     variable: Variables.labelText,
+                                     value: "Test value",
+                                     title: "Label Text", group: "UI Customization")
+        XCTAssertEqual(buttonLabelTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
+                                                                 variable: Variables.labelText))
     }
 }

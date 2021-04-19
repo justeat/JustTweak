@@ -10,24 +10,24 @@ class TweakPropertyGeneratorTests: XCTestCase {
     private var bundle: Bundle!
     private let tweaksFilename = "ValidTweakProvider_LowPriority"
     private var tweaksFilePath: String!
-    private let generatedClassName = "GeneratedTweakAccessorContent"
+    private let generatedClassName = "GeneratedTweakAccessor"
     private var codeGenerator: TweakPropertyCodeGenerator!
-    private var localConfigurationParser: TweakParser!
+    private var tweakLoader: TweakLoader!
     private var tweaks: [Tweak]!
     
     override func setUpWithError() throws {
         bundle = Bundle(for: type(of: self))
         tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         codeGenerator = TweakPropertyCodeGenerator()
-        localConfigurationParser = TweakParser()
-        tweaks = try localConfigurationParser.load(tweaksFilePath)
+        tweakLoader = TweakLoader()
+        tweaks = try tweakLoader.load(tweaksFilePath)
     }
     
     override func tearDownWithError() throws {
         bundle = nil
         tweaksFilePath = nil
         codeGenerator = nil
-        localConfigurationParser = nil
+        tweakLoader = nil
         tweaks = nil
     }
     
@@ -36,7 +36,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
                                           shouldCacheTweaks: true,
                                           stackName: "GeneratedTweakAccessorContent")
         let content = codeGenerator.generateConstantsFileContent(tweaks: tweaks, configuration: configuration)
-        let testContentPath = bundle.path(forResource: "GeneratedTweakAccessorContent+ConstantsContent", ofType: "")!
+        let testContentPath = bundle.path(forResource: "GeneratedTweakAccessor+ConstantsContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         XCTAssertEqual(content, testContent)
     }
@@ -70,7 +70,6 @@ class TweakPropertyGeneratorTests: XCTestCase {
         let content = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                 tweaks: tweaks,
                                                                 configuration: configuration)
-        
         let testContentPath = bundle.path(forResource: "GeneratedTweakAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         

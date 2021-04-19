@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120B0A1E26285CE70066F2C2 /* GeneratedTweakAccessorContent+ConstantsContent in Resources */ = {isa = PBXBuildFile; fileRef = 120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessorContent+ConstantsContent */; };
+		120B0A1E26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent in Resources */ = {isa = PBXBuildFile; fileRef = 120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent */; };
 		12273D1B2625D6BE00732559 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12273D1A2625D6BE00732559 /* main.swift */; };
 		12273D382625E45F00732559 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 12273D372625E45F00732559 /* ArgumentParser */; };
 		12BE964D2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */; };
@@ -17,8 +17,8 @@
 		4F65E88C2629CF8C009E8C3B /* ValidTweakProvider_LowPriority.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E88A2629CF8C009E8C3B /* ValidTweakProvider_LowPriority.json */; };
 		4F7750762627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
 		4F7750772627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
-		4F7750782627338700A0A3F5 /* TweakParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* TweakParser.swift */; };
-		4F7750792627338700A0A3F5 /* TweakParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* TweakParser.swift */; };
+		4F7750782627338700A0A3F5 /* TweakLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* TweakLoader.swift */; };
+		4F7750792627338700A0A3F5 /* TweakLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750742627338700A0A3F5 /* TweakLoader.swift */; };
 		4F77507A2627338700A0A3F5 /* TweakPropertyCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */; };
 		4F77507B2627338700A0A3F5 /* TweakPropertyCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */; };
 		4F7750862627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */; };
@@ -31,7 +31,7 @@
 		4F77509D262751FD00A0A3F5 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77509B262751FD00A0A3F5 /* Types.swift */; };
 		4F7750AA2627603A00A0A3F5 /* NSNumber+ValueTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750A92627603A00A0A3F5 /* NSNumber+ValueTypesTests.swift */; };
 		4F7750B32627626100A0A3F5 /* String+CasingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750B22627626100A0A3F5 /* String+CasingTests.swift */; };
-		4F7750B9262764C600A0A3F5 /* TweakParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750B8262764C600A0A3F5 /* TweakParserTests.swift */; };
+		4F7750B9262764C600A0A3F5 /* TweakLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750B8262764C600A0A3F5 /* TweakLoaderTests.swift */; };
 		4F7750C126277B6300A0A3F5 /* InvalidTweakProvider_MissingValues.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F7750C026277B6300A0A3F5 /* InvalidTweakProvider_MissingValues.json */; };
 		4FD526F826283EBB000F6780 /* InvalidTweakProvider_DuplicateGeneratedPropertyName.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD526F726283EBB000F6780 /* InvalidTweakProvider_DuplicateGeneratedPropertyName.json */; };
 		4FD526FE26283F91000F6780 /* InvalidTweakProvider_InvalidJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD526FD26283F91000F6780 /* InvalidTweakProvider_InvalidJSON.json */; };
@@ -53,7 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessorContent+ConstantsContent */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GeneratedTweakAccessorContent+ConstantsContent"; sourceTree = "<group>"; };
+		120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "GeneratedTweakAccessor+ConstantsContent"; sourceTree = "<group>"; };
 		12273D172625D6BE00732559 /* TweakPropertyGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TweakPropertyGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		12273D1A2625D6BE00732559 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		12BE964A2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweakPropertyGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +66,7 @@
 		4F65E8892629CF8C009E8C3B /* ValidTweakProvider_TopPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidTweakProvider_TopPriority.json; sourceTree = "<group>"; };
 		4F65E88A2629CF8C009E8C3B /* ValidTweakProvider_LowPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidTweakProvider_LowPriority.json; sourceTree = "<group>"; };
 		4F7750732627338700A0A3F5 /* TweakValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakValue.swift; sourceTree = "<group>"; };
-		4F7750742627338700A0A3F5 /* TweakParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakParser.swift; sourceTree = "<group>"; };
+		4F7750742627338700A0A3F5 /* TweakLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakLoader.swift; sourceTree = "<group>"; };
 		4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakPropertyCodeGenerator.swift; sourceTree = "<group>"; };
 		4F7750812627338E00A0A3F5 /* NSNumber+ValueTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNumber+ValueTypes.swift"; sourceTree = "<group>"; };
 		4F7750822627338E00A0A3F5 /* String+Casing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Casing.swift"; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		4F77509B262751FD00A0A3F5 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		4F7750A92627603A00A0A3F5 /* NSNumber+ValueTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNumber+ValueTypesTests.swift"; sourceTree = "<group>"; };
 		4F7750B22627626100A0A3F5 /* String+CasingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CasingTests.swift"; sourceTree = "<group>"; };
-		4F7750B8262764C600A0A3F5 /* TweakParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakParserTests.swift; sourceTree = "<group>"; };
+		4F7750B8262764C600A0A3F5 /* TweakLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakLoaderTests.swift; sourceTree = "<group>"; };
 		4F7750C026277B6300A0A3F5 /* InvalidTweakProvider_MissingValues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidTweakProvider_MissingValues.json; sourceTree = "<group>"; };
 		4FD526F726283EBB000F6780 /* InvalidTweakProvider_DuplicateGeneratedPropertyName.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidTweakProvider_DuplicateGeneratedPropertyName.json; sourceTree = "<group>"; };
 		4FD526FD26283F91000F6780 /* InvalidTweakProvider_InvalidJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidTweakProvider_InvalidJSON.json; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				4F7750752627338700A0A3F5 /* TweakPropertyCodeGenerator.swift */,
-				4F7750742627338700A0A3F5 /* TweakParser.swift */,
+				4F7750742627338700A0A3F5 /* TweakLoader.swift */,
 				4F775096262751EE00A0A3F5 /* Models.swift */,
 				4F77509B262751FD00A0A3F5 /* Types.swift */,
 				4F7750732627338700A0A3F5 /* TweakValue.swift */,
@@ -172,7 +172,7 @@
 				4F65E88A2629CF8C009E8C3B /* ValidTweakProvider_LowPriority.json */,
 				4F65E8892629CF8C009E8C3B /* ValidTweakProvider_TopPriority.json */,
 				12BE989C26272D6200C1B6C3 /* GeneratedTweakAccessorContent */,
-				120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessorContent+ConstantsContent */,
+				120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				4FD5270B262842B3000F6780 /* Array+DuplicatesTests.swift */,
-				4F7750B8262764C600A0A3F5 /* TweakParserTests.swift */,
+				4F7750B8262764C600A0A3F5 /* TweakLoaderTests.swift */,
 				4F7750A92627603A00A0A3F5 /* NSNumber+ValueTypesTests.swift */,
 				4F7750B22627626100A0A3F5 /* String+CasingTests.swift */,
 				12BE964C2626FA5000C1B6C3 /* TweakPropertyGeneratorTests.swift */,
@@ -283,7 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				120B0A1E26285CE70066F2C2 /* GeneratedTweakAccessorContent+ConstantsContent in Resources */,
+				120B0A1E26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent in Resources */,
 				4FD526FE26283F91000F6780 /* InvalidTweakProvider_InvalidJSON.json in Resources */,
 				4FD526F826283EBB000F6780 /* InvalidTweakProvider_DuplicateGeneratedPropertyName.json in Resources */,
 				4F7750C126277B6300A0A3F5 /* InvalidTweakProvider_MissingValues.json in Resources */,
@@ -322,7 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F7750762627338700A0A3F5 /* TweakValue.swift in Sources */,
-				4F7750782627338700A0A3F5 /* TweakParser.swift in Sources */,
+				4F7750782627338700A0A3F5 /* TweakLoader.swift in Sources */,
 				4F77509C262751FD00A0A3F5 /* Types.swift in Sources */,
 				12273D1B2625D6BE00732559 /* main.swift in Sources */,
 				4FD52706262841C7000F6780 /* Array+Duplicates.swift in Sources */,
@@ -340,7 +340,7 @@
 				4FD52711262843B6000F6780 /* Array+Duplicates.swift in Sources */,
 				4F7750772627338700A0A3F5 /* TweakValue.swift in Sources */,
 				4FD5270C262842B3000F6780 /* Array+DuplicatesTests.swift in Sources */,
-				4F7750792627338700A0A3F5 /* TweakParser.swift in Sources */,
+				4F7750792627338700A0A3F5 /* TweakLoader.swift in Sources */,
 				4F77509D262751FD00A0A3F5 /* Types.swift in Sources */,
 				4F7750B32627626100A0A3F5 /* String+CasingTests.swift in Sources */,
 				4F7750AA2627603A00A0A3F5 /* NSNumber+ValueTypesTests.swift in Sources */,
@@ -349,7 +349,7 @@
 				4F775098262751EE00A0A3F5 /* Models.swift in Sources */,
 				4F7750892627338E00A0A3F5 /* String+Casing.swift in Sources */,
 				4F7750872627338E00A0A3F5 /* NSNumber+ValueTypes.swift in Sources */,
-				4F7750B9262764C600A0A3F5 /* TweakParserTests.swift in Sources */,
+				4F7750B9262764C600A0A3F5 /* TweakLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@ target 'JustTweak_Example' do
   pod 'JustTweak', :path => '../'
   script_phase :name => 'JustTweak_Example',
                :script => '$SRCROOT/../JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \
-               -l $SRCROOT/JustTweak/TweakProviders/LocalTweakProvider_example.json \
+               -t $SRCROOT/JustTweak/TweakProviders/LocalTweakProvider_example.json \
                -o $SRCROOT/JustTweak/Accessors/ \
                -c $SRCROOT/JustTweak/CodeGeneration/Configuration.json',
                :execution_position => :before_compile
