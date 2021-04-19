@@ -94,7 +94,7 @@ static let tweakManager: TweakManager = {
         }
     ],
     "shouldCacheTweaks": true,
-    "stackName": "GeneratedConfigurationAccessor"
+    "stackName": "GeneratedTweakAccessorContent"
 }
 ```
 
@@ -138,13 +138,13 @@ The `MutableTweakProvider` with the highest priority, such as `UserDefaultsTweak
 If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object (which name you have defined in the `.json` configuration and use it to access the feature flags.
 
 ```
-let accessor = GeneratedConfigurationAccessor()
+let accessor = GeneratedTweakAccessorContent()
 if accessor.meaningOfLife == 42 {
     ...
 }
 ```
 
-See `GeneratedConfigurationAccessor.swift` and `GeneratedConfigurationAccessor+Constants.swift` for an example of generated code.
+See `GeneratedTweakAccessorContent.swift` and `GeneratedTweakAccessorContent+Constants.swift` for an example of generated code.
 
 ### Usage (advanced)
 

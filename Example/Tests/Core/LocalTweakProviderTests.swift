@@ -6,7 +6,7 @@
 import XCTest
 import JustTweak
 
-class LocalConfigurationTests: XCTestCase {
+class LocalTweakProviderTests: XCTestCase {
     
     var tweakProvider: LocalTweakProvider!
     
@@ -21,7 +21,7 @@ class LocalConfigurationTests: XCTestCase {
     }
     
     private func tweakProviderWithFileNamed(_ fileName: String) -> LocalTweakProvider? {
-        let bundle = Bundle(for: LocalConfigurationTests.self)
+        let bundle = Bundle(for: LocalTweakProviderTests.self)
         let jsonURL = bundle.url(forResource: fileName, withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonURL)
     }

@@ -1,17 +1,17 @@
 //
-//  LocalConfigurationParserTests.swift
+//  TweakParserTests.swift
 //  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
 import XCTest
 
-class LocalConfigurationParserTests: XCTestCase {
+class TweakParserTests: XCTestCase {
     
-    var sut: LocalConfigurationParser!
+    var sut: TweakParser!
     
     override func setUp() {
         super.setUp()
-        sut = LocalConfigurationParser()
+        sut = TweakParser()
     }
     
     override func tearDown() {
@@ -21,10 +21,10 @@ class LocalConfigurationParserTests: XCTestCase {
     
     func test_loadConfiguration_success() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "TweakProvider"
-        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        let tweaksFilename = "TweakProvider"
+        let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         
-        let testTweaks = try sut.load(localConfigurationFilePath)
+        let testTweaks = try sut.load(tweaksFilePath)
         
         let expectedTweaks = [
             Tweak(feature: "general",
@@ -88,25 +88,25 @@ class LocalConfigurationParserTests: XCTestCase {
     
     func test_loadConfiguration_failure_invalidJSON() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidTweakProvider_InvalidJSON"
-        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        let tweaksFilename = "InvalidTweakProvider_InvalidJSON"
+        let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         
-        XCTAssertThrowsError(try sut.load(localConfigurationFilePath))
+        XCTAssertThrowsError(try sut.load(tweaksFilePath))
     }
     
     func test_loadConfiguration_failure_missingValues() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidTweakProvider_MissingValues"
-        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        let tweaksFilename = "InvalidTweakProvider_MissingValues"
+        let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         
-        XCTAssertThrowsError(try sut.load(localConfigurationFilePath))
+        XCTAssertThrowsError(try sut.load(tweaksFilePath))
     }
     
     func test_loadConfiguration_failure_duplicateGeneratedPropertyName() throws {
         let bundle = Bundle(for: type(of: self))
-        let localConfigurationFilename = "InvalidTweakProvider_DuplicateGeneratedPropertyName"
-        let localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
-        XCTAssertThrowsError(try sut.load(localConfigurationFilePath))
+        let tweaksFilename = "InvalidTweakProvider_DuplicateGeneratedPropertyName"
+        let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
+        XCTAssertThrowsError(try sut.load(tweaksFilePath))
     }
     
     func test_typeForValue_String() {

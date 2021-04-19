@@ -5,7 +5,7 @@
 
 import Foundation
 
-typealias LocalConfigurationFormat = [FeatureKey: FeatureFormat]
+typealias TweaksFormat = [FeatureKey: FeatureFormat]
 typealias FeatureFormat = [VariableKey: TweakFormat]
 typealias TweakFormat = [String: Any]
 

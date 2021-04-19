@@ -16,5 +16,5 @@
         }
     ],
     "shouldCacheTweaks": true,
-    "stackName": "GeneratedConfigurationAccessor"
+    "stackName": "GeneratedTweakAccessor"
 }

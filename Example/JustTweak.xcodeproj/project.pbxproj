@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */; };
-		12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */; };
+		12BE93662626DE6C00C1B6C3 /* TweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* TweakAccessor.swift */; };
 		4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */; };
 		4F38E0F1236E1BB60070BD17 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */; };
 		4F43583223E732DD00FD60A7 /* TweakManager+PresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F43583123E732DD00FD60A7 /* TweakManager+PresentationTests.swift */; };
@@ -18,7 +17,8 @@
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F65E89F2629D083009E8C3B /* LocalTweakProvider_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E89E2629D083009E8C3B /* LocalTweakProvider_example.json */; };
 		4F7103EE23859CFE0021E4AF /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7103ED23859CFD0021E4AF /* CustomOperators.swift */; };
-		4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */; };
+		4F796327262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F796325262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift */; };
+		4F796328262DC81C004195E0 /* GeneratedTweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F796326262DC81C004195E0 /* GeneratedTweakAccessor.swift */; };
 		51A8BD6A5E5948F41EEC2E66 /* Pods_JustTweak_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F594AA2DDEDFFA4C835EACCF /* Pods_JustTweak_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -54,8 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+Constants.swift"; sourceTree = "<group>"; };
-		12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
+		12BE93652626DE6B00C1B6C3 /* TweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakAccessor.swift; sourceTree = "<group>"; };
 		2A3A7CF0048CBC9CF1917718 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakManagerCacheTests.swift; sourceTree = "<group>"; };
@@ -68,7 +67,8 @@
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		4F65E89E2629D083009E8C3B /* LocalTweakProvider_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalTweakProvider_example.json; sourceTree = "<group>"; };
 		4F7103ED23859CFD0021E4AF /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
-		4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedConfigurationAccessor.swift; sourceTree = "<group>"; };
+		4F796325262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedTweakAccessor+Constants.swift"; sourceTree = "<group>"; };
+		4F796326262DC81C004195E0 /* GeneratedTweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedTweakAccessor.swift; sourceTree = "<group>"; };
 		4FFF3DC5262B1789002A674D /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,9 +145,9 @@
 		4F65E6142629B82A009E8C3B /* Accessors */ = {
 			isa = PBXGroup;
 			children = (
-				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
-				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
-				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
+				12BE93652626DE6B00C1B6C3 /* TweakAccessor.swift */,
+				4F796326262DC81C004195E0 /* GeneratedTweakAccessor.swift */,
+				4F796325262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift */,
 			);
 			path = Accessors;
 			sourceTree = "<group>";
@@ -504,11 +504,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */,
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
-				120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */,
+				4F796328262DC81C004195E0 /* GeneratedTweakAccessor.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */,
+				12BE93662626DE6C00C1B6C3 /* TweakAccessor.swift in Sources */,
+				4F796327262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

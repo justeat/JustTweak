@@ -10,18 +10,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let configurationAccessor = GeneratedConfigurationAccessor()
+    let tweakAccessor = GeneratedTweakAccessor()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let navigationController = window?.rootViewController as! UINavigationController
         let viewController = navigationController.topViewController as! ViewController
-        viewController.configurationAccessor = configurationAccessor
-        viewController.tweakManager = ConfigurationAccessor.tweakManager
+        viewController.tweakAccessor = tweakAccessor
+        viewController.tweakManager = TweakAccessor.tweakManager
         return true
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if configurationAccessor.shouldShowAlert {
+        if tweakAccessor.shouldShowAlert {
             let alertController = UIAlertController(title: "Hello",
                                                     message: "Welcome to this Demo app!",
                                                     preferredStyle: .alert)

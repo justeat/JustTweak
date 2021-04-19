@@ -1,12 +1,12 @@
 //
-//  ConfigurationAccessor.swift
+//  TweakAccessor.swift
 //  Copyright (c) 2016 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
 import JustTweak
 
-class ConfigurationAccessor {
+class TweakAccessor {
     
     static let tweakManager: TweakManager = {
         var tweakProviders: [TweakProvider] = []

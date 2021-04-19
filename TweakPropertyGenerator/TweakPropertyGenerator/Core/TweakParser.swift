@@ -1,5 +1,5 @@
 //
-//  LocalConfigurationReader.swift
+//  TweakParser.swift
 //  Copyright © 2021 Just Eat Takeaway. All rights reserved.
 //
 
@@ -7,12 +7,12 @@ import Foundation
 
 extension String: Error {}
 
-class LocalConfigurationParser {
+class TweakParser {
     
     func load(_ filePath: String) throws -> [Tweak] {
         let url = URL(fileURLWithPath: filePath)
         let data = try Data(contentsOf: url)
-        guard let content = try JSONSerialization.jsonObject(with: data) as? LocalConfigurationFormat else {
+        guard let content = try JSONSerialization.jsonObject(with: data) as? TweaksFormat else {
             throw "Invalid JSON format for file \(filePath)"
         }
         

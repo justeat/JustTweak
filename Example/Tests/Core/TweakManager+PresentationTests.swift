@@ -12,19 +12,19 @@ import XCTest
 class TweakManager_PresentationTests: XCTestCase {
     
     var tweakManager: TweakManager!
-    let localConfigurationLowPriority: LocalTweakProvider = {
+    let localTweakProviderLowPriority: LocalTweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
-    let localConfigurationHighPriority: LocalTweakProvider = {
+    let localTweakProviderHighPriority: LocalTweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider_override", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
     
-    func test_GivenOneLocalConfiguration_WhenFetchedDisplayableTweaks_ThenAllTweaksSortedByTitleAreReturned() {
-        let tweakProviders: [TweakProvider] = [localConfigurationLowPriority]
+    func test_GivenOneLocalTweakProvider_WhenFetchedDisplayableTweaks_ThenAllTweaksSortedByTitleAreReturned() {
+        let tweakProviders: [TweakProvider] = [localTweakProviderLowPriority]
         tweakManager = TweakManager(tweakProviders: tweakProviders)
         let displayableTweaks = tweakManager.displayableTweaks
         let targetTweaks = [
@@ -67,8 +67,8 @@ class TweakManager_PresentationTests: XCTestCase {
         XCTAssertEqual(displayableTweaks, targetTweaks)
     }
     
-    func test_GivenTwoLocalConfigurations_WhenFetchedDisplayableTweaks_ThenTweaksFromBothConfigurationsSortedByTitleAreReturned() {
-        let tweakProviders: [LocalTweakProvider] = [localConfigurationHighPriority, localConfigurationLowPriority]
+    func test_GivenTwoLocalTweakProviders_WhenFetchedDisplayableTweaks_ThenTweaksFromBothConfigurationsSortedByTitleAreReturned() {
+        let tweakProviders: [LocalTweakProvider] = [localTweakProviderHighPriority, localTweakProviderLowPriority]
         tweakManager = TweakManager(tweakProviders: tweakProviders)
         let displayableTweaks = tweakManager.displayableTweaks
         let targetTweaks = [

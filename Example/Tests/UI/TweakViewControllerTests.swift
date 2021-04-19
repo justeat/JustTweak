@@ -16,10 +16,10 @@ class TweakViewControllerTests: XCTestCase {
         super.setUp()
         let bundle = Bundle(for: TweakViewControllerTests.self)
         let jsonURL = bundle.url(forResource: "test_tweak_provider", withExtension: "json")
-        let localConfiguration = LocalTweakProvider(jsonURL: jsonURL!)
+        let localTweakProvider = LocalTweakProvider(jsonURL: jsonURL!)
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
         let userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: userDefaults)
-        let tweakProviders: [TweakProvider] = [userDefaultsConfiguration, localConfiguration]
+        let tweakProviders: [TweakProvider] = [userDefaultsConfiguration, localTweakProvider]
         tweakManager = TweakManager(tweakProviders: tweakProviders)
         viewController = TweakViewController(style: .plain, tweakManager: tweakManager)
         

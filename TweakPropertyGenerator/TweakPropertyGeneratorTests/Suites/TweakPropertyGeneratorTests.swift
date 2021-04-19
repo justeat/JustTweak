@@ -8,24 +8,24 @@ import XCTest
 class TweakPropertyGeneratorTests: XCTestCase {
     
     private var bundle: Bundle!
-    private let localConfigurationFilename = "ValidTweakProvider_LowPriority"
-    private var localConfigurationFilePath: String!
-    private let generatedClassName = "GeneratedConfigurationAccessor"
+    private let tweaksFilename = "ValidTweakProvider_LowPriority"
+    private var tweaksFilePath: String!
+    private let generatedClassName = "GeneratedTweakAccessorContent"
     private var codeGenerator: TweakPropertyCodeGenerator!
-    private var localConfigurationParser: LocalConfigurationParser!
+    private var localConfigurationParser: TweakParser!
     private var tweaks: [Tweak]!
     
     override func setUpWithError() throws {
         bundle = Bundle(for: type(of: self))
-        localConfigurationFilePath = bundle.path(forResource: localConfigurationFilename, ofType: "json")!
+        tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         codeGenerator = TweakPropertyCodeGenerator()
-        localConfigurationParser = LocalConfigurationParser()
-        tweaks = try localConfigurationParser.load(localConfigurationFilePath)
+        localConfigurationParser = TweakParser()
+        tweaks = try localConfigurationParser.load(tweaksFilePath)
     }
     
     override func tearDownWithError() throws {
         bundle = nil
-        localConfigurationFilePath = nil
+        tweaksFilePath = nil
         codeGenerator = nil
         localConfigurationParser = nil
         tweaks = nil
@@ -34,9 +34,9 @@ class TweakPropertyGeneratorTests: XCTestCase {
     func test_generateConstants_output() throws {
         let configuration = Configuration(tweakProviders: [],
                                           shouldCacheTweaks: true,
-                                          stackName: "GeneratedConfigurationAccessor")
+                                          stackName: "GeneratedTweakAccessorContent")
         let content = codeGenerator.generateConstantsFileContent(tweaks: tweaks, configuration: configuration)
-        let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessor+ConstantsContent", ofType: "")!
+        let testContentPath = bundle.path(forResource: "GeneratedTweakAccessorContent+ConstantsContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         XCTAssertEqual(content, testContent)
     }
@@ -66,12 +66,12 @@ class TweakPropertyGeneratorTests: XCTestCase {
         ]
         let configuration = Configuration(tweakProviders: tweakProviders,
                                           shouldCacheTweaks: true,
-                                          stackName: "GeneratedConfigurationAccessor")
-        let content = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
+                                          stackName: "GeneratedTweakAccessorContent")
+        let content = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                 tweaks: tweaks,
                                                                 configuration: configuration)
         
-        let testContentPath = bundle.path(forResource: "GeneratedConfigurationAccessorContent", ofType: "")!
+        let testContentPath = bundle.path(forResource: "GeneratedTweakAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         
         XCTAssertEqual(content, testContent)

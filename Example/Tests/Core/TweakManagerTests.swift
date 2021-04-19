@@ -9,7 +9,7 @@ import XCTest
 class TweakManagerTests: XCTestCase {
     
     var tweakManager: TweakManager!
-    let localConfiguration: TweakProvider = {
+    let localTweakProvider: TweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
         let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
@@ -21,7 +21,7 @@ class TweakManagerTests: XCTestCase {
         let mockConfiguration = MockTweakProvider()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.TweakManagerTests")!
         userDefaultsConfiguration = UserDefaultsTweakProvider(userDefaults: testUserDefaults)
-        let tweakProviders: [TweakProvider] = [userDefaultsConfiguration, mockConfiguration, localConfiguration]
+        let tweakProviders: [TweakProvider] = [userDefaultsConfiguration, mockConfiguration, localTweakProvider]
         tweakManager = TweakManager(tweakProviders: tweakProviders)
     }
     
@@ -32,7 +32,7 @@ class TweakManagerTests: XCTestCase {
     }
     
     func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
-        let tweakManager = TweakManager(tweakProviders: [localConfiguration])
+        let tweakManager = TweakManager(tweakProviders: [localTweakProvider])
         XCTAssertNil(tweakManager.mutableTweakProvider)
     }
     

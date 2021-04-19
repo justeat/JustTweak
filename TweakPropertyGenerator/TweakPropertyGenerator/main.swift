@@ -9,7 +9,7 @@ import ArgumentParser
 struct TweakPropertyGenerator: ParsableCommand {
     
     @Option(name: .shortAndLong, help: "The local configuration file path.")
-    var localConfigurationFilePath: String
+    var tweaksFilePath: String
     
     @Option(name: .shortAndLong, help: "The output folder.")
     var outputFolder: String
@@ -17,8 +17,8 @@ struct TweakPropertyGenerator: ParsableCommand {
     @Option(name: .shortAndLong, help: "The configuration file path.")
     var configurationFilePath: String
     
-    private var localConfigurationFilename: String {
-        let url = URL(fileURLWithPath: localConfigurationFilePath)
+    private var tweaksFilename: String {
+        let url = URL(fileURLWithPath: tweaksFilePath)
         return String(url.lastPathComponent.split(separator: ".").first!)
     }
     
@@ -31,8 +31,8 @@ struct TweakPropertyGenerator: ParsableCommand {
     
     func run() throws {
         let codeGenerator = TweakPropertyCodeGenerator()
-        let localConfigurationParser = LocalConfigurationParser()
-        let tweaks = try localConfigurationParser.load(localConfigurationFilePath)
+        let localConfigurationParser = TweakParser()
+        let tweaks = try localConfigurationParser.load(tweaksFilePath)
         let configuration = loadConfigurationFromJson()
         
         writeConstantsFile(codeGenerator: codeGenerator,
@@ -55,7 +55,7 @@ extension TweakPropertyGenerator {
                                    configuration: Configuration) {
         let fileName = "\(configuration.stackName).swift"
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
-        let constants = codeGenerator.generateAccessorFileContent(localConfigurationFilename: localConfigurationFilename,
+        let constants = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                   tweaks: tweaks,
                                                                   configuration: configuration)
         try! constants.write(to: url, atomically: true, encoding: .utf8)

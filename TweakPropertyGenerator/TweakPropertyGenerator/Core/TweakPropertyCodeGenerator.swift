@@ -30,7 +30,7 @@ extension TweakPropertyCodeGenerator {
         return content
     }
     
-    func generateAccessorFileContent(localConfigurationFilename: String,
+    func generateAccessorFileContent(tweaksFilename: String,
                                      tweaks: [Tweak],
                                      configuration: Configuration) -> String {
         let template = self.accessorTemplate(with: configuration.stackName)
