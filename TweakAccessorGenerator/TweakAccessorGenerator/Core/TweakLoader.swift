@@ -53,9 +53,6 @@ class TweakLoader {
         guard let title = dictionary["Title"] as? String else {
             throw "Missing 'Title' value in dictionary \(dictionary)"
         }
-        guard let description = dictionary["Description"] as? String else {
-            throw "Missing 'Description' value in dictionary \(dictionary)"
-        }
         guard let group = dictionary["Group"] as? String else {
             throw "Missing 'Group' value in dictionary \(dictionary)"
         }
@@ -65,7 +62,7 @@ class TweakLoader {
         return Tweak(feature: feature,
                      variable: variable,
                      title: title,
-                     description: description,
+                     description: dictionary["Description"] as? String,
                      group: group,
                      valueType: try type(for: value),
                      propertyName: dictionary["GeneratedPropertyName"] as? String)
