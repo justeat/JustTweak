@@ -115,7 +115,7 @@ In the case whereby custom tweak providers are needed, their setup code should b
 
 ```
 script_phase :name => '<your_app_target_name>',
-             :script => '$PODS_ROOT/JustTweak/Assets/TweakPropertyGenerator.bundle/TweakPropertyGenerator \
+             :script => '$PODS_ROOT/JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
              -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
              -c $SRCROOT/<path_to_the_configuration_json_file>',

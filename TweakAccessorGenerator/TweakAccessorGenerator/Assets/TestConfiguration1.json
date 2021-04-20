@@ -1,0 +1,20 @@
+{
+    "tweakProviders": [
+        {
+            "type": "UserDefaultsTweakProvider",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_TopPriority_example",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_example"
+        }
+    ],
+    "shouldCacheTweaks": true,
+    "accessorName": "GeneratedTweakAccessor"
+}

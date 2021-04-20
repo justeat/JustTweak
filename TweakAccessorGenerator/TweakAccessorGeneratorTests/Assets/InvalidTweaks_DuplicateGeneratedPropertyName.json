@@ -1,0 +1,26 @@
+{
+  "ui_customization": {
+    "label_text": {
+      "Title": "Label Text",
+      "Description": "the title of the main label",
+      "Group": "UI Customization",
+      "Value": "Test value",
+      "GeneratedPropertyName": "definitiveAnswer"
+    }
+  },
+  "general": {
+    "answer_to_the_universe": {
+      "Title": "Definitive answer",
+      "Description": "Answer to the Ultimate Question of Life, the Universe, and Everything",
+      "Group": "General",
+      "Value": 42,
+      "GeneratedPropertyName": "definitiveAnswer"
+    },
+    "tap_to_change_color_enabled": {
+      "Title": "Tap to change views color",
+      "Description": "change the colour of the main view when receiving a tap",
+      "Group": "General",
+      "Value": true
+    }
+  }
+}
