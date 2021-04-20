@@ -32,7 +32,7 @@ public class OptimizelyTweakProvider: Configuration {
             case (nil, let client):
                 strongSelf.optimizelyClient = client
                 let notificationCentre = NotificationCenter.default
-                notificationCentre.post(name: TweakConfigurationDidChangeNotification, object: strongSelf)
+                notificationCentre.post(name: TweakProviderDidChangeNotification, object: strongSelf)
             case (let error, _):
                 if let error = error {
                     strongSelf.logClosure?("Couldn't initialize Optimizely manager. \(error.localizedDescription)", .error)

@@ -73,8 +73,8 @@ extension UserDefaultsTweakProvider {
         DispatchQueue.main.async {
             let notificationCenter = NotificationCenter.default
             let tweak = Tweak(feature: feature, variable: variable, value: value)
-            let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
-            notificationCenter.post(name: TweakConfigurationDidChangeNotification,
+            let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
+            notificationCenter.post(name: TweakProviderDidChangeNotification,
                                     object: self,
                                     userInfo: userInfo)
         }

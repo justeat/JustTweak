@@ -42,7 +42,7 @@ final public class TweakManager {
             self.tweakProviders[index].logClosure = logClosure
         }
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweakConfigurationDidChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweakProviderDidChangeNotification, object: nil)
     }
     
     deinit {
@@ -161,10 +161,10 @@ extension TweakManager {
         self.deregisterFromConfigurationsUpdates(object)
         queue.sync {
             let queue = OperationQueue.main
-            let name = TweakConfigurationDidChangeNotification
+            let name = TweakProviderDidChangeNotification
             let notificationsCenter = NotificationCenter.default
             let observer = notificationsCenter.addObserver(forName: name, object: nil, queue: queue) { notification in
-                guard let tweak = notification.userInfo?[TweakConfigurationDidChangeNotificationTweakKey] as? Tweak else { return }
+                guard let tweak = notification.userInfo?[TweakProviderDidChangeNotificationTweakKey] as? Tweak else { return }
                 closure(tweak)
             }
             observersMap[object] = observer

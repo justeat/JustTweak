@@ -72,8 +72,8 @@ class TweakManagerTests: XCTestCase {
             didCallClosure = true
         }
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
-        let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
-        NotificationCenter.default.post(name: TweakConfigurationDidChangeNotification, object: self, userInfo: userInfo)
+        let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
+        NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertTrue(didCallClosure)
     }
     
@@ -84,8 +84,8 @@ class TweakManagerTests: XCTestCase {
         }
         tweakManager.deregisterFromConfigurationsUpdates(self)
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
-        let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
-        NotificationCenter.default.post(name: TweakConfigurationDidChangeNotification, object: self, userInfo: userInfo)
+        let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
+        NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertFalse(didCallClosure)
     }
 }

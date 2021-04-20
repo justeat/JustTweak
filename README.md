@@ -216,7 +216,7 @@ See `TweakAccessor.swift` for more info.
 The `TweakManager` provides the option to cache the tweak values in order to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
 
 - call the `resetCache` method on the  `TweakManager`
-- post a `TweakConfigurationDidChangeNotification` notification
+- post a `TweakProviderDidChangeNotification` notification
 
 
 ### Update a mutable tweak provider at runtime
@@ -244,7 +244,7 @@ override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.defaultCenter().addObserver(self,
                                                    selector: #selector(updateUI),
-                                                   name: TweakConfigurationDidChangeNotification,
+                                                   name: TweakProviderDidChangeNotification,
                                                    object: nil)
 }
 

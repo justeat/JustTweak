@@ -23,5 +23,5 @@ public protocol MutableTweakProvider: TweakProvider {
     func deleteValue(feature: String, variable: String)
 }
 
-public let TweakConfigurationDidChangeNotification = Notification.Name("TweakConfigurationDidChangeNotification")
-public let TweakConfigurationDidChangeNotificationTweakKey = "TweakConfigurationDidChangeNotificationTweakKey"
+public let TweakProviderDidChangeNotification = Notification.Name("TweakProviderDidChangeNotification")
+public let TweakProviderDidChangeNotificationTweakKey = "TweakProviderDidChangeNotificationTweakKey"
