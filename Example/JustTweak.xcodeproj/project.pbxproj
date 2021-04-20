@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12BE93662626DE6C00C1B6C3 /* TweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* TweakAccessor.swift */; };
+		120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */; };
+		12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */; };
+		12EB283F262F321500A7A89A /* ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB283E262F321500A7A89A /* ExampleProtocol.swift */; };
+		12EB2864262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB2863262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift */; };
 		4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */; };
 		4F38E0F1236E1BB60070BD17 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */; };
 		4F43583223E732DD00FD60A7 /* TweakManager+PresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F43583123E732DD00FD60A7 /* TweakManager+PresentationTests.swift */; };
@@ -52,7 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12BE93652626DE6B00C1B6C3 /* TweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakAccessor.swift; sourceTree = "<group>"; };
+		120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+Constants.swift"; sourceTree = "<group>"; };
+		12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
+		12EB283E262F321500A7A89A /* ExampleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProtocol.swift; sourceTree = "<group>"; };
+		12EB2863262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+ExampleProtocol.swift"; sourceTree = "<group>"; };
 		2A3A7CF0048CBC9CF1917718 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakManagerCacheTests.swift; sourceTree = "<group>"; };
@@ -119,7 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F30EA6A21ADA06A00AECF77 /* TweakProviders */ = {
+		12EB2842262F322000A7A89A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				12EB283E262F321500A7A89A /* ExampleProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4F30EA6A21ADA06A00AECF77 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
 				4F30EA6B21ADA06A00AECF77 /* FirebaseTweakProvider.swift */,
@@ -141,9 +155,10 @@
 		4F65E6142629B82A009E8C3B /* Accessors */ = {
 			isa = PBXGroup;
 			children = (
-				12BE93652626DE6B00C1B6C3 /* TweakAccessor.swift */,
-				4F796326262DC81C004195E0 /* GeneratedTweakAccessor.swift */,
-				4F796325262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift */,
+				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
+				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
+				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
+				12EB2863262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift */,
 			);
 			path = Accessors;
 			sourceTree = "<group>";
@@ -213,7 +228,8 @@
 				4F65E6182629B880009E8C3B /* Assets */,
 				4F65E61B2629B8A2009E8C3B /* Code */,
 				4FFF3DC4262B1789002A674D /* CodeGeneration */,
-				4F30EA6A21ADA06A00AECF77 /* TweakProviders */,
+				4F30EA6A21ADA06A00AECF77 /* Configurations */,
+				12EB2842262F322000A7A89A /* Protocols */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				4F65E6172629B86F009E8C3B /* UI */,
 			);
@@ -496,6 +512,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12EB283F262F321500A7A89A /* ExampleProtocol.swift in Sources */,
+				4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */,
+				12EB2864262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */,
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
 				4F796328262DC81C004195E0 /* GeneratedTweakAccessor.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
