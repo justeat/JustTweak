@@ -8,7 +8,7 @@ import XCTest
 class TweakPropertyGeneratorTests: XCTestCase {
     
     private var bundle: Bundle!
-    private let tweaksFilename = "ValidTweakProvider_LowPriority"
+    private let tweaksFilename = "ValidTweaks_LowPriority"
     private var tweaksFilePath: String!
     private let generatedClassName = "GeneratedTweakAccessor"
     private var codeGenerator: TweakPropertyCodeGenerator!
@@ -34,7 +34,7 @@ class TweakPropertyGeneratorTests: XCTestCase {
     func test_generateConstants_output() throws {
         let configuration = Configuration(tweakProviders: [],
                                           shouldCacheTweaks: true,
-                                          stackName: "GeneratedTweakAccessorContent")
+                                          accessorName: "GeneratedTweakAccessorContent")
         let content = codeGenerator.generateConstantsFileContent(tweaks: tweaks, configuration: configuration)
         let testContentPath = bundle.path(forResource: "GeneratedTweakAccessor+ConstantsContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
@@ -56,17 +56,17 @@ class TweakPropertyGeneratorTests: XCTestCase {
                           propertyName: "firebaseTweakProvider",
                           macros: ["CONFIGURATION_APPSTORE"]),
             TweakProvider(type: "LocalTweakProvider",
-                          parameter: "ValidTweakProvider_TopPriority",
+                          parameter: "ValidTweaks_TopPriority",
                           propertyName: nil,
                           macros: ["DEBUG"]),
             TweakProvider(type: "LocalTweakProvider",
-                          parameter: "ValidTweakProvider_LowPriority",
+                          parameter: "ValidTweaks_LowPriority",
                           propertyName: nil,
                           macros: nil)
         ]
         let configuration = Configuration(tweakProviders: tweakProviders,
                                           shouldCacheTweaks: true,
-                                          stackName: "GeneratedTweakAccessorContent")
+                                          accessorName: "GeneratedTweakAccessorContent")
         let content = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                 tweaks: tweaks,
                                                                 configuration: configuration)

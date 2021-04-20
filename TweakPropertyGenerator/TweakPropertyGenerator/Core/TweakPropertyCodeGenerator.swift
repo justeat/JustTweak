@@ -20,7 +20,7 @@ extension TweakPropertyCodeGenerator {
     
     func generateConstantsFileContent(tweaks: [Tweak],
                                       configuration: Configuration) -> String {
-        let template = self.constantsTemplate(with: configuration.stackName)
+        let template = self.constantsTemplate(with: configuration.accessorName)
         let featureConstants = self.featureConstantsCodeBlock(with: tweaks)
         let variableConstants = self.variableConstantsCodeBlock(with: tweaks)
         
@@ -33,7 +33,7 @@ extension TweakPropertyCodeGenerator {
     func generateAccessorFileContent(tweaksFilename: String,
                                      tweaks: [Tweak],
                                      configuration: Configuration) -> String {
-        let template = self.accessorTemplate(with: configuration.stackName)
+        let template = self.accessorTemplate(with: configuration.accessorName)
         let tweakManager = self.tweakManagerCodeBlock(with: configuration)
         let classContent = self.classContent(with: tweaks)
         

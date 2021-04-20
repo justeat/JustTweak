@@ -21,7 +21,7 @@ class TweakLoaderTests: XCTestCase {
     
     func test_loadConfiguration_success() throws {
         let bundle = Bundle(for: type(of: self))
-        let tweaksFilename = "TweakProvider"
+        let tweaksFilename = "Tweaks"
         let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         
         let testTweaks = try sut.load(tweaksFilePath)
@@ -88,7 +88,7 @@ class TweakLoaderTests: XCTestCase {
     
     func test_loadConfiguration_failure_invalidJSON() throws {
         let bundle = Bundle(for: type(of: self))
-        let tweaksFilename = "InvalidTweakProvider_InvalidJSON"
+        let tweaksFilename = "InvalidTweaks_InvalidJSON"
         let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         
         XCTAssertThrowsError(try sut.load(tweaksFilePath))
@@ -96,7 +96,7 @@ class TweakLoaderTests: XCTestCase {
     
     func test_loadConfiguration_failure_missingValues() throws {
         let bundle = Bundle(for: type(of: self))
-        let tweaksFilename = "InvalidTweakProvider_MissingValues"
+        let tweaksFilename = "InvalidTweaks_MissingValues"
         let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         
         XCTAssertThrowsError(try sut.load(tweaksFilePath))
@@ -104,7 +104,7 @@ class TweakLoaderTests: XCTestCase {
     
     func test_loadConfiguration_failure_duplicateGeneratedPropertyName() throws {
         let bundle = Bundle(for: type(of: self))
-        let tweaksFilename = "InvalidTweakProvider_DuplicateGeneratedPropertyName"
+        let tweaksFilename = "InvalidTweaks_DuplicateGeneratedPropertyName"
         let tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
         XCTAssertThrowsError(try sut.load(tweaksFilePath))
     }

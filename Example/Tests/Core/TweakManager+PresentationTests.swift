@@ -14,12 +14,12 @@ class TweakManager_PresentationTests: XCTestCase {
     var tweakManager: TweakManager!
     let localTweakProviderLowPriority: LocalTweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider", withExtension: "json")!
+        let jsonConfigurationURL = bundle.url(forResource: "test_tweaks", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
     let localTweakProviderHighPriority: LocalTweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_tweak_provider_override", withExtension: "json")!
+        let jsonConfigurationURL = bundle.url(forResource: "test_tweaks_override", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
     

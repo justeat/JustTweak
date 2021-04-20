@@ -18,7 +18,7 @@ struct Tweak: Equatable {
 struct Configuration: Decodable {
     let tweakProviders: [TweakProvider]
     let shouldCacheTweaks: Bool
-    let stackName: String
+    let accessorName: String
 }
 
 struct TweakProvider: Decodable {

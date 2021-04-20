@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-t $SRCROOT/../Example/JustTweak/TweakProviders/LocalTweakProvider_example.json"
+            argument = "-t $SRCROOT/../Example/JustTweak/TweakProviders/LocalTweaks_example.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

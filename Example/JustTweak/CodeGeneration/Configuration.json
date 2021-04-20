@@ -7,14 +7,14 @@
         },
         {
             "type": "LocalTweakProvider",
-            "parameter": "LocalTweakProvider_TopPriority_example",
+            "parameter": "LocalTweaks_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
             "type": "LocalTweakProvider",
-            "parameter": "LocalTweakProvider_example"
+            "parameter": "LocalTweaks_example"
         }
     ],
     "shouldCacheTweaks": true,
-    "stackName": "GeneratedTweakAccessor"
+    "accessorName": "GeneratedTweakAccessor"
 }

@@ -12,7 +12,7 @@ class LocalTweakProviderTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        tweakProvider = tweakProviderWithFileNamed("test_tweak_provider")!
+        tweakProvider = tweakProviderWithFileNamed("test_tweaks")!
     }
     
     override func tearDown() {

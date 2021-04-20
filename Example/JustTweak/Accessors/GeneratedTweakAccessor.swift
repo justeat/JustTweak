@@ -19,13 +19,13 @@ class GeneratedTweakAccessor {
 
         // LocalTweakProvider
         #if DEBUG
-        let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweakProvider_TopPriority_example", withExtension: "json")!
+        let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweaks_TopPriority_example", withExtension: "json")!
         let localTweakProvider_1 = LocalTweakProvider(jsonURL: jsonFileURL_1)
         tweakProviders.append(localTweakProvider_1)
         #endif
 
         // LocalTweakProvider
-        let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
+        let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweaks_example", withExtension: "json")!
         let localTweakProvider_2 = LocalTweakProvider(jsonURL: jsonFileURL_2)
         tweakProviders.append(localTweakProvider_2)
 

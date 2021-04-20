@@ -31,7 +31,7 @@ pod "JustTweak"
 
 ### Integration
 
-- Define a `LocalTweakProvider` JSON file including your features. Refer to `LocalTweakProvider_example.json` for a starting point.
+- Define a `LocalTweakProvider` JSON file including your features. Refer to `LocalTweaks_example.json` for a starting point.
 - Configure the stack
 
 To configure the stack, you have two options: 
@@ -61,7 +61,7 @@ static let tweakManager: TweakManager = {
     tweakProviders.append(firebaseTweakProvider)
 
     // Local JSON-based TweakProvider (default TweakProvider)
-    let jsonFileURL = Bundle.main.url(forResource: "LocalTweakProvider_example", withExtension: "json")!
+    let jsonFileURL = Bundle.main.url(forResource: "LocalTweaks_example", withExtension: "json")!
     let localTweakProvider = LocalTweakProvider(jsonURL: jsonFileURL)
     tweakProviders.append(localTweakProvider)
     
@@ -85,16 +85,16 @@ static let tweakManager: TweakManager = {
         },
         {
             "type": "LocalTweakProvider",
-            "parameter": "LocalTweakProvider_TopPriority_example",
+            "parameter": "LocalTweaks_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
             "type": "LocalTweakProvider",
-            "parameter": "LocalTweakProvider_example"
+            "parameter": "LocalTweaks_example"
         }
     ],
     "shouldCacheTweaks": true,
-    "stackName": "GeneratedTweakAccessor"
+    "accessorName": "GeneratedTweakAccessor"
 }
 ```
 

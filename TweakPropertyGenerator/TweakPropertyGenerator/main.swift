@@ -53,7 +53,7 @@ extension TweakPropertyGenerator {
                                    tweaks: [Tweak],
                                    outputFolder: String,
                                    configuration: Configuration) {
-        let fileName = "\(configuration.stackName).swift"
+        let fileName = "\(configuration.accessorName).swift"
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
         let constants = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                   tweaks: tweaks,
@@ -65,7 +65,7 @@ extension TweakPropertyGenerator {
                                     tweaks: [Tweak],
                                     outputFolder: String,
                                     configuration: Configuration) {
-        let fileName = "\(configuration.stackName)+Constants.swift"
+        let fileName = "\(configuration.accessorName)+Constants.swift"
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
         let constants = codeGenerator.generateConstantsFileContent(tweaks: tweaks,
                                                                    configuration: configuration)
