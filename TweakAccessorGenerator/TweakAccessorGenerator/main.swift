@@ -8,8 +8,8 @@ import ArgumentParser
 
 struct TweakAccessorGenerator: ParsableCommand {
     
-    @Option(name: .shortAndLong, help: "The local configuration file path.")
-    var tweaksFilePath: String
+    @Option(name: .shortAndLong, help: "The local tweaks file path.")
+    var localTweaksFilePath: String
     
     @Option(name: .shortAndLong, help: "The output folder.")
     var outputFolder: String
@@ -18,7 +18,7 @@ struct TweakAccessorGenerator: ParsableCommand {
     var configurationFilePath: String
     
     private var tweaksFilename: String {
-        let url = URL(fileURLWithPath: tweaksFilePath)
+        let url = URL(fileURLWithPath: localTweaksFilePath)
         return String(url.lastPathComponent.split(separator: ".").first!)
     }
     
@@ -32,7 +32,7 @@ struct TweakAccessorGenerator: ParsableCommand {
     func run() throws {
         let codeGenerator = TweakAccessorCodeGenerator()
         let tweakLoader = TweakLoader()
-        let tweaks = try tweakLoader.load(tweaksFilePath)
+        let tweaks = try tweakLoader.load(localTweaksFilePath)
         let configuration = loadConfigurationFromJson()
         
         writeConstantsFile(codeGenerator: codeGenerator,
