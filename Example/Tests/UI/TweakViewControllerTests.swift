@@ -15,7 +15,7 @@ class TweakViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let bundle = Bundle(for: TweakViewControllerTests.self)
-        let jsonURL = bundle.url(forResource: "test_tweaks", withExtension: "json")
+        let jsonURL = bundle.url(forResource: "LocalTweaks_test", withExtension: "json")
         let localTweakProvider = LocalTweakProvider(jsonURL: jsonURL!)
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
         let userDefaultsTweakProvider = UserDefaultsTweakProvider(userDefaults: userDefaults)

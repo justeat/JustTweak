@@ -11,7 +11,7 @@ class TweakManagerTests: XCTestCase {
     var tweakManager: TweakManager!
     let localTweakProvider: TweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_tweaks", withExtension: "json")!
+        let jsonConfigurationURL = bundle.url(forResource: "LocalTweaks_test", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
     var userDefaultsTweakProvider: UserDefaultsTweakProvider!
