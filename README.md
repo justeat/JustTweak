@@ -104,8 +104,7 @@ In the case whereby custom tweak providers are needed, their setup code should b
 ...
 {
     "type": "CustomTweakProvider",
-    "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true",
-    "propertyName": "fc",
+    "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true\n\t\ttweakProviders.append(fc)",
     "macros": ["CONFIGURATION_APPSTORE"]
 },
 ...
