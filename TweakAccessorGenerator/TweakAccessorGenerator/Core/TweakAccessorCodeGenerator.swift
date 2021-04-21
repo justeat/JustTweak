@@ -164,27 +164,38 @@ extension TweakAccessorCodeGenerator {
             }
             
             switch tweakProvider.type {
-            case "UserDefaultsTweakProvider":
+            case "EphemeralTweakProvider":
                 let tweakProviderAllocation =
                     """
-                            let \(tweakProviderName) = \(tweakProvider.type)(userDefaults: \(tweakProvider.parameter))
+                            let \(tweakProviderName) = NSMutableDictionary()
+                            tweakProviders.append(\(tweakProviderName))
+                    """
+                generatedString.append(tweakProviderAllocation)
+
+            case "UserDefaultsTweakProvider":
+                assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
+                let tweakProviderAllocation =
+                    """
+                            let \(tweakProviderName) = \(tweakProvider.type)(userDefaults: \(tweakProvider.parameter!))
                             tweakProviders.append(\(tweakProviderName))
                     """
                 generatedString.append(tweakProviderAllocation)
                 
             case "LocalTweakProvider":
+                assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
                 let tweakProviderAllocation =
                     """
-                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(tweakProvider.parameter)\", withExtension: "json")!
+                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(tweakProvider.parameter!)\", withExtension: "json")!
                             let \(tweakProviderName) = \(tweakProvider.type)(jsonURL: \(jsonFileURL))
                             tweakProviders.append(\(tweakProviderName))
                     """
                 generatedString.append(tweakProviderAllocation)
                 
             case "CustomTweakProvider":
+                assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
                 let tweakProviderAllocation =
                     """
-                            \(tweakProvider.parameter)
+                            \(tweakProvider.parameter!)
                     """
                 generatedString.append(tweakProviderAllocation)
                 

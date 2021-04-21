@@ -79,6 +79,10 @@ static let tweakManager: TweakManager = {
 {
     "tweakProviders": [
         {
+            "type": "EphemeralTweakProvider",
+            "macros": ["DEBUG", "CONFIGURATION_UI_TESTS"]
+        },
+        {
             "type": "UserDefaultsTweakProvider",
             "parameter": "UserDefaults.standard",
             "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
@@ -98,7 +102,14 @@ static let tweakManager: TweakManager = {
 }
 ```
 
-In the case whereby custom tweak providers are needed, their setup code should be implemented in the configuration. E.g.
+Supported types are:
+
+- `EphemeralTweakProvider`
+- `UserDefaultsTweakProvider`
+- `LocalTweakProvider`
+- `CustomTweakProvider`
+
+In the case whereby custom tweak providers are needed, their setup code should be implemented in the configuration. It's important to include the `tweakProviders.append(<#property_name#>)` statement that will be included in the generated code. E.g.
 
 ```
 ...

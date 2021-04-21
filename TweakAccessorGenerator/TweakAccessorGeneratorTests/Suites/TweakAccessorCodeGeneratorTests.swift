@@ -43,25 +43,23 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
     
     func test_generateAccessor_output() throws {
         let tweakProviders = [
+            TweakProvider(type: "EphemeralTweakProvider",
+                          parameter: nil,
+                          macros: ["DEBUG", "CONFIGURATION_UI_TESTS"]),
             TweakProvider(type: "UserDefaultsTweakProvider",
                           parameter: "UserDefaults.standard",
-                          propertyName: nil,
                           macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
             TweakProvider(type: "CustomTweakProvider",
                           parameter: "let optimizelyTweakProvider = OptimizelyTweakProvider()\n        optimizelyTweakProvider.someValue = 42\n        tweakProviders.append(optimizelyTweakProvider)",
-                          propertyName: "optimizelyTweakProvider",
                           macros: ["CONFIGURATION_APPSTORE"]),
             TweakProvider(type: "CustomTweakProvider",
                           parameter: "let firebaseTweakProvider = FirebaseTweakProvider()\n        firebaseTweakProvider.someValue = true\n        tweakProviders.append(firebaseTweakProvider)",
-                          propertyName: "firebaseTweakProvider",
                           macros: ["CONFIGURATION_APPSTORE"]),
             TweakProvider(type: "LocalTweakProvider",
                           parameter: "ValidTweaks_TopPriority",
-                          propertyName: nil,
                           macros: ["DEBUG"]),
             TweakProvider(type: "LocalTweakProvider",
                           parameter: "ValidTweaks_LowPriority",
-                          propertyName: nil,
                           macros: nil)
         ]
         let configuration = Configuration(tweakProviders: tweakProviders,

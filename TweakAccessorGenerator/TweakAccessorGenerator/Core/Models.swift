@@ -23,7 +23,6 @@ struct Configuration: Decodable {
 
 struct TweakProvider: Decodable {
     let type: String
-    let parameter: String
-    let propertyName: String?
+    let parameter: String?
     let macros: [String]?
 }
