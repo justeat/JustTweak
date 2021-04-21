@@ -208,7 +208,6 @@
 				12273D132625D6BE00732559 /* Sources */,
 				12273D142625D6BE00732559 /* Frameworks */,
 				12273D152625D6BE00732559 /* CopyFiles */,
-				4F6D511B262EF67300E772C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -295,26 +294,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4F6D511B262EF67300E772C9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp $SYMROOT/Release/TweakAccessorGenerator \\\n$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		12273D132625D6BE00732559 /* Sources */ = {
