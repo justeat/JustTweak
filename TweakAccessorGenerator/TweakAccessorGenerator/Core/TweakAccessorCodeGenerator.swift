@@ -146,7 +146,7 @@ extension TweakAccessorCodeGenerator {
             let value = grouping[tweakProvider.type]!
             let index = currentIndexByConf[tweakProvider.type]!
             let tweakProvider = value[index]
-            let tweakProviderName = "\(tweakProvider.type.lowercaseFirstChar())_\(index+1)"
+            let tweakProviderName = "\(tweakProvider.type.lowercasedFirstChar())_\(index+1)"
             var generatedString: [String] = []
             let macros = tweakProvider.macros?.joined(separator: " || ")
             
@@ -182,11 +182,9 @@ extension TweakAccessorCodeGenerator {
                 generatedString.append(tweakProviderAllocation)
                 
             case "CustomTweakProvider":
-                assert(tweakProvider.propertyName != nil, "Missing value 'propertyName' for TweakProvider '\(tweakProvider)'")
                 let tweakProviderAllocation =
                     """
                             \(tweakProvider.parameter)
-                            tweakProviders.append(\(tweakProvider.propertyName!))
                     """
                 generatedString.append(tweakProviderAllocation)
                 

@@ -7,14 +7,12 @@
         },
         {
             "type": "CustomConfiguration",
-            "parameter": "let oc = OptimizelyTweakProvider()\n\toc.someValue = 42",
-            "propertyName": "oc",
+            "parameter": "let oc = OptimizelyTweakProvider()\n\toc.someValue = 42\n\ttweakProviders.append(oc)",
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {
             "type": "CustomConfiguration",
-            "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true",
-            "propertyName": "fc",
+            "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true\n\ttweakProviders.append(fc)",
             "macros": ["CONFIGURATION_APPSTORE"]
         },
         {

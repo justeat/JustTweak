@@ -127,9 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				12A3231A2630365500468F8C /* GeneratedConfigurationAccessor+ExampleProtocol.swift */,
+				12A3231D2630365500468F8C /* GeneratedTweakAccessor.swift */,
 				12A3231B2630365500468F8C /* GeneratedTweakAccessor+Constants.swift */,
 				12A3231C2630365500468F8C /* TweakAccessor.swift */,
-				12A3231D2630365500468F8C /* GeneratedTweakAccessor.swift */,
 			);
 			path = Accessors;
 			sourceTree = "<group>";
