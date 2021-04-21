@@ -1,20 +1,20 @@
 {
-    "configurations": [
+    "tweakProviders": [
         {
-            "type": "UserDefaultsConfiguration",
+            "type": "UserDefaultsTweakProvider",
             "parameter": "UserDefaults.standard",
             "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration_TopPriority",
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_TopPriority_example",
             "macros": ["DEBUG"]
         },
         {
-            "type": "LocalConfiguration",
-            "parameter": "ExampleConfiguration"
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_example"
         }
     ],
     "shouldCacheTweaks": true,
-    "stackName": "GeneratedConfigurationAccessor"
+    "accessorName": "GeneratedTweakAccessor"
 }

@@ -1,0 +1,32 @@
+{
+    "tweakProviders": [
+        {
+            "type": "UserDefaultsTweakProvider",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "CustomConfiguration",
+            "parameter": "let oc = OptimizelyTweakProvider()\n\toc.someValue = 42",
+            "propertyName": "oc",
+            "macros": ["CONFIGURATION_APPSTORE"]
+        },
+        {
+            "type": "CustomConfiguration",
+            "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true",
+            "propertyName": "fc",
+            "macros": ["CONFIGURATION_APPSTORE"]
+        },
+        {
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_TopPriority_example",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_example"
+        }
+    ],
+    "shouldCacheTweaks": true,
+    "accessorName": "GeneratedTweakAccessor"
+}

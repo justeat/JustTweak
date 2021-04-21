@@ -9,8 +9,8 @@ import JustTweak
 class Accessor {
     
     static let tweakManager: TweakManager = {
-        let ephemeralConfiguration: MutableConfiguration = NSMutableDictionary()
-        return TweakManager(configurations: [ephemeralConfiguration])
+        let ephemeralTweakProvider: MutableTweakProvider = NSMutableDictionary()
+        return TweakManager(tweakProviders: [ephemeralTweakProvider])
     }()
     
     @FallbackTweakProperty(fallbackValue: "default",

@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var yellowView: UIView!
     @IBOutlet var mainLabel: UILabel!
     
-    var configurationAccessor: GeneratedConfigurationAccessor!
+    var tweakAccessor: GeneratedTweakAccessor!
     var tweakManager: TweakManager!
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
@@ -36,11 +36,11 @@ class ViewController: UIViewController {
     
     internal func updateView() {
         setUpGestures()
-        redView.isHidden = !configurationAccessor.canShowRedView
-        greenView.isHidden = !configurationAccessor.canShowGreenView
-        yellowView.isHidden = !configurationAccessor.canShowYellowView
-        mainLabel.text = configurationAccessor.labelText
-        redView.alpha = CGFloat(configurationAccessor.redViewAlpha)
+        redView.isHidden = !tweakAccessor.canShowRedView
+        greenView.isHidden = !tweakAccessor.canShowGreenView
+        yellowView.isHidden = !tweakAccessor.canShowYellowView
+        mainLabel.text = tweakAccessor.labelText
+        redView.alpha = CGFloat(tweakAccessor.redViewAlpha)
     }
     
     internal func setUpGestures() {
@@ -48,13 +48,13 @@ class ViewController: UIViewController {
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(changeViewColor))
             view.addGestureRecognizer(tapGestureRecognizer)
         }
-        tapGestureRecognizer.isEnabled = configurationAccessor.isTapGestureToChangeColorEnabled
+        tapGestureRecognizer.isEnabled = tweakAccessor.isTapGestureToChangeColorEnabled
     }
     
     @objc internal func setAndShowMeaningOfLife() {
-        configurationAccessor.meaningOfLife = Bool.random() ? 42 : 108
+        tweakAccessor.meaningOfLife = Bool.random() ? 42 : 108
         let alertController = UIAlertController(title: "The Meaning of Life",
-                                                message: String(describing: configurationAccessor.meaningOfLife),
+                                                message: String(describing: tweakAccessor.meaningOfLife),
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)

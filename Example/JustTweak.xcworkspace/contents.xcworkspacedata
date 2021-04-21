@@ -5,7 +5,7 @@
       location = "group:JustTweak.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../TweakPropertyGenerator/TweakPropertyGenerator.xcodeproj">
+      location = "group:../TweakAccessorGenerator/TweakAccessorGenerator.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

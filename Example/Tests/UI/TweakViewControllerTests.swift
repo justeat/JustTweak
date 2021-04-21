@@ -15,12 +15,12 @@ class TweakViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let bundle = Bundle(for: TweakViewControllerTests.self)
-        let jsonURL = bundle.url(forResource: "test_configuration", withExtension: "json")
-        let localConfiguration = LocalConfiguration(jsonURL: jsonURL!)
+        let jsonURL = bundle.url(forResource: "LocalTweaks_test", withExtension: "json")
+        let localTweakProvider = LocalTweakProvider(jsonURL: jsonURL!)
         let userDefaults = UserDefaults(suiteName: "com.JustTweaks.Tests\(NSDate.timeIntervalSinceReferenceDate)")!
-        let userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: userDefaults)
-        let configurations: [Configuration] = [userDefaultsConfiguration, localConfiguration]
-        tweakManager = TweakManager(configurations: configurations)
+        let userDefaultsTweakProvider = UserDefaultsTweakProvider(userDefaults: userDefaults)
+        let tweakProviders: [TweakProvider] = [userDefaultsTweakProvider, localTweakProvider]
+        tweakManager = TweakManager(tweakProviders: tweakProviders)
         viewController = TweakViewController(style: .plain, tweakManager: tweakManager)
         
         rootWindow = UIWindow(frame: UIScreen.main.bounds)
@@ -33,8 +33,8 @@ class TweakViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
-        let mutableConfiguration = tweakManager.mutableConfiguration!
-        mutableConfiguration.deleteValue(feature: "feature_1", variable: "variable_1")
+        let mutableTweakProvider = tweakManager.mutableTweakProvider!
+        mutableTweakProvider.deleteValue(feature: "feature_1", variable: "variable_1")
         viewController = nil
         
         let rootViewController = rootWindow!.rootViewController!

@@ -9,31 +9,31 @@ import XCTest
 class TweakManagerTests: XCTestCase {
     
     var tweakManager: TweakManager!
-    let localConfiguration: LocalConfiguration = {
+    let localTweakProvider: TweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        return LocalConfiguration(jsonURL: jsonConfigurationURL)
+        let jsonConfigurationURL = bundle.url(forResource: "LocalTweaks_test", withExtension: "json")!
+        return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
-    var userDefaultsConfiguration: UserDefaultsConfiguration!
+    var userDefaultsTweakProvider: UserDefaultsTweakProvider!
     
     override func setUp() {
         super.setUp()
-        let mockConfiguration = MockConfiguration()
+        let mockTweakProvider = MockTweakProvider()
         let testUserDefaults = UserDefaults(suiteName: "com.JustTweak.TweakManagerTests")!
-        userDefaultsConfiguration = UserDefaultsConfiguration(userDefaults: testUserDefaults)
-        let configurations: [Configuration] = [userDefaultsConfiguration, mockConfiguration, localConfiguration]
-        tweakManager = TweakManager(configurations: configurations)
+        userDefaultsTweakProvider = UserDefaultsTweakProvider(userDefaults: testUserDefaults)
+        let tweakProviders: [TweakProvider] = [userDefaultsTweakProvider, mockTweakProvider, localTweakProvider]
+        tweakManager = TweakManager(tweakProviders: tweakProviders)
     }
     
     override func tearDown() {
-        userDefaultsConfiguration.deleteValue(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
+        userDefaultsTweakProvider.deleteValue(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
         tweakManager = nil
         super.tearDown()
     }
     
-    func testReturnsNoMutableConfiguration_IfNoneHasBeenPassedToInitializer() {
-        let tweakManager = TweakManager(configurations: [localConfiguration])
-        XCTAssertNil(tweakManager.mutableConfiguration)
+    func testReturnsNoMutableTweakProvider_IfNoneHasBeenPassedToInitializer() {
+        let tweakManager = TweakManager(tweakProviders: [localTweakProvider])
+        XCTAssertNil(tweakManager.mutableTweakProvider)
     }
     
     func testReturnsNil_ForUndefinedTweak() {
@@ -60,9 +60,9 @@ class TweakManagerTests: XCTestCase {
         XCTAssertTrue(tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor)!.boolValue)
     }
     
-    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsConfiguration() {
-        let mutableConfiguration = tweakManager.mutableConfiguration!
-        mutableConfiguration.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
+    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsTweakProvider() {
+        let mutableTweakProvider = tweakManager.mutableTweakProvider!
+        mutableTweakProvider.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
         XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)!.boolValue)
     }
     
@@ -72,8 +72,8 @@ class TweakManagerTests: XCTestCase {
             didCallClosure = true
         }
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
-        let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
-        NotificationCenter.default.post(name: TweakConfigurationDidChangeNotification, object: self, userInfo: userInfo)
+        let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
+        NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertTrue(didCallClosure)
     }
     
@@ -84,13 +84,13 @@ class TweakManagerTests: XCTestCase {
         }
         tweakManager.deregisterFromConfigurationsUpdates(self)
         let tweak = Tweak(feature: "feature", variable: "variable", value: "value")
-        let userInfo = [TweakConfigurationDidChangeNotificationTweakKey: tweak]
-        NotificationCenter.default.post(name: TweakConfigurationDidChangeNotification, object: self, userInfo: userInfo)
+        let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
+        NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertFalse(didCallClosure)
     }
 }
 
-fileprivate class MockConfiguration: Configuration {
+fileprivate class MockTweakProvider: TweakProvider {
     
     var logClosure: LogClosure?
     let features: [String : [String]] = [:]
