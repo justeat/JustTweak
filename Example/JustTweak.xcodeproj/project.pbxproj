@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120B0A1A2628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */; };
-		12BE93662626DE6C00C1B6C3 /* ConfigurationAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */; };
+		12A3231E2630365500468F8C /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3231A2630365500468F8C /* GeneratedConfigurationAccessor+ExampleProtocol.swift */; };
+		12A3231F2630365500468F8C /* GeneratedTweakAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3231B2630365500468F8C /* GeneratedTweakAccessor+Constants.swift */; };
+		12A323202630365500468F8C /* TweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3231C2630365500468F8C /* TweakAccessor.swift */; };
+		12A323212630365500468F8C /* GeneratedTweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3231D2630365500468F8C /* GeneratedTweakAccessor.swift */; };
 		12EB283F262F321500A7A89A /* ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB283E262F321500A7A89A /* ExampleProtocol.swift */; };
-		12EB2864262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB2863262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift */; };
 		4F0372B22387FE79003CA58E /* TweakManagerCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */; };
 		4F38E0F1236E1BB60070BD17 /* PropertyWrappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */; };
 		4F43583223E732DD00FD60A7 /* TweakManager+PresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F43583123E732DD00FD60A7 /* TweakManager+PresentationTests.swift */; };
@@ -20,8 +21,6 @@
 		4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6422A521A4205B002B69F0 /* Symbols.swift */; };
 		4F65E89F2629D083009E8C3B /* LocalTweaks_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E89E2629D083009E8C3B /* LocalTweaks_example.json */; };
 		4F7103EE23859CFE0021E4AF /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7103ED23859CFD0021E4AF /* CustomOperators.swift */; };
-		4F796327262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F796325262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift */; };
-		4F796328262DC81C004195E0 /* GeneratedTweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F796326262DC81C004195E0 /* GeneratedTweakAccessor.swift */; };
 		51A8BD6A5E5948F41EEC2E66 /* Pods_JustTweak_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F594AA2DDEDFFA4C835EACCF /* Pods_JustTweak_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -55,10 +54,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+Constants.swift"; sourceTree = "<group>"; };
-		12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationAccessor.swift; sourceTree = "<group>"; };
+		12A3231A2630365500468F8C /* GeneratedConfigurationAccessor+ExampleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+ExampleProtocol.swift"; sourceTree = "<group>"; };
+		12A3231B2630365500468F8C /* GeneratedTweakAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedTweakAccessor+Constants.swift"; sourceTree = "<group>"; };
+		12A3231C2630365500468F8C /* TweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakAccessor.swift; sourceTree = "<group>"; };
+		12A3231D2630365500468F8C /* GeneratedTweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedTweakAccessor.swift; sourceTree = "<group>"; };
 		12EB283E262F321500A7A89A /* ExampleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProtocol.swift; sourceTree = "<group>"; };
-		12EB2863262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+ExampleProtocol.swift"; sourceTree = "<group>"; };
 		2A3A7CF0048CBC9CF1917718 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3432AE8768ED164F737437EA /* Pods-JustTweak_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Tests/Pods-JustTweak_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F0372B12387FE79003CA58E /* TweakManagerCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakManagerCacheTests.swift; sourceTree = "<group>"; };
@@ -71,8 +71,6 @@
 		4F6422A521A4205B002B69F0 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		4F65E89E2629D083009E8C3B /* LocalTweaks_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalTweaks_example.json; sourceTree = "<group>"; };
 		4F7103ED23859CFD0021E4AF /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
-		4F796325262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedTweakAccessor+Constants.swift"; sourceTree = "<group>"; };
-		4F796326262DC81C004195E0 /* GeneratedTweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedTweakAccessor.swift; sourceTree = "<group>"; };
 		4FFF3DC5262B1789002A674D /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* JustTweak_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustTweak_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +123,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12A323192630365500468F8C /* Accessors */ = {
+			isa = PBXGroup;
+			children = (
+				12A3231A2630365500468F8C /* GeneratedConfigurationAccessor+ExampleProtocol.swift */,
+				12A3231B2630365500468F8C /* GeneratedTweakAccessor+Constants.swift */,
+				12A3231C2630365500468F8C /* TweakAccessor.swift */,
+				12A3231D2630365500468F8C /* GeneratedTweakAccessor.swift */,
+			);
+			path = Accessors;
+			sourceTree = "<group>";
+		};
 		12EB2842262F322000A7A89A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,7 +142,7 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		4F30EA6A21ADA06A00AECF77 /* Configurations */ = {
+		4F30EA6A21ADA06A00AECF77 /* TweakProviders */ = {
 			isa = PBXGroup;
 			children = (
 				4F30EA6B21ADA06A00AECF77 /* FirebaseTweakProvider.swift */,
@@ -150,17 +159,6 @@
 				4F6422A521A4205B002B69F0 /* Symbols.swift */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		4F65E6142629B82A009E8C3B /* Accessors */ = {
-			isa = PBXGroup;
-			children = (
-				12BE93652626DE6B00C1B6C3 /* ConfigurationAccessor.swift */,
-				4F775090262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift */,
-				120B0A192628535E0066F2C2 /* GeneratedConfigurationAccessor+Constants.swift */,
-				12EB2863262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift */,
-			);
-			path = Accessors;
 			sourceTree = "<group>";
 		};
 		4F65E6172629B86F009E8C3B /* UI */ = {
@@ -224,11 +222,11 @@
 		607FACD21AFB9204008FA782 /* Example for JustTweak */ = {
 			isa = PBXGroup;
 			children = (
-				4F65E6142629B82A009E8C3B /* Accessors */,
+				12A323192630365500468F8C /* Accessors */,
 				4F65E6182629B880009E8C3B /* Assets */,
 				4F65E61B2629B8A2009E8C3B /* Code */,
 				4FFF3DC4262B1789002A674D /* CodeGeneration */,
-				4F30EA6A21ADA06A00AECF77 /* Configurations */,
+				4F30EA6A21ADA06A00AECF77 /* TweakProviders */,
 				12EB2842262F322000A7A89A /* Protocols */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				4F65E6172629B86F009E8C3B /* UI */,
@@ -449,7 +447,7 @@
 			name = "[CP-User] JustTweak_Example";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \\\n               -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \\\n               -o $SRCROOT/JustTweak/Accessors/ \\\n               -c $SRCROOT/JustTweak/CodeGeneration/Configuration.json";
+			shellScript = "$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \\\n               -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \\\n               -o $SRCROOT/JustTweak/Accessors/ \\\n               -c $SRCROOT/JustTweak/CodeGeneration/Configuration.json\n";
 		};
 		D2F894A2A9B802CCF5D931F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -513,14 +511,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				12EB283F262F321500A7A89A /* ExampleProtocol.swift in Sources */,
-				4F775091262735C300A0A3F5 /* GeneratedConfigurationAccessor.swift in Sources */,
-				12EB2864262F42DD00A7A89A /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */,
 				4F6422A621A4205B002B69F0 /* Symbols.swift in Sources */,
-				4F796328262DC81C004195E0 /* GeneratedTweakAccessor.swift in Sources */,
+				12A323202630365500468F8C /* TweakAccessor.swift in Sources */,
+				12A3231E2630365500468F8C /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				12BE93662626DE6C00C1B6C3 /* TweakAccessor.swift in Sources */,
-				4F796327262DC81C004195E0 /* GeneratedTweakAccessor+Constants.swift in Sources */,
+				12A323212630365500468F8C /* GeneratedTweakAccessor.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				12A3231F2630365500468F8C /* GeneratedTweakAccessor+Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
