@@ -109,8 +109,11 @@ Supported types are:
 - `LocalTweakProvider`
 - `CustomTweakProvider`
 
-In the case whereby custom tweak providers are needed, their setup code should be implemented in the configuration. It's important to include the `tweakProviders.append(<#property_name#>)` statement that will be included in the generated code. E.g.
-
+The content of the `parameter` value depends on the type:
+- `EphemeralTweakProvider`: is not needed
+- `UserDefaultsTweakProvider`: should specify the `UserDefaults` instance to be used 
+- `LocalTweakProvider`: should specify the filename of the json file containing the tweaks
+- `CustomTweakProvider`: should specify the whole code needed to instantiate and add your custom tweak provider. It's important to include the `tweakProviders.append(<#property_name#>)` statement that will be included in the generated code. E.g.
 ```
 ...
 {
@@ -124,7 +127,7 @@ In the case whereby custom tweak providers are needed, their setup code should b
 - Add the following to your `Podfile`
 
 ```
-script_phase :name => '<your_app_target_name>',
+script_phase :name => 'TweakAccessorGenerator',
              :script => '$PODS_ROOT/JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
              -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
@@ -136,14 +139,9 @@ Every time the target is built, the code generator tool will regenerate the code
 
 - Add the generated files to you project and start using the stack.
 
-### Implementation details
+## Usage
 
-The order of the objects in the `tweakProviders` array defines the priority of the tweak providers.
-
-The `MutableTweakProvider` with the highest priority, such as `UserDefaultsTweakProvider` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalTweakProvider` should have the lowest priority as it provides the default values from a local tweak provider and it's the one used by the `TweakViewController` to populate the UI.
-
-
-### Usage (basic)
+### Basic
 
 If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object (which name you have defined in the `.json` configuration and use it to access the feature flags.
 
@@ -156,7 +154,7 @@ if accessor.meaningOfLife == 42 {
 
 See `GeneratedTweakAccessor.swift` and `GeneratedTweakAccessor+Constants.swift` for an example of generated code.
 
-### Usage (advanced)
+### Advanced
 
 If you decided to implement the stack code yourself, you'll have to implemented code for accessing the features via the `TweakManager`.
 
@@ -221,7 +219,17 @@ if let variation = variation {
 See `TweakAccessor.swift` for more info.
 
 
-### Caching
+### Tweak Providers priority
+
+The order of the objects in the `tweakProviders` array defines the priority of the tweak providers.
+
+The `MutableTweakProvider` with the highest priority, such as `UserDefaultsTweakProvider` in the example above, will be used to reflect the changes made in the UI (`TweakViewController`). The `LocalTweakProvider` should have the lowest priority as it provides the default values from a local tweak provider and it's the one used by the `TweakViewController` to populate the UI.
+
+### Migration notes
+
+In order to migrate from manual to the code generated implementation, it is necessary to update to the new `.json` format. To aid with this process we have added the `GeneratedPropertyName` property to the tweak object. Set this value to align with your current property names in code, so that the generated accessor properties match your existing implementation.
+
+### Caching notes
 
 The `TweakManager` provides the option to cache the tweak values in order to improve performance. Caching is disabled by default but can be enabled via the `useCache` property. When enabled, there are two ways to reset the cache:
 
