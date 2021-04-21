@@ -9,7 +9,7 @@ struct Tweak: Equatable {
     let feature: String
     let variable: String
     let title: String
-    let description: String
+    let description: String?
     let group: String
     let valueType: String
     let propertyName: String?
@@ -23,7 +23,6 @@ struct Configuration: Decodable {
 
 struct TweakProvider: Decodable {
     let type: String
-    let parameter: String
-    let propertyName: String?
+    let parameter: String?
     let macros: [String]?
 }

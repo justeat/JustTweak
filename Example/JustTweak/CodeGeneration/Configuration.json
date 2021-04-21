@@ -1,6 +1,10 @@
 {
     "tweakProviders": [
         {
+            "type": "EphemeralTweakProvider",
+            "macros": ["DEBUG", "CONFIGURATION_UI_TESTS"]
+        },
+        {
             "type": "UserDefaultsTweakProvider",
             "parameter": "UserDefaults.standard",
             "macros": ["DEBUG", "CONFIGURATION_DEBUG"]

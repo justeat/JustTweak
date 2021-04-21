@@ -146,7 +146,7 @@ extension TweakAccessorCodeGenerator {
             let value = grouping[tweakProvider.type]!
             let index = currentIndexByConf[tweakProvider.type]!
             let tweakProvider = value[index]
-            let tweakProviderName = "\(tweakProvider.type.lowercaseFirstChar())_\(index+1)"
+            let tweakProviderName = "\(tweakProvider.type.lowercasedFirstChar())_\(index+1)"
             var generatedString: [String] = []
             let macros = tweakProvider.macros?.joined(separator: " || ")
             
@@ -164,29 +164,38 @@ extension TweakAccessorCodeGenerator {
             }
             
             switch tweakProvider.type {
-            case "UserDefaultsTweakProvider":
+            case "EphemeralTweakProvider":
                 let tweakProviderAllocation =
                     """
-                            let \(tweakProviderName) = \(tweakProvider.type)(userDefaults: \(tweakProvider.parameter))
+                            let \(tweakProviderName) = NSMutableDictionary()
+                            tweakProviders.append(\(tweakProviderName))
+                    """
+                generatedString.append(tweakProviderAllocation)
+
+            case "UserDefaultsTweakProvider":
+                assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
+                let tweakProviderAllocation =
+                    """
+                            let \(tweakProviderName) = \(tweakProvider.type)(userDefaults: \(tweakProvider.parameter!))
                             tweakProviders.append(\(tweakProviderName))
                     """
                 generatedString.append(tweakProviderAllocation)
                 
             case "LocalTweakProvider":
+                assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
                 let tweakProviderAllocation =
                     """
-                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(tweakProvider.parameter)\", withExtension: "json")!
+                            let \(jsonFileURL) = Bundle.main.url(forResource: \"\(tweakProvider.parameter!)\", withExtension: "json")!
                             let \(tweakProviderName) = \(tweakProvider.type)(jsonURL: \(jsonFileURL))
                             tweakProviders.append(\(tweakProviderName))
                     """
                 generatedString.append(tweakProviderAllocation)
                 
             case "CustomTweakProvider":
-                assert(tweakProvider.propertyName != nil, "Missing value 'propertyName' for TweakProvider '\(tweakProvider)'")
+                assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
                 let tweakProviderAllocation =
                     """
-                            \(tweakProvider.parameter)
-                            tweakProviders.append(\(tweakProvider.propertyName!))
+                            \(tweakProvider.parameter!)
                     """
                 generatedString.append(tweakProviderAllocation)
                 

@@ -11,6 +11,12 @@ class GeneratedTweakAccessor {
     static let tweakManager: TweakManager = {
         var tweakProviders: [TweakProvider] = []
 
+        // EphemeralTweakProvider
+        #if DEBUG || CONFIGURATION_UI_TESTS
+        let ephemeralTweakProvider_1 = NSMutableDictionary()
+        tweakProviders.append(ephemeralTweakProvider_1)
+        #endif
+
         // UserDefaultsTweakProvider
         #if DEBUG || CONFIGURATION_DEBUG
         let userDefaultsTweakProvider_1 = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)

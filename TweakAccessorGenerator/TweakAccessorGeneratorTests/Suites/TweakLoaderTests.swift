@@ -191,7 +191,7 @@ class TweakLoaderTests: XCTestCase {
             "Group": group,
             "Value": 3.14
         ]
-        XCTAssertThrowsError(try sut.tweak(for: dictionary, feature: feature, variable: variable))
+        XCTAssertNoThrow(try sut.tweak(for: dictionary, feature: feature, variable: variable))
     }
     
     func test_tweakForDictionary_MissingGroup() {
