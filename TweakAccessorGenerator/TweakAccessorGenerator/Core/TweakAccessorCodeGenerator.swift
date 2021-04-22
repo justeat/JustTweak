@@ -124,8 +124,8 @@ extension TweakAccessorCodeGenerator {
                 tweakManager.useCache = \(configuration.shouldCacheTweaks)
                 return tweakManager
             }()
-                
-            private var tweakManager: TweakManager {
+
+            var tweakManager: TweakManager {
                 return Self.tweakManager
             }
         """
