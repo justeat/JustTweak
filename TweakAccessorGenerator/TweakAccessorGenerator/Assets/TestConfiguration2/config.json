@@ -1,0 +1,34 @@
+{
+    "tweakProviders": [
+        {
+            "type": "EphemeralTweakProvider",
+            "macros": ["DEBUG", "CONFIGURATION_UI_TESTS"]
+        },
+        {
+            "type": "UserDefaultsTweakProvider",
+            "parameter": "UserDefaults.standard",
+            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
+        },
+        {
+            "type": "CustomTweakProvider",
+            "parameter": "OptimizelyTweakProviderSetupCode",
+            "macros": ["CONFIGURATION_APPSTORE"]
+        },
+        {
+            "type": "CustomTweakProvider",
+            "parameter": "FirebaseTweakProviderSetupCode",
+            "macros": ["CONFIGURATION_APPSTORE"]
+        },
+        {
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_TopPriority_example",
+            "macros": ["DEBUG"]
+        },
+        {
+            "type": "LocalTweakProvider",
+            "parameter": "LocalTweaks_example"
+        }
+    ],
+    "shouldCacheTweaks": true,
+    "accessorName": "GeneratedTweakAccessor"
+}

@@ -32,9 +32,10 @@ extension TweakAccessorCodeGenerator {
     
     func generateAccessorFileContent(tweaksFilename: String,
                                      tweaks: [Tweak],
-                                     configuration: Configuration) -> String {
+                                     configuration: Configuration,
+                                     customTweakProvidersSetupCode: [Filename: CodeBlock]) -> String {
         let template = self.accessorTemplate(with: configuration.accessorName)
-        let tweakManager = self.tweakManagerCodeBlock(with: configuration)
+        let tweakManager = self.tweakManagerCodeBlock(with: configuration, customTweakProvidersSetupCode: customTweakProvidersSetupCode)
         let classContent = self.classContent(with: tweaks)
         
         let content = template
@@ -114,8 +115,10 @@ extension TweakAccessorCodeGenerator {
         """
     }
     
-    private func tweakManagerCodeBlock(with configuration: Configuration) -> String {
-        let tweakProvidersCodeBlock = self.tweakProvidersCodeBlock(with: configuration)
+    private func tweakManagerCodeBlock(with configuration: Configuration,
+                                       customTweakProvidersSetupCode: [Filename: CodeBlock]) -> String {
+        let tweakProvidersCodeBlock = self.tweakProvidersCodeBlock(with: configuration,
+                                                                   customTweakProvidersSetupCode: customTweakProvidersSetupCode)
         
         return """
             static let tweakManager: TweakManager = {
@@ -131,7 +134,8 @@ extension TweakAccessorCodeGenerator {
         """
     }
     
-    private func tweakProvidersCodeBlock(with configuration: Configuration) -> String {
+    private func tweakProvidersCodeBlock(with configuration: Configuration,
+                                         customTweakProvidersSetupCode: [Filename: CodeBlock]) -> String {
         let grouping = Dictionary(grouping: configuration.tweakProviders) { $0.type }
         
         var tweakProvidersString: [String] = [
@@ -193,9 +197,11 @@ extension TweakAccessorCodeGenerator {
                 
             case "CustomTweakProvider":
                 assert(tweakProvider.parameter != nil, "Missing value 'parameter' for TweakProvider '\(tweakProvider)'")
+                let setupCode = customTweakProvidersSetupCode[tweakProvider.parameter!]!
+                let formattedSetupCode = formatCustomTweakProviderSetupCode(setupCode)
                 let tweakProviderAllocation =
                     """
-                            \(tweakProvider.parameter!)
+                    \(formattedSetupCode.trimmingCharacters(in: .newlines))
                     """
                 generatedString.append(tweakProviderAllocation)
                 
@@ -235,5 +241,11 @@ extension TweakAccessorCodeGenerator {
                            tweakManager: tweakManager)
             var \(propertyName): \(tweak.valueType)
         """
+    }
+    
+    private func formatCustomTweakProviderSetupCode(_ setupCode: String) -> String {
+        setupCode.split(separator: "\n")
+            .map { "        " + $0 }
+            .joined(separator: "\n")
     }
 }

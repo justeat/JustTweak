@@ -71,7 +71,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-c $SRCROOT/TweakAccessorGenerator/Assets/TestConfiguration1.json"
+            argument = "-c $SRCROOT/TweakAccessorGenerator/Assets/TestConfiguration1/"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

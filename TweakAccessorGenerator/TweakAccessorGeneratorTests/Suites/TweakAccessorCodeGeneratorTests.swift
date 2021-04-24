@@ -50,10 +50,10 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
                           parameter: "UserDefaults.standard",
                           macros: ["DEBUG", "CONFIGURATION_DEBUG"]),
             TweakProvider(type: "CustomTweakProvider",
-                          parameter: "let optimizelyTweakProvider = OptimizelyTweakProvider()\n        optimizelyTweakProvider.someValue = 42\n        tweakProviders.append(optimizelyTweakProvider)",
+                          parameter: "OptimizelyTweakProviderSetupCode",
                           macros: ["CONFIGURATION_APPSTORE"]),
             TweakProvider(type: "CustomTweakProvider",
-                          parameter: "let firebaseTweakProvider = FirebaseTweakProvider()\n        firebaseTweakProvider.someValue = true\n        tweakProviders.append(firebaseTweakProvider)",
+                          parameter: "FirebaseTweakProviderSetupCode",
                           macros: ["CONFIGURATION_APPSTORE"]),
             TweakProvider(type: "LocalTweakProvider",
                           parameter: "ValidTweaks_TopPriority",
@@ -65,12 +65,24 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
         let configuration = Configuration(tweakProviders: tweakProviders,
                                           shouldCacheTweaks: true,
                                           accessorName: "GeneratedTweakAccessorContent")
+        let customTweakProvidersSetupCode = [
+            "FirebaseTweakProviderSetupCode": codeBlock(for: "FirebaseTweakProviderSetupCode"),
+            "OptimizelyTweakProviderSetupCode": codeBlock(for: "OptimizelyTweakProviderSetupCode"),
+            
+        ]
         let content = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                 tweaks: tweaks,
-                                                                configuration: configuration)
+                                                                configuration: configuration,
+                                                                customTweakProvidersSetupCode: customTweakProvidersSetupCode)
         let testContentPath = bundle.path(forResource: "GeneratedTweakAccessorContent", ofType: "")!
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         
         XCTAssertEqual(content, testContent)
+    }
+    
+    private func codeBlock(for customTweakProviderFile: String) -> String {
+        let testBundle = Bundle(for: TweakAccessorCodeGeneratorTests.self)
+        let filePath = testBundle.path(forResource: customTweakProviderFile, ofType: "")!
+        return try! String(contentsOfFile: filePath)
     }
 }
