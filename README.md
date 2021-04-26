@@ -198,11 +198,10 @@ if let tweak = tweak {
 }
 ```
 
-`@TweakProperty` and `@OptionalTweakProperty` property wrappers are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `TweakManager` is needed. 
+`@TweakProperty`, `@OptionalTweakProperty` and `@FallbackTweakProperty` property wrappers are available to mark properties representing feature flags. Mind that in order to use these property wrappers, a static instance of `TweakManager` is needed. 
 
 ```swift
-@TweakProperty(fallbackValue: <#fallback_value#>,
-               feature: <#feature_key#>,
+@TweakProperty(feature: <#feature_key#>,
                variable: <#variable_key#>,
                tweakManager: <#TweakManager#>)
 var labelText: String
@@ -214,6 +213,14 @@ var labelText: String
                        variable: <#variable_key#>,
                        tweakManager: <#TweakManager#>)
 var meaningOfLife: Int?
+```
+
+```swift
+@FallbackTweakProperty(fallbackValue: <#nillable_fallback_value#>,
+                       feature: <#feature_key#>,
+                       variable: <#variable_key#>,
+                       tweakManager: <#TweakManager#>)
+var shouldShowFeatureX: Bool
 ```
 
 3. Run an A/B test
