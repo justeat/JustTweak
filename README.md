@@ -140,7 +140,7 @@ It's important to include the `tweakProviders.append(<#property_name#>)` stateme
 
 ```sh
 script_phase :name => 'TweakAccessorGenerator',
-             :script => '$PODS_ROOT/JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
+             :script => '$PODS_ROOT/JustTweak/JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
              -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
              -c $SRCROOT/<path_to_the_folder_containing_config.json>',
