@@ -52,7 +52,6 @@ struct TweakAccessorGenerator: ParsableCommand {
         let tweakLoader = TweakLoader()
         let tweaks = try tweakLoader.load(localTweaksFilePath)
         let configuration = loadConfigurationFromJson()
-        let customTweakProvidersSetupCode = loadCustomTweakProvidersCode()
         
         writeConstantsFile(codeGenerator: codeGenerator,
                            tweaks: tweaks,
@@ -62,8 +61,7 @@ struct TweakAccessorGenerator: ParsableCommand {
         writeAccessorFile(codeGenerator: codeGenerator,
                           tweaks: tweaks,
                           outputFolder: outputFolder,
-                          configuration: configuration,
-                          customTweakProvidersSetupCode: customTweakProvidersSetupCode)
+                          configuration: configuration)
     }
 }
 
@@ -83,8 +81,8 @@ extension TweakAccessorGenerator {
     private func writeAccessorFile(codeGenerator: TweakAccessorCodeGenerator,
                                    tweaks: [Tweak],
                                    outputFolder: String,
-                                   configuration: Configuration,
-                                   customTweakProvidersSetupCode: [Filename: CodeBlock]) {
+                                   configuration: Configuration) {
+        let customTweakProvidersSetupCode = loadCustomTweakProvidersCode()
         let fileName = "\(configuration.accessorName).swift"
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
         let constants = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,

@@ -125,7 +125,7 @@ The content of the `parameter` value depends on the type:
 ...
 ```
 
-Example of content of `FirebaseTweakProviderSetupCode`. Store any CustomTweakProvider setup code file in the same folder of `config.json` and mind not to add them in any target in Xcode.
+Example content from `FirebaseTweakProviderSetupCode`. Store any CustomTweakProvider setup code file in the same folder of `config.json` and mind not to add them in any target in Xcode.
 
 ```swift
 let firebaseTweakProvider = FirebaseTweakProvider()
