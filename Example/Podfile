@@ -5,11 +5,11 @@ use_frameworks!
 
 target 'JustTweak_Example' do
   pod 'JustTweak', :path => '../'
-  script_phase :name => 'JustTweak_Example',
+  script_phase :name => 'TweakAccessorGenerator',
                :script => '$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
                -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \
                -o $SRCROOT/JustTweak/Accessors/ \
-               -c $SRCROOT/JustTweak/CodeGeneration/Configuration.json',
+               -c $SRCROOT/JustTweak/CodeGeneration/',
                :execution_position => :before_compile
   
 #  pod 'Firebase/RemoteConfig'

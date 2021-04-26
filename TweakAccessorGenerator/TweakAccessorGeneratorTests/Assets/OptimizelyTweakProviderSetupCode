@@ -1,0 +1,3 @@
+let optimizelyTweakProvider = OptimizelyTweakProvider()
+optimizelyTweakProvider.someValue = 42
+tweakProviders.append(optimizelyTweakProvider)

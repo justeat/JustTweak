@@ -39,8 +39,8 @@ class GeneratedTweakAccessor {
         tweakManager.useCache = true
         return tweakManager
     }()
-        
-    private var tweakManager: TweakManager {
+
+    var tweakManager: TweakManager {
         return Self.tweakManager
     }
 

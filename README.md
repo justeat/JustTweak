@@ -73,9 +73,9 @@ static let tweakManager: TweakManager = {
 
 #### Using the code generator tool
 
-- Define the stack configuration in a `.json` file in the following format:
+- Define the stack configuration in a `config.json` file in the following format:
 
-```
+```json
 {
     "tweakProviders": [
         {
@@ -113,25 +113,37 @@ The content of the `parameter` value depends on the type:
 - `EphemeralTweakProvider`: is not needed
 - `UserDefaultsTweakProvider`: should specify the `UserDefaults` instance to be used 
 - `LocalTweakProvider`: should specify the filename of the json file containing the tweaks
-- `CustomTweakProvider`: should specify the whole code needed to instantiate and add your custom tweak provider. It's important to include the `tweakProviders.append(<#property_name#>)` statement that will be included in the generated code. E.g.
+- `CustomTweakProvider`: should specify the filename of a file containing the setup code needed to instantiate and add your custom tweak provider.
+
 ```
-...
+...json
 {
     "type": "CustomTweakProvider",
-    "parameter": "let fc = FirebaseTweakProvider()\n\t\tfc.someValue = true\n\t\ttweakProviders.append(fc)",
+    "parameter": "FirebaseTweakProviderSetupCode",
     "macros": ["CONFIGURATION_APPSTORE"]
 },
 ...
 ```
 
+Example content from `FirebaseTweakProviderSetupCode`. Store any CustomTweakProvider setup code file in the same folder of `config.json` and mind not to add them in any target in Xcode.
+
+```swift
+let firebaseTweakProvider = FirebaseTweakProvider()
+firebaseTweakProvider.someValue = true
+tweakProviders.append(firebaseTweakProvider)
+```
+
+It's important to include the `tweakProviders.append(<#property_name#>)` statement at the end of your code block that will be included in the generated code.
+
+
 - Add the following to your `Podfile`
 
-```
+```sh
 script_phase :name => 'TweakAccessorGenerator',
              :script => '$PODS_ROOT/JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
              -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
-             -c $SRCROOT/<path_to_the_configuration_json_file>',
+             -c $SRCROOT/<path_to_the_folder_containing_config.json>',
              :execution_position => :before_compile
 ```
 
@@ -145,7 +157,7 @@ Every time the target is built, the code generator tool will regenerate the code
 
 If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object (which name you have defined in the `.json` configuration and use it to access the feature flags.
 
-```
+```swift
 let accessor = GeneratedTweakAccessor()
 if accessor.meaningOfLife == 42 {
     ...
@@ -188,7 +200,7 @@ if let tweak = tweak {
 
 `@TweakProperty` and `@OptionalTweakProperty` property wrappers are available to mark properties representing feature flags. Mind that by using these property wrappers, a static instance of `TweakManager` is needed. 
 
-```
+```swift
 @TweakProperty(fallbackValue: <#fallback_value#>,
                feature: <#feature_key#>,
                variable: <#variable_key#>,
@@ -196,7 +208,7 @@ if let tweak = tweak {
 var labelText: String
 ```
 
-```
+```swift
 @OptionalTweakProperty(fallbackValue: <#nillable_fallback_value#>,
                        feature: <#feature_key#>,
                        variable: <#variable_key#>,
