@@ -9,38 +9,38 @@ import JustTweak
 class Accessor {
     
     static let tweakManager: TweakManager = {
-        let ephemeralConfiguration: MutableConfiguration = NSMutableDictionary()
-        return TweakManager(configurations: [ephemeralConfiguration])
+        let ephemeralTweakProvider: MutableTweakProvider = NSMutableDictionary()
+        return TweakManager(tweakProviders: [ephemeralTweakProvider])
     }()
     
-    @TweakProperty(fallbackValue: "default",
-                   feature: "stringValue_feature",
-                   variable: "stringValue_variable",
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: "default",
+                           feature: "stringValue_feature",
+                           variable: "stringValue_variable",
+                           tweakManager: tweakManager)
     var stringValue: String
     
-    @TweakProperty(fallbackValue: false,
-                   feature: "boolValue_feature",
-                   variable: "boolValue_variable",
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: false,
+                           feature: "boolValue_feature",
+                           variable: "boolValue_variable",
+                           tweakManager: tweakManager)
     var boolValue: Bool
     
-    @TweakProperty(fallbackValue: 42,
-                   feature: "intValue_feature",
-                   variable: "intValue_variable",
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: 42,
+                           feature: "intValue_feature",
+                           variable: "intValue_variable",
+                           tweakManager: tweakManager)
     var intValue: Int
     
-    @TweakProperty(fallbackValue: 3.14,
-                   feature: "doubleValue_feature",
-                   variable: "doubleValue_variable",
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: 3.14,
+                           feature: "doubleValue_feature",
+                           variable: "doubleValue_variable",
+                           tweakManager: tweakManager)
     var doubleValue: Double
     
-    @TweakProperty(fallbackValue: 108.0,
-                   feature: "floatValue_feature",
-                   variable: "floatValue_variable",
-                   tweakManager: tweakManager)
+    @FallbackTweakProperty(fallbackValue: 108.0,
+                           feature: "floatValue_feature",
+                           variable: "floatValue_variable",
+                           tweakManager: tweakManager)
     var floatValue: Float
     
     @OptionalTweakProperty(fallbackValue: nil,

@@ -7,6 +7,29 @@ import Foundation
 
 @propertyWrapper
 public struct TweakProperty<T: TweakValue> {
+    let feature: String
+    let variable: String
+    let tweakManager: TweakManager
+    
+    public init(feature: String, variable: String, tweakManager: TweakManager) {
+        self.feature = feature
+        self.variable = variable
+        self.tweakManager = tweakManager
+    }
+    
+    public var wrappedValue: T {
+        get {
+            let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
+            return tweak!.value as! T
+        }
+        set {
+            tweakManager.set(newValue, feature: feature, variable: variable)
+        }
+    }
+}
+
+@propertyWrapper
+public struct FallbackTweakProperty<T: TweakValue> {
     let fallbackValue: T
     let feature: String
     let variable: String

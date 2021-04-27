@@ -7,12 +7,12 @@ import Foundation
 
 final public class TweakManager {
     
-    var configurations: [Configuration]
+    var tweakProviders: [TweakProvider]
     
     public var logClosure: LogClosure? {
         didSet {
-            for (index, _) in configurations.enumerated() {
-                configurations[index].logClosure = logClosure
+            for (index, _) in tweakProviders.enumerated() {
+                tweakProviders[index].logClosure = logClosure
             }
         }
     }
@@ -32,17 +32,17 @@ final public class TweakManager {
     private var experimentCache = [String : String]()
     private var observersMap = [NSObject : NSObjectProtocol]()
     
-    var mutableConfiguration: MutableConfiguration? {
-        return configurations.first { $0 is MutableConfiguration } as? MutableConfiguration
+    var mutableTweakProvider: MutableTweakProvider? {
+        return tweakProviders.first { $0 is MutableTweakProvider } as? MutableTweakProvider
     }
     
-    public init(configurations: [Configuration]) {
-        self.configurations = configurations
-        for (index, _) in self.configurations.enumerated() {
-            self.configurations[index].logClosure = logClosure
+    public init(tweakProviders: [TweakProvider]) {
+        self.tweakProviders = tweakProviders
+        for (index, _) in self.tweakProviders.enumerated() {
+            self.tweakProviders[index].logClosure = logClosure
         }
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweakConfigurationDidChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweakProviderDidChangeNotification, object: nil)
     }
     
     deinit {
@@ -50,7 +50,7 @@ final public class TweakManager {
     }
 }
 
-extension TweakManager: MutableConfiguration {
+extension TweakManager: MutableTweakProvider {
     
     public func isFeatureEnabled(_ feature: String) -> Bool {
         queue.sync {
@@ -60,7 +60,7 @@ extension TweakManager: MutableConfiguration {
             }
             
             var enabled = false
-            for (_, configuration) in configurations.enumerated() {
+            for (_, configuration) in tweakProviders.enumerated() {
                 if configuration.isFeatureEnabled(feature) {
                     enabled = true
                     break
@@ -81,7 +81,7 @@ extension TweakManager: MutableConfiguration {
             }
             
             var result: Tweak? = nil
-            for (_, configuration) in configurations.enumerated() {
+            for (_, configuration) in tweakProviders.enumerated() {
                 if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
                     logClosure?("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
                     result = Tweak(feature: feature,
@@ -121,7 +121,7 @@ extension TweakManager: MutableConfiguration {
             }
             
             var activeVariation: String?
-            for (_, configuration) in configurations.enumerated() {
+            for (_, configuration) in tweakProviders.enumerated() {
                 activeVariation = configuration.activeVariation(for: experiment)
                 if activeVariation != nil { break }
             }
@@ -133,7 +133,7 @@ extension TweakManager: MutableConfiguration {
     }
     
     public func set(_ value: TweakValue, feature: String, variable: String) {
-        guard let mutableConfiguration = self.mutableConfiguration else { return }
+        guard let mutableTweakProvider = self.mutableTweakProvider else { return }
         if useCache {
             queue.sync {
                 // cannot use write-through cache because tweakWith(feature:variable:) returns a Tweak, but here we only have a TweakValue
@@ -141,17 +141,17 @@ extension TweakManager: MutableConfiguration {
                 tweakCache[feature]?[variable] = nil
             }
         }
-        mutableConfiguration.set(value, feature: feature, variable: variable)
+        mutableTweakProvider.set(value, feature: feature, variable: variable)
     }
 
     public func deleteValue(feature: String, variable: String) {
-        guard let mutableConfiguration = self.mutableConfiguration else { return }
+        guard let mutableTweakProvider = self.mutableTweakProvider else { return }
         if useCache {
             queue.sync {
                 tweakCache[feature]?[variable] = nil
             }
         }
-        mutableConfiguration.deleteValue(feature: feature, variable: variable)
+        mutableTweakProvider.deleteValue(feature: feature, variable: variable)
     }
 }
 
@@ -161,10 +161,10 @@ extension TweakManager {
         self.deregisterFromConfigurationsUpdates(object)
         queue.sync {
             let queue = OperationQueue.main
-            let name = TweakConfigurationDidChangeNotification
+            let name = TweakProviderDidChangeNotification
             let notificationsCenter = NotificationCenter.default
             let observer = notificationsCenter.addObserver(forName: name, object: nil, queue: queue) { notification in
-                guard let tweak = notification.userInfo?[TweakConfigurationDidChangeNotificationTweakKey] as? Tweak else { return }
+                guard let tweak = notification.userInfo?[TweakProviderDidChangeNotificationTweakKey] as? Tweak else { return }
                 closure(tweak)
             }
             observersMap[object] = observer

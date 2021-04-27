@@ -5,6 +5,9 @@
       location = "group:JustTweak.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../TweakAccessorGenerator/TweakAccessorGenerator.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

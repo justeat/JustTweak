@@ -1,0 +1,3 @@
+let fc = FirebaseTweakProvider()
+fc.someValue = true
+tweakProviders.append(fc)

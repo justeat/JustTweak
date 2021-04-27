@@ -12,20 +12,20 @@ import XCTest
 class TweakManager_PresentationTests: XCTestCase {
     
     var tweakManager: TweakManager!
-    let localConfigurationLowPriority: LocalConfiguration = {
+    let localTweakProviderLowPriority: LocalTweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_configuration", withExtension: "json")!
-        return LocalConfiguration(jsonURL: jsonConfigurationURL)
+        let jsonConfigurationURL = bundle.url(forResource: "LocalTweaks_test", withExtension: "json")!
+        return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
-    let localConfigurationHighPriority: LocalConfiguration = {
+    let localTweakProviderHighPriority: LocalTweakProvider = {
         let bundle = Bundle(for: TweakManagerTests.self)
-        let jsonConfigurationURL = bundle.url(forResource: "test_configuration_override", withExtension: "json")!
-        return LocalConfiguration(jsonURL: jsonConfigurationURL)
+        let jsonConfigurationURL = bundle.url(forResource: "LocalTweaks_test_override", withExtension: "json")!
+        return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
     
-    func test_GivenOneLocalConfiguration_WhenFetchedDisplayableTweaks_ThenAllTweaksSortedByTitleAreReturned() {
-        let configurations: [Configuration] = [localConfigurationLowPriority]
-        tweakManager = TweakManager(configurations: configurations)
+    func test_GivenOneLocalTweakProvider_WhenFetchedDisplayableTweaks_ThenAllTweaksSortedByTitleAreReturned() {
+        let tweakProviders: [TweakProvider] = [localTweakProviderLowPriority]
+        tweakManager = TweakManager(tweakProviders: tweakProviders)
         let displayableTweaks = tweakManager.displayableTweaks
         let targetTweaks = [
             Tweak(feature: "ui_customization",
@@ -67,9 +67,9 @@ class TweakManager_PresentationTests: XCTestCase {
         XCTAssertEqual(displayableTweaks, targetTweaks)
     }
     
-    func test_GivenTwoLocalConfigurations_WhenFetchedDisplayableTweaks_ThenTweaksFromBothConfigurationsSortedByTitleAreReturned() {
-        let configurations: [Configuration] = [localConfigurationHighPriority, localConfigurationLowPriority]
-        tweakManager = TweakManager(configurations: configurations)
+    func test_GivenTwoLocalTweakProviders_WhenFetchedDisplayableTweaks_ThenTweaksFromBothConfigurationsSortedByTitleAreReturned() {
+        let tweakProviders: [LocalTweakProvider] = [localTweakProviderHighPriority, localTweakProviderLowPriority]
+        tweakManager = TweakManager(tweakProviders: tweakProviders)
         let displayableTweaks = tweakManager.displayableTweaks
         let targetTweaks = [
             Tweak(feature: "ui_customization",

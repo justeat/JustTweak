@@ -5,8 +5,15 @@ use_frameworks!
 
 target 'JustTweak_Example' do
   pod 'JustTweak', :path => '../'
-  pod 'Firebase/RemoteConfig'
-  pod 'OptimizelySDKiOS'
+  script_phase :name => 'TweakAccessorGenerator',
+               :script => '$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
+               -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \
+               -o $SRCROOT/JustTweak/Accessors/ \
+               -c $SRCROOT/JustTweak/CodeGeneration/',
+               :execution_position => :before_compile
+  
+#  pod 'Firebase/RemoteConfig'
+#  pod 'OptimizelySDKiOS'
 
   target 'JustTweak_Tests' do
     inherit! :search_paths
