@@ -447,7 +447,7 @@
 			name = "[CP-User] TweakAccessorGenerator";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \\\n               -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \\\n               -o $SRCROOT/JustTweak/Accessors/ \\\n               -c $SRCROOT/JustTweak/CodeGeneration/\n";
+			shellScript = "$SRCROOT/../JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \\\n               -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \\\n               -o $SRCROOT/JustTweak/Accessors/ \\\n               -c $SRCROOT/JustTweak/CodeGeneration/";
 		};
 		D2F894A2A9B802CCF5D931F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
