@@ -5,21 +5,6 @@
 
 import Foundation
 
-extension String {
-    
-    var isInt: Bool {
-        Int(self) != nil
-    }
-    
-    var isDouble: Bool {
-        Double(self) != nil
-    }
-    
-    var isFloat: Bool {
-        Float(self) != nil
-    }
-}
-
 public extension String {
     
     var tweakValue: TweakValue {
