@@ -37,7 +37,7 @@ extension TweakAccessorCodeGenerator {
                                      customTweakProvidersSetupCode: [Filename: CodeBlock]) -> String {
         let template = self.accessorTemplate(with: configuration.accessorName)
         let tweakManager = self.tweakManagerCodeBlock(with: configuration, customTweakProvidersSetupCode: customTweakProvidersSetupCode)
-        let classContent = self.classContent(with: tweaks)
+        let classContent = self.classContent(with: tweaks, configuration: configuration)
         
         let content = template
             .replacingOccurrences(of: tweakManagerConst, with: tweakManager)
@@ -122,18 +122,30 @@ extension TweakAccessorCodeGenerator {
         let tweakProvidersCodeBlock = self.tweakProvidersCodeBlock(with: configuration,
                                                                    customTweakProvidersSetupCode: customTweakProvidersSetupCode)
         
-        return """
-            static let tweakManager: TweakManager = {
-        \(tweakProvidersCodeBlock)
-                let tweakManager = TweakManager(tweakProviders: tweakProviders)
-                tweakManager.useCache = \(configuration.shouldCacheTweaks)
-                return tweakManager
-            }()
+        if configuration.usePropertyWrappers {
+            return """
+                static let tweakManager: TweakManager = {
+            \(tweakProvidersCodeBlock)
+                    let tweakManager = TweakManager(tweakProviders: tweakProviders)
+                    tweakManager.useCache = \(configuration.shouldCacheTweaks)
+                    return tweakManager
+                }()
 
-            var tweakManager: TweakManager {
-                return Self.tweakManager
-            }
-        """
+                var tweakManager: TweakManager {
+                    return Self.tweakManager
+                }
+            """
+        }
+        else {
+            return """
+                lazy var tweakManager: TweakManager = {
+            \(tweakProvidersCodeBlock)
+                    let tweakManager = TweakManager(tweakProviders: tweakProviders)
+                    tweakManager.useCache = \(configuration.shouldCacheTweaks)
+                    return tweakManager
+                }()
+            """
+        }
     }
     
     private func tweakProvidersCodeBlock(with configuration: Configuration,
@@ -227,15 +239,22 @@ extension TweakAccessorCodeGenerator {
         return tweakProvidersString.joined(separator: "\n")
     }
     
-    private func classContent(with tweaks: [Tweak]) -> String {
+    private func classContent(with tweaks: [Tweak], configuration: Configuration) -> String {
         var content: Set<String> = []
-        tweaks.forEach {
-            content.insert(tweakProperty(for: $0))
+        if configuration.usePropertyWrappers {
+            tweaks.forEach {
+                content.insert(tweakPropertyWrapper(for: $0))
+            }
+        }
+        else {
+            tweaks.forEach {
+                content.insert(tweakComputedProperty(for: $0))
+            }
         }
         return content.sorted().joined(separator: "\n\n")
     }
     
-    private func tweakProperty(for tweak: Tweak) -> String {
+    private func tweakPropertyWrapper(for tweak: Tweak) -> String {
         let propertyName = tweak.propertyName ?? tweak.variable.camelCased()
         return """
             @TweakProperty(feature: \(featuresConst).\(tweak.feature.camelCased()),
@@ -243,6 +262,50 @@ extension TweakAccessorCodeGenerator {
                            tweakManager: tweakManager)
             var \(propertyName): \(tweak.valueType)
         """
+    }
+    
+    private func tweakComputedProperty(for tweak: Tweak) -> String {
+        let propertyName = tweak.propertyName ?? tweak.variable.camelCased()
+        let feature = "\(featuresConst).\(tweak.feature.camelCased())"
+        let variable = "\(variablesConst).\(tweak.variable.camelCased())"
+        let castProperty = try! self.castProperty(for: tweak.valueType)
+        let defaultValue = try! self.defaultValue(for: tweak.valueType)
+        return """
+            var \(propertyName): \(tweak.valueType) {
+                get { tweakManager.tweakWith(feature: \(feature), variable: \(variable))?.\(castProperty) ?? \(defaultValue) }
+                set { tweakManager.set(newValue, feature: \(feature), variable: \(variable)) }
+            }
+        """
+    }
+    
+    private func castProperty(for valueType: String) throws -> String {
+        switch valueType {
+        case "String":
+            return "stringValue"
+        case "Bool":
+            return "boolValue"
+        case "Double":
+            return "doubleValue"
+        case "Int":
+            return "intValue"
+        default:
+            throw "Unsupported value type '\(valueType)'"
+        }
+    }
+    
+    private func defaultValue(for valueType: String) throws -> String {
+        switch valueType {
+        case "String":
+            return "\"\""
+        case "Bool":
+            return "false"
+        case "Double":
+            return "0.0"
+        case "Int":
+            return "0"
+        default:
+            throw "Unsupported value type '\(valueType)'"
+        }
     }
     
     private func formatCustomTweakProviderSetupCode(_ setupCode: String) -> String {
