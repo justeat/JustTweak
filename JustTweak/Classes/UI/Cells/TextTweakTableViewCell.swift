@@ -67,7 +67,19 @@ class TextTweakTableViewCell: UITableViewCell, TweakViewControllerCell, UITextFi
     }()
     
     @objc func textDidChange() {
-        value = textField.text!
+        guard let text = textField.text else { return }
+        if let int = Int(text) {
+            value = int
+        }
+        else if let double = Double(text) {
+            value = double
+        }
+        else if let float = Float(text) {
+            value = float
+        }
+        else {
+            value = text
+        }
     }
     
     @objc func textEditingDidEnd() {

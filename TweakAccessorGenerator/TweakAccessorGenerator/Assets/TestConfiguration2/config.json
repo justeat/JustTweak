@@ -30,5 +30,6 @@
         }
     ],
     "shouldCacheTweaks": true,
+    "usePropertyWrappers": true,
     "accessorName": "GeneratedTweakAccessor"
 }

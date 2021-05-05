@@ -98,11 +98,12 @@ static let tweakManager: TweakManager = {
         }
     ],
     "shouldCacheTweaks": true,
+    "usePropertyWrappers": true,
     "accessorName": "GeneratedTweakAccessor"
 }
 ```
 
-Supported types are:
+Supported tweak provider types are:
 
 - `EphemeralTweakProvider`
 - `UserDefaultsTweakProvider`
@@ -135,6 +136,11 @@ tweakProviders.append(firebaseTweakProvider)
 
 It's important to include the `tweakProviders.append(<#property_name#>)` statement at the end of your code block that will be included in the generated code.
 
+Other supported configuration:
+
+`shouldCacheTweaks`: enables/disable the JustTweak cache (see [Caching notes](#caching-notes)).
+`usePropertyWrappers`: property wrappers are definitely one of the most exciting new features in Swift 5.1. In order to be used for the stack, they need a single instance of `TweakManager`. If this is not a possible approach for you codebase, you can set this value to `false` to allow the generation of code that doesn't rely on a `static let`. 
+`accessorName`: the name of the generated class. 
 
 - Add the following to your `Podfile`
 
