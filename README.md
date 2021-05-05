@@ -146,7 +146,7 @@ Other supported configuration:
 
 ```sh
 script_phase :name => 'TweakAccessorGenerator',
-             :script => '$PODS_ROOT/JustTweak/JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator \
+             :script => '$PODS_ROOT/JustTweak/_TweakAccessorGenerator \
              -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
              -c $SRCROOT/<path_to_the_folder_containing_config.json>',
