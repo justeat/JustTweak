@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name                    = 'JustTweak'
-  s.version                 = '6.1.0'
+  s.version                 = '6.1.1'
   s.summary                 = 'A framework for feature flagging, locally and remotely configure and A/B test iOS apps.'
   s.description             = <<-DESC
 JustTweak is a framework for feature flagging, locally and remotely configure and A/B test iOS apps.
@@ -19,7 +19,17 @@ JustTweak is a framework for feature flagging, locally and remotely configure an
   s.swift_version           = '5.1'
   
   s.source_files            = 'JustTweak/Classes/**/*.swift'
-  s.resource_bundle         = { 'JustTweak' => 'JustTweak/Assets/**/*' }
+  s.resource_bundle         = { 'JustTweak' => 'JustTweak/Assets/en.lproj/*' }
+  
+  s.preserve_paths = [
+    '_TweakAccessorGenerator',
+  ]
+    
+  # Ensure the generator script are callable via
+  # ${PODS_ROOT}/<name>
+  s.prepare_command = <<-PREPARE_COMMAND_END
+    cp -f ./JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator ./_TweakAccessorGenerator
+  PREPARE_COMMAND_END
   
 end
 
