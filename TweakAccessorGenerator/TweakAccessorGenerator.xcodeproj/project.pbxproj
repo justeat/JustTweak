@@ -12,10 +12,7 @@
 		12273D382625E45F00732559 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 12273D372625E45F00732559 /* ArgumentParser */; };
 		12BE964D2626FA5000C1B6C3 /* TweakAccessorCodeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BE964C2626FA5000C1B6C3 /* TweakAccessorCodeGeneratorTests.swift */; };
 		12BE987A2627243D00C1B6C3 /* Tweaks.json in Resources */ = {isa = PBXBuildFile; fileRef = 12BE98792627243D00C1B6C3 /* Tweaks.json */; };
-		4F3F85E426400B6D00A7B8B8 /* GeneratedTweakAccessorContent_NoPropertyWrappers in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F85E226400B6D00A7B8B8 /* GeneratedTweakAccessorContent_NoPropertyWrappers */; };
-		4F3F85E526400B6E00A7B8B8 /* GeneratedTweakAccessorContent_PropertyWrappers in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F85E326400B6D00A7B8B8 /* GeneratedTweakAccessorContent_PropertyWrappers */; };
-		4F5B53E22632DD6100513C18 /* OptimizelyTweakProviderSetupCode in Resources */ = {isa = PBXBuildFile; fileRef = 4F5B53E02632DD6100513C18 /* OptimizelyTweakProviderSetupCode */; };
-		4F5B53E32632DD6100513C18 /* FirebaseTweakProviderSetupCode in Resources */ = {isa = PBXBuildFile; fileRef = 4F5B53E12632DD6100513C18 /* FirebaseTweakProviderSetupCode */; };
+		4F3F85E426400B6D00A7B8B8 /* GeneratedTweakAccessorContent in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F85E226400B6D00A7B8B8 /* GeneratedTweakAccessorContent */; };
 		4F65E88B2629CF8C009E8C3B /* ValidTweaks_TopPriority.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E8892629CF8C009E8C3B /* ValidTweaks_TopPriority.json */; };
 		4F65E88C2629CF8C009E8C3B /* ValidTweaks_LowPriority.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F65E88A2629CF8C009E8C3B /* ValidTweaks_LowPriority.json */; };
 		4F7750762627338700A0A3F5 /* TweakValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750732627338700A0A3F5 /* TweakValue.swift */; };
@@ -63,13 +60,8 @@
 		12BE964C2626FA5000C1B6C3 /* TweakAccessorCodeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakAccessorCodeGeneratorTests.swift; sourceTree = "<group>"; };
 		12BE964E2626FA5000C1B6C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12BE98792627243D00C1B6C3 /* Tweaks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tweaks.json; sourceTree = "<group>"; };
-		4F3F85E226400B6D00A7B8B8 /* GeneratedTweakAccessorContent_NoPropertyWrappers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedTweakAccessorContent_NoPropertyWrappers; sourceTree = "<group>"; };
-		4F3F85E326400B6D00A7B8B8 /* GeneratedTweakAccessorContent_PropertyWrappers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedTweakAccessorContent_PropertyWrappers; sourceTree = "<group>"; };
-		4F5B53E02632DD6100513C18 /* OptimizelyTweakProviderSetupCode */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OptimizelyTweakProviderSetupCode; sourceTree = "<group>"; };
-		4F5B53E12632DD6100513C18 /* FirebaseTweakProviderSetupCode */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FirebaseTweakProviderSetupCode; sourceTree = "<group>"; };
-		4F5B54AF263413BE00513C18 /* OptimizelyTweakProviderSetupCode */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OptimizelyTweakProviderSetupCode; sourceTree = "<group>"; };
+		4F3F85E226400B6D00A7B8B8 /* GeneratedTweakAccessorContent */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GeneratedTweakAccessorContent; sourceTree = "<group>"; };
 		4F5B54B0263413BE00513C18 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
-		4F5B54B1263413BE00513C18 /* FirebaseTweakProviderSetupCode */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FirebaseTweakProviderSetupCode; sourceTree = "<group>"; };
 		4F5B54B3263413BE00513C18 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		4F65E8892629CF8C009E8C3B /* ValidTweaks_TopPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidTweaks_TopPriority.json; sourceTree = "<group>"; };
 		4F65E88A2629CF8C009E8C3B /* ValidTweaks_LowPriority.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ValidTweaks_LowPriority.json; sourceTree = "<group>"; };
@@ -151,9 +143,7 @@
 		4F5B54AE263413BE00513C18 /* TestConfiguration2 */ = {
 			isa = PBXGroup;
 			children = (
-				4F5B54AF263413BE00513C18 /* OptimizelyTweakProviderSetupCode */,
 				4F5B54B0263413BE00513C18 /* config.json */,
-				4F5B54B1263413BE00513C18 /* FirebaseTweakProviderSetupCode */,
 			);
 			path = TestConfiguration2;
 			sourceTree = "<group>";
@@ -191,8 +181,6 @@
 		4F7750A82627602200A0A3F5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				4F5B53E12632DD6100513C18 /* FirebaseTweakProviderSetupCode */,
-				4F5B53E02632DD6100513C18 /* OptimizelyTweakProviderSetupCode */,
 				4FD526F726283EBB000F6780 /* InvalidTweaks_DuplicateGeneratedPropertyName.json */,
 				4FD526FD26283F91000F6780 /* InvalidTweaks_InvalidJSON.json */,
 				4F7750C026277B6300A0A3F5 /* InvalidTweaks_MissingValues.json */,
@@ -200,8 +188,7 @@
 				4F65E88A2629CF8C009E8C3B /* ValidTweaks_LowPriority.json */,
 				4F65E8892629CF8C009E8C3B /* ValidTweaks_TopPriority.json */,
 				120B0A1D26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent */,
-				4F3F85E226400B6D00A7B8B8 /* GeneratedTweakAccessorContent_NoPropertyWrappers */,
-				4F3F85E326400B6D00A7B8B8 /* GeneratedTweakAccessorContent_PropertyWrappers */,
+				4F3F85E226400B6D00A7B8B8 /* GeneratedTweakAccessorContent */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -311,17 +298,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F5B53E32632DD6100513C18 /* FirebaseTweakProviderSetupCode in Resources */,
 				120B0A1E26285CE70066F2C2 /* GeneratedTweakAccessor+ConstantsContent in Resources */,
 				4FD526FE26283F91000F6780 /* InvalidTweaks_InvalidJSON.json in Resources */,
 				4FD526F826283EBB000F6780 /* InvalidTweaks_DuplicateGeneratedPropertyName.json in Resources */,
 				4F7750C126277B6300A0A3F5 /* InvalidTweaks_MissingValues.json in Resources */,
-				4F5B53E22632DD6100513C18 /* OptimizelyTweakProviderSetupCode in Resources */,
-				4F3F85E426400B6D00A7B8B8 /* GeneratedTweakAccessorContent_NoPropertyWrappers in Resources */,
+				4F3F85E426400B6D00A7B8B8 /* GeneratedTweakAccessorContent in Resources */,
 				12BE987A2627243D00C1B6C3 /* Tweaks.json in Resources */,
 				4F65E88C2629CF8C009E8C3B /* ValidTweaks_LowPriority.json in Resources */,
 				4F65E88B2629CF8C009E8C3B /* ValidTweaks_TopPriority.json in Resources */,
-				4F3F85E526400B6E00A7B8B8 /* GeneratedTweakAccessorContent_PropertyWrappers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

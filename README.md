@@ -77,70 +77,11 @@ static let tweakManager: TweakManager = {
 
 ```json
 {
-    "tweakProviders": [
-        {
-            "type": "EphemeralTweakProvider",
-            "macros": ["DEBUG", "CONFIGURATION_UI_TESTS"]
-        },
-        {
-            "type": "UserDefaultsTweakProvider",
-            "parameter": "UserDefaults.standard",
-            "macros": ["DEBUG", "CONFIGURATION_DEBUG"]
-        },
-        {
-            "type": "LocalTweakProvider",
-            "parameter": "LocalTweaks_TopPriority_example",
-            "macros": ["DEBUG"]
-        },
-        {
-            "type": "LocalTweakProvider",
-            "parameter": "LocalTweaks_example"
-        }
-    ],
-    "shouldCacheTweaks": true,
-    "usePropertyWrappers": true,
     "accessorName": "GeneratedTweakAccessor"
 }
 ```
 
-Supported tweak provider types are:
-
-- `EphemeralTweakProvider`
-- `UserDefaultsTweakProvider`
-- `LocalTweakProvider`
-- `CustomTweakProvider`
-
-The content of the `parameter` value depends on the type:
-- `EphemeralTweakProvider`: is not needed
-- `UserDefaultsTweakProvider`: should specify the `UserDefaults` instance to be used 
-- `LocalTweakProvider`: should specify the filename of the json file containing the tweaks
-- `CustomTweakProvider`: should specify the filename of a file containing the setup code needed to instantiate and add your custom tweak provider.
-
-```
-...json
-{
-    "type": "CustomTweakProvider",
-    "parameter": "FirebaseTweakProviderSetupCode",
-    "macros": ["CONFIGURATION_APPSTORE"]
-},
-...
-```
-
-Example content from `FirebaseTweakProviderSetupCode`. Store any CustomTweakProvider setup code file in the same folder of `config.json` and mind not to add them in any target in Xcode.
-
-```swift
-let firebaseTweakProvider = FirebaseTweakProvider()
-firebaseTweakProvider.someValue = true
-tweakProviders.append(firebaseTweakProvider)
-```
-
-It's important to include the `tweakProviders.append(<#property_name#>)` statement at the end of your code block that will be included in the generated code.
-
-Other supported configuration:
-
-`shouldCacheTweaks`: enables/disable the JustTweak cache (see [Caching notes](#caching-notes)).
-`usePropertyWrappers`: property wrappers are definitely one of the most exciting new features in Swift 5.1. In order to be used for the stack, they need a single instance of `TweakManager`. If this is not a possible approach for you codebase, you can set this value to `false` to allow the generation of code that doesn't rely on a `static let`. 
-`accessorName`: the name of the generated class. 
+the only currently supported value is `accessorName` that defines the name of the generated class. 
 
 - Add the following to your `Podfile`
 
@@ -164,7 +105,7 @@ Every time the target is built, the code generator tool will regenerate the code
 If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object (which name you have defined in the `.json` configuration and use it to access the feature flags.
 
 ```swift
-let accessor = GeneratedTweakAccessor()
+let accessor = GeneratedTweakAccessor(with: <#tweak_manager_instance#>)
 if accessor.meaningOfLife == 42 {
     ...
 }
