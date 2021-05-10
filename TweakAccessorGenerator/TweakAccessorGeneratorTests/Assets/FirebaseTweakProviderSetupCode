@@ -1,3 +1,0 @@
-let firebaseTweakProvider = FirebaseTweakProvider()
-firebaseTweakProvider.someValue = true
-tweakProviders.append(firebaseTweakProvider)

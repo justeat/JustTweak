@@ -8,79 +8,49 @@ import JustTweak
 
 class GeneratedTweakAccessor {
 
-    static let tweakManager: TweakManager = {
-        var tweakProviders: [TweakProvider] = []
+    private(set) var tweakManager: TweakManager
 
-        // EphemeralTweakProvider
-        #if DEBUG || CONFIGURATION_UI_TESTS
-        let ephemeralTweakProvider_1 = NSMutableDictionary()
-        tweakProviders.append(ephemeralTweakProvider_1)
-        #endif
-
-        // UserDefaultsTweakProvider
-        #if DEBUG || CONFIGURATION_DEBUG
-        let userDefaultsTweakProvider_1 = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)
-        tweakProviders.append(userDefaultsTweakProvider_1)
-        #endif
-
-        // LocalTweakProvider
-        #if DEBUG
-        let jsonFileURL_1 = Bundle.main.url(forResource: "LocalTweaks_TopPriority_example", withExtension: "json")!
-        let localTweakProvider_1 = LocalTweakProvider(jsonURL: jsonFileURL_1)
-        tweakProviders.append(localTweakProvider_1)
-        #endif
-
-        // LocalTweakProvider
-        let jsonFileURL_2 = Bundle.main.url(forResource: "LocalTweaks_example", withExtension: "json")!
-        let localTweakProvider_2 = LocalTweakProvider(jsonURL: jsonFileURL_2)
-        tweakProviders.append(localTweakProvider_2)
-
-        let tweakManager = TweakManager(tweakProviders: tweakProviders)
-        tweakManager.useCache = true
-        return tweakManager
-    }()
-
-    var tweakManager: TweakManager {
-        return Self.tweakManager
+    init(with tweakManager: TweakManager) {
+        self.tweakManager = tweakManager
     }
 
-    @TweakProperty(feature: Features.general,
-                   variable: Variables.answerToTheUniverse,
-                   tweakManager: tweakManager)
-    var meaningOfLife: Int
+    var canShowGreenView: Bool {
+        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)?.boolValue ?? false }
+        set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayGreenView) }
+    }
 
-    @TweakProperty(feature: Features.general,
-                   variable: Variables.greetOnAppDidBecomeActive,
-                   tweakManager: tweakManager)
-    var shouldShowAlert: Bool
+    var canShowRedView: Bool {
+        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)?.boolValue ?? false }
+        set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayRedView) }
+    }
 
-    @TweakProperty(feature: Features.general,
-                   variable: Variables.tapToChangeColorEnabled,
-                   tweakManager: tweakManager)
-    var isTapGestureToChangeColorEnabled: Bool
+    var canShowYellowView: Bool {
+        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)?.boolValue ?? false }
+        set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayYellowView) }
+    }
 
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayGreenView,
-                   tweakManager: tweakManager)
-    var canShowGreenView: Bool
+    var isTapGestureToChangeColorEnabled: Bool {
+        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeColorEnabled)?.boolValue ?? false }
+        set { tweakManager.set(newValue, feature: Features.general, variable: Variables.tapToChangeColorEnabled) }
+    }
 
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayRedView,
-                   tweakManager: tweakManager)
-    var canShowRedView: Bool
+    var labelText: String {
+        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.labelText)?.stringValue ?? "" }
+        set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.labelText) }
+    }
 
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.displayYellowView,
-                   tweakManager: tweakManager)
-    var canShowYellowView: Bool
+    var meaningOfLife: Int {
+        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.answerToTheUniverse)?.intValue ?? 0 }
+        set { tweakManager.set(newValue, feature: Features.general, variable: Variables.answerToTheUniverse) }
+    }
 
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.labelText,
-                   tweakManager: tweakManager)
-    var labelText: String
+    var redViewAlpha: Double {
+        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.redViewAlphaComponent)?.doubleValue ?? 0.0 }
+        set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.redViewAlphaComponent) }
+    }
 
-    @TweakProperty(feature: Features.uiCustomization,
-                   variable: Variables.redViewAlphaComponent,
-                   tweakManager: tweakManager)
-    var redViewAlpha: Double
+    var shouldShowAlert: Bool {
+        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.greetOnAppDidBecomeActive)?.boolValue ?? false }
+        set { tweakManager.set(newValue, feature: Features.general, variable: Variables.greetOnAppDidBecomeActive) }
+    }
 }

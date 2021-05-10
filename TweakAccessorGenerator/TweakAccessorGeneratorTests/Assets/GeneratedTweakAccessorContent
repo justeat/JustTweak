@@ -8,51 +8,11 @@ import JustTweak
 
 class GeneratedTweakAccessorContent {
 
-    lazy var tweakManager: TweakManager = {
-        var tweakProviders: [TweakProvider] = []
+    let tweakManager: TweakManager
 
-        // EphemeralTweakProvider
-        #if DEBUG || CONFIGURATION_UI_TESTS
-        let ephemeralTweakProvider_1 = NSMutableDictionary()
-        tweakProviders.append(ephemeralTweakProvider_1)
-        #endif
-
-        // UserDefaultsTweakProvider
-        #if DEBUG || CONFIGURATION_DEBUG
-        let userDefaultsTweakProvider_1 = UserDefaultsTweakProvider(userDefaults: UserDefaults.standard)
-        tweakProviders.append(userDefaultsTweakProvider_1)
-        #endif
-
-        // CustomTweakProvider
-        #if CONFIGURATION_APPSTORE
-        let optimizelyTweakProvider = OptimizelyTweakProvider()
-        optimizelyTweakProvider.someValue = 42
-        tweakProviders.append(optimizelyTweakProvider)
-        #endif
-
-        // CustomTweakProvider
-        #if CONFIGURATION_APPSTORE
-        let firebaseTweakProvider = FirebaseTweakProvider()
-        firebaseTweakProvider.someValue = true
-        tweakProviders.append(firebaseTweakProvider)
-        #endif
-
-        // LocalTweakProvider
-        #if DEBUG
-        let jsonFileURL_1 = Bundle.main.url(forResource: "ValidTweaks_TopPriority", withExtension: "json")!
-        let localTweakProvider_1 = LocalTweakProvider(jsonURL: jsonFileURL_1)
-        tweakProviders.append(localTweakProvider_1)
-        #endif
-
-        // LocalTweakProvider
-        let jsonFileURL_2 = Bundle.main.url(forResource: "ValidTweaks_LowPriority", withExtension: "json")!
-        let localTweakProvider_2 = LocalTweakProvider(jsonURL: jsonFileURL_2)
-        tweakProviders.append(localTweakProvider_2)
-
-        let tweakManager = TweakManager(tweakProviders: tweakProviders)
-        tweakManager.useCache = true
-        return tweakManager
-    }()
+    init(with tweakManager: TweakManager) {
+        self.tweakManager = tweakManager
+    }
 
     var canShowGreenView: Bool {
         get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)?.boolValue ?? false }

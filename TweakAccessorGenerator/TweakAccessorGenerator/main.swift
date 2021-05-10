@@ -33,20 +33,6 @@ struct TweakAccessorGenerator: ParsableCommand {
         return decodedResult
     }
     
-    private func loadCustomTweakProvidersCode() -> [Filename: CodeBlock] {
-        let configuration = loadConfigurationFromJson()
-        let customTweakProviders = configuration.tweakProviders.filter { $0.type == "CustomTweakProvider" } // costantise
-        let filenameReferences = customTweakProviders.map { $0.parameter! }
-        
-        var customTweakProvidersCode: [Filename: CodeBlock] = [:]
-        for reference in filenameReferences {
-            let configurationUrl = configurationFolderURL.appendingPathComponent(reference)
-            let content = try! String(contentsOf: configurationUrl)
-            customTweakProvidersCode[reference] = content
-        }
-        return customTweakProvidersCode
-    }
-    
     func run() throws {
         let codeGenerator = TweakAccessorCodeGenerator()
         let tweakLoader = TweakLoader()
@@ -82,13 +68,11 @@ extension TweakAccessorGenerator {
                                    tweaks: [Tweak],
                                    outputFolder: String,
                                    configuration: Configuration) {
-        let customTweakProvidersSetupCode = loadCustomTweakProvidersCode()
         let fileName = "\(configuration.accessorName).swift"
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
         let constants = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                   tweaks: tweaks,
-                                                                  configuration: configuration,
-                                                                  customTweakProvidersSetupCode: customTweakProvidersSetupCode)
+                                                                  configuration: configuration)
         try! constants.write(to: url, atomically: true, encoding: .utf8)
     }
 }
