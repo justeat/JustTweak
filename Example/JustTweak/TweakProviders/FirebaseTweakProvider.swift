@@ -66,8 +66,4 @@ public class FirebaseTweakProvider: Configuration {
                      title: nil,
                      group: nil)
     }
-    
-    public func activeVariation(for experiment: String) -> String? {
-        return nil
-    }
 }

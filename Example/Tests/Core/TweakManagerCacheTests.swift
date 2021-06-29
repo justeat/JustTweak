@@ -11,7 +11,6 @@ fileprivate struct Constants {
     static let feature = "some_feature"
     static let variable = "some_variable"
     static let experiment = "some_experiment"
-    static let activeVariation = "some_experiment_variation"
 }
 
 class TweakManagerCacheTests: XCTestCase {
@@ -80,28 +79,6 @@ class TweakManagerCacheTests: XCTestCase {
         XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 3 : 4)
     }
-    
-    // MARK: - activeVariation(experiment:)
-    
-    func testActiveVariation_CacheDisabled() {
-        testActiveVariation(useCache: false)
-    }
-    
-    func testActiveVariation_CacheEnabled() {
-        testActiveVariation(useCache: true)
-    }
-    
-    private func testActiveVariation(useCache: Bool) {
-        tweakManager.useCache = useCache
-        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, 0)
-        XCTAssertEqual(tweakManager.activeVariation(for: Constants.experiment), Constants.activeVariation)
-        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, 1)
-        XCTAssertEqual(tweakManager.activeVariation(for: Constants.experiment), Constants.activeVariation)
-        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, useCache ? 1 : 2)
-        tweakManager.resetCache()
-        XCTAssertEqual(tweakManager.activeVariation(for: Constants.experiment), Constants.activeVariation)
-        XCTAssertEqual(mockTweakProvider.activeVariationCallsCounter, useCache ? 2 : 3)
-    }
 }
 
 fileprivate class MockTweakProvider: MutableTweakProvider {
@@ -110,11 +87,9 @@ fileprivate class MockTweakProvider: MutableTweakProvider {
     
     var isFeatureEnabledCallsCounter: Int = 0
     var tweakWithFeatureVariableCallsCounter: Int = 0
-    var activeVariationCallsCounter: Int = 0
     
     var featureBackingStore: [String : Bool] = [Constants.feature: Constants.featureActiveValue]
     var tweakBackingStore: [String : [String : Tweak]] = [:]
-    var experimentBackingStore: [String : String] = [Constants.experiment: Constants.activeVariation]
     
     func isFeatureEnabled(_ feature: String) -> Bool {
         isFeatureEnabledCallsCounter += 1
@@ -124,11 +99,6 @@ fileprivate class MockTweakProvider: MutableTweakProvider {
     func tweakWith(feature: String, variable: String) -> Tweak? {
         tweakWithFeatureVariableCallsCounter += 1
         return tweakBackingStore[feature]?[variable]
-    }
-    
-    func activeVariation(for experiment: String) -> String? {
-        activeVariationCallsCounter += 1
-        return experimentBackingStore[experiment]
     }
     
     func set(_ value: TweakValue, feature: String, variable: String) {

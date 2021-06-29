@@ -170,21 +170,6 @@ var meaningOfLife: Int?
 var shouldShowFeatureX: Bool
 ```
 
-3. Run an A/B test
-
-```swift
-// check for a tweak value
-let variation = tweakManager.activeVariation(for: "some_experiment")
-if let variation = variation {
-    // act according to the kind of variation (e.g. "control", "variation_1")
-} else {
-    // default behaviour
-}
-```
-
-See `TweakAccessor.swift` for more info.
-
-
 ### Tweak Providers priority
 
 The order of the objects in the `tweakProviders` array defines the priority of the tweak providers.

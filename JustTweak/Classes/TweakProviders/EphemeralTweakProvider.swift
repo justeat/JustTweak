@@ -28,10 +28,6 @@ extension NSDictionary: TweakProvider {
         guard let finalValue = value else { return nil }
         return Tweak(feature: feature, variable: variable, value: finalValue)
     }
-    
-    public func activeVariation(for experiment: String) -> String? {
-        return nil
-    }
 }
 
 extension NSMutableDictionary: MutableTweakProvider {

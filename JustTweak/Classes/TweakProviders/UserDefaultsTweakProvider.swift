@@ -35,10 +35,6 @@ extension UserDefaultsTweakProvider: TweakProvider {
                      title: nil,
                      group: nil)
     }
-    
-    public func activeVariation(for experiment: String) -> String? {
-        return nil
-    }
 }
 
 extension UserDefaultsTweakProvider: MutableTweakProvider {

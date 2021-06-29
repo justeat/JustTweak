@@ -107,8 +107,4 @@ fileprivate class MockTweakProvider: TweakProvider {
         guard let value = knownValues[variable] else { return nil }
         return Tweak(feature: feature, variable: variable, value: value["Value"]!, title: nil, group: nil)
     }
-    
-    func activeVariation(for experiment: String) -> String? {
-        return nil
-    }
 }
