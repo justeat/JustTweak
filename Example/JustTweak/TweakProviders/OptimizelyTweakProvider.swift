@@ -73,8 +73,4 @@ public class OptimizelyTweakProvider: Configuration {
         
         return nil
     }
-    
-    public func activeVariation(for experiment: String) -> String? {
-        return optimizelyClient?.activate(experiment, userId: userId)?.variationKey
-    }
 }

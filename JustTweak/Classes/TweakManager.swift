@@ -112,26 +112,7 @@ extension TweakManager: MutableTweakProvider {
             return result
         }
     }
-    
-    public func activeVariation(for experiment: String) -> String? {
-        queue.sync {
-            if useCache, let cachedExperiment = experimentCache[experiment] {
-                logClosure?("Experiment '\(cachedExperiment)' found in cache.)", .verbose)
-                return cachedExperiment
-            }
-            
-            var activeVariation: String?
-            for (_, configuration) in tweakProviders.enumerated() {
-                activeVariation = configuration.activeVariation(for: experiment)
-                if activeVariation != nil { break }
-            }
-            if useCache {
-                experimentCache[experiment] = activeVariation
-            }
-            return activeVariation
-        }
-    }
-    
+
     public func set(_ value: TweakValue, feature: String, variable: String) {
         guard let mutableTweakProvider = self.mutableTweakProvider else { return }
         if useCache {

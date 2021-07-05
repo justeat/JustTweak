@@ -72,8 +72,4 @@ extension LocalTweakProvider: TweakProvider {
                      description: description,
                      group: group)
     }
-    
-    public func activeVariation(for experiment: String) -> String? {
-        return nil
-    }
 }

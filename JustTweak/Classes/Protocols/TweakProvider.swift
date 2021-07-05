@@ -15,7 +15,6 @@ public protocol TweakProvider {
     var logClosure: LogClosure? { set get }
     func isFeatureEnabled(_ feature: String) -> Bool
     func tweakWith(feature: String, variable: String) -> Tweak?
-    func activeVariation(for experiment: String) -> String?
 }
 
 public protocol MutableTweakProvider: TweakProvider {
