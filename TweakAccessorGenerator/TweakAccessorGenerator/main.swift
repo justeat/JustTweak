@@ -61,7 +61,13 @@ extension TweakAccessorGenerator {
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
         let constants = codeGenerator.generateConstantsFileContent(tweaks: tweaks,
                                                                    configuration: configuration)
-        try! constants.write(to: url, atomically: true, encoding: .utf8)
+        if let existingConstants = try? String(contentsOf: url, encoding: .utf8) {
+            if existingConstants != constants {
+                try! constants.write(to: url, atomically: true, encoding: .utf8)
+            }
+        } else {
+            try! constants.write(to: url, atomically: true, encoding: .utf8)
+        }
     }
     
     private func writeAccessorFile(codeGenerator: TweakAccessorCodeGenerator,
@@ -70,10 +76,16 @@ extension TweakAccessorGenerator {
                                    configuration: Configuration) {
         let fileName = "\(configuration.accessorName).swift"
         let url: URL = URL(fileURLWithPath: outputFolder).appendingPathComponent(fileName)
-        let constants = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
-                                                                  tweaks: tweaks,
-                                                                  configuration: configuration)
-        try! constants.write(to: url, atomically: true, encoding: .utf8)
+        let accessor = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
+                                                                 tweaks: tweaks,
+                                                                 configuration: configuration)
+        if let existingAccessor = try? String(contentsOf: url, encoding: .utf8) {
+            if existingAccessor != accessor {
+                try! accessor.write(to: url, atomically: true, encoding: .utf8)
+            }
+        } else {
+            try! accessor.write(to: url, atomically: true, encoding: .utf8)
+        }
     }
 }
 
