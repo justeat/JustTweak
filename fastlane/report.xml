@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.00055">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: ensure_bundle_exec" time="0.000468">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: run_tests" time="26.414791">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
