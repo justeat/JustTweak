@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "7CD69B1F-AAC5-4B28-B048-0799F574A991",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "OS_ACTIVITY_MODE",
+        "value" : "disable"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:JustTweak.xcodeproj",
+      "identifier" : "607FACCF1AFB9204008FA782",
+      "name" : "JustTweak_Example"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:JustTweak.xcodeproj",
+        "identifier" : "607FACE41AFB9204008FA782",
+        "name" : "JustTweak_Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

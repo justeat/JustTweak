@@ -37,3 +37,6 @@ Carthage/Build
 #
 Pods/
 default.profraw
+fastlane/test_output/
+fastlane/report.xml
+derived_data/

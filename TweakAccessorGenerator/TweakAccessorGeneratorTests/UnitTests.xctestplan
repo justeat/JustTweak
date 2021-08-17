@@ -1,0 +1,43 @@
+{
+  "configurations" : [
+    {
+      "id" : "5ACF2D18-3EDB-4507-A1E4-C3ECF1D3D55F",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-l $SRCROOT\/..\/Example\/JustTweak\/TweakProviders\/LocalTweaks_example.json"
+      },
+      {
+        "argument" : "-o $SRCROOT\/..\/Example\/JustTweak\/Accessors\/"
+      },
+      {
+        "argument" : "-c $SRCROOT\/TweakAccessorGenerator\/Assets\/TestConfiguration1\/"
+      },
+      {
+        "argument" : "--help",
+        "enabled" : false
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:TweakAccessorGenerator.xcodeproj",
+      "identifier" : "12273D162625D6BE00732559",
+      "name" : "TweakAccessorGenerator"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TweakAccessorGenerator.xcodeproj",
+        "identifier" : "12BE96492626FA5000C1B6C3",
+        "name" : "TweakAccessorGeneratorTests"
+      }
+    }
+  ],
+  "version" : 1
+}

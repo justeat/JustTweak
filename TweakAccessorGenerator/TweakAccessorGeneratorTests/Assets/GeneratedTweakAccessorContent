@@ -8,7 +8,7 @@ import JustTweak
 
 class GeneratedTweakAccessorContent {
 
-    let tweakManager: TweakManager
+    private(set) var tweakManager: TweakManager
 
     init(with tweakManager: TweakManager) {
         self.tweakManager = tweakManager
