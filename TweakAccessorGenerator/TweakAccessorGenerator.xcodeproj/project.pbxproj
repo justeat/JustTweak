@@ -33,6 +33,7 @@
 		4F7750B32627626100A0A3F5 /* String+CasingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750B22627626100A0A3F5 /* String+CasingTests.swift */; };
 		4F7750B9262764C600A0A3F5 /* TweakLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7750B8262764C600A0A3F5 /* TweakLoaderTests.swift */; };
 		4F7750C126277B6300A0A3F5 /* InvalidTweaks_MissingValues.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F7750C026277B6300A0A3F5 /* InvalidTweaks_MissingValues.json */; };
+		4F86DC6E26CBE01400DEC81C /* UnitTests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 4F86DC6D26CBE01400DEC81C /* UnitTests.xctestplan */; };
 		4FD526F826283EBB000F6780 /* InvalidTweaks_DuplicateGeneratedPropertyName.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD526F726283EBB000F6780 /* InvalidTweaks_DuplicateGeneratedPropertyName.json */; };
 		4FD526FE26283F91000F6780 /* InvalidTweaks_InvalidJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD526FD26283F91000F6780 /* InvalidTweaks_InvalidJSON.json */; };
 		4FD52706262841C7000F6780 /* Array+Duplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD52705262841C7000F6780 /* Array+Duplicates.swift */; };
@@ -76,6 +77,7 @@
 		4F7750B22627626100A0A3F5 /* String+CasingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CasingTests.swift"; sourceTree = "<group>"; };
 		4F7750B8262764C600A0A3F5 /* TweakLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweakLoaderTests.swift; sourceTree = "<group>"; };
 		4F7750C026277B6300A0A3F5 /* InvalidTweaks_MissingValues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidTweaks_MissingValues.json; sourceTree = "<group>"; };
+		4F86DC6D26CBE01400DEC81C /* UnitTests.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		4FD526F726283EBB000F6780 /* InvalidTweaks_DuplicateGeneratedPropertyName.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidTweaks_DuplicateGeneratedPropertyName.json; sourceTree = "<group>"; };
 		4FD526FD26283F91000F6780 /* InvalidTweaks_InvalidJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InvalidTweaks_InvalidJSON.json; sourceTree = "<group>"; };
 		4FD52705262841C7000F6780 /* Array+Duplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Duplicates.swift"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		12BE964B2626FA5000C1B6C3 /* TweakAccessorGeneratorTests */ = {
 			isa = PBXGroup;
 			children = (
+				4F86DC6D26CBE01400DEC81C /* UnitTests.xctestplan */,
 				4F7750AF2627603E00A0A3F5 /* Suites */,
 				4F7750A82627602200A0A3F5 /* Assets */,
 				12BE964E2626FA5000C1B6C3 /* Info.plist */,
@@ -306,6 +309,7 @@
 				12BE987A2627243D00C1B6C3 /* Tweaks.json in Resources */,
 				4F65E88C2629CF8C009E8C3B /* ValidTweaks_LowPriority.json in Resources */,
 				4F65E88B2629CF8C009E8C3B /* ValidTweaks_TopPriority.json in Resources */,
+				4F86DC6E26CBE01400DEC81C /* UnitTests.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +406,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -457,7 +460,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -469,8 +471,9 @@
 		12273D1F2625D6BE00732559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZKPN288GRK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -480,8 +483,9 @@
 		12273D202625D6BE00732559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZKPN288GRK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -491,9 +495,10 @@
 		12BE964F2626FA5000C1B6C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = ZKPN288GRK;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TweakAccessorGeneratorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,9 +514,10 @@
 		12BE96502626FA5000C1B6C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = ZKPN288GRK;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TweakAccessorGeneratorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
