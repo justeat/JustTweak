@@ -88,11 +88,34 @@ class TweakManagerTests: XCTestCase {
         NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertFalse(didCallClosure)
     }
+    
+    func testTweakManagerDecryption() throws {
+        var mutableTweakProvider = try XCTUnwrap(tweakManager.mutableTweakProvider)
+        let feature = "password"
+        let variable = "variable"
+        
+        let encodedString = try XCTUnwrap("my secret password".data(using: .utf8)?.base64EncodedString())
+        
+        mutableTweakProvider.set(encodedString, feature: feature, variable: variable)
+        mutableTweakProvider.decryptionClosure = { tweak in
+            let data = Data(base64Encoded: tweak.stringValue!).map {
+                String(data: $0, encoding: .utf8)
+            }!
+            
+            return data!
+        }
+        
+        let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
+        
+        XCTAssertEqual("bXkgc2VjcmV0IHBhc3N3b3Jk", tweak?.stringValue)
+        XCTAssertEqual("my secret password", tweak?.decryptedValue?.stringValue)
+    }
 }
 
 fileprivate class MockTweakProvider: TweakProvider {
     
     var logClosure: LogClosure?
+    var decryptionClosure: ((Tweak) -> TweakValue)?
     let features: [String : [String]] = [:]
     let knownValues = [Variables.displayRedView: ["Value": true],
                        Variables.displayYellowView: ["Value": false],

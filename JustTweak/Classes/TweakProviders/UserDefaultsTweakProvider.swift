@@ -12,6 +12,7 @@ final public class UserDefaultsTweakProvider {
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
     public var logClosure: LogClosure?
+    public var decryptionClosure: ((Tweak) -> TweakValue)?
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
@@ -29,11 +30,16 @@ extension UserDefaultsTweakProvider: TweakProvider {
         let userDefaultsKey = keyForTweakWithIdentifier(variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey) as AnyObject?
         guard let value = updateUserDefaults(userDefaultsValue) else { return nil }
-        return Tweak(feature: feature,
-                     variable: variable,
-                     value: value,
-                     title: nil,
-                     group: nil)
+        
+        let tweak = Tweak(
+            feature: feature,
+            variable: variable,
+            value: value,
+            title: nil,
+            group: nil
+        )
+        
+        return tweak.mutatedCopy(decryptedValue: decryptionClosure?(tweak))
     }
 }
 

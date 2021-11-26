@@ -17,6 +17,14 @@ final public class TweakManager {
         }
     }
     
+    public var decryptionClosure: ((Tweak) -> TweakValue)? {
+        didSet {
+            for (index, _) in tweakProviders.enumerated() {
+                tweakProviders[index].decryptionClosure = decryptionClosure
+            }
+        }
+    }
+    
     public var useCache: Bool = false {
         didSet {
             if useCache != oldValue {
@@ -45,6 +53,9 @@ final public class TweakManager {
         notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweakProviderDidChangeNotification, object: nil)
     }
     
+    
+    private(set) var decryptClosure: ((Tweak) -> TweakValue)?
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -81,19 +92,23 @@ extension TweakManager: MutableTweakProvider {
             }
             
             var result: Tweak? = nil
-            for (_, configuration) in tweakProviders.enumerated() {
-                if let tweak = configuration.tweakWith(feature: feature, variable: variable) {
-                    logClosure?("Tweak '\(tweak)' found in configuration \(configuration))", .verbose)
-                    result = Tweak(feature: feature,
-                                   variable: variable,
-                                   value: tweak.value,
-                                   title: tweak.title,
-                                   group: tweak.group,
-                                   source: "\(type(of: configuration))")
+            for (_, tweakProvider) in tweakProviders.enumerated() {
+                if let tweak = tweakProvider.tweakWith(feature: feature, variable: variable) {
+                    logClosure?("Tweak '\(tweak)' found in configuration \(tweakProvider))", .verbose)
+                    
+                    let tweakWithoutDecryptedValue = Tweak(feature: feature,
+                                                           variable: variable,
+                                                           value: tweak.value,
+                                                           title: tweak.title,
+                                                           group: tweak.group,
+                                                           source: "\(type(of: tweakProvider))")
+                    
+                    let decryptedValue = tweakProvider.decryptionClosure?(tweakWithoutDecryptedValue)
+                    result = tweakWithoutDecryptedValue.mutatedCopy(decryptedValue: decryptedValue)
                     break
                 }
                 else {
-                    logClosure?("Tweak with identifier '\(variable)' NOT found in configuration \(configuration))", .verbose)
+                    logClosure?("Tweak with identifier '\(variable)' NOT found in configuration \(tweakProvider))", .verbose)
                 }
             }
             if let result = result {

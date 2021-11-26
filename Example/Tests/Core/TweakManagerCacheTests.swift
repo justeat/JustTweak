@@ -83,6 +83,7 @@ class TweakManagerCacheTests: XCTestCase {
 
 fileprivate class MockTweakProvider: MutableTweakProvider {
     
+    var decryptionClosure: ((Tweak) -> TweakValue)?
     var logClosure: LogClosure?
     
     var isFeatureEnabledCallsCounter: Int = 0

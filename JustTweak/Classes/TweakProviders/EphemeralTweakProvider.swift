@@ -12,6 +12,13 @@ extension NSDictionary: TweakProvider {
         set { }
     }
     
+    public var decryptionClosure: ((Tweak) -> TweakValue)? {
+        get {
+            nil
+        }
+        set {}
+    }
+    
     public func isFeatureEnabled(_ feature: String) -> Bool {
         self[feature] as? Bool ?? false
     }
@@ -26,7 +33,7 @@ extension NSDictionary: TweakProvider {
             value = theValue.tweakValue
         }
         guard let finalValue = value else { return nil }
-        return Tweak(feature: feature, variable: variable, value: finalValue)
+        return Tweak(feature: feature, variable: variable, value: finalValue, decryptedValue: nil)
     }
 }
 
