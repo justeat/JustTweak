@@ -6,7 +6,7 @@
 import JustTweak
 import OptimizelySDKiOS
 
-public class OptimizelyTweakProvider: Configuration {
+public class OptimizelyTweakProvider: TweakProvider {
     
     private var optimizelyManager: OPTLYManager?
     private var optimizelyClient: OPTLYClient?
