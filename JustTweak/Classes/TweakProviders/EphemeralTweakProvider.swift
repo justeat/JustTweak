@@ -33,7 +33,7 @@ extension NSDictionary: TweakProvider {
             value = theValue.tweakValue
         }
         guard let finalValue = value else { return nil }
-        return Tweak(feature: feature, variable: variable, value: finalValue, decryptedValue: nil)
+        return Tweak(feature: feature, variable: variable, value: finalValue)
     }
 }
 
