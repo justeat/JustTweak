@@ -53,9 +53,6 @@ final public class TweakManager {
         notificationCenter.addObserver(self, selector: #selector(configurationDidChange), name: TweakProviderDidChangeNotification, object: nil)
     }
     
-    
-    private(set) var decryptClosure: ((Tweak) -> TweakValue)?
-
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

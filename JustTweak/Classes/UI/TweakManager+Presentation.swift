@@ -21,7 +21,7 @@ extension TweakManager {
                                                     description: jsonTweak.desc,
                                                     group: jsonTweak.group)
                         
-                        let decryptedTweakValue = decryptClosure?(aggregatedTweak)
+                        let decryptedTweakValue = decryptionClosure?(aggregatedTweak)
                         
                         let key = "\(feature)-\(variable)"
                         tweaks[key] = Tweak(feature: feature,

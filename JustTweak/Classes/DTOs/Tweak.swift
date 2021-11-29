@@ -54,13 +54,13 @@ public struct Tweak {
     }
     
     func mutatedCopy(feature: String? = nil,
-                            variable: String? = nil,
-                            value: TweakValue? = nil,
-                            title: String? = nil,
-                            description: String? = nil,
-                            group: String? = nil,
-                            source: String? = nil,
-                            decryptedValue: TweakValue? = nil) -> Self {
+                     variable: String? = nil,
+                     value: TweakValue? = nil,
+                     title: String? = nil,
+                     description: String? = nil,
+                     group: String? = nil,
+                     source: String? = nil,
+                     decryptedValue: TweakValue? = nil) -> Self {
         Self(feature: feature ?? self.feature,
              variable: variable ?? self.variable,
              value: value ?? self.value,
