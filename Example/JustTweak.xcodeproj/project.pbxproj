@@ -41,6 +41,7 @@
 		61F1DECE1DA7ECF700314DEC /* TweaksUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F1DECD1DA7ECF700314DEC /* TweaksUtilitiesTests.swift */; };
 		61F1DECF1DA7EE6C00314DEC /* TweakManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F1DEC91DA7ECD300314DEC /* TweakManagerTests.swift */; };
 		8D0BA4A3FCD875282B8A3ED3 /* Pods_JustTweak_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B347460C9476DF9F5F7BDF32 /* Pods_JustTweak_Example.framework */; };
+		FBD9154E27551ABF0076FA98 /* EphemeralTweakProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD9154D27551ABF0076FA98 /* EphemeralTweakProviderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		9418360080E044BFF47F4F7C /* Pods-JustTweak_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustTweak_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustTweak_Example/Pods-JustTweak_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B347460C9476DF9F5F7BDF32 /* Pods_JustTweak_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustTweak_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F594AA2DDEDFFA4C835EACCF /* Pods_JustTweak_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustTweak_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBD9154D27551ABF0076FA98 /* EphemeralTweakProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EphemeralTweakProviderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +299,7 @@
 				619938D71DA7F2DA00765852 /* TweakTests.swift */,
 				618A46CD1DAD4DC500B8F5CA /* UserDefaultsTweakProviderTests.swift */,
 				4F38E0F0236E1BB60070BD17 /* PropertyWrappersTests.swift */,
+				FBD9154D27551ABF0076FA98 /* EphemeralTweakProviderTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				4F38E0F1236E1BB60070BD17 /* PropertyWrappersTests.swift in Sources */,
 				618A46CE1DAD4DC500B8F5CA /* UserDefaultsTweakProviderTests.swift in Sources */,
 				618A46CC1DAD481400B8F5CA /* TweakExtensionsTests.swift in Sources */,
+				FBD9154E27551ABF0076FA98 /* EphemeralTweakProviderTests.swift in Sources */,
 				4F6422A721A4205B002B69F0 /* Symbols.swift in Sources */,
 				619938DC1DA7F6E600765852 /* TweakViewControllerTests.swift in Sources */,
 				4F43583223E732DD00FD60A7 /* TweakManager+PresentationTests.swift in Sources */,

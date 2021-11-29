@@ -8,8 +8,8 @@ import JustTweak
 
 class UserDefaultsTweakProviderTests: XCTestCase {
     
-    var userDefaultsTweakProvider: UserDefaultsTweakProvider!
-    let userDefaults = UserDefaults(suiteName: String(describing: UserDefaultsTweakProviderTests.self))!
+    private var userDefaultsTweakProvider: UserDefaultsTweakProvider!
+    private let userDefaults = UserDefaults(suiteName: String(describing: UserDefaultsTweakProviderTests.self))!
 
     private let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
 
@@ -70,5 +70,18 @@ class UserDefaultsTweakProviderTests: XCTestCase {
         userDefaultsTweakProvider.set("Hello", feature: "feature_1", variable: "variable_1")
         let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
         XCTAssertTrue(tweak!.value == "Hello")
-    }    
+    }
+    
+    func testDecryptionClosure() {
+        XCTAssertNil(userDefaultsTweakProvider.decryptionClosure)
+        
+        userDefaultsTweakProvider.decryptionClosure = { tweak in
+            (tweak.value.stringValue ?? "") + "Decrypted"
+        }
+        
+        let tweak = Tweak(feature: "feature", variable: "variable", value: "topSecret")
+        let decryptedTweak = userDefaultsTweakProvider.decryptionClosure?(tweak)
+        
+        XCTAssertEqual(decryptedTweak?.stringValue, "topSecretDecrypted")
+    }
 }

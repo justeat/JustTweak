@@ -8,7 +8,7 @@ import JustTweak
 
 class LocalTweakProviderTests: XCTestCase {
     
-    var tweakProvider: LocalTweakProvider!
+    private var tweakProvider: LocalTweakProvider!
     
     override func setUp() {
         super.setUp()
@@ -53,5 +53,18 @@ class LocalTweakProviderTests: XCTestCase {
                                      title: "Label Text", group: "UI Customization")
         XCTAssertEqual(buttonLabelTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
                                                                  variable: Variables.labelText))
+    }
+    
+    func testDecryptionClosure() {
+        XCTAssertNil(tweakProvider.decryptionClosure)
+        
+        tweakProvider.decryptionClosure = { tweak in
+            (tweak.value.stringValue ?? "") + "Decrypted"
+        }
+        
+        let tweak = Tweak(feature: "feature", variable: "variable", value: "topSecret")
+        let decryptedTweak = tweakProvider.decryptionClosure?(tweak)
+        
+        XCTAssertEqual(decryptedTweak?.stringValue, "topSecretDecrypted")
     }
 }

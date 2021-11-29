@@ -110,6 +110,18 @@ class TweakManagerTests: XCTestCase {
         XCTAssertEqual("bXkgc2VjcmV0IHBhc3N3b3Jk", tweak?.stringValue)
         XCTAssertEqual("my secret password", tweak?.decryptedValue?.stringValue)
     }
+    
+    func testSetTweakManagerDecryptionClosureThenDecryptionClosureIsSetForProviders() throws {
+        let mutableTweakProvider = try XCTUnwrap(tweakManager.mutableTweakProvider)
+        
+        XCTAssertNil(mutableTweakProvider.decryptionClosure)
+        
+        tweakManager.decryptionClosure = { tweak in
+            tweak.value
+        }
+        
+        XCTAssertNotNil(mutableTweakProvider.decryptionClosure)
+    }
 }
 
 fileprivate class MockTweakProvider: TweakProvider {
