@@ -98,11 +98,11 @@ class TweakManagerTests: XCTestCase {
         
         mutableTweakProvider.set(encodedString, feature: feature, variable: variable)
         mutableTweakProvider.decryptionClosure = { tweak in
-            let data = Data(base64Encoded: tweak.stringValue!).map {
+            let data = Data(base64Encoded: tweak.stringValue ?? "").map {
                 String(data: $0, encoding: .utf8)
-            }!
+            } ?? ""
             
-            return data!
+            return data ?? ""
         }
         
         let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
