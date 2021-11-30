@@ -5,14 +5,14 @@
 
 import UIKit
 
-internal protocol TweakViewControllerCell: class {
+internal protocol TweakViewControllerCell: AnyObject {
     var title: String? { get set }
     var desc: String? { get set }
     var value: TweakValue { get set }
     var delegate: TweakViewControllerCellDelegate? { get set }
 }
 
-internal protocol TweakViewControllerCellDelegate: class {
+internal protocol TweakViewControllerCellDelegate: AnyObject {
     func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell)
 }
 

@@ -15,6 +15,7 @@ final public class LocalTweakProvider {
     private let fileURL: URL
     
     public var logClosure: LogClosure?
+    public var decryptionClosure: ((Tweak) -> TweakValue)?
     
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]
@@ -65,11 +66,14 @@ extension LocalTweakProvider: TweakProvider {
         let description = entry[EncodingKeys.Description.rawValue] as? String
         let group = entry[EncodingKeys.Group.rawValue] as? String
         let value = tweakValueFromJSONObject(entry[EncodingKeys.Value.rawValue])
-        return Tweak(feature: feature,
-                     variable: variable,
-                     value: value,
-                     title: title,
-                     description: description,
-                     group: group)
+        
+        let tweak = Tweak(feature: feature,
+                          variable: variable,
+                          value: value,
+                          title: title,
+                          description: description,
+                          group: group)
+        
+        return tweak.mutatedCopy(decryptedValue: decryptionClosure?(tweak))
     }
 }

@@ -7,7 +7,7 @@ import JustTweak
 import FirebaseCore
 import FirebaseRemoteConfig
 
-public class FirebaseTweakProvider: Configuration {
+public class FirebaseTweakProvider: TweakProvider {
     
     public init() {
         /* DOWNLOAD THE GoogleService.plist from the Firebase dashboard */
