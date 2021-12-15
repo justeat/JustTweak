@@ -32,6 +32,12 @@ class ViewController: UIViewController {
             print("Tweak changed: \(tweak)")
             self?.updateView()
         }
+        addEncryptedMeaningOfLifeTapGesture()
+    }
+    
+    private func addEncryptedMeaningOfLifeTapGesture() {
+        let tapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(showEncryptedMeaningOfLife))
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     internal func updateView() {
@@ -58,6 +64,14 @@ class ViewController: UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func showEncryptedMeaningOfLife() {
+        let alertController = UIAlertController(title: "Encrypted Meaning of Life",
+                                                message: String(describing: tweakAccessor.definitiveAnswerEncrypted),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
     }
     
     @objc internal func changeViewColor() {

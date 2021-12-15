@@ -36,6 +36,14 @@
     }
   },
   "general": {
+    "encrypted_answer_to_the_universe": {
+      "Title": "Encrypted definitive answer",
+      "Description": "Encrypted answer to the Ultimate Question of Life, the Universe, and Everything",
+      "Group": "General",
+      "Value": "24 ton yletinifeD",
+      "GeneratedPropertyName": "definitiveAnswerEncrypted",
+      "Encrypted": true
+    },
     "answer_to_the_universe": {
       "Title": "Definitive answer",
       "Description": "Answer to the Ultimate Question of Life, the Universe, and Everything",

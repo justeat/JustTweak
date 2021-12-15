@@ -29,6 +29,11 @@ class GeneratedTweakAccessor {
         set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayYellowView) }
     }
 
+    var definitiveAnswerEncrypted: String {
+        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.encryptedAnswerToTheUniverse)?.stringValue ?? "" }
+        set { tweakManager.set(newValue, feature: Features.general, variable: Variables.encryptedAnswerToTheUniverse) }
+    }
+
     var isTapGestureToChangeColorEnabled: Bool {
         get { tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeColorEnabled)?.boolValue ?? false }
         set { tweakManager.set(newValue, feature: Features.general, variable: Variables.tapToChangeColorEnabled) }
