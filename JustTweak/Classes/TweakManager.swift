@@ -102,7 +102,7 @@ extension TweakManager: MutableTweakProvider {
                     break
                 }
                 else {
-                    let logMessage = "Tweak with identifier '\(variable)' in configuration \(tweakProvider)) could NOT BE FOUND or has an INVALID CONFIGURATION"
+                    let logMessage = "Tweak with identifier '\(variable)' in configuration \(tweakProvider)) could NOT be found or has an invalid configuration"
                     logClosure?(logMessage, .verbose)
                 }
             }

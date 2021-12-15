@@ -253,11 +253,11 @@ Note that you have to specify if the value is encrypted in your JSON file (with 
 
 ```swift
 tweakProvider.decryptionClosure = { tweak in
-    String((tweak.value.stringValue ?? "").reversed())
+    // decrypt `tweak.value` with your cypher of choice and return the decrypted value
 }
 ```
 
-The final tweak you fetch from the tweak provider will then return the following value: "Definitely not 42" which is the reversed of "24 ton yletinifeD".
+The final tweak you fetch from the tweak provider will then return the following value: "Definitely not 42" which is the reversed of "24 ton yletinifeD". Assuming you properly reverse it in the closure.
 
 ## License
 
