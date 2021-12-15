@@ -257,7 +257,7 @@ tweakProvider.decryptionClosure = { tweak in
 }
 ```
 
-The final tweak you fetch from the tweak provider will then return the following value: "Definitely not 42" which is the reversed of "24 ton yletinifeD". Assuming you properly reverse it in the closure.
+In this way, the tweak fetched from the tweak provider will have the decrypted value.
 
 ## License
 
