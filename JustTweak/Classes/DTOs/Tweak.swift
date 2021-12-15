@@ -11,7 +11,6 @@ public struct Tweak {
     public let variable: String
     
     public let value: TweakValue
-    public let decryptedValue: TweakValue?
     
     public let title: String?
     public let desc: String?
@@ -41,8 +40,7 @@ public struct Tweak {
                 title: String? = nil,
                 description: String? = nil,
                 group: String? = nil,
-                source: String? = nil,
-                decryptedValue: TweakValue? = nil) {
+                source: String? = nil) {
         self.feature = feature
         self.variable = variable
         self.value = value
@@ -50,7 +48,6 @@ public struct Tweak {
         self.desc = description
         self.group = group
         self.source = source
-        self.decryptedValue = decryptedValue
     }
     
     func mutatedCopy(feature: String? = nil,
@@ -59,16 +56,14 @@ public struct Tweak {
                      title: String? = nil,
                      description: String? = nil,
                      group: String? = nil,
-                     source: String? = nil,
-                     decryptedValue: TweakValue? = nil) -> Self {
+                     source: String? = nil) -> Self {
         Self(feature: feature ?? self.feature,
              variable: variable ?? self.variable,
              value: value ?? self.value,
              title: title ?? self.title,
              description: description ?? self.desc,
              group: group ?? self.group,
-             source: source ?? self.source,
-             decryptedValue: decryptedValue ?? self.decryptedValue)
+             source: source ?? self.source)
     }
 }
 

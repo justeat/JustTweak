@@ -234,6 +234,31 @@ JustTweak comes with three tweak providers out-of-the-box:
 In addition, JustTweak defines `TweakProvider` and `MutableTweakProvider` protocols you can implement to create your own tweak provider to fit your needs. In the example project you can find some examples which you can use as a starting point.
 
 
+### Encryption or pre-processing (Advanced)
+
+JustTweak offers the ability to add a `decryptionClosure` to a `TweakProvider`. This closure takes the `Tweak` as input and returns a `TweakValue` as output. The closure allows you to do some preprocessing on your tweak which can e.g. be used to decrypt values. This can be used if you have an encrypted value in your tweaks JSON file as can be seen below:
+
+```json
+"encrypted_answer_to_the_universe": {
+  "Title": "Encrypted definitive answer",
+  "Description": "Encrypted answer to the Ultimate Question of Life, the Universe, and Everything",
+  "Group": "General",
+  "Value": "24 ton yletinifeD",
+  "GeneratedPropertyName": "definitiveAnswerEncrypted",
+  "Encrypted": true
+}
+```
+
+Note that you have to specify if the value is encrypted in your JSON file (with the `Encrypted` property) for the decryption closure to process the value. The decryption closure for the JSON above can be specified as follows:
+
+```swift
+tweakProvider.decryptionClosure = { tweak in
+    String((tweak.value.stringValue ?? "").reversed())
+}
+```
+
+The final tweak you fetch from the tweak provider will then return the following value: "Definitely not 42" which is the reversed of "24 ton yletinifeD".
+
 ## License
 
 JustTweak is available under the Apache 2.0 license. See the LICENSE file for more info.

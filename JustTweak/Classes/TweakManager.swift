@@ -93,19 +93,17 @@ extension TweakManager: MutableTweakProvider {
                 if let tweak = tweakProvider.tweakWith(feature: feature, variable: variable) {
                     logClosure?("Tweak '\(tweak)' found in configuration \(tweakProvider))", .verbose)
                     
-                    let tweakWithoutDecryptedValue = Tweak(feature: feature,
-                                                           variable: variable,
-                                                           value: tweak.value,
-                                                           title: tweak.title,
-                                                           group: tweak.group,
-                                                           source: "\(type(of: tweakProvider))")
-                    
-                    let decryptedValue = tweakProvider.decryptionClosure?(tweakWithoutDecryptedValue)
-                    result = tweakWithoutDecryptedValue.mutatedCopy(decryptedValue: decryptedValue)
+                    result = Tweak(feature: feature,
+                                   variable: variable,
+                                   value: tweak.value,
+                                   title: tweak.title,
+                                   group: tweak.group,
+                                   source: "\(type(of: tweakProvider))")
                     break
                 }
                 else {
-                    logClosure?("Tweak with identifier '\(variable)' NOT found in configuration \(tweakProvider))", .verbose)
+                    let logMessage = "Tweak with identifier '\(variable)' in configuration \(tweakProvider)) could NOT BE FOUND or has an INVALID CONFIGURATION"
+                    logClosure?(logMessage, .verbose)
                 }
             }
             if let result = result {

@@ -90,25 +90,19 @@ class TweakManagerTests: XCTestCase {
     }
     
     func testTweakManagerDecryption() throws {
-        var mutableTweakProvider = try XCTUnwrap(tweakManager.mutableTweakProvider)
-        let feature = "password"
-        let variable = "variable"
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "LocalTweaks_example", withExtension: "json"))
         
-        let encodedString = try XCTUnwrap("my secret password".data(using: .utf8)?.base64EncodedString())
+        tweakManager.tweakProviders.append(LocalTweakProvider(jsonURL: url))
         
-        mutableTweakProvider.set(encodedString, feature: feature, variable: variable)
-        mutableTweakProvider.decryptionClosure = { tweak in
-            let data = Data(base64Encoded: tweak.stringValue ?? "").map {
-                String(data: $0, encoding: .utf8)
-            } ?? ""
-            
-            return data ?? ""
+        tweakManager.decryptionClosure = { tweak in
+            String((tweak.value.stringValue ?? "").reversed())
         }
         
+        let feature = "general"
+        let variable = "encrypted_answer_to_the_universe"
         let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
         
-        XCTAssertEqual("bXkgc2VjcmV0IHBhc3N3b3Jk", tweak?.stringValue)
-        XCTAssertEqual("my secret password", tweak?.decryptedValue?.stringValue)
+        XCTAssertEqual("Definitely not 42", tweak?.stringValue)
     }
     
     func testSetTweakManagerDecryptionClosureThenDecryptionClosureIsSetForProviders() throws {

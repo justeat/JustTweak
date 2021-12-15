@@ -31,15 +31,13 @@ extension UserDefaultsTweakProvider: TweakProvider {
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey) as AnyObject?
         guard let value = updateUserDefaults(userDefaultsValue) else { return nil }
         
-        let tweak = Tweak(
+        return Tweak(
             feature: feature,
             variable: variable,
             value: value,
             title: nil,
             group: nil
         )
-        
-        return tweak.mutatedCopy(decryptedValue: decryptionClosure?(tweak))
     }
 }
 
