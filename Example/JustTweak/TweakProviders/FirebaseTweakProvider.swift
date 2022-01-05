@@ -55,8 +55,8 @@ public class FirebaseTweakProvider: TweakProvider {
         return configValue.boolValue
     }
     
-    public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard configured else { return nil }
+    public func tweakWith(feature: String, variable: String) throws -> Tweak {
+        guard configured else { throw TweakError.notFound }
         let configValue = remoteConfiguration.configValue(forKey: variable)
         guard configValue.source != .static else { return nil }
         guard let stringValue = configValue.stringValue else { return nil }

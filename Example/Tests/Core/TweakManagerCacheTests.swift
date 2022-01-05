@@ -5,6 +5,7 @@
 
 import XCTest
 @testable import JustTweak
+@testable import JustTweak_Example
 
 fileprivate struct Constants {
     static let featureActiveValue = true
@@ -68,15 +69,15 @@ class TweakManagerCacheTests: XCTestCase {
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, 0)
         let value = true
         tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
-        XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
+        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, 1)
-        XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
+        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 1 : 2)
         tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
-        XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
+        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 2 : 3)
         tweakManager.resetCache()
-        XCTAssertEqual(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)!.value as! Bool, value)
+        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 3 : 4)
     }
 }
@@ -97,9 +98,12 @@ fileprivate class MockTweakProvider: MutableTweakProvider {
         return featureBackingStore[feature] ?? false
     }
     
-    func tweakWith(feature: String, variable: String) -> Tweak? {
+    func tweakWith(feature: String, variable: String) throws -> Tweak {
         tweakWithFeatureVariableCallsCounter += 1
-        return tweakBackingStore[feature]?[variable]
+        guard let tweak = tweakBackingStore[feature]?[variable] else {
+            throw TweakError.notFound
+        }
+        return tweak
     }
     
     func set(_ value: TweakValue, feature: String, variable: String) {

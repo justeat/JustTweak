@@ -14,7 +14,7 @@ public typealias LogClosure = (String, LogLevel) -> Void
 public protocol TweakProvider {
     var logClosure: LogClosure? { set get }
     func isFeatureEnabled(_ feature: String) -> Bool
-    func tweakWith(feature: String, variable: String) -> Tweak?
+    func tweakWith(feature: String, variable: String) throws -> Tweak
     
     var decryptionClosure: ((Tweak) -> TweakValue)? { get set }
 }

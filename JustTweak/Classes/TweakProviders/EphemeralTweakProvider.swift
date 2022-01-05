@@ -23,8 +23,8 @@ extension NSDictionary: TweakProvider {
         self[feature] as? Bool ?? false
     }
     
-    public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let storedValue = self[variable] else { return nil }
+    public func tweakWith(feature: String, variable: String) throws -> Tweak {
+        guard let storedValue = self[variable] else { throw TweakError.notFound }
         var value: TweakValue? = nil
         if let theValue = storedValue as? String {
             value = theValue
@@ -32,7 +32,7 @@ extension NSDictionary: TweakProvider {
         else if let theValue = storedValue as? NSNumber {
             value = theValue.tweakValue
         }
-        guard let finalValue = value else { return nil }
+        guard let finalValue = value else { throw TweakError.notSupported }
         return Tweak(feature: feature, variable: variable, value: finalValue)
     }
 }

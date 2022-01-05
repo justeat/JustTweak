@@ -26,10 +26,10 @@ extension UserDefaultsTweakProvider: TweakProvider {
         return userDefaults.bool(forKey: userDefaultsKey)
     }
 
-    public func tweakWith(feature: String, variable: String) -> Tweak? {
+    public func tweakWith(feature: String, variable: String) throws -> Tweak {
         let userDefaultsKey = keyForTweakWithIdentifier(variable)
         let userDefaultsValue = userDefaults.object(forKey: userDefaultsKey) as AnyObject?
-        guard let value = updateUserDefaults(userDefaultsValue) else { return nil }
+        guard let value = updateUserDefaults(userDefaultsValue) else { throw TweakError.notFound }
         
         return Tweak(
             feature: feature,
