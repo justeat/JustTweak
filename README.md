@@ -131,17 +131,29 @@ if enabled {
 }
 ```
 
-2. Get the value of a flag for a given feature. `TweakManager` will return the value from the tweak provider with the highest priority and automatically fallback to the others if no set value is found.
+2. Get the value of a flag for a given feature. `TweakManager` will return the value from the tweak provider with the highest priority and automatically fallback to the others if no set value is found. It throws exeception when a nil Tweak is found which can be catched and handled as needed.
 
 Use either `tweakWith(feature:variable:)` or the provided property wrappers.
 
 ```swift
 // check for a tweak value
-let tweak = tweakManager.tweakWith(feature: "some_feature", variable: "some_flag")
+let tweak = try? tweakManager.tweakWith(feature: "some_feature", variable: "some_flag")
 if let tweak = tweak {
     // tweak was found in some tweak provider, use tweak.value
 } else {
     // tweak was not found in any tweak provider
+}
+```
+Or with do-catch
+```swift
+// check for a tweak value
+do {
+    let tweak = try tweakManager.tweakWith(feature: "some_feature", variable: "some_flag")
+    // tweak was found in some tweak provider, use tweak.value
+    return tweak    
+} catch let error as TweakError {
+    // tweak was not found in any tweak provider
+    //handle error
 }
 ```
 
