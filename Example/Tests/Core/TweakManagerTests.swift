@@ -40,30 +40,30 @@ class TweakManagerTests: XCTestCase {
         XCTAssertNil(try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: "some_undefined_tweak"))
     }
     
-    func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(try! tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView).boolValue)
+    func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() throws {
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)).boolValue)
     }
     
-    func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(try! tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView).boolValue)
+    func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() throws {
+        XCTAssertFalse(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)).boolValue)
     }
     
-    func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(try! tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView).boolValue)
+    func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() throws {
+        XCTAssertFalse(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)).boolValue)
     }
     
-    func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(try! tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive).boolValue)
+    func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() throws {
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)).boolValue)
     }
     
-    func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(try! tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor).boolValue)
+    func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() throws {
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor)).boolValue)
     }
     
-    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsTweakProvider() {
+    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsTweakProvider() throws {
         let mutableTweakProvider = tweakManager.mutableTweakProvider!
         mutableTweakProvider.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
-        XCTAssertFalse(try! tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive).boolValue)
+        XCTAssertFalse(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)).boolValue)
     }
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {

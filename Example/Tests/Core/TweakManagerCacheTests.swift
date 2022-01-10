@@ -56,28 +56,28 @@ class TweakManagerCacheTests: XCTestCase {
     
     // MARK: - tweakWith(feature:variable:)
     
-    func testTweakFetch_CacheDisabled() {
-        tweakFetch(useCache: false)
+    func testTweakFetch_CacheDisabled() throws {
+        try tweakFetch(useCache: false)
     }
     
-    func testTweakFetch_CacheEnabled() {
-        tweakFetch(useCache: true)
+    func testTweakFetch_CacheEnabled() throws {
+        try tweakFetch(useCache: true)
     }
     
-    private func tweakFetch(useCache: Bool) {
+    private func tweakFetch(useCache: Bool) throws {
         tweakManager.useCache = useCache
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, 0)
         let value = true
         tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
-        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
+        XCTAssertEqual(try XCTUnwrap(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, 1)
-        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
+        XCTAssertEqual(try XCTUnwrap(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 1 : 2)
         tweakManager.set(value, feature: Constants.feature, variable: Constants.variable)
-        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
+        XCTAssertEqual(try XCTUnwrap(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 2 : 3)
         tweakManager.resetCache()
-        XCTAssertEqual(try! tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable).value as! Bool, value)
+        XCTAssertEqual(try XCTUnwrap(tweakManager.tweakWith(feature: Constants.feature, variable: Constants.variable)).value as! Bool, value)
         XCTAssertEqual(mockTweakProvider.tweakWithFeatureVariableCallsCounter, useCache ? 3 : 4)
     }
 }

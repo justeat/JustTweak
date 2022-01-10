@@ -33,7 +33,7 @@ class LocalTweakProviderTests: XCTestCase {
                                  title: "Display Red View",
                                  group: "UI Customization")
         XCTAssertEqual(redViewTweak, try tweakProvider.tweakWith(feature: Features.uiCustomization,
-                                                             variable: Variables.displayRedView))
+                                                                 variable: Variables.displayRedView))
     }
     
     func testParsesFloatTweak() {
@@ -43,7 +43,7 @@ class LocalTweakProviderTests: XCTestCase {
                                       title: "Red View Alpha Component",
                                       group: "UI Customization")
         XCTAssertEqual(redViewAlphaTweak, try tweakProvider.tweakWith(feature: Features.uiCustomization,
-                                                                  variable: Variables.redViewAlpha))
+                                                                      variable: Variables.redViewAlpha))
     }
     
     func testParsesStringTweak() {
@@ -52,7 +52,7 @@ class LocalTweakProviderTests: XCTestCase {
                                      value: "Test value",
                                      title: "Label Text", group: "UI Customization")
         XCTAssertEqual(buttonLabelTweak, try tweakProvider.tweakWith(feature: Features.uiCustomization,
-                                                                 variable: Variables.labelText))
+                                                                     variable: Variables.labelText))
     }
     
     func testDecryptionClosure() {

@@ -152,8 +152,13 @@ do {
     // tweak was found in some tweak provider, use tweak.value
     return tweak    
 } catch let error as TweakError {
-    // tweak was not found in any tweak provider
-    //handle error
+    switch error {
+    case .notFound: () // "Feature or variable is not found"
+    case .notSupported: () // "Variable type is not supported"
+    case .decryptionClosureNotProvided: () // "Value is encrypted but there's no decryption closure provided"
+    }
+} catch let error { // add a default catch to satisfy the compiler
+    print(error.localizedDescription)
 }
 ```
 
