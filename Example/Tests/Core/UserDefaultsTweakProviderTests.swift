@@ -24,52 +24,52 @@ class UserDefaultsTweakProviderTests: XCTestCase {
         super.tearDown()
     }
     
-    func testReturnsCorrectTweaksIdentifiersWhenInitializedAndTweaksHaveBeenSet() {
+    func testReturnsCorrectTweaksIdentifiersWhenInitializedAndTweaksHaveBeenSet() throws {
         let anotherConfiguration = UserDefaultsTweakProvider(userDefaults: userDefaults)
         anotherConfiguration.set("hello", feature: "feature_1", variable: "variable_4")
         anotherConfiguration.set(true, feature: "feature_1", variable: "variable_3")
         anotherConfiguration.set(12.34, feature: "feature_1", variable: "variable_2")
         anotherConfiguration.set(42, feature: "feature_1", variable: "variable_1")
         
-        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")!.value == 42)
-        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_2")!.value == 12.34)
-        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_3")!.value == true)
-        XCTAssertTrue(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_4")!.value == "hello")
+        XCTAssertTrue(try XCTUnwrap(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_1")).value == 42)
+        XCTAssertTrue(try XCTUnwrap(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_2")).value == 12.34)
+        XCTAssertTrue(try XCTUnwrap(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_3")).value == true)
+        XCTAssertTrue(try XCTUnwrap(anotherConfiguration.tweakWith(feature: "feature_1", variable: "variable_4")).value == "hello")
     }
     
     func testReturnsNilForTweaksThatHaveNoUserDefaultValue() {
-        let tweak = userDefaultsTweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)
+        let tweak = try? userDefaultsTweakProvider.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)
         XCTAssertNil(tweak)
     }
     
-    func testUpdatesValueForTweak_withBool() {
+    func testUpdatesValueForTweak_withBool() throws {
         userDefaultsTweakProvider.set(true, feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
-        XCTAssertTrue(tweak!.value == true)
+        let tweak = try XCTUnwrap(userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1"))
+        XCTAssertTrue(tweak.value.boolValue)
     }
     
-    func testUpdatesValueForTweak_withInteger() {
+    func testUpdatesValueForTweak_withInteger() throws {
         userDefaultsTweakProvider.set(42, feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
-        XCTAssertTrue(tweak!.value == 42)
+        let tweak = try XCTUnwrap(userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1"))
+        XCTAssertTrue(tweak.value == 42)
     }
     
-    func testUpdatesValueForTweak_withFloat() {
+    func testUpdatesValueForTweak_withFloat() throws {
         userDefaultsTweakProvider.set(Float(12.34), feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
-        XCTAssertTrue(tweak!.value == Float(12.34))
+        let tweak = try XCTUnwrap(userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1"))
+        XCTAssertTrue(tweak.value == Float(12.34))
     }
     
-    func testUpdatesValueForTweak_withDouble() {
+    func testUpdatesValueForTweak_withDouble() throws {
         userDefaultsTweakProvider.set(Double(23.45), feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
-        XCTAssertTrue(tweak!.value == Double(23.45))
+        let tweak = try XCTUnwrap(userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1"))
+        XCTAssertTrue(tweak.value == Double(23.45))
     }
     
-    func testUpdatesValueForTweak_withString() {
+    func testUpdatesValueForTweak_withString() throws {
         userDefaultsTweakProvider.set("Hello", feature: "feature_1", variable: "variable_1")
-        let tweak = userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1")
-        XCTAssertTrue(tweak!.value == "Hello")
+        let tweak = try XCTUnwrap(userDefaultsTweakProvider.tweakWith(feature: "feature_1", variable: "variable_1"))
+        XCTAssertTrue(tweak.value == "Hello")
     }
     
     func testDecryptionClosure() {

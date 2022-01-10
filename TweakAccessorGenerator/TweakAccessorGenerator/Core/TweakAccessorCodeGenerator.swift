@@ -152,7 +152,7 @@ extension TweakAccessorCodeGenerator {
         let defaultValue = try! self.defaultValue(for: tweak.valueType)
         return """
             var \(propertyName): \(tweak.valueType) {
-                get { tweakManager.tweakWith(feature: \(feature), variable: \(variable))?.\(castProperty) ?? \(defaultValue) }
+                get { (try? tweakManager.tweakWith(feature: \(feature), variable: \(variable)))?.\(castProperty) ?? \(defaultValue) }
                 set { tweakManager.set(newValue, feature: \(feature), variable: \(variable)) }
             }
         """

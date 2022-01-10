@@ -47,9 +47,12 @@ public class OptimizelyTweakProvider: TweakProvider {
         return optimizelyClient?.isFeatureEnabled(feature, userId: userId, attributes: attributes) ?? false
     }
     
-    public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let optimizelyClient = optimizelyClient else { return nil }
-        guard optimizelyClient.isFeatureEnabled(feature, userId: userId, attributes: attributes) == true else { return nil }
+    public func tweakWith(feature: String, variable: String) throws -> Tweak {
+        guard let optimizelyClient = optimizelyClient,
+              optimizelyClient.isFeatureEnabled(feature, userId: userId, attributes: attributes) == true
+        else {
+            throw TweakError.notFound
+        }
         
         let tweakValue: TweakValue? = {
             if let boolValue = optimizelyClient.getFeatureVariableBoolean(feature, variableKey: variable, userId: userId, attributes: attributes)?.boolValue {
@@ -66,11 +69,10 @@ public class OptimizelyTweakProvider: TweakProvider {
             }
             return nil
         }()
-        
-        if let tweakValue = tweakValue {
-            return Tweak(feature: feature, variable: variable, value: tweakValue, title: nil, group: nil)
+
+        guard let tweakValue = tweakValue else {
+            throw TweakError.notFound
         }
-        
-        return nil
+        return Tweak(feature: feature, variable: variable, value: tweakValue, title: nil, group: nil)
     }
 }

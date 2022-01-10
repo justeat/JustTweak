@@ -60,8 +60,8 @@ extension LocalTweakProvider: TweakProvider {
         return configurationFile[feature] != nil
     }
     
-    public func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let entry = configurationFile[feature]?[variable] else { return nil }
+    public func tweakWith(feature: String, variable: String) throws -> Tweak {
+        guard let entry = configurationFile[feature]?[variable] else { throw TweakError.notFound }
         let title = entry[EncodingKeys.Title.rawValue] as? String
         let description = entry[EncodingKeys.Description.rawValue] as? String
         let group = entry[EncodingKeys.Group.rawValue] as? String
@@ -78,8 +78,7 @@ extension LocalTweakProvider: TweakProvider {
         if isEncrypted {
             guard let decryptionClosure = decryptionClosure else {
                 // The configuration is not correct, it's encrypted, but there's no way to decrypt
-                // So return nil to indicate an error. Should be changed to a throwing function in the future
-                return nil
+                throw TweakError.decryptionClosureNotProvided
             }
             
             return tweak.mutatedCopy(value: decryptionClosure(tweak))

@@ -123,7 +123,7 @@ class TweakViewControllerTests: XCTestCase {
     
     // MARK: Cells Actions
     
-    func testUpdatesValueOfTweak_WhenUserTooglesSwitchOnBooleanCell() {
+    func testUpdatesValueOfTweak_WhenUserTooglesSwitchOnBooleanCell() throws {
         viewController.beginAppearanceTransition(true, animated: false)
         viewController.endAppearanceTransition()
         
@@ -131,7 +131,7 @@ class TweakViewControllerTests: XCTestCase {
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
         cell.switchControl.sendActions(for: .valueChanged)
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)!.boolValue)
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)).boolValue)
     }
     
     // MARK: Other Actions

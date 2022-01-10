@@ -32,8 +32,8 @@ class LocalTweakProviderTests: XCTestCase {
                                  value: true,
                                  title: "Display Red View",
                                  group: "UI Customization")
-        XCTAssertEqual(redViewTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
-                                                             variable: Variables.displayRedView))
+        XCTAssertEqual(redViewTweak, try tweakProvider.tweakWith(feature: Features.uiCustomization,
+                                                                 variable: Variables.displayRedView))
     }
     
     func testParsesFloatTweak() {
@@ -42,8 +42,8 @@ class LocalTweakProviderTests: XCTestCase {
                                       value: 1.0,
                                       title: "Red View Alpha Component",
                                       group: "UI Customization")
-        XCTAssertEqual(redViewAlphaTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
-                                                                  variable: Variables.redViewAlpha))
+        XCTAssertEqual(redViewAlphaTweak, try tweakProvider.tweakWith(feature: Features.uiCustomization,
+                                                                      variable: Variables.redViewAlpha))
     }
     
     func testParsesStringTweak() {
@@ -51,8 +51,8 @@ class LocalTweakProviderTests: XCTestCase {
                                      variable: Variables.labelText,
                                      value: "Test value",
                                      title: "Label Text", group: "UI Customization")
-        XCTAssertEqual(buttonLabelTweak, tweakProvider.tweakWith(feature: Features.uiCustomization,
-                                                                 variable: Variables.labelText))
+        XCTAssertEqual(buttonLabelTweak, try tweakProvider.tweakWith(feature: Features.uiCustomization,
+                                                                     variable: Variables.labelText))
     }
     
     func testDecryptionClosure() {

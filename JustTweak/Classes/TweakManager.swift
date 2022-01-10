@@ -59,7 +59,7 @@ final public class TweakManager {
 }
 
 extension TweakManager: MutableTweakProvider {
-    
+
     public func isFeatureEnabled(_ feature: String) -> Bool {
         queue.sync {
             if useCache, let cachedFeature = featureCache[feature] {
@@ -81,8 +81,8 @@ extension TweakManager: MutableTweakProvider {
         }
     }
     
-    public func tweakWith(feature: String, variable: String) -> Tweak? {
-        queue.sync {
+    public func tweakWith(feature: String, variable: String) throws -> Tweak {
+        try queue.sync {
             if useCache, let cachedTweaks = tweakCache[feature], let cachedTweak = cachedTweaks[variable] {
                 logClosure?("Tweak '\(cachedTweak)' found in cache.)", .verbose)
                 return cachedTweak
@@ -90,7 +90,7 @@ extension TweakManager: MutableTweakProvider {
             
             var result: Tweak? = nil
             for (_, tweakProvider) in tweakProviders.enumerated() {
-                if let tweak = tweakProvider.tweakWith(feature: feature, variable: variable) {
+                if let tweak = try? tweakProvider.tweakWith(feature: feature, variable: variable) {
                     logClosure?("Tweak '\(tweak)' found in configuration \(tweakProvider))", .verbose)
                     
                     result = Tweak(feature: feature,
@@ -100,24 +100,22 @@ extension TweakManager: MutableTweakProvider {
                                    group: tweak.group,
                                    source: "\(type(of: tweakProvider))")
                     break
-                }
-                else {
+                }  else {
                     let logMessage = "Tweak with identifier '\(variable)' in configuration \(tweakProvider)) could NOT be found or has an invalid configuration"
                     logClosure?(logMessage, .verbose)
                 }
             }
-            if let result = result {
-                logClosure?("Tweak with feature '\(feature)' and variable '\(variable)' resolved. Using '\(result)'.", .debug)
-                if useCache {
-                    if let _ = tweakCache[feature] {
-                        tweakCache[feature]?[variable] = result
-                    } else {
-                        tweakCache[feature] = [variable : result]
-                    }
-                }
-            }
-            else {
+            guard let result = result else {
                 logClosure?("No Tweak found for identifier '\(variable)'", .verbose)
+                throw TweakError.notFound
+            }
+            logClosure?("Tweak with feature '\(feature)' and variable '\(variable)' resolved. Using '\(result)'.", .debug)
+            if useCache {
+                if let _ = tweakCache[feature] {
+                    tweakCache[feature]?[variable] = result
+                } else {
+                    tweakCache[feature] = [variable : result]
+                }
             }
             return result
         }

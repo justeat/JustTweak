@@ -19,8 +19,8 @@ public struct TweakProperty<T: TweakValue> {
     
     public var wrappedValue: T {
         get {
-            let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
-            return tweak!.value as! T
+            let tweak = try? tweakManager.tweakWith(feature: feature, variable: variable)
+            return tweak?.value as! T
         }
         set {
             tweakManager.set(newValue, feature: feature, variable: variable)
@@ -44,7 +44,7 @@ public struct FallbackTweakProperty<T: TweakValue> {
     
     public var wrappedValue: T {
         get {
-            let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
+            let tweak = try? tweakManager.tweakWith(feature: feature, variable: variable)
             return (tweak?.value as? T) ?? fallbackValue
         }
         set {
@@ -69,7 +69,7 @@ public struct OptionalTweakProperty<T: TweakValue> {
     
     public var wrappedValue: T? {
         get {
-            let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
+            let tweak = try? tweakManager.tweakWith(feature: feature, variable: variable)
             return (tweak?.value as? T) ?? fallbackValue
         }
         set {

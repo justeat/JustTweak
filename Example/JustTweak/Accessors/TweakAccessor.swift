@@ -87,18 +87,18 @@ class TweakAccessor {
     // MARK: - Via TweakManager
     
     var canShowYellowView: Bool {
-        return tweakManager.tweakWith(feature: Features.uiCustomization,
-                                      variable: Variables.displayYellowView)?.boolValue ?? false
+        return (try? tweakManager.tweakWith(feature: Features.uiCustomization,
+                                            variable: Variables.displayYellowView))?.boolValue ?? false
     }
-    
+
     var redViewAlpha: Float {
-        return tweakManager.tweakWith(feature: Features.uiCustomization,
-                                      variable: Variables.redViewAlpha)?.floatValue ?? 0.0
+        return (try? tweakManager.tweakWith(feature: Features.uiCustomization,
+                                            variable: Variables.redViewAlpha))?.floatValue ?? 0.0
     }
-    
+
     var isTapGestureToChangeColorEnabled: Bool {
-        return tweakManager.tweakWith(feature: Features.general,
-                                      variable: Variables.tapToChangeViewColor)?.boolValue ?? false
+        return (try? tweakManager.tweakWith(feature: Features.general,
+                                            variable: Variables.tapToChangeViewColor))?.boolValue ?? false
     }
 }
 

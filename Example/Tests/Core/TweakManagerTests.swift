@@ -37,33 +37,33 @@ class TweakManagerTests: XCTestCase {
     }
     
     func testReturnsNil_ForUndefinedTweak() {
-        XCTAssertNil(tweakManager.tweakWith(feature: Features.uiCustomization, variable: "some_undefined_tweak"))
+        XCTAssertNil(try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: "some_undefined_tweak"))
     }
     
-    func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() {
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)!.boolValue)
+    func testReturnsRemoteConfigValue_ForDisplayRedViewTweak() throws {
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)).boolValue)
     }
     
-    func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() {
-        XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)!.boolValue)
+    func testReturnsRemoteConfigValue_ForDisplayYellowViewTweak() throws {
+        XCTAssertFalse(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)).boolValue)
     }
     
-    func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() {
-        XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)!.boolValue)
+    func testReturnsRemoteConfigValue_ForDisplayGreenViewTweak() throws {
+        XCTAssertFalse(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)).boolValue)
     }
     
-    func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() {
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)!.boolValue)
+    func testReturnsRemoteConfigValue_ForGreetOnAppDidBecomeActiveTweak() throws {
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)).boolValue)
     }
     
-    func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() {
-        XCTAssertTrue(tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor)!.boolValue)
+    func testReturnsJSONConfigValue_ForTapToChangeViewColorTweak_AsYetUnkown() throws {
+        XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeViewColor)).boolValue)
     }
     
-    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsTweakProvider() {
+    func testReturnsUserSetValue_ForGreetOnAppDidBecomeActiveTweak_AfterUpdatingUserDefaultsTweakProvider() throws {
         let mutableTweakProvider = tweakManager.mutableTweakProvider!
         mutableTweakProvider.set(false, feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)
-        XCTAssertFalse(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)!.boolValue)
+        XCTAssertFalse(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.greetOnAppDidBecomeActive)).boolValue)
     }
     
     func testCallsClosureForRegisteredObserverWhenAnyConfigurationChanges() {
@@ -100,7 +100,7 @@ class TweakManagerTests: XCTestCase {
         
         let feature = "general"
         let variable = "encrypted_answer_to_the_universe"
-        let tweak = tweakManager.tweakWith(feature: feature, variable: variable)
+        let tweak = try? tweakManager.tweakWith(feature: feature, variable: variable)
         
         XCTAssertEqual("Definitely not 42", tweak?.stringValue)
     }
@@ -132,8 +132,8 @@ fileprivate class MockTweakProvider: TweakProvider {
         return false
     }
     
-    func tweakWith(feature: String, variable: String) -> Tweak? {
-        guard let value = knownValues[variable] else { return nil }
+    func tweakWith(feature: String, variable: String) throws -> Tweak {
+        guard let value = knownValues[variable] else { throw TweakError.notFound }
         return Tweak(feature: feature, variable: variable, value: value["Value"]!, title: nil, group: nil)
     }
 }

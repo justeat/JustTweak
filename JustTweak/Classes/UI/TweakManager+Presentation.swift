@@ -12,15 +12,14 @@ extension TweakManager {
         for localTweakProvider in self.localTweakProviders.reversed() {
             for (feature, variables) in localTweakProvider.features {
                 for variable in variables {
-                    if let tweak = tweakWith(feature: feature, variable: variable),
-                        let jsonTweak = localTweakProvider.tweakWith(feature: feature, variable: variable) {
+                    if let tweak = try? tweakWith(feature: feature, variable: variable),
+                        let jsonTweak = try? localTweakProvider.tweakWith(feature: feature, variable: variable) {
                         let aggregatedTweak = Tweak(feature: feature,
                                                     variable: variable,
                                                     value: tweak.value,
                                                     title: jsonTweak.title,
                                                     description: jsonTweak.desc,
                                                     group: jsonTweak.group)
-                        
                         let key = "\(feature)-\(variable)"
                         tweaks[key] = aggregatedTweak
                     }
