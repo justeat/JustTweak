@@ -1,8 +1,6 @@
 //
 //  TweakError.swift
-//  JustTweak
-//
-//  Created by Sania Zafar on 06/01/2022.
+//  Copyright (c) 2022 Just Eat Holding Ltd. All rights reserved.
 //
 
 import Foundation
