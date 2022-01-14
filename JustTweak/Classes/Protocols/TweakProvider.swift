@@ -16,11 +16,11 @@ public protocol TweakProvider {
     func isFeatureEnabled(_ feature: String) -> Bool
     func tweakWith(feature: String, variable: String) throws -> Tweak
     
-    var decryptionClosure: ((Tweak) -> TweakValue)? { get set }
+    var decryptionClosure: ((Tweak) -> AnyTweakValue)? { get set }
 }
 
 public protocol MutableTweakProvider: TweakProvider {
-    func set(_ value: TweakValue, feature: String, variable: String)
+    func set<T: TweakValue>(_ value: T, feature: String, variable: String)
     func deleteValue(feature: String, variable: String)
 }
 

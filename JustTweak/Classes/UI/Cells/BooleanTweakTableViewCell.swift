@@ -33,7 +33,7 @@ internal class BooleanTweakTableViewCell: UITableViewCell, TweakViewControllerCe
         }
     }
     
-    var value: TweakValue {
+    var value: Bool {
         get {
             return switchControl.isOn
         }

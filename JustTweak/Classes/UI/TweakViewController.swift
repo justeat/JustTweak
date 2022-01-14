@@ -5,14 +5,13 @@
 
 import UIKit
 
-internal protocol TweakViewControllerCell: AnyObject {
+protocol TweakViewControllerCell: AnyObject {
     var title: String? { get set }
     var desc: String? { get set }
-    var value: TweakValue { get set }
     var delegate: TweakViewControllerCellDelegate? { get set }
 }
 
-internal protocol TweakViewControllerCellDelegate: AnyObject {
+protocol TweakViewControllerCellDelegate: AnyObject {
     func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell)
 }
 
@@ -28,9 +27,9 @@ public class TweakViewController: UITableViewController {
         var variable: String
         var title: String?
         var desc: String?
-        var value: TweakValue
+        var value: AnyTweakValue
         
-        init(feature: String, variable: String, value: TweakValue, title: String?, description: String?) {
+        init(feature: String, variable: String, value: AnyTweakValue, title: String?, description: String?) {
             self.feature = feature
             self.variable = variable
             self.value = value
@@ -40,7 +39,7 @@ public class TweakViewController: UITableViewController {
     }
     
     private enum CellIdentifiers: String {
-        case ToogleCell, TextCell, NumberCell
+        case ToggleCell, TextCell, NumberCell
     }
     
     private var sections = [Section]()
@@ -104,7 +103,13 @@ extension TweakViewController {
         if let cell = cell as? TweakViewControllerCell {
             cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
             cell.desc = tweak.desc
-            cell.value = tweak.value
+            
+            if let cell = cell as? BooleanTweakTableViewCell {
+                cell.value = tweak.value.boolValue
+            } else if let cell = cell as? TextTweakTableViewCell {
+                cell.value = tweak.value.description
+            }
+            
             cell.delegate = self
         }
         return cell
@@ -126,13 +131,13 @@ extension TweakViewController {
     }
     
     private func cellIdentifierForTweak(_ tweak: Tweak) -> String {
-        if let _ = tweak.value as? Bool {
-            return CellIdentifiers.ToogleCell.rawValue
-        }
-        else if let _ = tweak.value as? String {
+        if let _ = Bool(tweak.value.description) {
+            return CellIdentifiers.ToggleCell.rawValue
+        } else if let _ = Double(tweak.value.description) {
+            return CellIdentifiers.NumberCell.rawValue
+        } else {
             return CellIdentifiers.TextCell.rawValue
         }
-        return CellIdentifiers.NumberCell.rawValue
     }
     
     private func titleForHeaderForSection(_ section: Int) -> String? {
@@ -176,7 +181,7 @@ extension TweakViewController {
     
     private func registerCellClasses() {
         tableView.register(BooleanTweakTableViewCell.self,
-                           forCellReuseIdentifier: CellIdentifiers.ToogleCell.rawValue)
+                           forCellReuseIdentifier: CellIdentifiers.ToggleCell.rawValue)
         tableView.register(NumericTweakTableViewCell.self,
                            forCellReuseIdentifier: CellIdentifiers.NumberCell.rawValue)
         tableView.register(TextTweakTableViewCell.self,
@@ -232,8 +237,28 @@ extension TweakViewController: TweakViewControllerCellDelegate {
             if let tweak = tweakAt(indexPath: indexPath) {
                 let feature = tweak.feature
                 let variable = tweak.variable
-                tweakManager.set(cell.value, feature: feature, variable: variable)
-                tweak.value = cell.value
+                
+                if let cell = cell as? BooleanTweakTableViewCell {
+                    tweakManager.set(cell.value, feature: feature, variable: variable)
+                    tweak.value = cell.value.eraseToAnyTweakValue()
+                } else if let cell = cell as? TextTweakTableViewCell {
+                    if let int = Int(cell.value) {
+                        tweakManager.set(int, feature: feature, variable: variable)
+                        tweak.value = int.eraseToAnyTweakValue()
+                    }
+                    else if let double = Double(cell.value) {
+                        tweakManager.set(double, feature: feature, variable: variable)
+                        tweak.value = double.eraseToAnyTweakValue()
+                    }
+                    else if let float = Float(cell.value) {
+                        tweakManager.set(float, feature: feature, variable: variable)
+                        tweak.value = float.eraseToAnyTweakValue()
+                    }
+                    else {
+                        tweakManager.set(cell.value, feature: feature, variable: variable)
+                        tweak.value = cell.value.eraseToAnyTweakValue()
+                    }
+                }
             }
         }
     }

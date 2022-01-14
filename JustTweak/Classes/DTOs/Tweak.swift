@@ -5,12 +5,12 @@
 
 import Foundation
 
-public struct Tweak {
+public struct Tweak: Hashable {
     
     public let feature: String
     public let variable: String
     
-    public let value: TweakValue
+    public let value: AnyTweakValue
     
     public let title: String?
     public let desc: String?
@@ -36,7 +36,7 @@ public struct Tweak {
     
     public init(feature: String,
                 variable: String,
-                value: TweakValue,
+                value: AnyTweakValue,
                 title: String? = nil,
                 description: String? = nil,
                 group: String? = nil,
@@ -52,7 +52,7 @@ public struct Tweak {
     
     func mutatedCopy(feature: String? = nil,
                      variable: String? = nil,
-                     value: TweakValue? = nil,
+                     value: AnyTweakValue? = nil,
                      title: String? = nil,
                      description: String? = nil,
                      group: String? = nil,
@@ -73,19 +73,6 @@ extension Tweak: CustomStringConvertible {
         get {
             return dictionaryValue.description
         }
-    }
-}
-
-extension Tweak: Equatable {
-
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.feature == rhs.feature &&
-            lhs.variable == rhs.variable &&
-            lhs.value == rhs.value &&
-            lhs.title == rhs.title &&
-            lhs.desc == rhs.desc &&
-            lhs.group == rhs.group &&
-            lhs.source == rhs.source
     }
 }
 

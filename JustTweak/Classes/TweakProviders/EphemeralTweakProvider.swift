@@ -12,7 +12,7 @@ extension NSDictionary: TweakProvider {
         set { }
     }
     
-    public var decryptionClosure: ((Tweak) -> TweakValue)? {
+    public var decryptionClosure: ((Tweak) -> AnyTweakValue)? {
         get {
             nil
         }
@@ -25,12 +25,12 @@ extension NSDictionary: TweakProvider {
     
     public func tweakWith(feature: String, variable: String) throws -> Tweak {
         guard let storedValue = self[variable] else { throw TweakError.notFound }
-        var value: TweakValue? = nil
+        var value: AnyTweakValue? = nil
         if let theValue = storedValue as? String {
-            value = theValue
+            value = theValue.eraseToAnyTweakValue()
         }
         else if let theValue = storedValue as? NSNumber {
-            value = theValue.tweakValue
+            value = theValue.tweakValue.eraseToAnyTweakValue()
         }
         guard let finalValue = value else { throw TweakError.notSupported }
         return Tweak(feature: feature, variable: variable, value: finalValue)
@@ -39,7 +39,7 @@ extension NSDictionary: TweakProvider {
 
 extension NSMutableDictionary: MutableTweakProvider {
     
-    public func set(_ value: TweakValue, feature: String, variable: String) {
+    public func set<T: TweakValue>(_ value: T, feature: String, variable: String) {
         self[variable] = value
     }
     

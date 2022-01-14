@@ -17,7 +17,7 @@ final public class TweakManager {
         }
     }
     
-    public var decryptionClosure: ((Tweak) -> TweakValue)? {
+    public var decryptionClosure: ((Tweak) -> AnyTweakValue)? {
         didSet {
             for (index, _) in tweakProviders.enumerated() {
                 tweakProviders[index].decryptionClosure = decryptionClosure
@@ -121,7 +121,7 @@ extension TweakManager: MutableTweakProvider {
         }
     }
 
-    public func set(_ value: TweakValue, feature: String, variable: String) {
+    public func set<T: TweakValue>(_ value: T, feature: String, variable: String) {
         guard let mutableTweakProvider = self.mutableTweakProvider else { return }
         if useCache {
             queue.sync {

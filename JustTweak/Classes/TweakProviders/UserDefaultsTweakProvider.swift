@@ -12,7 +12,7 @@ final public class UserDefaultsTweakProvider {
     private static let userDefaultsKeyPrefix = "lib.fragments.userDefaultsKey"
     
     public var logClosure: LogClosure?
-    public var decryptionClosure: ((Tweak) -> TweakValue)?
+    public var decryptionClosure: ((Tweak) -> AnyTweakValue)?
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
@@ -42,8 +42,7 @@ extension UserDefaultsTweakProvider: TweakProvider {
 }
 
 extension UserDefaultsTweakProvider: MutableTweakProvider {
-    
-    public func set(_ value: TweakValue, feature: String, variable: String) {
+    public func set<T: TweakValue>(_ value: T, feature: String, variable: String) {
         updateUserDefaults(value: value, feature: feature, variable: variable)
     }
 
@@ -58,21 +57,21 @@ extension UserDefaultsTweakProvider {
         return "\(UserDefaultsTweakProvider.userDefaultsKeyPrefix).\(identifier)"
     }
     
-    private func updateUserDefaults(_ object: AnyObject?) -> TweakValue? {
+    private func updateUserDefaults(_ object: AnyObject?) -> AnyTweakValue? {
         if let object = object as? String {
-            return object
+            return object.eraseToAnyTweakValue()
         }
         else if let object = object as? NSNumber {
-            return object.tweakValue
+            return object.tweakValue.eraseToAnyTweakValue()
         }
         return nil
     }
         
-    private func updateUserDefaults(value: TweakValue, feature: String, variable: String) {
+    private func updateUserDefaults<T: TweakValue>(value: T, feature: String, variable: String) {
         userDefaults.set(value, forKey: keyForTweakWithIdentifier(variable))
         DispatchQueue.main.async {
             let notificationCenter = NotificationCenter.default
-            let tweak = Tweak(feature: feature, variable: variable, value: value)
+            let tweak = Tweak(feature: feature, variable: variable, value: value.eraseToAnyTweakValue())
             let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
             notificationCenter.post(name: TweakProviderDidChangeNotification,
                                     object: self,

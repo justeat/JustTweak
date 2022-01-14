@@ -5,7 +5,7 @@
 
 import Foundation
 
-public protocol TweakValue: CustomStringConvertible {}
+public protocol TweakValue: Hashable, CustomStringConvertible {}
 
 extension Bool: TweakValue {}
 extension Int: TweakValue {}
@@ -28,17 +28,24 @@ public extension TweakValue {
     }
     
     var boolValue: Bool {
-        return self as? Bool ?? false
+        Bool(description) ?? false
     }
     
-    var stringValue: String? {
-        return self as? String
+    var stringValue: String {
+        description
+    }
+    
+    func eraseToAnyTweakValue() -> AnyTweakValue {
+        AnyTweakValue(self)
     }
 }
 
-public func ==(lhs: TweakValue, rhs: TweakValue) -> Bool {
-    if let lhs = lhs as? String, let rhs = rhs as? String {
-        return lhs == rhs
+public struct AnyTweakValue: TweakValue {
+    public let description: String
+    public let value: AnyHashable
+
+    public init<T: TweakValue>(_ tweakValue: T) {
+        description = tweakValue.description
+        value = AnyHashable(tweakValue)
     }
-    return NSNumber(tweakValue: lhs) == NSNumber(tweakValue: rhs)
 }

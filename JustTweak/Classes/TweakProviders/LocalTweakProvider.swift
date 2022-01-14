@@ -15,7 +15,7 @@ final public class LocalTweakProvider {
     private let fileURL: URL
     
     public var logClosure: LogClosure?
-    public var decryptionClosure: ((Tweak) -> TweakValue)?
+    public var decryptionClosure: ((Tweak) -> AnyTweakValue)?
     
     public var features: [String : [String]] {
         var storage: [String : [String]] = [:]
@@ -39,16 +39,16 @@ final public class LocalTweakProvider {
         fileURL = jsonURL
     }
     
-    private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> TweakValue {
-        let value: TweakValue
+    private func tweakValueFromJSONObject(_ jsonObject: AnyObject?) -> AnyTweakValue {
+        let value: AnyTweakValue
         if let numberValue = jsonObject as? NSNumber {
             value = numberValue.tweakValue
         }
         else if let stringValue = jsonObject as? String {
-            value = stringValue
+            value = stringValue.eraseToAnyTweakValue()
         }
         else {
-            value = false
+            value = false.eraseToAnyTweakValue()
         }
         return value
     }

@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tweakManager.useCache = true
         
         tweakManager.decryptionClosure = { tweak in
-            String((tweak.value.stringValue ?? "").reversed())
+            String((tweak.value.stringValue).reversed()).eraseToAnyTweakValue()
         }
         
         return tweakManager
