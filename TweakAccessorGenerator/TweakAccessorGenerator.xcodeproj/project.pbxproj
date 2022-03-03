@@ -505,6 +505,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justeattakeaway.TweakAccessorGeneratorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -524,6 +525,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justeattakeaway.TweakAccessorGeneratorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -565,7 +567,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		12273D362625E45F00732559 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:apple/swift-argument-parser.git";
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.4.1;
