@@ -15,42 +15,42 @@ class GeneratedTweakAccessorContent {
     }
 
     var canShowGreenView: Bool {
-        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView)?.boolValue ?? false }
+        get { (try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayGreenView))?.boolValue ?? false }
         set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayGreenView) }
     }
 
     var canShowRedView: Bool {
-        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView)?.boolValue ?? false }
+        get { (try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayRedView))?.boolValue ?? false }
         set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayRedView) }
     }
 
     var canShowYellowView: Bool {
-        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)?.boolValue ?? false }
+        get { (try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView))?.boolValue ?? false }
         set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.displayYellowView) }
     }
 
     var isTapGestureToChangeColorEnabled: Bool {
-        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeColorEnabled)?.boolValue ?? false }
+        get { (try? tweakManager.tweakWith(feature: Features.general, variable: Variables.tapToChangeColorEnabled))?.boolValue ?? false }
         set { tweakManager.set(newValue, feature: Features.general, variable: Variables.tapToChangeColorEnabled) }
     }
 
     var labelText: String {
-        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.labelText)?.stringValue ?? "" }
+        get { (try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.labelText))?.stringValue ?? "" }
         set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.labelText) }
     }
 
     var meaningOfLife: Int {
-        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.answerToTheUniverse)?.intValue ?? 0 }
+        get { (try? tweakManager.tweakWith(feature: Features.general, variable: Variables.answerToTheUniverse))?.intValue ?? 0 }
         set { tweakManager.set(newValue, feature: Features.general, variable: Variables.answerToTheUniverse) }
     }
 
     var redViewAlpha: Double {
-        get { tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.redViewAlphaComponent)?.doubleValue ?? 0.0 }
+        get { (try? tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.redViewAlphaComponent))?.doubleValue ?? 0.0 }
         set { tweakManager.set(newValue, feature: Features.uiCustomization, variable: Variables.redViewAlphaComponent) }
     }
 
     var shouldShowAlert: Bool {
-        get { tweakManager.tweakWith(feature: Features.general, variable: Variables.greetOnAppDidBecomeActive)?.boolValue ?? false }
+        get { (try? tweakManager.tweakWith(feature: Features.general, variable: Variables.greetOnAppDidBecomeActive))?.boolValue ?? false }
         set { tweakManager.set(newValue, feature: Features.general, variable: Variables.greetOnAppDidBecomeActive) }
     }
 }

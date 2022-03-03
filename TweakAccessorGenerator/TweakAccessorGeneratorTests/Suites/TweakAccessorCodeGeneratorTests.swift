@@ -16,8 +16,9 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
     private var tweaks: [Tweak]!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         bundle = Bundle(for: type(of: self))
-        tweaksFilePath = bundle.path(forResource: tweaksFilename, ofType: "json")!
+        tweaksFilePath = try XCTUnwrap(bundle.path(forResource: tweaksFilename, ofType: "json"))
         codeGenerator = TweakAccessorCodeGenerator()
         tweakLoader = TweakLoader()
         tweaks = try tweakLoader.load(tweaksFilePath)
@@ -29,12 +30,13 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
         codeGenerator = nil
         tweakLoader = nil
         tweaks = nil
+        try super.tearDownWithError()
     }
     
     func test_generateConstants_output() throws {
         let configuration = Configuration(accessorName: "GeneratedTweakAccessorContent")
         let content = codeGenerator.generateConstantsFileContent(tweaks: tweaks, configuration: configuration)
-        let testContentPath = bundle.path(forResource: "GeneratedTweakAccessor+ConstantsContent", ofType: "")!
+        let testContentPath = try XCTUnwrap(bundle.path(forResource: "GeneratedTweakAccessor+ConstantsContent", ofType: ""))
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         XCTAssertEqual(content, testContent)
     }
@@ -44,15 +46,15 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
         let content = codeGenerator.generateAccessorFileContent(tweaksFilename: tweaksFilename,
                                                                 tweaks: tweaks,
                                                                 configuration: configuration)
-        let testContentPath = bundle.path(forResource: "GeneratedTweakAccessorContent", ofType: "")!
+        let testContentPath = try XCTUnwrap(bundle.path(forResource: "GeneratedTweakAccessorContent", ofType: ""))
         let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
         
         XCTAssertEqual(content, testContent)
     }
     
-    private func codeBlock(for customTweakProviderFile: String) -> String {
+    private func codeBlock(for customTweakProviderFile: String) throws -> String {
         let testBundle = Bundle(for: TweakAccessorCodeGeneratorTests.self)
-        let filePath = testBundle.path(forResource: customTweakProviderFile, ofType: "")!
-        return try! String(contentsOfFile: filePath)
+        let filePath = try XCTUnwrap(testBundle.path(forResource: customTweakProviderFile, ofType: ""))
+        return try String(contentsOfFile: filePath)
     }
 }
