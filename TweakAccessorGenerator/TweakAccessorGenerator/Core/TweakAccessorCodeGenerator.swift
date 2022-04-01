@@ -27,7 +27,7 @@ extension TweakAccessorCodeGenerator {
         let content = template
             .replacingOccurrences(of: featureConstantsConst, with: featureConstants)
             .replacingOccurrences(of: variableConstantsConst, with: variableConstants)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .trimmingCharacters(in: .whitespacesAndNewlines) + "\n"
         return content
     }
     
@@ -41,7 +41,7 @@ extension TweakAccessorCodeGenerator {
         let content = template
             .replacingOccurrences(of: tweakManagerConst, with: tweakManager)
             .replacingOccurrences(of: classContentConst, with: classContent)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .trimmingCharacters(in: .whitespacesAndNewlines) + "\n"
         return content
     }
     
