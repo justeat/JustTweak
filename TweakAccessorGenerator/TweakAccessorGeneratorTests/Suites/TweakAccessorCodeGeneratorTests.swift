@@ -37,7 +37,7 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
         let configuration = Configuration(accessorName: "GeneratedTweakAccessorContent")
         let content = codeGenerator.generateConstantsFileContent(tweaks: tweaks, configuration: configuration)
         let testContentPath = try XCTUnwrap(bundle.path(forResource: "GeneratedTweakAccessor+ConstantsContent", ofType: ""))
-        let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
+        let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8)
         XCTAssertEqual(content, testContent)
     }
     
@@ -47,7 +47,7 @@ class TweakAccessorCodeGeneratorTests: XCTestCase {
                                                                 tweaks: tweaks,
                                                                 configuration: configuration)
         let testContentPath = try XCTUnwrap(bundle.path(forResource: "GeneratedTweakAccessorContent", ofType: ""))
-        let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8).trimmingCharacters(in: .newlines)
+        let testContent = try String(contentsOfFile: testContentPath, encoding: .utf8)
         
         XCTAssertEqual(content, testContent)
     }
