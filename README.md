@@ -21,11 +21,17 @@ With JustTweak you can achieve the following:
 
 ## Installation
 
+### CocoaPods
+
 JustTweak is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod "JustTweak"
 ```
+
+### Swift Package Manager
+
+JustTweak is also available through SPM. Copy the URL for this repo, and add the package in your project settings.
 
 ## Implementation
 
