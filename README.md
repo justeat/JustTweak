@@ -282,6 +282,21 @@ tweakProvider.decryptionClosure = { tweak in
 
 In this way, the tweak fetched from the tweak provider will have the decrypted value.
 
+### Forcing tweaks to be of type `Double`
+TweakAccessorGenerator determines a tweak's type from the value. For numeric values this will result in a value of an integer (e.g. `3`) to export as an `Int` type. Floating point values (e.g. `3.0`) will export as a `Double` type. This default behaviour can be overriden by specifying the `PreserveFloat` boolean, e.g.
+
+```json
+{
+  "Group": "a tweak group",
+  "Title": "a tweak",
+  "GeneratedPropertyName" : "aTweak",
+  "Value" : 123
+  "PreserveFloat": true
+}
+```
+
+This will export the `aTweak` tweak as a `Double`, despite having an integer value (`123`).
+
 ## License
 
 JustTweak is available under the Apache 2.0 license. See the LICENSE file for more info.
