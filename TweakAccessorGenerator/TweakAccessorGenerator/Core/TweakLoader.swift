@@ -59,12 +59,13 @@ class TweakLoader {
         guard let value = dictionary["Value"] else {
             throw "Missing 'Value' value in dictionary \(dictionary)"
         }
+        let preserveFloat = dictionary["PreserveFloat"] as? Bool ?? false
         return Tweak(feature: feature,
                      variable: variable,
                      title: title,
                      description: dictionary["Description"] as? String,
                      group: group,
-                     valueType: try type(for: value),
+                     valueType: preserveFloat ? "Double" : try type(for: value),
                      propertyName: dictionary["GeneratedPropertyName"] as? String)
     }
 }

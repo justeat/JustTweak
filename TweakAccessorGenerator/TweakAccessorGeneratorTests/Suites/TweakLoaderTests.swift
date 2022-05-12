@@ -227,4 +227,37 @@ class TweakLoaderTests: XCTestCase {
         ]
         XCTAssertThrowsError(try sut.tweak(for: dictionary, feature: feature, variable: variable))
     }
+    
+    func test_tweakForDictionary_PreserveFloat() throws {
+        let feature = "some feature"
+        let variable = "some variable"
+        let title = "some title"
+        let description = "some description"
+        let group = "some group"
+        let dictionary: [String : Any] = [
+            "Title": title,
+            "Description": description,
+            "Group": group,
+            "Value": 3,
+            "PreserveFloat": true
+        ]
+        let tweak = try XCTUnwrap(sut.tweak(for: dictionary, feature: feature, variable: variable))
+        XCTAssertEqual(tweak.valueType, "Double")
+    }
+    
+    func test_tweakForDictionary_NoPreserveFloat() throws {
+        let feature = "some feature"
+        let variable = "some variable"
+        let title = "some title"
+        let description = "some description"
+        let group = "some group"
+        let dictionary: [String : Any] = [
+            "Title": title,
+            "Description": description,
+            "Group": group,
+            "Value": 3
+        ]
+        let tweak = try XCTUnwrap(sut.tweak(for: dictionary, feature: feature, variable: variable))
+        XCTAssertNotEqual(tweak.valueType, "Double")
+    }
 }
