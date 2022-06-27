@@ -18,7 +18,7 @@ JustTweak is a framework for feature flagging, locally and remotely configure an
   s.resources               = 'Framework/Sources/Resources/**/*'
 
   s.preserve_paths = [
-    '_TweakAccessorGenerator',
+    'TweakAccessorGenerator',
   ]
 
 end

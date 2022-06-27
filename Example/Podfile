@@ -6,7 +6,7 @@ use_frameworks!
 target 'JustTweak_Example' do
   pod 'JustTweak', :path => '../'
   script_phase :name => 'TweakAccessorGenerator',
-               :script => '$SRCROOT/../_TweakAccessorGenerator \
+               :script => '$SRCROOT/../TweakAccessorGenerator \
                -l $SRCROOT/JustTweak/TweakProviders/LocalTweaks_example.json \
                -o $SRCROOT/JustTweak/Accessors/ \
                -c $SRCROOT/JustTweak/CodeGeneration/',
