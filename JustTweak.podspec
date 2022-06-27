@@ -14,8 +14,8 @@ JustTweak is a framework for feature flagging, locally and remotely configure an
   s.ios.deployment_target   = '11.0'
   s.swift_version           = '5.1'
 
-  s.source_files            = 'JustTweak/Classes/**/*.swift'
-  s.resource_bundle         = { 'JustTweak' => 'JustTweak/Assets/en.lproj/*' }
+  s.source_files            = 'Framework/Sources/**/*.swift'
+  s.resources               = 'Framework/Sources/Resources/**/*'
 
   s.preserve_paths = [
     '_TweakAccessorGenerator',
