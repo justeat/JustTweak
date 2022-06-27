@@ -1,5 +1,5 @@
 PODS:
-  - JustTweak (10.0.2)
+  - JustTweak (10.0.1)
 
 DEPENDENCIES:
   - JustTweak (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  JustTweak: 0143c5fc233c1e2a0d1a8eacadab26fc48b4cb5a
+  JustTweak: 6bd30e934b06f125ba0a7e50471340027ce5623b
 
-PODFILE CHECKSUM: a68b671e421f174879203bb91286c82eecc0444f
+PODFILE CHECKSUM: 3c427fa5cb7925fa09addab51c9b8a7c0b3f84f4
 
 COCOAPODS: 1.10.2

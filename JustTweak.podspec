@@ -21,10 +21,4 @@ JustTweak is a framework for feature flagging, locally and remotely configure an
     '_TweakAccessorGenerator',
   ]
 
-  # Ensure the generator script are callable via
-  # ${PODS_ROOT}/<name>
-  s.prepare_command = <<-PREPARE_COMMAND_END
-    cp -f ./JustTweak/Assets/TweakAccessorGenerator.bundle/TweakAccessorGenerator ./_TweakAccessorGenerator
-  PREPARE_COMMAND_END
-
 end
