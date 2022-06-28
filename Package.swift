@@ -1,9 +1,10 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
     name: "JustTweak",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v11)
     ],
@@ -15,7 +16,8 @@ let package = Package(
     targets: [
         .target(
             name: "JustTweak",
-            path: "JustTweak/"
+            path: "Framework/Sources",
+            resources: [.process("Resources")]
         )
     ]
 )
