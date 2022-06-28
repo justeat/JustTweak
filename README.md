@@ -93,7 +93,7 @@ the only currently supported value is `accessorName` that defines the name of th
 
 ```sh
 script_phase :name => 'TweakAccessorGenerator',
-             :script => '$PODS_ROOT/JustTweak/TweakAccessorGenerator \
+             :script => '$SRCROOT/../TweakAccessorGenerator \
              -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
              -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
              -c $SRCROOT/<path_to_the_folder_containing_config.json>',
