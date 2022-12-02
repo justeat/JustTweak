@@ -8,6 +8,8 @@ import UIKit
 internal protocol TweakViewControllerCell: AnyObject {
     var title: String? { get set }
     var desc: String? { get set }
+    var feature: String? { get set }
+    var variable: String? { get set }
     var value: TweakValue { get set }
     var delegate: TweakViewControllerCellDelegate? { get set }
 }
@@ -103,6 +105,8 @@ extension TweakViewController {
         if let cell = cell as? TweakViewControllerCell {
             cell.title = tweak.title ?? "\(tweak.feature):\(tweak.variable)"
             cell.desc = tweak.desc
+            cell.feature = tweak.feature
+            cell.variable = tweak.variable
             cell.value = tweak.value
             cell.delegate = self
         }
@@ -227,12 +231,14 @@ extension TweakViewController {
 extension TweakViewController: TweakViewControllerCellDelegate {
     
     internal func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
-        if let indexPath = tableView.indexPath(for: cell as! UITableViewCell) {
-            if let tweak = tweakAt(indexPath: indexPath) {
-                let feature = tweak.feature
-                let variable = tweak.variable
-                tweakManager.set(cell.value, feature: feature, variable: variable)
-                tweak.value = cell.value
+        if let feature = cell.feature, let variable = cell.variable {
+            if let indexPath = indexPathForTweak(with: feature, variable: variable) {
+                if let tweak = tweakAt(indexPath: indexPath){
+                    let feature = tweak.feature
+                    let variable = tweak.variable
+                    tweakManager.set(cell.value, feature: feature, variable: variable)
+                    tweak.value = cell.value
+                }
             }
         }
     }
