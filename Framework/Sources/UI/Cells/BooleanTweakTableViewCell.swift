@@ -6,7 +6,10 @@
 import UIKit
 
 internal class BooleanTweakTableViewCell: UITableViewCell, TweakViewControllerCell {
-    
+
+    var feature: String?
+    var variable: String?
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }

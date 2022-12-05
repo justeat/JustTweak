@@ -7,6 +7,9 @@ import UIKit
 
 class TextTweakTableViewCell: UITableViewCell, TweakViewControllerCell, UITextFieldDelegate {
 
+    var feature: String?
+    var variable: String?
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
