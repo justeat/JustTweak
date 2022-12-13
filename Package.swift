@@ -18,6 +18,12 @@ let package = Package(
             name: "JustTweak",
             path: "Framework/Sources",
             resources: [.process("Resources")]
+        ),
+        .testTarget(
+            name: "JustTweak_Tests",
+            dependencies: ["JustTweak"],
+            path: "Tests/Sources",
+            resources: [.process("Resources")]
         )
     ]
 )

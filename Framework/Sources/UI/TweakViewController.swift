@@ -231,14 +231,16 @@ extension TweakViewController {
 extension TweakViewController: TweakViewControllerCellDelegate {
     
     internal func tweakConfigurationCellDidChangeValue(_ cell: TweakViewControllerCell) {
-        guard let featureValue = cell.feature, let variableValue = cell.variable ,
-              let indexPath = indexPathForTweak(with: featureValue, variable: variableValue),
-              let tweak = tweakAt(indexPath: indexPath)
-        else { return }
-        let feature = tweak.feature
-        let variable = tweak.variable
-        tweakManager.set(cell.value, feature: feature, variable: variable)
-        tweak.value = cell.value
+        if let feature = cell.feature, let variable = cell.variable {
+            if let indexPath = indexPathForTweak(with: feature, variable: variable) {
+                if let tweak = tweakAt(indexPath: indexPath){
+                    let feature = tweak.feature
+                    let variable = tweak.variable
+                    tweakManager.set(cell.value, feature: feature, variable: variable)
+                    tweak.value = cell.value
+                }
+            }
+        }
     }
 }
 

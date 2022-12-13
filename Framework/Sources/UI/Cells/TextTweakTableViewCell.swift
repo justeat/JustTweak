@@ -7,8 +7,8 @@ import UIKit
 
 class TextTweakTableViewCell: UITableViewCell, TweakViewControllerCell, UITextFieldDelegate {
 
-    var feature: String?
-    var variable: String?
+    private var _feature: String? = nil
+    private var _variable: String? = nil
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -33,6 +33,26 @@ class TextTweakTableViewCell: UITableViewCell, TweakViewControllerCell, UITextFi
         }
         set {
             detailTextLabel?.text = newValue
+        }
+    }
+
+    var feature: String? {
+        get {
+            return self._feature
+        }
+
+        set {
+            self._feature = newValue
+        }
+    }
+
+    var variable: String? {
+        get {
+            return self._variable
+        }
+
+        set {
+            self._variable = newValue
         }
     }
     
