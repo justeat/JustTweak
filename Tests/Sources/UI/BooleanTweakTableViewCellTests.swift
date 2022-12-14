@@ -13,7 +13,7 @@ class BooleanTweakTableViewCellTests: XCTestCase {
         let mockDelegate = MockTweakCellDelegate()
         let cell = BooleanTweakTableViewCell()
         cell.delegate = mockDelegate
-        cell.switchControl.sendActions(for: .valueChanged)
+        cell.didChangeTweakValue()
         XCTAssertTrue(mockDelegate.didCallDelegate)
     }
     

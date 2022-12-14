@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		30879B1029489A9900F9BB18 /* JustTweak in Frameworks */ = {isa = PBXBuildFile; productRef = 30879B0F29489A9900F9BB18 /* JustTweak */; };
 		30879B122948A29E00F9BB18 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30879B112948A29E00F9BB18 /* Symbols.swift */; };
-		309A848E2947697F003F1B12 /* FirebaseTweakProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84732947697F003F1B12 /* FirebaseTweakProvider.swift */; };
-		309A848F2947697F003F1B12 /* OptimizelyTweakProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84742947697F003F1B12 /* OptimizelyTweakProvider.swift */; };
 		309A84902947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84762947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift */; };
 		309A84912947697F003F1B12 /* GeneratedTweakAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84772947697F003F1B12 /* GeneratedTweakAccessor+Constants.swift */; };
 		309A84922947697F003F1B12 /* TweakAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84782947697F003F1B12 /* TweakAccessor.swift */; };
@@ -20,7 +18,6 @@
 		309A84972947697F003F1B12 /* ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A847F2947697F003F1B12 /* ExampleProtocol.swift */; };
 		309A84982947697F003F1B12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 309A84822947697F003F1B12 /* LaunchScreen.xib */; };
 		309A84992947697F003F1B12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 309A84842947697F003F1B12 /* Main.storyboard */; };
-		309A849A2947697F003F1B12 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 309A84872947697F003F1B12 /* config.json */; };
 		309A849B2947697F003F1B12 /* LocalTweaks_TopPriority_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 309A84882947697F003F1B12 /* LocalTweaks_TopPriority_example.json */; };
 		309A849C2947697F003F1B12 /* LocalTweaks_example.json in Resources */ = {isa = PBXBuildFile; fileRef = 309A84892947697F003F1B12 /* LocalTweaks_example.json */; };
 		309A849D2947697F003F1B12 /* ExampleOptimizelyDatafile.json in Resources */ = {isa = PBXBuildFile; fileRef = 309A848B2947697F003F1B12 /* ExampleOptimizelyDatafile.json */; };
@@ -32,8 +29,6 @@
 		30879B0E2948988A00F9BB18 /* JustTweakFork */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JustTweakFork; path = ..; sourceTree = "<group>"; };
 		30879B112948A29E00F9BB18 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		309A846829476939003F1B12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		309A84732947697F003F1B12 /* FirebaseTweakProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTweakProvider.swift; sourceTree = "<group>"; };
-		309A84742947697F003F1B12 /* OptimizelyTweakProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptimizelyTweakProvider.swift; sourceTree = "<group>"; };
 		309A84762947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+ExampleProtocol.swift"; sourceTree = "<group>"; };
 		309A84772947697F003F1B12 /* GeneratedTweakAccessor+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedTweakAccessor+Constants.swift"; sourceTree = "<group>"; };
 		309A84782947697F003F1B12 /* TweakAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweakAccessor.swift; sourceTree = "<group>"; };
@@ -43,7 +38,6 @@
 		309A847F2947697F003F1B12 /* ExampleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleProtocol.swift; sourceTree = "<group>"; };
 		309A84832947697F003F1B12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		309A84852947697F003F1B12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		309A84872947697F003F1B12 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		309A84882947697F003F1B12 /* LocalTweaks_TopPriority_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalTweaks_TopPriority_example.json; sourceTree = "<group>"; };
 		309A84892947697F003F1B12 /* LocalTweaks_example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocalTweaks_example.json; sourceTree = "<group>"; };
 		309A848B2947697F003F1B12 /* ExampleOptimizelyDatafile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExampleOptimizelyDatafile.json; sourceTree = "<group>"; };
@@ -82,21 +76,11 @@
 		309A84712947697F003F1B12 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				309A84722947697F003F1B12 /* TweakProviders */,
 				309A84752947697F003F1B12 /* Accessors */,
 				309A847A2947697F003F1B12 /* Code */,
 				309A847E2947697F003F1B12 /* Protocols */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		309A84722947697F003F1B12 /* TweakProviders */ = {
-			isa = PBXGroup;
-			children = (
-				309A84732947697F003F1B12 /* FirebaseTweakProvider.swift */,
-				309A84742947697F003F1B12 /* OptimizelyTweakProvider.swift */,
-			);
-			path = TweakProviders;
 			sourceTree = "<group>";
 		};
 		309A84752947697F003F1B12 /* Accessors */ = {
@@ -132,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				309A84812947697F003F1B12 /* UI */,
-				309A84862947697F003F1B12 /* CodeGeneration */,
 				309A84882947697F003F1B12 /* LocalTweaks_TopPriority_example.json */,
 				309A84892947697F003F1B12 /* LocalTweaks_example.json */,
 				309A848A2947697F003F1B12 /* Assets */,
@@ -147,14 +130,6 @@
 				309A84842947697F003F1B12 /* Main.storyboard */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		309A84862947697F003F1B12 /* CodeGeneration */ = {
-			isa = PBXGroup;
-			children = (
-				309A84872947697F003F1B12 /* config.json */,
-			);
-			path = CodeGeneration;
 			sourceTree = "<group>";
 		};
 		309A848A2947697F003F1B12 /* Assets */ = {
@@ -256,7 +231,6 @@
 				309A849F2947697F003F1B12 /* Images.xcassets in Resources */,
 				309A84992947697F003F1B12 /* Main.storyboard in Resources */,
 				309A849E2947697F003F1B12 /* GoogleService-Info.plist in Resources */,
-				309A849A2947697F003F1B12 /* config.json in Resources */,
 				309A849D2947697F003F1B12 /* ExampleOptimizelyDatafile.json in Resources */,
 				309A849B2947697F003F1B12 /* LocalTweaks_TopPriority_example.json in Resources */,
 				309A84982947697F003F1B12 /* LaunchScreen.xib in Resources */,
@@ -282,7 +256,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$SRCROOT/../TweakAccessorGenerator \\\n               -l $SRCROOT/Resources/LocalTweaks_example.json \\\n               -o $SRCROOT/Sources/Accessors/ \\\n               -c $SRCROOT/Resources/CodeGeneration/\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$SRCROOT/../execTool/TweakAccessorGenerator \\\n               -l $SRCROOT/Resources/LocalTweaks_example.json \\\n               -o $SRCROOT/Sources/Accessors/ \\\n               -a GeneratedTweakAccessor\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -294,12 +268,10 @@
 				309A84902947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */,
 				309A84932947697F003F1B12 /* GeneratedTweakAccessor.swift in Sources */,
 				309A84962947697F003F1B12 /* AppDelegate.swift in Sources */,
-				309A848E2947697F003F1B12 /* FirebaseTweakProvider.swift in Sources */,
 				309A84922947697F003F1B12 /* TweakAccessor.swift in Sources */,
 				30879B122948A29E00F9BB18 /* Symbols.swift in Sources */,
 				309A84972947697F003F1B12 /* ExampleProtocol.swift in Sources */,
 				309A84942947697F003F1B12 /* ViewController.swift in Sources */,
-				309A848F2947697F003F1B12 /* OptimizelyTweakProvider.swift in Sources */,
 				309A84912947697F003F1B12 /* GeneratedTweakAccessor+Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,6 @@
       "Value": false,
       "GeneratedPropertyName": "canShowRedView"
     },
-    
     "display_yellow_view": {
       "Title": "Display Yellow View",
       "Description": "shows a yellow view in the main view controller",

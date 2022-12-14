@@ -1,0 +1,212 @@
+{
+  "": {
+    "dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/ArgumentParser.d",
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/ArgumentParser.o",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/master.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/BashCompletionsGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/BashCompletionsGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/BashCompletionsGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/BashCompletionsGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/CompletionsGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/CompletionsGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/CompletionsGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/CompletionsGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/FishCompletionsGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/FishCompletionsGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/FishCompletionsGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/FishCompletionsGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/ZshCompletionsGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/ZshCompletionsGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/ZshCompletionsGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/ZshCompletionsGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Argument.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Argument.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Argument~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Argument.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/ArgumentHelp.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentHelp.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentHelp~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentHelp.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/ArgumentVisibility.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentVisibility.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentVisibility~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentVisibility.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/CompletionKind.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/CompletionKind.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/CompletionKind~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/CompletionKind.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Errors.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Errors.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Errors~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Errors.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Flag.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Flag.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Flag~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Flag.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/NameSpecification.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/NameSpecification.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/NameSpecification~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/NameSpecification.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Option.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Option.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Option~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Option.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/OptionGroup.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/OptionGroup.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/OptionGroup~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/OptionGroup.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/AsyncParsableCommand.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/AsyncParsableCommand.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/AsyncParsableCommand~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/AsyncParsableCommand.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/CommandConfiguration.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/CommandConfiguration.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/CommandConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/CommandConfiguration.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/EnumerableFlag.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/EnumerableFlag.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/EnumerableFlag~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/EnumerableFlag.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ExpressibleByArgument.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ExpressibleByArgument.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ExpressibleByArgument~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ExpressibleByArgument.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableArguments.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArguments.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArguments~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArguments.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableArgumentsValidation.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArgumentsValidation.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArgumentsValidation~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArgumentsValidation.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableCommand.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableCommand.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableCommand~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableCommand.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentDecoder.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDecoder.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDecoder~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDecoder.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentDefinition.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDefinition.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDefinition~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDefinition.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentSet.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentSet.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentSet~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentSet.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/CommandParser.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/CommandParser.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/CommandParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/CommandParser.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/InputKey.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputKey.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputKey~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputKey.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/InputOrigin.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputOrigin.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputOrigin~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputOrigin.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/Name.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Name.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Name~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Name.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/Parsed.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Parsed.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Parsed~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Parsed.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ParsedValues.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParsedValues.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParsedValues~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParsedValues.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ParserError.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParserError.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParserError~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParserError.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/SplitArguments.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/SplitArguments.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/SplitArguments~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/SplitArguments.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/DumpHelpGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/DumpHelpGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/DumpHelpGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/DumpHelpGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/HelpCommand.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpCommand.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpCommand~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpCommand.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/HelpGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/MessageInfo.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/MessageInfo.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/MessageInfo~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/MessageInfo.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/UsageGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/UsageGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/UsageGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/UsageGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/CollectionExtensions.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/CollectionExtensions.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/CollectionExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/CollectionExtensions.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/Platform.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Platform.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Platform~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Platform.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/SequenceExtensions.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/SequenceExtensions.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/SequenceExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/SequenceExtensions.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/StringExtensions.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/StringExtensions.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/StringExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/StringExtensions.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/Tree.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Tree.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Tree~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Tree.swiftdeps"
+  }
+}

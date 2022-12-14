@@ -1,0 +1,4 @@
+module JustTweak {
+    header "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/JustTweak.build/JustTweak-Swift.h"
+    requires objc
+}

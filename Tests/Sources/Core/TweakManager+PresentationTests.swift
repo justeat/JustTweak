@@ -73,11 +73,6 @@ class TweakManager_PresentationTests: XCTestCase {
         let displayableTweaks = tweakManager.displayableTweaks
         let targetTweaks = [
             Tweak(feature: "ui_customization",
-                  variable: "display_blue_view",
-                  value: true,
-                  title: "Display Blue View",
-                  group: "UI Customization"),
-            Tweak(feature: "ui_customization",
                   variable: "display_green_view",
                   value: true,
                   title: "Display Green View",

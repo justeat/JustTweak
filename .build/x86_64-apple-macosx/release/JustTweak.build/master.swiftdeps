@@ -1,0 +1,22 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "72fd80e4fd88042093161f5e629a93060713fe2ae1cd7b992afcf1f2a2c44421"
+build_start_time: [1670953933, 239593029]
+build_end_time: [1670953935, 203434944]
+inputs:
+  "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/JustTweak.build/DerivedSources/resource_bundle_accessor.swift": !dirty [1670953932, 583231925]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/DTOs/Tweak.swift": !dirty [1669989583, 341460466]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/DTOs/TweakValue.swift": !dirty [1669989583, 341527462]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/Errors/TweakError.swift": !dirty [1669989583, 341615676]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/Extensions/Bundle+JustTweak.swift": !dirty [1669989583, 341701507]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/Extensions/TweakExtensions.swift": !dirty [1669989583, 341773509]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/Protocols/TweakProvider.swift": !dirty [1669989583, 341883659]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/TweakManager.swift": !dirty [1669989583, 342138767]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/TweakProviders/EphemeralTweakProvider.swift": !dirty [1669989583, 342233180]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/TweakProviders/LocalTweakProvider.swift": !dirty [1669989583, 342311620]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/TweakProviders/UserDefaultsTweakProvider.swift": !dirty [1669989583, 342363834]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/UI/Cells/BooleanTweakTableViewCell.swift": !dirty [1670942283, 356670379]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/UI/Cells/NumericTweakTableViewCell.swift": !dirty [1669989583, 342554569]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/UI/Cells/TextTweakTableViewCell.swift": !dirty [1669993468, 956528902]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/UI/TweakManager+Presentation.swift": !dirty [1669989583, 342695713]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/UI/TweakViewController.swift": !dirty [1669993468, 956793785]
+  "/Users/marium.hassan/JustTweak/Framework/Sources/Utilities/PropertyWrappers.swift": !dirty [1669989583, 342873096]

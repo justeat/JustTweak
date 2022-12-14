@@ -22,7 +22,6 @@ class LocalTweakProviderTests: XCTestCase {
     }
     
     private func tweakProviderWithFileNamed(_ fileName: String) -> LocalTweakProvider? {
-        //let bundle = Bundle(LocalTweakProviderTests.self)
         let jsonURL = Bundle.module.url(forResource: fileName, withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonURL)
     }

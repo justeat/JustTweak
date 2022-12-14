@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "dbecd2739aece7353662566b704ed89c6210613b7e960f3a8c13dc9b14e9b15f"
+build_start_time: [1670953933, 238739967]
+build_end_time: [1670953933, 933024883]
+inputs:
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParserToolInfo/ToolInfo.swift": [1670953932, 451474905]

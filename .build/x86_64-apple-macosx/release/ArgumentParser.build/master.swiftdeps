@@ -1,0 +1,62 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "95f25427b07f214239cbf4f564a3fd2d8b55f546d7a58eb180134520984ac19c"
+build_start_time: [1670954088, 180793046]
+build_end_time: [1670954093, 800692081]
+inputs:
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/BashCompletionsGenerator.swift"
+  : [1670953932, 442533731]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/CompletionsGenerator.swift"
+  : [1670953932, 442602396]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/FishCompletionsGenerator.swift"
+  : [1670953932, 442675113]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/ZshCompletionsGenerator.swift"
+  : [1670953932, 442761421]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Argument.swift": [1670953932, 447338104]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/ArgumentHelp.swift"
+  : [1670953932, 447445392]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/ArgumentVisibility.swift"
+  : [1670953932, 447528123]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/CompletionKind.swift"
+  : [1670953932, 447605609]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Errors.swift": [1670953932, 447689056]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Flag.swift": [1670953932, 447808265]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/NameSpecification.swift"
+  : [1670953932, 447890281]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Option.swift": [1670953932, 447975397]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/OptionGroup.swift"
+  : [1670953932, 448075771]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/AsyncParsableCommand.swift"
+  : [1670953932, 448390483]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/CommandConfiguration.swift"
+  : [1670953932, 448508739]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/EnumerableFlag.swift": [1670953932, 448583126]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ExpressibleByArgument.swift"
+  : [1670953932, 448656558]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableArguments.swift"
+  : [1670953932, 448747873]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableArgumentsValidation.swift"
+  : [1670953932, 448842287]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableCommand.swift"
+  : [1670953932, 448931694]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentDecoder.swift": [1670953932, 449067592]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentDefinition.swift": [1670953932, 449164867]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentSet.swift": [1670953932, 449307918]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/CommandParser.swift": [1670953932, 449444293]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/InputKey.swift": [1670953932, 449518203]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/InputOrigin.swift": [1670953932, 449586868]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/Name.swift": [1670953932, 449644327]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/Parsed.swift": [1670953932, 449707031]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ParsedValues.swift": [1670953932, 449769496]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ParserError.swift": [1670953932, 449833631]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/SplitArguments.swift": [1670953932, 449951648]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/DumpHelpGenerator.swift": [1670953932, 450075626]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/HelpCommand.swift": [1670953932, 450230598]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/HelpGenerator.swift": [1670953932, 450334548]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/MessageInfo.swift": [1670953932, 450415849]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/UsageGenerator.swift": [1670953932, 450545549]
+  ? "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/CollectionExtensions.swift"
+  : [1670953932, 450684070]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/Platform.swift": [1670953932, 450769901]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/SequenceExtensions.swift": [1670953932, 450844287]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/StringExtensions.swift": [1670953932, 450903892]
+  "/Users/marium.hassan/JustTweak/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/Tree.swift": [1670953932, 450980186]

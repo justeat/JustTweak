@@ -130,7 +130,7 @@ class TweakViewControllerTests: XCTestCase {
         let indexPath = viewController.indexPathForTweak(with: Features.uiCustomization, variable: Variables.displayYellowView)!
         let cell = viewController.tableView.cellForRow(at: indexPath) as! BooleanTweakTableViewCell
         cell.switchControl.isOn = true
-        cell.switchControl.sendActions(for: .valueChanged)
+        cell.didChangeTweakValue()
         XCTAssertTrue(try XCTUnwrap(tweakManager.tweakWith(feature: Features.uiCustomization, variable: Variables.displayYellowView)).boolValue)
     }
     

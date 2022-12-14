@@ -1,0 +1,52 @@
+{
+  "": {
+    "dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/TweakAccessorGenerator.d",
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/TweakAccessorGenerator.o",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/master.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Core/Models.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/Models.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/Models~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/Models.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Core/TweakAccessorCodeGenerator.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakAccessorCodeGenerator.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakAccessorCodeGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakAccessorCodeGenerator.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Core/TweakLoader.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakLoader.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakLoader~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakLoader.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Core/TweakValue.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakValue.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakValue~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/TweakValue.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Core/Types.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/Types.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/Types~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Core/Types.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Extensions/Array+Duplicates.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/Array+Duplicates.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/Array+Duplicates~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/Array+Duplicates.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Extensions/NSNumber+ValueTypes.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/NSNumber+ValueTypes.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/NSNumber+ValueTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/NSNumber+ValueTypes.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/Extensions/String+Casing.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/String+Casing.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/String+Casing~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/Extensions/String+Casing.swiftdeps"
+  },
+  "/Users/marium.hassan/JustTweak/TweakAccessorGenerator/Sources/main.swift": {
+    "object": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/main.swift.o",
+    "swiftmodule": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/TweakAccessorGenerator.build/main.swiftdeps"
+  }
+}

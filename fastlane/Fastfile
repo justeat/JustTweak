@@ -5,36 +5,47 @@ platform :ios do
     before_all do
         ensure_bundle_exec
         $derived_data_folder = "./derived_data"
-        $workspace_filename = "Example/JustTweak.xcworkspace"
+        $package_path = "."
         $common_test_xcargs = "COMPILER_INDEX_STORE_ENABLE=NO"
+	$cloned_source_packages_path = "./cloned_source_packages"
+	
     end
 
     lane :unit_tests_just_tweak do |parameters|
         UI.user_error! "Missing parameter 'device'" unless parameters.has_key?(:device)
         device = parameters[:device]
+
         run_tests(
-            workspace: $workspace_filename,
-            scheme: "JustTweak-Example",
-            testplan: "UnitTests",
+            package_path: $package_path,
+            scheme: "JustTweak",
             device: device,
+	    clean: true,
             code_coverage: true,
             result_bundle: true,
+	    skip_package_dependencies_resolution: true,
             concurrent_workers: 1,
             xcargs: $common_test_xcargs,
-            derived_data_path: $derived_data_folder
+            derived_data_path: $derived_data_folder,
+	    cloned_source_packages_path: $cloned_source_packages_path
         )
     end
 
     lane :unit_tests_tweak_accessor_generator do |parameters|
+     UI.user_error! "Missing parameter 'device'" unless parameters.has_key?(:device)
+        device = parameters[:device]
+
         run_tests(
-            workspace: $workspace_filename,
+            package_path: $package_path,
             scheme: "TweakAccessorGenerator",
-            testplan: "UnitTests",
+	    device: device,
+	    clean: true,
             code_coverage: true,
             result_bundle: true,
+	    skip_package_dependencies_resolution: true,
             concurrent_workers: 1,
             xcargs: $common_test_xcargs,
-            derived_data_path: $derived_data_folder
+            derived_data_path: $derived_data_folder,
+	    cloned_source_packages_path: $cloned_source_packages_path
         )
     end
 

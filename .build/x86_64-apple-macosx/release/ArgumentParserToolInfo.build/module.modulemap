@@ -1,0 +1,4 @@
+module ArgumentParserToolInfo {
+    header "/Users/marium.hassan/JustTweak/.build/x86_64-apple-macosx/release/ArgumentParserToolInfo.build/ArgumentParserToolInfo-Swift.h"
+    requires objc
+}

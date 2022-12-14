@@ -89,23 +89,7 @@ class TweakManagerTests: XCTestCase {
         NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertFalse(didCallClosure)
     }
-    
-    func testTweakManagerDecryption() throws {
-        let url = try XCTUnwrap(Bundle.module.url(forResource: "LocalTweaks_example", withExtension: "json"))
         
-        tweakManager.tweakProviders.append(LocalTweakProvider(jsonURL: url))
-        
-        tweakManager.decryptionClosure = { tweak in
-            String((tweak.value.stringValue ?? "").reversed())
-        }
-        
-        let feature = "general"
-        let variable = "encrypted_answer_to_the_universe"
-        let tweak = try? tweakManager.tweakWith(feature: feature, variable: variable)
-        
-        XCTAssertEqual("Definitely not 42", tweak?.stringValue)
-    }
-    
     func testSetTweakManagerDecryptionClosureThenDecryptionClosureIsSetForProviders() throws {
         let mutableTweakProvider = try XCTUnwrap(tweakManager.mutableTweakProvider)
         
