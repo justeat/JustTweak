@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30879B1029489A9900F9BB18 /* JustTweak in Frameworks */ = {isa = PBXBuildFile; productRef = 30879B0F29489A9900F9BB18 /* JustTweak */; };
+		307B487F294B758E00B09E6A /* JustTweak in Frameworks */ = {isa = PBXBuildFile; productRef = 307B487E294B758E00B09E6A /* JustTweak */; };
 		30879B122948A29E00F9BB18 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30879B112948A29E00F9BB18 /* Symbols.swift */; };
 		309A84902947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84762947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift */; };
 		309A84912947697F003F1B12 /* GeneratedTweakAccessor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309A84772947697F003F1B12 /* GeneratedTweakAccessor+Constants.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		30879B0E2948988A00F9BB18 /* JustTweakFork */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JustTweakFork; path = ..; sourceTree = "<group>"; };
+		307B487D294B758200B09E6A /* JustTweak */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JustTweak; path = ..; sourceTree = "<group>"; };
 		30879B112948A29E00F9BB18 /* Symbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		309A846829476939003F1B12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		309A84762947697F003F1B12 /* GeneratedConfigurationAccessor+ExampleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneratedConfigurationAccessor+ExampleProtocol.swift"; sourceTree = "<group>"; };
@@ -51,17 +51,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30879B1029489A9900F9BB18 /* JustTweak in Frameworks */,
+				307B487F294B758E00B09E6A /* JustTweak in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		30879B0D2948988A00F9BB18 /* Packages */ = {
+		307B487C294B758200B09E6A /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				30879B0E2948988A00F9BB18 /* JustTweakFork */,
+				307B487D294B758200B09E6A /* JustTweak */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				30879B0D2948988A00F9BB18 /* Packages */,
+				307B487C294B758200B09E6A /* Packages */,
 				309A84802947697F003F1B12 /* Resources */,
 				309A84712947697F003F1B12 /* Sources */,
 				309A846829476939003F1B12 /* Info.plist */,
@@ -180,7 +180,7 @@
 			);
 			name = DemoApp;
 			packageProductDependencies = (
-				30879B0F29489A9900F9BB18 /* JustTweak */,
+				307B487E294B758E00B09E6A /* JustTweak */,
 			);
 			productName = JustTweak;
 			productReference = 607FACD01AFB9204008FA782 /* DemoApp.app */;
@@ -468,7 +468,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		30879B0F29489A9900F9BB18 /* JustTweak */ = {
+		307B487E294B758E00B09E6A /* JustTweak */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = JustTweak;
 		};

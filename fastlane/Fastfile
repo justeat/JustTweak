@@ -31,13 +31,10 @@ platform :ios do
     end
 
     lane :unit_tests_tweak_accessor_generator do |parameters|
-     UI.user_error! "Missing parameter 'device'" unless parameters.has_key?(:device)
-        device = parameters[:device]
-
+ 
         run_tests(
             package_path: $package_path,
             scheme: "TweakAccessorGenerator",
-	    device: device,
 	    clean: true,
             code_coverage: true,
             result_bundle: true,

@@ -25,7 +25,7 @@ jobs:
     - name: Run tests (JustTweak)
       run: bundle exec fastlane unit_tests_just_tweak device:'iPhone 11'
     - name: Run tests (TweakAccessorGenerator)
-      run: bundle exec fastlane unit_tests_tweak_accessor_generator device:'iPhone 11'
+      run: bundle exec fastlane unit_tests_tweak_accessor_generator
     - name: Validate lib
       run: |
         set -eo pipefail
