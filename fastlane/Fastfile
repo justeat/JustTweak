@@ -8,6 +8,7 @@ platform :ios do
         $package_path = "."
         $common_test_xcargs = "COMPILER_INDEX_STORE_ENABLE=NO"
 	$cloned_source_packages_path = "./cloned_source_packages"
+	$destination = "platform=macOS"
 	
     end
 
@@ -35,6 +36,7 @@ platform :ios do
         run_tests(
             package_path: $package_path,
             scheme: "TweakAccessorGenerator",
+	    destination: $destination,
 	    clean: true,
             code_coverage: true,
             result_bundle: true,
