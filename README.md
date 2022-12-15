@@ -79,25 +79,16 @@ static let tweakManager: TweakManager = {
 
 #### Using the code generator tool
 
-- Define the stack configuration in a `config.json` file in the following format:
-
-```json
-{
-    "accessorName": "GeneratedTweakAccessor"
-}
-```
-
-the only currently supported value is `accessorName` that defines the name of the generated class. 
-
 - Add the following to your `Podfile`
 
 ```sh
 script_phase :name => 'TweakAccessorGenerator',
-             :script => '$SRCROOT/../TweakAccessorGenerator \
-             -l $SRCROOT/<path_to_the_local_tweaks_json_file> \
-             -o $SRCROOT/<path_to_the_output_folder_for_the_generated_code> \
-             -c $SRCROOT/<path_to_the_folder_containing_config.json>',
+             :script => '$SRCROOT/../execTool/TweakAccessorGenerator \
+               -l $SRCROOT/Resources/LocalTweaks_example.json \
+               -o $SRCROOT/Sources/Accessors/ \
+               -a GeneratedTweakAccessor',
              :execution_position => :before_compile
+
 ```
 
 Every time the target is built, the code generator tool will regenerate the code for the stack. It will include all the properties backing the features defined in the `LocalTweakProvider`.
@@ -108,7 +99,7 @@ Every time the target is built, the code generator tool will regenerate the code
 
 ### Basic
 
-If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object (which name you have defined in the `.json` configuration and use it to access the feature flags.
+If you have used the code generator tool, the generated stack includes all the feature flags. Simply allocate the accessor object and use it to access the feature flags.
 
 ```swift
 let accessor = GeneratedTweakAccessor(with: <#tweak_manager_instance#>)

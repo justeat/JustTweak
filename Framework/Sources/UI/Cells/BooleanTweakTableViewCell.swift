@@ -7,8 +7,8 @@ import UIKit
 
 internal class BooleanTweakTableViewCell: UITableViewCell, TweakViewControllerCell {
 
-    private var _feature: String? = nil
-    private var _variable: String? = nil
+    var feature: String?
+    var variable: String?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
@@ -35,26 +35,6 @@ internal class BooleanTweakTableViewCell: UITableViewCell, TweakViewControllerCe
         }
     }
 
-    var feature: String? {
-        get {
-            return self._feature
-        }
-
-        set {
-            self._feature = newValue
-        }
-    }
-
-    var variable: String? {
-        get {
-            return self._variable
-        }
-
-        set {
-            self._variable = newValue
-        }
-    }
-    
     var value: TweakValue {
         get {
             return switchControl.isOn

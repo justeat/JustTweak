@@ -51,7 +51,6 @@
       "Value": 42,
       "GeneratedPropertyName": "meaningOfLife"
     },
-
     "greet_on_app_did_become_active": {
       "Title": "Greet on app launch",
       "Description": "shows an alert on applicationDidBecomeActive",

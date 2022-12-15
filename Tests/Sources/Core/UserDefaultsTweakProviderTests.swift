@@ -6,7 +6,6 @@
 import XCTest
 import JustTweak
 
-
 class UserDefaultsTweakProviderTests: XCTestCase {
     
     private var userDefaultsTweakProvider: UserDefaultsTweakProvider!

@@ -11,7 +11,6 @@ class TweakManagerTests: XCTestCase {
     
     var tweakManager: TweakManager!
     let localTweakProvider: TweakProvider = {
-       // let bundle = Bundle(for: TweakManagerTests.self)
         let jsonConfigurationURL = Bundle.module.url(forResource: "LocalTweaks_test", withExtension: "json")!
         return LocalTweakProvider(jsonURL: jsonConfigurationURL)
     }()
@@ -88,6 +87,22 @@ class TweakManagerTests: XCTestCase {
         let userInfo = [TweakProviderDidChangeNotificationTweakKey: tweak]
         NotificationCenter.default.post(name: TweakProviderDidChangeNotification, object: self, userInfo: userInfo)
         XCTAssertFalse(didCallClosure)
+    }
+
+    func testTweakManagerDecryption() throws {
+        let url = try XCTUnwrap(Bundle.module.url(forResource: "LocalTweaks_test", withExtension: "json"))
+
+        tweakManager.tweakProviders.append(LocalTweakProvider(jsonURL: url))
+
+        tweakManager.decryptionClosure = { tweak in
+            String((tweak.value.stringValue ?? "").reversed())
+        }
+
+        let feature = "general"
+        let variable = "tap_to_change_color_enabled"
+        let tweak = try? tweakManager.tweakWith(feature: feature, variable: variable)
+
+        XCTAssertNotNil(tweak?.value)
     }
         
     func testSetTweakManagerDecryptionClosureThenDecryptionClosureIsSetForProviders() throws {
