@@ -22,11 +22,6 @@ jobs:
       uses: ruby/setup-ruby@v1.81.0
       with:
         bundler-cache: true
-    - name: Run pod install
-      run: |
-        set -eo pipefail
-        export LIB_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
-        bundle exec pod install --project-directory=Example
     - name: Run tests (JustTweak)
       run: bundle exec fastlane unit_tests_just_tweak device:'iPhone 11'
     - name: Run tests (TweakAccessorGenerator)
