@@ -30,4 +30,3 @@ jobs:
       run: |
         set -eo pipefail
         export LIB_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
-        bundle exec pod lib lint --allow-warnings
