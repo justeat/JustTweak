@@ -1,5 +1,7 @@
 ![JustTweak Banner](./img/just_tweak_banner.png)
 
+### Warning: This library is not supported by Just Eat Takeaway anymore and therefore considered deprecated. The repository has been archived. We have moved from JustTweak to [Toggles](https://github.com/TogglesPlatform/Toggles).
+
 # JustTweak
 
 [![Build Status](https://travis-ci.org/justeat/JustTweak.svg?branch=master)](https://travis-ci.org/justeat/JustTweak)
